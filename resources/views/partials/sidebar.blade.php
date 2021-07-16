@@ -33,27 +33,21 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
-                            List Pendaftar
+                            Pendaftaran PPDB
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/master/list-atph" class="nav-link">
+                            <a href="{{ route('ppdb.tambah.pendaftar') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>ATPH</p>
+                                <p>Tambah Peserta PPDB</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/master/list-tbsm" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>TBSM</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/master/list-tkj" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>TKJ</p>
+                                <p>List Peserta</p>
                             </a>
                         </li>
                     </ul>
