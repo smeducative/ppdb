@@ -10,9 +10,9 @@ class PendaftaranPPDB extends Controller
 {
     public function listPendaftar()
     {
-        $peserta = PesertaPPDB::get();
+        $pesertappdb = PesertaPPDB::with('jurusan')->get();
 
-        return view('ppdb.list', compact('peserta'));
+        return view('ppdb.list', compact('pesertappdb'));
     }
 
     public function tambahPendaftar()
@@ -57,7 +57,7 @@ class PendaftaranPPDB extends Controller
         $ppdb->tanggal_lahir = request('tanggal_lahir');
         $ppdb->nik = request('nik');
         $ppdb->alamat_lengkap = request('alamat_lengkap');
-        $ppdb->pilihan_jurusan = request('pilihan_jurusan');
+        $ppdb->jurusan_id = request('pilihan_jurusan');
         $ppdb->asal_sekolah = request('asal_sekolah');
         $ppdb->tahun_lulus = request('tahun_lulus');
         $ppdb->nisn = request('nisn');
