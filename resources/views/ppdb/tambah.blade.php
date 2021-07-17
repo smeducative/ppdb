@@ -175,7 +175,7 @@
                                                     <label class="custom-control-label" for="pkip">Peserta penerima KIP</label>
                                                 </div>
 
-                                                <input type="text" class="form-control" name="no_kip" value="{{ old('no_kip') }}" placeholder="No. NISN" disabled>
+                                                <input type="text" class="form-control" name="no_kip" value="{{ old('no_kip') }}" placeholder="No. KIP" disabled>
                                             </div>
 
                                             {{-- No. HP --}}
@@ -233,7 +233,78 @@
                                         {{-- Jenis beasiswa --}}
                                         <div id="jenis-beasiswa" class="content" role="tabpanel" aria-labelledby="jenis-beasiswa-part-trigger">
                                             {{-- jenis beasiswa --}}
-                                            cek
+
+
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <h3>Akademik</h3>
+                                                </div>
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Ranking</label>
+
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-medal"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" data-inputmask='"mask": "9/9/9"' placeholder="kelas/semester/peringkat" name="peringkat"
+                                                                data-mask>
+                                                        </div>
+                                                        <!-- /.input group -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Hadidz / Hafidzoh</label>
+                                                        <input type="text" class="form-control" name="hafidz" placeholder="Hafidz / Hafidzoh"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h3>Non Akademik</h3>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Jenis Lomba</label>
+                                                        <input type="text" class="form-control" name="jenis_lomba" placeholder="misal: kejuaran catur"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Juara ke</label>
+                                                        <input type="text" class="form-control" name="juara_ke" placeholder="Juara ke" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Tingkat</label>
+                                                        <select class="form-control select2" id="jtingkat" style="width: 100%;" name="juara_tingkat" required>
+                                                            @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
+
+                                                            <option value="{{ $tingkat }}">{{ $tingkat }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <h3>Rekomendasi</h3>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    {{-- <label>Rekomendasi</label> --}}
+                                                    <div class="custom-control custom-checkbox mb-2">
+                                                        <input type="checkbox" name="beasiswa_rekomendasi" class="custom-control-input" id="mwc">
+                                                        <label class="custom-control-label" for="mwc">Peserta di rekomendasikan oleh MWC</label>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- row -->
+
+
 
                                             <button class="btn btn-primary" onclick="event.preventDefault();stepper.previous()">Kembali</button>
                                             <button class="btn btn-primary" type="submit">Submit</button>
@@ -283,6 +354,7 @@
     <script src="/plugins/select2/js/select2.full.min.js"></script>
 
     <script src="/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
 
     <script>
         $(function() {
@@ -293,7 +365,11 @@
             $('#tlulus').select2({
                 theme: 'bootstrap4'
             })
+            $('#jtingkat').select2({
+                theme: 'bootstrap4'
+            })
 
+            $('[data-mask]').inputmask()
 
         })
 
