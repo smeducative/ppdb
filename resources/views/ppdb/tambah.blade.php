@@ -33,6 +33,14 @@
             <div class="row">
                 <div class="col-md-12">
 
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Success!</h5>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="card">
 
                         <div class="card-header">
@@ -125,8 +133,8 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                     </div>
-                                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" placeholder="dd/mm/yyyy"
-                                                        data-mask>
+                                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="tanggal_lahir"
+                                                        data-mask required>
                                                 </div>
                                             </div>
 
@@ -196,7 +204,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">+62</span>
                                                     </div>
-                                                    <input type="number" class="form-control" placeholder="No. HP">
+                                                    <input type="number" class="form-control" name="no_hp" placeholder="No. HP">
                                                 </div>
                                             </div>
 
@@ -309,7 +317,7 @@
                                                 <div class="col-md-12">
                                                     {{-- <label>Rekomendasi</label> --}}
                                                     <div class="custom-control custom-checkbox mb-2">
-                                                        <input type="checkbox" name="beasiswa_rekomendasi" class="custom-control-input" id="mwc">
+                                                        <input type="checkbox" name="rekomendasi_mwc" class="custom-control-input" id="mwc">
                                                         <label class="custom-control-label" for="mwc">Peserta di rekomendasikan oleh MWC</label>
                                                     </div>
                                                 </div>

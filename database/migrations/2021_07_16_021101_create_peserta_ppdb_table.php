@@ -17,7 +17,7 @@ class CreatePesertaPpdbTable extends Migration
 
             // identitas diri
             $table->uuid('id');
-            $table->integer('pilihan_jurusan');
+            $table->integer('jurusan_id');
             $table->string('gelombang')->nullable();
             $table->string('photo')->nullable();
             $table->string('nama_lengkap');
@@ -43,8 +43,7 @@ class CreatePesertaPpdbTable extends Migration
             $table->string('no_hp_ibu')->nullable();
 
             // jenis beasiswa
-
-            $table->string('jenis_beasiswa')->nullable();
+            // $table->string('jenis_beasiswa')->nullable();
 
             // a. kelas, semester, peringkat
             // b. hafidz, hafidzoh

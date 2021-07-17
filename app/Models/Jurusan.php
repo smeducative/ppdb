@@ -14,4 +14,9 @@ class Jurusan extends Model
     protected $guarded = [];
 
     public $timestamps = false;
+
+    public function pesertaPpdb()
+    {
+        return $this->hasMany(PesertaPPDB::class);
+    }
 }
