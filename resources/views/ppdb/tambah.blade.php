@@ -96,7 +96,7 @@
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
                                                 <input type="text" class="form-control" name="nama_lengkap" id="name" value="{{ old('nama_lengkap') }}"
-                                                    placeholder="Nama Lengkap" required>
+                                                    placeholder="Nama Lengkap" autofocus required>
                                             </div>
 
                                             {{-- jenis kelamin --}}
@@ -196,7 +196,35 @@
                                         {{-- identitas orang tua --}}
                                         <div id="identitas-orang-tua" class="content" role="tabpanel" aria-labelledby="identitas-orang-tua-part-trigger">
                                             {{-- identias orang tua --}}
-                                            tes
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    {{-- nama ayah --}}
+                                                    <div class="form-group">
+                                                        <label>Nama Ayah</label>
+                                                        <input type="text" name="nama_ayah" class="form-control" placeholder="Nama Ayah"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>No. HP Ayah</label>
+                                                        <input type="text" name="no_ayah" class="form-control" placeholder="No. HP Ayah"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{-- nama ibu --}}
+                                                    <div class="form-group">
+                                                        <label>Nama Ibu</label>
+                                                        <input type="text" name="nama_ayah" class="form-control" placeholder="Nama Ibu"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>No. HP Ibu</label>
+                                                        <input type="text" name="no_ibu" class="form-control" placeholder="No. HP Ayah"/>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <button class="btn btn-primary" onclick="event.preventDefault();stepper.previous()">Kembali</button>
                                             <button class="btn btn-primary" onclick="event.preventDefault();stepper.next()">Lanjut</button>
