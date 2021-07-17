@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    @yield('head')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -127,6 +129,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/js/js-admin/demo.js"></script>
 
+
+    @yield('footer')
     {{-- <!-- page script -->
     <script>
         $(function() {
