@@ -43,12 +43,10 @@
 
                                             <th>No. Pendafaran</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
                                             <th>Tempat, Tanggal Lahir</th>
                                             <th>No. Telepon</th>
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
-                                            <th>NIK</th>
                                             <th>Lihat selengkapnya</th>
                                         </tr>
                                     </thead>
@@ -58,12 +56,10 @@
 
                                             <td> {{ 12 }} </td>
                                             <td>  {{ $peserta->nama_lengkap }} </td>
-                                            <td> {{ $peserta->jenis_kelamin }} </td>
-                                            <td> {{ $peserta->tempat_lahir }}, {{ $peserta->tanggal_lahir }} </td>
+                                            <td> {{ $peserta->tempat_lahir }}, {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
                                             <td>  {{ $peserta->no_hp }} </td>
                                             <td>  {{ $peserta->asal_sekolah }} </td>
-                                            <td> {{ $peserta->pilihan_jurusan }} </td>
-                                            <td> {{ $peserta->nik }} </td>
+                                            <td> {{ $peserta->jurusan->nama }} </td>
                                             <td> <button class="btn btn-outline-success">Lihat selengkapnya</button> </td>
                                         </tr>
                                         @endforeach
