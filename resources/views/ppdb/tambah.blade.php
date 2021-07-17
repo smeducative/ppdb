@@ -118,6 +118,17 @@
                                                 <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}"
                                                     placeholder="Tempat Lahir" required>
                                             </div>
+                                            {{-- Tanggal Lahir --}}
+                                            <div class="form-group">
+                                                <label>Tanggal Lahir</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" placeholder="dd/mm/yyyy"
+                                                        data-mask>
+                                                </div>
+                                            </div>
 
 
                                             {{-- NIK --}}
@@ -215,7 +226,7 @@
                                                     {{-- nama ibu --}}
                                                     <div class="form-group">
                                                         <label>Nama Ibu</label>
-                                                        <input type="text" name="nama_ayah" class="form-control" placeholder="Nama Ibu"/>
+                                                        <input type="text" name="nama_ibu" class="form-control" placeholder="Nama Ibu"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
