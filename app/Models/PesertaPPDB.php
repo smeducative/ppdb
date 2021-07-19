@@ -9,6 +9,10 @@ class PesertaPPDB extends Model
 {
     use HasFactory;
 
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
     protected $table = 'peserta_ppdb';
 
     protected $guarded = [];
@@ -22,5 +26,10 @@ class PesertaPPDB extends Model
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);
+    }
+
+    public function getNoPendaftaranAttribute($value)
+    {
+        return '000' . $this->jurusan->id . $this->created_at->format('my');
     }
 }

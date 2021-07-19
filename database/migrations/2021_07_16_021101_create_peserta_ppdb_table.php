@@ -24,11 +24,11 @@ class CreatePesertaPpdbTable extends Migration
             $table->enum('jenis_kelamin', ['l', 'p']);
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->integer('nik');
+            $table->string('nik');
+            $table->string('nisn')->nullable();
             $table->text('alamat_lengkap');
             $table->string('asal_sekolah');
             $table->year('tahun_lulus');
-            $table->integer('nisn')->nullable();
             $table->enum('penerima_kip', ['y', 'n']);
             $table->string('no_kip')->nullable();
             $table->string('no_hp')->nullable();

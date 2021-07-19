@@ -17,8 +17,6 @@ class PendaftaranPPDB extends Controller
 
     public function tambahPendaftar()
     {
-        // logic ...
-
         return view('ppdb.tambah');
     }
 
@@ -84,5 +82,12 @@ class PendaftaranPPDB extends Controller
         session()->flash('success', 'peserta ppdb di tambahkan');
 
         return back();
+    }
+
+    public function showPeserta($id)
+    {
+        $peserta = PesertaPPDB::find($id);
+
+        return view('ppdb.show', compact('peserta'));
     }
 }

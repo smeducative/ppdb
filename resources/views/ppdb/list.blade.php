@@ -47,20 +47,17 @@
                                             <th>No. Telepon</th>
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
-                                            <th>Lihat selengkapnya</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($pesertappdb as $peserta)
                                         <tr>
-
-                                            <td> {{ 12 }} </td>
-                                            <td>  {{ $peserta->nama_lengkap }} </td>
+                                            <td> {{ $peserta->no_pendaftaran }} </td>
+                                            <td>  <a href="{{ route('ppdb.show.peserta', $peserta->id) }}"> {{ $peserta->nama_lengkap }}</a> </td>
                                             <td> {{ $peserta->tempat_lahir }}, {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
                                             <td>  {{ $peserta->no_hp }} </td>
                                             <td>  {{ $peserta->asal_sekolah }} </td>
                                             <td> {{ $peserta->jurusan->nama }} </td>
-                                            <td> <button class="btn btn-outline-success">Lihat selengkapnya</button> </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
