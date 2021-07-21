@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - PPDB Smedip</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+    <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">
 </head>
 <body style="font-family: Poppins">
@@ -43,6 +43,8 @@
 
 <!-- AlpineJS Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+
+@yield('footer')
 
 </body>
 </html>

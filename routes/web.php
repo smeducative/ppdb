@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 Route::view('/formulir', 'formulir');
+Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mendaftar');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');

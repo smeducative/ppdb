@@ -90,4 +90,12 @@ class PendaftaranPPDB extends Controller
 
         return view('ppdb.show', compact('peserta'));
     }
+
+
+
+    // formulir section
+    public function mendaftar()
+    {
+        dd(request()->all());
+    }
 }

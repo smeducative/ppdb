@@ -1,5 +1,7 @@
 @extends('layouts.landing')
 
+@inject('jurusan', 'App\Models\Jurusan')
+
 @section('title', 'Formulir Pendaftaran')
 
 @section('content')
@@ -16,271 +18,320 @@
   </nav>
 </header>
 
-    <section class="max-w-6xl mx-auto bg-gray-50 mt-10 p-3">
+<section class="mt-10 px-5 max-w-7xl mx-auto">
+    <h2 class="text-2xl ont-bold">Formulir PPDB</h2>
+</section>
+
+    <section class="w-full bg-gray-50 mt-10">
         <!--
   This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
 -->
-<div>
-  <div class="md:grid md:grid-cols-3 md:gap-6">
+<div class="max-w-7xl mx-auto bg-gray-100 py-5">
+  <div class="md:grid md:grid-cols-3 md:gap-6" x-data="{
+    step: 1
+  }" x-cloak>
     <div class="md:col-span-1">
-      <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+
+      {{-- step 1 - data diri --}}
+      <div class="px-5" x-show="step === 1" x-transition>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Diri</h3>
         <p class="mt-1 text-sm text-gray-600">
-          This information will be displayed publicly so be careful what you share.
+          Informasi tentang data diri peserta.
         </p>
       </div>
+
+      {{-- step 2 - identitas orang tua --}}
+      <div class="px-5" x-show="step === 2" x-transition>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Orang Tua</h3>
+        <p class="mt-1 text-sm text-gray-600">
+          Informasi data orang tua peserta.
+        </p>
+      </div>
+
+      {{-- step 3 - Jenis beasiswa --}}
+      <div class="px-5" x-show="step === 3" x-transition>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa</h3>
+        <p class="mt-1 text-sm text-gray-600">
+          Jenis beasiswa peserta.
+        </p>
+      </div>
+      {{-- end step --}}
     </div>
-    <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
+    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
+      <form action="{{ route('ppdb.mendaftar') }}" method="POST">
+          @csrf
         <div class="shadow sm:rounded-md sm:overflow-hidden">
-          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div class="grid grid-cols-3 gap-6">
+
+          {{-- step 1 - identitas peserta --}}
+          <div x-show="step === 1" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+
+            {{-- Nama lengkap --}}
+            <div class="grid">
               <div class="col-span-3 sm:col-span-2">
-                <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Website
+                <label class="block text-sm font-medium text-gray-700">
+                  Nama Lengkap
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                    http://
-                  </span>
-                  <input type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="www.example.com">
+                  <input type="text" name="nama_lengkap" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Nama lengkap" required>
                 </div>
               </div>
             </div>
 
-            <div>
-              <label for="about" class="block text-sm font-medium text-gray-700">
-                About
-              </label>
-              <div class="mt-1">
-                <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="you@example.com"></textarea>
-              </div>
-              <p class="mt-2 text-sm text-gray-500">
-                Brief description for your profile. URLs are hyperlinked.
-              </p>
-            </div>
+            {{-- Jenis Kelamin --}}
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700">
-                Photo
-              </label>
-              <div class="mt-1 flex items-center">
-                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-                <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  Change
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700">
-                Cover photo
-              </label>
-              <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                <div class="space-y-1 text-center">
-                  <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <div class="flex text-sm text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                      <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                    </label>
-                    <p class="pl-1">or drag and drop</p>
-                  </div>
-                  <p class="text-xs text-gray-500">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Save
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div class="hidden sm:block" aria-hidden="true">
-  <div class="py-5">
-    <div class="border-t border-gray-200"></div>
-  </div>
-</div>
-
-<div class="mt-10 sm:mt-0">
-  <div class="md:grid md:grid-cols-3 md:gap-6">
-    <div class="md:col-span-1">
-      <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Use a permanent address where you can receive mail.
-        </p>
-      </div>
-    </div>
-    <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
-        <div class="shadow overflow-hidden sm:rounded-md">
-          <div class="px-4 py-5 bg-white sm:p-6">
-            <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-6 sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                <input type="text" name="email-address" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label for="country" class="block text-sm font-medium text-gray-700">Country / Region</label>
-                <select id="country" name="country" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
-              </div>
-
-              <div class="col-span-6">
-                <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
-                <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-              <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                <input type="text" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
-                <input type="text" name="state" id="state" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal</label>
-                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-              </div>
-            </div>
-          </div>
-          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Save
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div class="hidden sm:block" aria-hidden="true">
-  <div class="py-5">
-    <div class="border-t border-gray-200"></div>
-  </div>
-</div>
-
-<div class="mt-10 sm:mt-0">
-  <div class="md:grid md:grid-cols-3 md:gap-6">
-    <div class="md:col-span-1">
-      <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Notifications</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Decide which communications you'd like to receive and how.
-        </p>
-      </div>
-    </div>
-    <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
-        <div class="shadow overflow-hidden sm:rounded-md">
-          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <fieldset>
-              <legend class="text-base font-medium text-gray-900">By Email</legend>
-              <div class="mt-4 space-y-4">
-                <div class="flex items-start">
-                  <div class="flex items-center h-5">
-                    <input id="comments" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="comments" class="font-medium text-gray-700">Comments</label>
-                    <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                  </div>
-                </div>
-                <div class="flex items-start">
-                  <div class="flex items-center h-5">
-                    <input id="candidates" name="candidates" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="candidates" class="font-medium text-gray-700">Candidates</label>
-                    <p class="text-gray-500">Get notified when a candidate applies for a job.</p>
-                  </div>
-                </div>
-                <div class="flex items-start">
-                  <div class="flex items-center h-5">
-                    <input id="offers" name="offers" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                  </div>
-                  <div class="ml-3 text-sm">
-                    <label for="offers" class="font-medium text-gray-700">Offers</label>
-                    <p class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
             <fieldset>
               <div>
-                <legend class="text-base font-medium text-gray-900">Push Notifications</legend>
-                <p class="text-sm text-gray-500">These are delivered via SMS to your mobile phone.</p>
+                <legend class="text-base font-medium text-gray-900">Jenis Kelamin</legend>
               </div>
               <div class="mt-4 space-y-4">
                 <div class="flex items-center">
-                  <input id="push-everything" name="push-notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                  <label for="push-everything" class="ml-3 block text-sm font-medium text-gray-700">
-                    Everything
+                  <input name="jenis_kelamin" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="l" checked="checked">
+                  <label class="ml-3 block text-sm font-medium text-gray-700">
+                    Laki-laki
                   </label>
                 </div>
                 <div class="flex items-center">
-                  <input id="push-email" name="push-notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                  <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
-                    Same as email
-                  </label>
-                </div>
-                <div class="flex items-center">
-                  <input id="push-nothing" name="push-notifications" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                  <label for="push-nothing" class="ml-3 block text-sm font-medium text-gray-700">
-                    No push notifications
+                  <input name="jenis_kelamin" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="p">
+                  <label class="ml-3 block text-sm font-medium text-gray-700">
+                    Perempuan
                   </label>
                 </div>
               </div>
             </fieldset>
+            {{-- Tempat Lahir --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label for="company-website" class="block text-sm font-medium text-gray-700">
+                  Tempat Lahir
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" name="tempat_lahir" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tempat lahir" required>
+                </div>
+              </div>
+            </div>
+
+            {{-- Tanggal Lahir --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label for="company-website" class="block text-sm font-medium text-gray-700">
+                  Tanggal Lahir
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="tanggal_lahir" data-mask required>
+                </div>
+              </div>
+            </div>
+
+            {{-- nik --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700">
+                  NIK
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="number" name="nik" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NIK" required>
+                </div>
+              </div>
+            </div>
+
+            {{-- nisn --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700">
+                  NISN
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="number" name="nisn" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NISN">
+                </div>
+              </div>
+            </div>
+
+            {{-- alamat lengkap --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700">
+                  Alamat Lengkap
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap" name="alamat_lengkap" required></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid">
+
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">Pilihan Jurusan</label>
+                <select name="pilihan_jurusan" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  @foreach($jurusan->get() as $jrs)
+                  <option value="{{ $jrs->id }}"> {{ $jrs->nama }} </option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+            {{-- asal sekolah --}}
+
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700">
+                  Asal Sekolah
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah">
+                </div>
+              </div>
+            </div>
+
+            {{-- tahun lulus --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700">
+                  Tahun Lulus
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                    <select name="tahun_lulus" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    @for($i = now()->year; $i >= 2015; $i--)
+                        <option value="{{ $i }}"> {{ $i }} </option>
+                    @endfor
+                    </select>
+                 </div>
+              </div>
+            </div>
+
+
+            {{-- Nomer HP --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700">
+                  No. HP
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="number" name="nisn" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="No. HP">
+                </div>
+              </div>
+            </div>
+
           </div>
+
+          {{-- step 2 - identitas orang tua --}}
+          <div x-show="step === 2" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+            <div class="grid grid-cols-6 gap-6">
+
+              {{-- identitas ayah --}}
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">Nama Ayah</label>
+                <input type="text" name="nama_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">No. HP Ayah</label>
+                <input type="text" name="no_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
+
+              {{-- idntitas ibu --}}
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">Nama Ibu</label>
+                <input type="text" name="nama_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">No. HP Ibu</label>
+                <input type="text" name="no_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
+
+
+            </div>
+
+          </div>
+
+          {{-- tep 3 - jenis beasiswa --}}
+          <div x-show="step === 3" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+
+            <div>
+
+                <div class="font-bold text-xl">
+                    <h3>Akademik</h3>
+                </div>
+
+
+                <div class="grid mb-5">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">Ranking</label>
+
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" data-inputmask='"mask": "9/2/9"' placeholder="kelas/semester/peringkat" name="peringkat" data-mask>
+                        <!-- /.input group -->
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">Hadidz / Hafidzoh</label>
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="hafidz" placeholder="Hafidz / Hafidzoh"/>
+                    </div>
+                </div>
+
+                <div class="font-bold text-xl mt-5">
+                    <h3>Non Akademik</h3>
+                </div>
+
+                <div class="grid mb-5">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">Jenis Lomba</label>
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis_lomba" placeholder="misal: kejuaran catur"/>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                        <label class="block text-sm font-medium text-gray-700">Juara ke</label>
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="juara_ke" placeholder="Juara ke" />
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <label class="block text-sm font-medium text-gray-700">Tingkat</label>
+                        <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="jtingkat" style="width: 100%;" name="juara_tingkat" required>
+                            @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
+
+                            <option value="{{ $tingkat }}">{{ $tingkat }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="font-semibold text-xl mt-5">
+                    <h3>Rekomendasi</h3>
+                </div>
+
+                <div class="grid">
+                    {{-- <label>Rekomendasi</label> --}}
+                    <div class="mt-4">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input name="rekomendasi_mwc" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="comments" class="font-medium text-gray-700">Rekomendasi MWC</label>
+                                <p class="text-gray-500">Merupakan peserta rekomandasi MWC.</p>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
+
+          </div>
+
+
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button x-show="step > 1" @click.prevent="step--" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+              Previous
+            </button>
+
+            <button x-show="step < 3" @click.prevent="step++" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Next
+            </button>
+
+            <button x-show="step === 3" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Save
             </button>
           </div>
@@ -291,4 +342,15 @@
 </div>
 
     </section>
+@endsection
+
+@section('footer')    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+
+    <script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('[data-mask]').inputmask()
+        })
+    </script>
 @endsection
