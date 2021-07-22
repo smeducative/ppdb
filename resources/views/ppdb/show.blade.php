@@ -35,7 +35,10 @@
                             <h3 class="card-title">Data diri peserta</h3>
 
                             <div class="card-tools">
-                                <button class="btn btn-primary"><i class="fas fa-print mr-2"></i> print</button>
+                                <button class="btn btn-primary" onclick="document.getElementById('unduh-dokumen').submit();"><i class="fas fa-print mr-2"></i> print</button>
+                                <form action="{{ route('ppdb.unduh.dokumen', ['uuid' => $peserta->id ]) }}" method="POST" id="unduh-dokumen">
+                                    @csrf
+                                </form>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -71,7 +74,9 @@
                                         <th width="30%">Tempat, Tanggal lahir</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <span>{{ $peserta->tempat_lahir }}, {{ $peserta->tanggal_lahir->format('d-m-Y') }} ({{ $peserta->tanggal_lahir->timespan() }}) </span>
+                                            <span>{{ $peserta->tempat_lahir }},
+                                                {{ $peserta->tanggal_lahir->format('d-m-Y') }}
+                                                ({{ $peserta->tanggal_lahir->timespan() }}) </span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -197,7 +202,7 @@
                                         <th width="30%">Semester</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <span>{{ $peserta->akademik['semseter'] }}</span>
+                                            <span>{{ $peserta->akademik['semester'] }}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -259,15 +264,15 @@
                                         <td>
                                             <span>
                                                 @switch($peserta->diterima)
-                                                    @case(0)
-                                                        <span class="text-warning">Proses seleksi</span>
-                                                        @break
-                                                    @case(1)
-                                                        <span class="text-success">Di terima</span>
+                                                @case(0)
+                                                <span class="text-warning">Proses seleksi</span>
+                                                @break
+                                                @case(1)
+                                                <span class="text-success">Di terima</span>
 
-                                                        @break
-                                                        @default
-                                                        <span class="text-danger">Di tolak</span>
+                                                @break
+                                                @default
+                                                <span class="text-danger">Di tolak</span>
 
                                                 @endswitch
                                             </span>

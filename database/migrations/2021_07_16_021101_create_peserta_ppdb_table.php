@@ -18,6 +18,9 @@ class CreatePesertaPpdbTable extends Migration
             // identitas diri
             $table->uuid('id');
             $table->integer('jurusan_id');
+            $table->integer('no_urut');
+            $table->string('semester');
+            $table->string('no_pendaftaran');
             $table->string('gelombang')->nullable();
             $table->string('photo')->nullable();
             $table->string('nama_lengkap');

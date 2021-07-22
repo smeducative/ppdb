@@ -17,13 +17,16 @@ class JurusanSeeder extends Seeder
         $data = [
             [
                 'id'    => 1,
-                'nama'  => 'Teknik Komputer dan Jaringan'
+                'nama'  => 'Teknik Komputer dan Jaringan',
+                'abbreviation'  => 'TKJ'
             ], [
                 'id'    => 2,
-                'nama'  => 'Teknik dan Bisnis Sepeda Motor'
+                'nama'  => 'Teknik dan Bisnis Sepeda Motor',
+                'abbreviation'  => 'TBSM'
             ], [
                 'id'    => 3,
-                'nama'  => 'Agribisnis Tanaman Pangan dan Holtikultura'
+                'nama'  => 'Agribisnis Tanaman Pangan dan Holtikultura',
+                'abbreviation'  => 'ATPH'
             ],
         ];
 

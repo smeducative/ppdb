@@ -28,8 +28,8 @@ class PesertaPPDB extends Model
         return $this->belongsTo(Jurusan::class);
     }
 
-    public function getNoPendaftaranAttribute($value)
+    public function getNoUrut()
     {
-        return '000' . $this->jurusan->id . $this->created_at->format('my');
+        return $this->whereYear('created_at', now()->year)->count() + 1;
     }
 }

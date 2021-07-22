@@ -23,7 +23,7 @@
         </div><!-- /.container-fluid -->
     </section>
 
-<!-- Main content -->
+    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
 
@@ -41,7 +41,7 @@
                                     <thead>
                                         <tr>
 
-                                            <th>No. Pendafaran</th>
+                                            <th>No. Pendaftaran</th>
                                             <th>Nama</th>
                                             <th>Tempat, Tanggal Lahir</th>
                                             <th>No. Telepon</th>
@@ -53,10 +53,12 @@
                                         @foreach ($pesertappdb as $peserta)
                                         <tr>
                                             <td> {{ $peserta->no_pendaftaran }} </td>
-                                            <td>  <a href="{{ route('ppdb.show.peserta', $peserta->id) }}"> {{ $peserta->nama_lengkap }}</a> </td>
-                                            <td> {{ $peserta->tempat_lahir }}, {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
-                                            <td>  {{ $peserta->no_hp }} </td>
-                                            <td>  {{ $peserta->asal_sekolah }} </td>
+                                            <td> <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
+                                                    {{ $peserta->nama_lengkap }}</a> </td>
+                                            <td> {{ $peserta->tempat_lahir }},
+                                                {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
+                                            <td> {{ $peserta->no_hp }} </td>
+                                            <td> {{ $peserta->asal_sekolah }} </td>
                                             <td> {{ $peserta->jurusan->nama }} </td>
                                         </tr>
                                         @endforeach
@@ -74,8 +76,8 @@
     </section>
 
 
-        </div>
-    </section>
+</div>
+</section>
 
 </div>
 @endsection
@@ -89,16 +91,16 @@
 @endsection
 
 @section('footer')
-    <!-- DataTables  & Plugins -->
-    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
 
-    <!-- Page specific script -->
-    <script>
-        $(function () {
+<!-- Page specific script -->
+<script>
+    $(function () {
 
             $('#list-ppdb').DataTable({
                 "paging": true,
@@ -110,5 +112,5 @@
                 "responsive": true,
             });
       });
-    </script>
+</script>
 @endsection

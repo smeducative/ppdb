@@ -29,4 +29,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::post('/ppdb/tambah-pendaftar', [PendaftaranPPDB::class, 'submitPendaftar'])->name('ppdb.tambah.pendaftar');
 
     Route::get('/ppdb/show/{id}', [PendaftaranPPDB::class, 'showPeserta'])->name('ppdb.show.peserta');
+
+    Route::post('/ppdb/unduh-dokumen/{uuid}', [PendaftaranPPDB::class, 'unduhDokumen'])->name('ppdb.unduh.dokumen');
 });
