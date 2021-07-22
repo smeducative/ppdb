@@ -75,15 +75,15 @@ class PendaftaranPPDB extends Controller
         $ppdb->nama_ibu = request('nama_ibu');
         $ppdb->no_hp_ibu = request('no_ibu');
         $ppdb->akademik = [
-            'kelas' => explode('/', request('peringkat'))[0],
-            'semester' => explode('/', request('peringkat'))[1],
-            'peringkat' => explode('/', request('peringkat'))[2],
-            'hafidz'    => request('hafidz')
+            'kelas' => explode('/', request('peringkat'))[0] ?? '',
+            'semester' => explode('/', request('peringkat'))[1] ?? '',
+            'peringkat' => explode('/', request('peringkat'))[2] ?? '',
+            'hafidz'    => request('hafidz') ?? ''
         ];
         $ppdb->non_akademik = [
-            'jenis_lomba' => request('jenis_lomba'),
-            'juara_ke'     => request('juara_ke'),
-            'juara_tingkat' => request('juara_tingkat')
+            'jenis_lomba' => request('jenis_lomba') ?? '',
+            'juara_ke'     => request('juara_ke') ?? '',
+            'juara_tingkat' => request('juara_tingkat') ?? ''
         ];
         $ppdb->rekomendasi_mwc = request()->has('rekomendasi_mwc') ? 1 : 0;
         $ppdb->save();
