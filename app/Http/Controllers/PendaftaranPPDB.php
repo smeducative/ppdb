@@ -150,6 +150,6 @@ class PendaftaranPPDB extends Controller
 
         $phpword->saveAs('ppdb/' . $filename);
 
-        return response()->download($filename);
+        return response()->download('ppdb/' . $filename);
     }
 }
