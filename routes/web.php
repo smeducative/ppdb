@@ -31,4 +31,10 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/ppdb/show/{id}', [PendaftaranPPDB::class, 'showPeserta'])->name('ppdb.show.peserta');
 
     Route::post('/ppdb/unduh-dokumen/{uuid}', [PendaftaranPPDB::class, 'unduhDokumen'])->name('ppdb.unduh.dokumen');
+
+    Route::get('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'daftarUlang'])->name('ppdb.daftar-ulang');
+    Route::post('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'daftarUlangPost'])->name('ppdb.daftar.ulang');
+
+
+    Route::get('/ppdb/list/terdaftar-ulang/{jurusan}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
 });

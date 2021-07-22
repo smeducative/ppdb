@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\IOFactory;
+use App\Helper\Terbilang;
 
 class PendaftaranPPDB extends Controller
 {
@@ -95,6 +96,16 @@ class PendaftaranPPDB extends Controller
         return back();
     }
 
+
+    // show daftar ulang
+
+    public function listDaftarUlang($jurusan)
+    {
+        $pesertappdb = PesertaPPDB::with('jurusan')->get(); // proto
+
+        return view('ppdb.list-daftar-ulang', compact('pesertappdb'));
+    }
+
     public function showPeserta($id)
     {
         $peserta = PesertaPPDB::find($id);
@@ -172,6 +183,15 @@ class PendaftaranPPDB extends Controller
         session()->flash('success', 'berhasil');
 
         return back();
+    }
+
+
+    // form daftar ulang
+    public function daftarUlang($uuid)
+    {
+        $peserta = PesertaPPDB::findOrFail($uuid);
+
+        return view('ppdb.daftar-ulang', compact('peserta'));
     }
 
 

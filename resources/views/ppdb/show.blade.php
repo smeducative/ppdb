@@ -284,8 +284,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="button" class="btn btn-success">Terima</button>
-                            <button type="button" class="btn btn-danger">Tolak</button>
+                            <a href="{{ route('ppdb.daftar-ulang', ['uuid' => $peserta->id ]) }}" type="button" class="btn btn-success">Daftar Ulang</a>
                         </div>
                     </div>
 

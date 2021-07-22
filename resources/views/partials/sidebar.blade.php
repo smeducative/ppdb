@@ -62,19 +62,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/master/du-atph" class="nav-link">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/du-tbsm" class="nav-link">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/du-tkj" class="nav-link">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 1]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU TKJ</p>
                             </a>
