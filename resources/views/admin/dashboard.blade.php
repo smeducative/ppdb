@@ -33,7 +33,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $count['atph'] }}
 
                             <p>ATPH</p>
                         </div>
@@ -48,7 +48,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $count['tbsm'] }}
 
                             <p>TBSM</p>
                         </div>
@@ -63,7 +63,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $count['tkj'] }}
 
                             <p>TKJ</p>
                         </div>
@@ -78,7 +78,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $peserta->count() }}
 
                             <p>Total Pendaftar</p>
                         </div>
