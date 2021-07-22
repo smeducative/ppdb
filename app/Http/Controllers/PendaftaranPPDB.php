@@ -148,7 +148,7 @@ class PendaftaranPPDB extends Controller
 
         $filename = Str::slug($peserta->nama_lengkap) . '.docx';
 
-        $phpword->saveAs($filename);
+        $phpword->saveAs('ppdb/' . $filename);
 
         return response()->download($filename);
     }
