@@ -59,6 +59,7 @@ class PendaftaranPPDB extends Controller
         $ppdb->no_urut = $no_urut;
         $ppdb->semester = now()->year . '/' . now()->addYear()->year;
         $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
+        $ppdb->nama_lengkap = request('nama_lengkap');
         $ppdb->jenis_kelamin = request('jenis_kelamin');
         $ppdb->tempat_lahir = request('tempat_lahir');
         $ppdb->tanggal_lahir = request('tanggal_lahir');

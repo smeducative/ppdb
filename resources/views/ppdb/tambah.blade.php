@@ -301,7 +301,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Tingkat</label>
-                                                        <select class="form-control select2" id="jtingkat" style="width: 100%;" name="juara_tingkat" required>
+                                                        <select class="form-control select2" id="jtingkat" style="width: 100%;" name="juara_tingkat">
                                                             <option value="">-- pilih tingkat --</option>
                                                             @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
 
