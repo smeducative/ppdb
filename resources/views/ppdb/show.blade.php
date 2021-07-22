@@ -250,7 +250,7 @@
                                         <th width="30%">Rekomendasi MWC</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <span>{{ $peserta->rekomendasi_mwc }}</span>
+                                            <span>{{ $peserta->rekomendasi_mwc ? 'Ya' : 'Tidak'}}</span>
                                         </td>
                                     </tr>
 
