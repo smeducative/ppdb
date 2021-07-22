@@ -129,7 +129,7 @@ class PendaftaranPPDB extends Controller
             'tahun_lulus'   => $peserta->tahun_lulus,
             'nisn'          => $peserta->nisn,
             'nik'          => $peserta->nik,
-            'penerima_kip'  => $peserta->penerima_kip,
+            'penerima_kip'  => $peserta->penerima_kip == 'y' ? 'Ya' : 'Tidak',
             'no_kip'  => $peserta->no_kip,
             'no_hp'         => $peserta->no_hp,
             'nama_ayah'     => $peserta->nama_ayah,
