@@ -18,6 +18,19 @@
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div><!-- /.col -->
+
+                <div class="col-md-3 mt-3">
+                    <div class="">
+                                <div class="form-group">
+                                    <label class="form-label">Data Tahun:</label>
+                                    <select class="custom-select form-control-border" id="exampleSelectBorder">
+                                        <option>Value 1</option>
+                                        <option>Value 2</option>
+                                        <option>Value 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>

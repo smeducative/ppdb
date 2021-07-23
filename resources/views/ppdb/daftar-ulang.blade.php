@@ -30,6 +30,17 @@
 
             <div class="row">
                 <div class="col-md-12">
+
+                    {{-- alert --}}
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Success!</h5>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Form Daftar Ulang</h3>
@@ -67,18 +78,75 @@
                                         <th width="30%">Jumlah</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <input type="text" class="form-control" name="jumlah">
+                                            <input type="text" class="form-control" name="nominal">
                                         </td>
                                     </tr>
                                 </tbody>
                              </table>
 
-                            </form>
 
 
                         <div class="card-footer">
-                            <a href="{{ route('ppdb.daftar-ulang', ['uuid' => $peserta->id ]) }}" type="button" class="btn btn-primary">Daftar Ulang</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3 class="card-title">kwitansi Pembayaran</h3>
+
+                            <div class="card-tools">
+                                <form action="{{ route('ppdb.cetak.kwitansi', ['uuid' => $peserta->id]) }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+
+                            @if ($peserta->kwitansi->count())
+                            <table class="table table-hover text-nowrap">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>No. Peserta</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Jenis Pembayaran</th>
+                                        <th>Jumlah</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+
+                                    @foreach ($peserta->kwitansi as $kwitansi)
+                                    <tr>
+                                        <td>{{ $peserta->no_pendaftaran }}</td>
+                                        <td>{{ $peserta->nama_lengkap}}</td>
+                                        <td>{{ $kwitansi->jenis_pembayaran }}</td>
+                                        <td>{{ $kwitansi->nominal }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                            @else
+
+                            <div class="">
+                                belum ada kwitansi untuk di tampilkan
+                            </div>
+
+                            @endif
 
                         </div>
                     </div>
