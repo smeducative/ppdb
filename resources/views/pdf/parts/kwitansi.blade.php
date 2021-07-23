@@ -37,7 +37,7 @@
         <td width="2%">:</td>
         <td class="w-full" style="position: relative
         ;"> <img src="/img/kwitansi/image003.png" style="position: absolute; z-index: 0; top: 0; left: 0; right: 0; bottom: 0;" >
-            <span class="px-5" style="position: absolute;z-index: 1;">Seratus ribu rupiah</span>
+            <span class="px-5" style="position: absolute;z-index: 1;">{{ (new App\Helper\Terbilang)->convert($peserta->kwitansi->nominal) }}</span>
         </td>
     </tr>
     </tr>
