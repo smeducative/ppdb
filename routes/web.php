@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\KwitansiController;
 use App\Http\Controllers\PendaftaranPPDB;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,12 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::post('/ppdb/unduh-dokumen/{uuid}', [PendaftaranPPDB::class, 'unduhDokumen'])->name('ppdb.unduh.dokumen');
 
     Route::get('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'daftarUlang'])->name('ppdb.daftar-ulang');
-    Route::post('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'daftarUlangPost'])->name('ppdb.daftar.ulang');
+    Route::post('/ppdb/daftar-ulang/{uuid}', [KwitansiController::class, 'tambahKwitansi'])->name('ppdb.daftar.ulang');
 
 
     Route::get('/ppdb/list/terdaftar-ulang/{jurusan}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
+
+
+    // cetak
+    Route::post('/cetak/kwitansi/{uuid}', [KwitansiController::class, 'cetakKwitansi'])->name('ppdb.cetak.kwitansi');
 });

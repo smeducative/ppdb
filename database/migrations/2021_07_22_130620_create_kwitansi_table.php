@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDaftarUlangTable extends Migration
+class CreateKwitansiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateDaftarUlangTable extends Migration
      */
     public function up()
     {
-        Schema::create('daftar_ulang', function (Blueprint $table) {
+        Schema::create('kwitansi', function (Blueprint $table) {
+            $table->id();
             $table->uuid('peserta_ppdb_id');
+            $table->string('jenis_pembayaran');
+            $table->unsignedBigInteger('nominal');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateDaftarUlangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daftar_ulang');
+        Schema::dropIfExists('kwitansi');
     }
 }

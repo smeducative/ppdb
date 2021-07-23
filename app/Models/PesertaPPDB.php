@@ -32,4 +32,9 @@ class PesertaPPDB extends Model
     {
         return $this->whereYear('created_at', now()->year)->count() + 1;
     }
+
+    public function Kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'peserta_ppdb_id');
+    }
 }

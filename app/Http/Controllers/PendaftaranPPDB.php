@@ -189,7 +189,7 @@ class PendaftaranPPDB extends Controller
     // form daftar ulang
     public function daftarUlang($uuid)
     {
-        $peserta = PesertaPPDB::findOrFail($uuid);
+        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
 
         return view('ppdb.daftar-ulang', compact('peserta'));
     }
