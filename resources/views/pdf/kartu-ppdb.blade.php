@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'List Peserta PPDB')
+@section('title', 'Kartu Pendaftaran Peserta PPDB')
 
 @section('content')
 
@@ -31,7 +31,17 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Peserta PPDB </h3>
+                            <h3 class="card-title">Kartu Pendaftaran Peserta PPDB </h3>
+
+                            <div class="card-tools">
+
+                                <form action="{{ route('ppdb.cetak.kartu.semua') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-print"></i> Cetak Semua
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body">
                             @if (!$pesertappdb->isEmpty())
@@ -47,19 +57,28 @@
                                             <th>No. Telepon</th>
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($pesertappdb as $peserta)
                                         <tr>
                                             <td> {{ $peserta->no_pendaftaran }} </td>
-                                            <td> <a href="{{ route('ppdb.kwitansi.tambah', ['uuid' => $peserta->id]) }}">
+                                            <td> <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
                                                     {{ $peserta->nama_lengkap }}</a> </td>
                                             <td> {{ $peserta->tempat_lahir }},
                                                 {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
                                             <td> {{ $peserta->no_hp }} </td>
                                             <td> {{ $peserta->asal_sekolah }} </td>
                                             <td> {{ $peserta->jurusan->nama }} </td>
+                                            <td>
+
+                                                <form action="{{ route('ppdb.cetak.kartu', $peserta->id) }}" method="POST">
+                                                    @csrf
+
+                                                    <button class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

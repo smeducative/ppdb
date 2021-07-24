@@ -1,6 +1,4 @@
 
-    <div class="row">
-        <div class="col-md-6" style="border: 3px solid black; border-radius: 10px;">
     <!-- header -->
 <div class="row p-1 px-3 m-1" style="border: 3px solid black; border-radius: 10px;">
     <div class="col-2 p-0">
@@ -23,7 +21,7 @@
 
     <!-- heading -->
     <div class="text-center">
-        <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TH 2021/2022</strong>
+        <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TH {{ now()->year . '/' . now()->addYear()->year }}</strong>
     </div>
 
 
@@ -33,17 +31,17 @@
         <tr>
             <td class="p-1" width="30%">No. Pendaftaran</td>
             <td class="p-1" width="5%">:</td>
-            <td class="p-1">TKJ-089-02-21</td>
+            <td class="p-1">{{ $peserta->no_pendaftaran }}</td>
         </tr>
         <tr>
             <td class="p-1" width="30%">Nama Lengkap</td>
             <td class="p-1" width="5%">:</td>
-            <td class="p-1">Syakirin Amin</td>
+            <td class="p-1">{{ $peserta->nama_lengkap }}</td>
         </tr>
         <tr>
             <td class="p-1" width="30%">TTL</td>
             <td class="p-1" width="5%">:</td>
-            <td class="p-1">Pekalongan, 22-08-1999</td>
+            <td class="p-1">{{ $peserta->tempat_lahir }}, {{ $peserta->tanggal_lahir->format('d-m-Y') }}</td>
         </tr>
         <tr>
             <td class="p-1" width="30%">Kejuruan</td>
@@ -65,9 +63,4 @@
             <strong class="d-block" style="font-size: 11px;">Smk Diponegoro Karanganyar</strong>
             <div style="margin-top: 70px;">( Orang )</div>
         </div>
-    </div>
-
-
-        </div>
-
     </div>

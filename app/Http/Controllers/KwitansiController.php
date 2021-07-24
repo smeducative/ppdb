@@ -51,7 +51,7 @@ class KwitansiController extends Controller
 
     public function cetakKwitansi($uuid)
     {
-        $pesertappdb = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
+        $pesertappdb = PesertaPPDB::with(['jurusan', 'kwitansi'])->where('diterima', 1)->findOrFail($uuid);
 
         // $pdf = PDF::loadView('pdf.cetak-kwitansi', $peserta);
 
@@ -67,7 +67,7 @@ class KwitansiController extends Controller
             'kwitansi' => function ($query) use ($id) {
                 $query->whereId($id);
             }
-        ])->findOrFail($uuid);
+        ])->where('diterima', 1)->findOrFail($uuid);
 
         // $pdf = PDF::loadView('pdf.cetak-kwitansi', $peserta);
 

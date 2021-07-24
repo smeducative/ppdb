@@ -121,19 +121,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/master/baju-atph" class="nav-link">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 3]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kartu ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tbsm" class="nav-link">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 2]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kartu TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tkj" class="nav-link">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 1]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kartu TKJ</p>
                             </a>
@@ -179,19 +179,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/master/baju-atph" class="nav-link">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 3]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tbsm" class="nav-link">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 2]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tkj" class="nav-link">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 1]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat TKJ</p>
                             </a>
