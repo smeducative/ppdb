@@ -214,19 +214,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-atph" class="nav-link">
+                            <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 3]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kwitansi ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tbsm" class="nav-link">
+                            <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 2]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kwitansi TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tkj" class="nav-link">
+                            <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 1]) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kwitansi TKJ</p>
                             </a>

@@ -23,6 +23,8 @@ class PesertaPPDB extends Model
         'tanggal_lahir' => 'date'
     ];
 
+    protected $with = ['jurusan'];
+
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);

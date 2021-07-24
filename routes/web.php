@@ -39,6 +39,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::prefix('kwitansi')->group(function () {
         Route::get('show', [KwitansiController::class, 'showPesertaDiterima'])->name('ppdb.kwitansi.show');
+        Route::get('show/{jurusan}', [KwitansiController::class, 'showJurusanPeserta'])->name('ppdb.kwitansi.show.jurusan');
 
         // tambah kwitansi
         Route::get('/tambah/{uuid}', [KwitansiController::class, 'tambahKwitansi'])->name('ppdb.kwitansi.tambah');

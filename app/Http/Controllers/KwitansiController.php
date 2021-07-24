@@ -18,6 +18,14 @@ class KwitansiController extends Controller
         return view('pdf.kwitansi', compact('pesertappdb'));
     }
 
+    public function showJurusanPeserta($jurusan)
+    {
+        $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)
+            ->whereJurusanId($jurusan)->latest()->get();
+
+        return view('pdf.kwitansi', compact('pesertappdb'));
+    }
+
     public function tambahKwitansi($uuid)
     {
         $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
