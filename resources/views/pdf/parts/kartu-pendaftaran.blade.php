@@ -46,12 +46,11 @@
         <tr>
             <td class="p-1" width="30%">Kejuruan</td>
             <td class="p-1" width="5%">:</td>
-            <td class="p-1">Rekayasa Perangkat Lunak</td>
+            <td class="p-1">{{ $peserta->jurusan->nama }}</td>
         </tr>
     </table>
 
     <!-- photo adn ttd -->
-
     <div class="row">
         <div class="col-md-6">
             <div style="width: 140px; height: 160px; border: 3px solid black; border-radius: 8px; margin: 5px; margin-left: 20px;">

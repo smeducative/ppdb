@@ -21,14 +21,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="/master/jurusan" class="nav-link">
                         <i class="nav-icon fas fa-list-alt"></i>
                         <p>
                             Jurusan
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
