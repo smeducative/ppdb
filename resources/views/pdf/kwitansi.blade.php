@@ -53,7 +53,7 @@
                                         @foreach ($pesertappdb as $peserta)
                                         <tr>
                                             <td> {{ $peserta->no_pendaftaran }} </td>
-                                            <td> <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
+                                            <td> <a href="{{ route('ppdb.kwitansi.tambah', ['uuid' => $peserta->id]) }}">
                                                     {{ $peserta->nama_lengkap }}</a> </td>
                                             <td> {{ $peserta->tempat_lahir }},
                                                 {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>

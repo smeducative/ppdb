@@ -43,12 +43,12 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Form Daftar Ulang</h3>
+                            <h3 class="card-title">Kwitansi Peserta</h3>
                         </div>
 
                         <div class="card-body p-0">
 
-                            <form action="{{ route('ppdb.daftar.ulang', ['uuid' => $peserta->id ]) }}" method="POST">
+                            <form action="{{ route('ppdb.kwitansi.tambah', ['uuid' => $peserta->id ]) }}" method="POST">
                                 @csrf
 
                              <table class="table">
@@ -71,14 +71,14 @@
                                         <th width="30%">Jenis Pembayaran</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <input type="text" class="form-control" name="jenis_pembayaran" value="Daftar Ulang PPDB">
+                                            <input type="text" class="form-control" name="jenis_pembayaran" placeholder="Jenis Pembayaran" required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th width="30%">Jumlah</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <input type="text" class="form-control" name="nominal">
+                                            <input type="text" class="form-control" name="nominal" placeholder="Nominal" required>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -87,7 +87,7 @@
 
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
 
 
@@ -123,6 +123,7 @@
                                         <th>Nama Lengkap</th>
                                         <th>Jenis Pembayaran</th>
                                         <th>Jumlah</th>
+                                        <th>Pada Tanggal</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -136,6 +137,7 @@
                                         <td>{{ $peserta->nama_lengkap}}</td>
                                         <td>{{ $kwitansi->jenis_pembayaran }}</td>
                                         <td>{{ $kwitansi->nominal }}</td>
+                                        <td>{{ $kwitansi->created_at->format('d-M-Y H:i') }}</td>
                                         <td>
                                             <form action="{{ route('ppdb.cetak.kwitansi.single', ['uuid' => $peserta->id, 'id' => $kwitansi->id]) }}" method="POST">
                                     @csrf

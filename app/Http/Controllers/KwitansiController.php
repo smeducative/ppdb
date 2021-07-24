@@ -20,6 +20,13 @@ class KwitansiController extends Controller
 
     public function tambahKwitansi($uuid)
     {
+        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
+
+        return view('ppdb.tambah-kwitansi', compact('peserta'));
+    }
+
+    public function storeKwitansi($uuid)
+    {
         $data = request()->validate([
             'jenis_pembayaran' => ['required'],
             'nominal'   => ['required']
