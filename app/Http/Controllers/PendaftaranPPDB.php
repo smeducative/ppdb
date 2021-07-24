@@ -10,7 +10,7 @@ class PendaftaranPPDB extends Controller
 {
     public function listPendaftar()
     {
-        $pesertappdb = PesertaPPDB::with('jurusan')->latest()->get();
+        $pesertappdb = PesertaPPDB::whereYear('created_at', now()->year)->with('jurusan')->latest()->get();
 
         return view('ppdb.list', compact('pesertappdb'));
     }

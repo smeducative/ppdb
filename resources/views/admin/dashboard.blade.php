@@ -91,7 +91,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ $peserta->count() }}
+                            <h3>{{ $count['all'] }}</h3>
 
                             <p>Total Pendaftar</p>
                         </div>

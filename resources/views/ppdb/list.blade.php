@@ -48,6 +48,7 @@
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
                                             <th>Status</th>
+                                            <th>Tanggal daftar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,6 +74,7 @@
                                                 <span class="badge bg-danger">Di tolak</span>
 
                                                 @endswitch</td>
+                                                <td>{{ $peserta->created_at->format('d-m-Y H:i') }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
