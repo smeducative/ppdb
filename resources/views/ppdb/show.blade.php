@@ -30,13 +30,21 @@
             <div class="row">
                 <div class="col-md-12">
 
+                   @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Success!</h5>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data diri peserta</h3>
 
                             <div class="card-tools">
                                 <button class="btn btn-primary" onclick="document.getElementById('unduh-dokumen').submit();"><i class="fas fa-print mr-2"></i> print</button>
-                                <form action="{{ route('ppdb.unduh.dokumen', ['uuid' => $peserta->id ]) }}" method="POST" id="unduh-dokumen">
+                                <form action="#" method="POST" id="unduh-dokumen">
                                     @csrf
                                 </form>
                             </div>
@@ -262,20 +270,18 @@
                                         <th width="30%">Penerimaan</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <span>
                                                 @switch($peserta->diterima)
                                                 @case(0)
-                                                <span class="text-warning">Proses seleksi</span>
+                                                <span class="badge bg-warning">Proses seleksi</span>
                                                 @break
                                                 @case(1)
-                                                <span class="text-success">Di terima</span>
+                                                <span class="badge bg-success">Di terima</span>
 
                                                 @break
                                                 @default
-                                                <span class="text-danger">Di tolak</span>
+                                                <span class="badge bg-danger">Di tolak</span>
 
                                                 @endswitch
-                                            </span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -284,7 +290,16 @@
                         </div>
 
                         <div class="card-footer">
-                            <a href="{{ route('ppdb.daftar-ulang', ['uuid' => $peserta->id ]) }}" type="button" class="btn btn-success">Daftar Ulang</a>
+
+                            <button id="btn-terima" class="btn btn-success">Terima</button>
+                            <button id="btn-tolak" class="btn btn-danger">Tolak</button>
+
+                            <form id="peserta-diterima" action="{{ route('ppdb.terima.peserta', ['uuid' => $peserta->id]) }}?status=y" method="POST">
+                                @csrf
+                            </form>
+                            <form id="peserta-ditolak" action="{{ route('ppdb.terima.peserta', ['uuid' => $peserta->id]) }}?status=n" method="POST">
+                                @csrf
+                            </form>
                         </div>
                     </div>
 
@@ -296,4 +311,50 @@
 </div>
 
 
+@endsection
+@section('head')
+
+<link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+@endsection
+@section('footer')
+    <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#btn-terima').click(function() {
+
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Terima Peserta?',
+                    showCancelButton: true,
+                }).then((res) => {
+
+                    if(res.isConfirmed) {
+                        $('#peserta-diterima').submit()
+                    }
+
+                });
+
+                // $('#peserta-diterima')
+            });
+
+            $('#btn-tolak').click(function() {
+
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Tolak Peserta?',
+                    showCancelButton: true,
+                }).then((res) => {
+
+                    if(res.isConfirmed) {
+                        $('#peserta-ditolak').submit()
+                    }
+
+                });
+
+                // $('#peserta-diterima')
+            });
+        })
+    </script>
 @endsection

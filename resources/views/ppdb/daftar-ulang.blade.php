@@ -107,7 +107,7 @@
                                 <form action="{{ route('ppdb.cetak.kwitansi', ['uuid' => $peserta->id]) }}" method="POST">
                                     @csrf
 
-                                    <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak </button>
+                                    <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak Semua</button>
                                 </form>
                             </div>
                         </div>
@@ -123,6 +123,7 @@
                                         <th>Nama Lengkap</th>
                                         <th>Jenis Pembayaran</th>
                                         <th>Jumlah</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -135,6 +136,13 @@
                                         <td>{{ $peserta->nama_lengkap}}</td>
                                         <td>{{ $kwitansi->jenis_pembayaran }}</td>
                                         <td>{{ $kwitansi->nominal }}</td>
+                                        <td>
+                                            <form action="{{ route('ppdb.cetak.kwitansi.single', ['uuid' => $peserta->id, 'id' => $kwitansi->id]) }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak</button>
+
+                                </form> </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

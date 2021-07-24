@@ -208,6 +208,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('ppdb.kwitansi.show') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Peserta Diterima</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/master/baju-atph" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kwitansi ATPH</p>

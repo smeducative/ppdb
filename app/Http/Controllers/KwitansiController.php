@@ -9,6 +9,15 @@ use PDF;
 
 class KwitansiController extends Controller
 {
+
+    // show kwitansi   \
+    public function showPesertaDiterima()
+    {
+        $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)->latest()->get();
+
+        return view('pdf.kwitansi', compact('pesertappdb'));
+    }
+
     public function tambahKwitansi($uuid)
     {
         $data = request()->validate([
@@ -27,12 +36,28 @@ class KwitansiController extends Controller
 
     public function cetakKwitansi($uuid)
     {
-        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
+        $pesertappdb = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
 
         // $pdf = PDF::loadView('pdf.cetak-kwitansi', $peserta);
 
         // return $pdf->stream('kwitansi-' . Str::slug($peserta->nama_lengkap) . '.pdf');
 
-        return view('pdf.cetak-kwitansi', $peserta);
+        return view('pdf.cetak-kwitansi', compact('pesertappdb'));
+    }
+
+    public function cetakKwitansiSingle($uuid, $id)
+    {
+        $pesertappdb = PesertaPPDB::with([
+            'jurusan',
+            'kwitansi' => function ($query) use ($id) {
+                $query->whereId($id);
+            }
+        ])->findOrFail($uuid);
+
+        // $pdf = PDF::loadView('pdf.cetak-kwitansi', $peserta);
+
+        // return $pdf->stream('kwitansi-' . Str::slug($peserta->nama_lengkap) . '.pdf');
+
+        return view('pdf.cetak-kwitansi', compact('pesertappdb'));
     }
 }

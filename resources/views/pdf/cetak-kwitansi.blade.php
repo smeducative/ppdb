@@ -4,9 +4,9 @@
 
 @section('content')
 
-@foreach ($kwitansi as $peserta)
+@foreach ($pesertappdb->kwitansi as $kwitansi)
 <div style="display: block; margin-bottom:66px;">
-    @include('pdf.parts.kwitansi', $peserta)
+    @include('pdf.parts.kwitansi', ['kwitansi' => $kwitansi])
 </div>
 @endforeach
 

@@ -47,7 +47,6 @@
                                             <th>No. Telepon</th>
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
-                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,18 +60,6 @@
                                             <td> {{ $peserta->no_hp }} </td>
                                             <td> {{ $peserta->asal_sekolah }} </td>
                                             <td> {{ $peserta->jurusan->nama }} </td>
-                                            <td>@switch($peserta->diterima)
-                                                @case(0)
-                                                <span class="badge bg-warning">Proses seleksi</span>
-                                                @break
-                                                @case(1)
-                                                <span class="badge bg-success">Di terima</span>
-
-                                                @break
-                                                @default
-                                                <span class="badge bg-danger">Di tolak</span>
-
-                                                @endswitch</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

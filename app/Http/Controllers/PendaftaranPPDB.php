@@ -185,56 +185,17 @@ class PendaftaranPPDB extends Controller
         return back();
     }
 
-
-    // form daftar ulang
-    public function daftarUlang($uuid)
+    public function terimaPeserta($uuid)
     {
         $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
 
-        return view('ppdb.daftar-ulang', compact('peserta'));
-    }
+        $peserta->diterima = request()->get('status') == "y" ? 1 : 2;
+        $peserta->save();
 
+        $msg = request()->get('status') == "y" ? "Peserta Diterima" : "Peserta Ditolak";
 
-    // unduh data
-    public function unduhDokumen($uuid)
-    {
-        $peserta = PesertaPPDB::findOrFail($uuid);
+        session()->flash('success', $msg);
 
-        $phpword = new TemplateProcessor(storage_path('app/form_pendaftaran_ppdb.docx'));
-
-        $phpword->setValues([
-            'no_pendaftaran'    => $peserta->no_pendaftaran,
-            'nama_lengkap'  => $peserta->nama_lengkap,
-            'jenis_kelamin'  => $peserta->jenis_kelamin == 'l' ? 'Laki-laki' : 'Perempuan',
-            'tempat_lahir'  => $peserta->tempat_lahir,
-            'tanggal_lahir' => $peserta->tanggal_lahir->format('d-m-Y'),
-            'alamat_lengkap' => $peserta->alamat_lengkap,
-            'pilihan_jurusan'  => $peserta->jurusan->nama,
-            'asal_sekolah'  => $peserta->asal_sekolah,
-            'tahun_lulus'   => $peserta->tahun_lulus,
-            'nisn'          => $peserta->nisn,
-            'nik'          => $peserta->nik,
-            'penerima_kip'  => $peserta->penerima_kip == 'y' ? 'Ya' : 'Tidak',
-            'no_kip'  => $peserta->no_kip,
-            'no_hp'         => $peserta->no_hp,
-            'nama_ayah'     => $peserta->nama_ayah,
-            'no_hp_ayah'       => $peserta->no_hp_ayah,
-            'nama_ibu'      => $peserta->nama_ibu,
-            'no_hp_ibu'        => $peserta->no_hp_ibu,
-            'akademik_kelas'    => $peserta->akademik['kelas'],
-            'akademik_semester' => $peserta->akademik['semester'],
-            'akademik_peringkat' => $peserta->akademik['peringkat'],
-            'akademik_hafidz'    => $peserta->akademik['hafidz'],
-            'non_akademik_jenis_lomba' => $peserta->non_akademik['jenis_lomba'],
-            'non_akademik_juara_ke' => $peserta->non_akademik['juara_ke'],
-            'non_akademik_juara_tingkat' => $peserta->non_akademik['juara_tingkat'],
-            'rekomendasi_mwc' => $peserta->rekomendasi_mwc ? 'ya' : 'tidak',
-        ]);
-
-        $filename = Str::slug($peserta->nama_lengkap) . '.docx';
-
-        $phpword->saveAs('ppdb/' . $filename);
-
-        return response()->download('ppdb/' . $filename);
+        return back();
     }
 }

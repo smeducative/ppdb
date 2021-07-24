@@ -13,6 +13,8 @@ class Kwitansi extends Model
 
     protected $guarded = [];
 
+    protected $with = ['pesertaPpdb'];
+
     public function pesertaPpdb()
     {
         return $this->belongsTo(PesertaPPDB::class, 'peserta_ppdb_id');

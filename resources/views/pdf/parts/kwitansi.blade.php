@@ -16,7 +16,7 @@
         <div style="display: flex;align-items: center;justify-content: center;">
 
             <strong class="d-inline mr-2">No.</strong>
-            <div class="px-3 py-1 d-inline" style="border: 5px solid black;">TKJ-099-02-21</div>
+            <div class="px-3 py-1 d-inline" style="border: 5px solid black;">{{ $kwitansi->pesertaPpdb->no_pendaftaran }}</div>
         </div>
     </div>
 </div>
@@ -30,26 +30,26 @@
     <tr>
         <td width="18%">Sudah Terima Dari</td>
         <td width="2%">:</td>
-        <td> Penyetor </td>
+        <td> {{ $kwitansi->pesertaPpdb->nama_lengkap }} </td>
     </tr>
     <tr>
         <td width="18%">Banyaknya Uang</td>
         <td width="2%">:</td>
         <td class="w-full" style="position: relative
         ;"> <img src="/img/kwitansi/image003.png" style="position: absolute; z-index: 0; top: 0; left: 0; right: 0; bottom: 0;" >
-            <span class="px-5" style="position: absolute;z-index: 1;">{{ (new App\Helper\Terbilang)->convert($peserta->kwitansi->nominal) }}</span>
+            <span class="px-5" style="position: absolute;z-index: 1;">{{ (new App\Helper\Terbilang)->convert($kwitansi->nominal) }} rupiah</span>
         </td>
     </tr>
     </tr>
     <tr>
         <td width="18%">Untuk Pembayaran</td>
         <td width="2%">:</td>
-        <td> Pembayaran ppdb </td>
+        <td> {{ $kwitansi->jenis_pembayaran }} </td>
     </tr>
 </table>
 
 <div class="text-right w-full px-5">
-    Karanganyar, 22-09-2021
+    Karanganyar, {{ $kwitansi->created_at->format('d-m-Y') }}
 </div>
 
 <div class="px-3 d-flex mt-2">
@@ -57,7 +57,7 @@
 
     <div style="position: relative;" class="text-center p-2">
         <img src="/img/kwitansi/image005.png" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
-            <span class="px-5" style="position: absolute; z-index: 1;">100.000</span>
+            <span class="px-5" style="position: absolute; z-index: 1;">{{ number_format($kwitansi->nominal) }}</span>
         </div>
 </div>
 
@@ -66,7 +66,8 @@
         <strong>Penerima</strong>
     </div>
     <div class="col-6 text-right" style="padding-right: 120px;">
-        <strong>Penyetor</strong>
+        <strong class="d-block">Penyetor</strong>
+        <span>( {{ $kwitansi->pesertaPpdb->nama_lengkap }} )</span>
     </div>
 </div>
 

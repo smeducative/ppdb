@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\KwitansiController;
 use App\Http\Controllers\PendaftaranPPDB;
+use App\Models\Kwitansi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,10 +32,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::get('/ppdb/show/{id}', [PendaftaranPPDB::class, 'showPeserta'])->name('ppdb.show.peserta');
 
-    Route::post('/ppdb/unduh-dokumen/{uuid}', [PendaftaranPPDB::class, 'unduhDokumen'])->name('ppdb.unduh.dokumen');
-
-    Route::get('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'daftarUlang'])->name('ppdb.daftar-ulang');
-    Route::post('/ppdb/daftar-ulang/{uuid}', [KwitansiController::class, 'tambahKwitansi'])->name('ppdb.daftar.ulang');
+    Route::post('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'terimaPeserta'])->name('ppdb.terima.peserta');
 
 
     Route::get('/ppdb/list/terdaftar-ulang/{jurusan}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
@@ -42,4 +40,10 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     // cetak
     Route::post('/cetak/kwitansi/{uuid}', [KwitansiController::class, 'cetakKwitansi'])->name('ppdb.cetak.kwitansi');
+    Route::post('/cetak/kwitansi/{uuid}/{id}', [KwitansiController::class, 'cetakKwitansiSingle'])->name('ppdb.cetak.kwitansi.single');
+
+
+    Route::prefix('kwitansi')->group(function () {
+        Route::get('show', [KwitansiController::class, 'showPesertaDiterima'])->name('ppdb.kwitansi.show');
+    });
 });
