@@ -23,10 +23,10 @@
                     <div class="">
                                 <div class="form-group">
                                     <label class="form-label">Data Tahun:</label>
-                                    <select class="custom-select form-control-border" id="exampleSelectBorder">
-                                        <option>Value 1</option>
-                                        <option>Value 2</option>
-                                        <option>Value 3</option>
+                                    <select class="custom-select form-control-border" id="ppdb-tahun">
+										@for($i = now()->year; $i >= 2021 ; $i--)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+										@endfor
                                     </select>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $count['atph'] }}
+							<h3>{{ $count['atph'] }}</h3>
 
                             <p>ATPH</p>
                         </div>
@@ -61,7 +61,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $count['tbsm'] }}
+							<h3>{{ $count['tbsm'] }}</h3>
 
                             <p>TBSM</p>
                         </div>
@@ -76,7 +76,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ $count['tkj'] }}
+							<h3>{{ $count['tkj'] }}</h3>
 
                             <p>TKJ</p>
                         </div>
@@ -175,4 +175,14 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+@endsection
+
+@section('footer')
+	<script>
+		$(document).ready(function () {
+			$("#ppdb-tahun").on('change', function (e) {
+				window.location.href = '?tahun='+e.target.value
+			})
+		})
+	</script>
 @endsection

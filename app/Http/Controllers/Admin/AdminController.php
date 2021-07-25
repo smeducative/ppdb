@@ -10,13 +10,18 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $peserta = PesertaPPDB::whereYear('created_at', now()->year);
+		$tahun = request('tahun', now()->year);
 
-        $count['tkj'] = $peserta->where('jurusan_id', 1)->count();
-        $count['tbsm'] = $peserta->where('jurusan_id', 2)->count();
-        $count['atph'] = $peserta->where('jurusan_id', 3)->count();
-        $count['all'] = $peserta->count();
+		$peserta = PesertaPPDB::with('jurusan')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
-        return view('admin.dashboard', compact('count', 'peserta'));
+        $count = [
+			'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
+            'tbsm' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
+            'atph' => collect($peserta)->where('jurusan_id', 3)->first()->c ?? 0,
+            'all' => collect($peserta)->sum('c') ?? 0
+		];
+
+
+        return view('admin.dashboard', compact('count'));
     }
 }

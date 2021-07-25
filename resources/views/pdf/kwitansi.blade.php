@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Dashboard</h1>
+                    <h1>Dashboard Kwitansi</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Peserta PPDB</li>
+                        <li class="breadcrumb-item active">Kwitansi</li>
                     </ol>
                 </div>
             </div>
@@ -29,11 +29,24 @@
 
             <div class="row">
                 <div class="col-md-12">
+
+					<div class="callout callout-info">
+                  		<h5>Info!</h5>
+
+                  		<p>Peserta yang tampil di halaman ini adalah peserta yang telah dinyatakan <strong>diterima</strong>. Setelah peserta dinyatakan <strong>diterima</strong>, peserta melakukan daftar ulang dengan melakukan pembayaran kwitansi daftar ulang.</p>
+                	</div>
+
+					<div class="callout callout-info">
+                  		<h5>Tips!</h5>
+
+                  		<p>Klik nama peserta untuk mengisi kwitansi.</p>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
                             <h3>Peserta PPDB </h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-0 py-2 table-responsive text-nowrap">
                             @if (!$pesertappdb->isEmpty())
 
                             <div class="table-responsive">
@@ -47,6 +60,7 @@
                                             <th>No. Telepon</th>
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
+											<th>Kwitansi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,6 +74,7 @@
                                             <td> {{ $peserta->no_hp }} </td>
                                             <td> {{ $peserta->asal_sekolah }} </td>
                                             <td> {{ $peserta->jurusan->nama }} </td>
+											<td> {{ $peserta->kwitansi->count() }} </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Peserta PPDB</li>
+                        <li class="breadcrumb-item active">Daftar Ulang Peserta PPDB</li>
                     </ol>
                 </div>
             </div>
@@ -29,11 +29,18 @@
 
             <div class="row">
                 <div class="col-md-12">
+
+					<div class="callout callout-info">
+                  		<h5>Info!</h5>
+
+                  		<p>Peserta yang telah melakukan pembayaran daftar ulang akan tampil disini. jika peserta belum tampil, silahkan melakukan daftar ulang di menu kwitansi.</p>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
-                            <h3>Peserta PPDB</h3>
+                            <h3>Peserta daftar ulang PPDB</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-0 py-2 table-responsive text-nowrap">
                             @if (!$pesertappdb->isEmpty())
 
                             <div class="table-responsive">

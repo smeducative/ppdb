@@ -44,7 +44,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // tambah kwitansi
         Route::get('/tambah/{uuid}', [KwitansiController::class, 'tambahKwitansi'])->name('ppdb.kwitansi.tambah');
-        Route::post('/tambah/{uuid}', [KwitansiController::class, 'tambahKwitansi'])->name('ppdb.kwitansi.tambah');
+        Route::post('/tambah/{uuid}', [KwitansiController::class, 'storeKwitansi'])->name('ppdb.kwitansi.tambah');
 
 
         // cetak
