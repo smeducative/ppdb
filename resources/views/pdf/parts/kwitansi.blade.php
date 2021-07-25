@@ -57,7 +57,7 @@
 
     <div style="position: relative;" class="text-center p-2">
         <img src="/img/kwitansi/image005.png" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
-            <span class="px-5" style="position: absolute; z-index: 1;">{{ number_format($kwitansi->nominal) }}</span>
+            <span class="px-5" style="position: absolute; z-index: 1;">{{ number_format($kwitansi->nominal, 2, ',', '.') }}</span>
         </div>
 </div>
 
@@ -67,7 +67,7 @@
     </div>
     <div class="col-6 text-right" style="padding-right: 120px;">
         <strong class="d-block">Penyetor</strong>
-        <span>( {{ $kwitansi->pesertaPpdb->nama_lengkap }} )</span>
+
     </div>
 </div>
 

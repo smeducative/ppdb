@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/master/home" class="brand-link">
-        <img src="/img/img-admin/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">PPDB | Admin</span>
     </a>
@@ -29,8 +29,8 @@
                         </p>
                     </a>
                 </li> --}}
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') ? 'menu-open' : ''  }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') ? 'active' : ''  }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Pendaftaran PPDB
@@ -39,13 +39,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.tambah.pendaftar') }}" class="nav-link">
+                            <a href="{{ route('ppdb.tambah.pendaftar') }}" class="nav-link {{ request()->routeIs('ppdb.tambah.pendaftar') ? 'active' : ''  }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tambah Peserta PPDB</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.list.pendaftar') }}" class="nav-link">
+                            <a href="{{ route('ppdb.list.pendaftar') }}" class="nav-link {{ request()->routeIs('ppdb.list.pendaftar') ? 'active' : ''  }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Peserta</p>
                             </a>
@@ -62,19 +62,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}" class="nav-link">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}" class="nav-link {{ request()->routeIs('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}" class="nav-link">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}" class="nav-link {{ request()->routeIs('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 1]) }}" class="nav-link">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 1]) }}" class="nav-link {{ request()->routeIs('ppdb.daftar.ulang.list', ['jurusan' => 1]) }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU TKJ</p>
                             </a>
@@ -198,8 +198,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.kwitansi.show') || request()->routeIs('ppdb.kwitansi.show.jurusan') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.kwitansi.show') || request()->routeIs('ppdb.kwitansi.show.jurusan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-money-check"></i>
                         <p>
                             Kwitansi
@@ -208,7 +208,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.kwitansi.show') }}" class="nav-link">
+                            <a href="{{ route('ppdb.kwitansi.show') }}" class="nav-link  {{ request()->routeIs('ppdb.kwitansi.show') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Peserta Diterima</p>
                             </a>
