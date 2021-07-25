@@ -33,7 +33,7 @@
                         <div class="card-header">
                             <h3>Peserta PPDB</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-0 py-2">
                             @if (!$pesertappdb->isEmpty())
 
                             <div class="table-responsive">
@@ -121,7 +121,7 @@
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
-                "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,

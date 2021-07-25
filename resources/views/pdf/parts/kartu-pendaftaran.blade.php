@@ -21,7 +21,7 @@
 
     <!-- heading -->
     <div class="text-center">
-        <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TH {{ now()->year . '/' . now()->addYear()->year }}</strong>
+        <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TH {{ $peserta->created_at->format('Y') . '/' . $peserta->created_at->addYear()->format('Y') }}</strong>
     </div>
 
 
@@ -58,8 +58,8 @@
         </div>
 
         <div class="col-md-6 text-center">
-            <span>22-08-2021</span>
+            <span>{{ $peserta->created_at->format('d-m-Y') }}</span>
             <strong class="d-block" style="font-size: 11px;">Smk Diponegoro Karanganyar</strong>
-            <div style="margin-top: 70px;">( Orang )</div>
+            <div style="margin-top: 70px;">(______)</div>
         </div>
     </div>
