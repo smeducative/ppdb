@@ -112,7 +112,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $du['atph'] }}</h3>
 
                             <p>ATPH</p>
                         </div>
@@ -127,7 +127,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $du['tbsm'] }}</h3>
 
                             <p>TBSM</p>
                         </div>
@@ -142,7 +142,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $du['tkj'] }}</h3>
 
                             <p>TKJ</p>
                         </div>
@@ -157,7 +157,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">Siswa</sup></h3>
+                            <h3>{{ $du['all'] }}</h3>
 
                             <p>Total Pendaftar</p>
                         </div>

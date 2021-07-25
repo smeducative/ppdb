@@ -14,6 +14,8 @@ class AdminController extends Controller
 
 		$peserta = PesertaPPDB::with('jurusan')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
+		$pesertadu = PesertaPPDB::has('kwitansi')->with('jurusan')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
+
         $count = [
 			'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
             'tbsm' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
@@ -21,7 +23,14 @@ class AdminController extends Controller
             'all' => collect($peserta)->sum('c') ?? 0
 		];
 
+		$du = [
+			'tkj' => collect($pesertadu)->where('jurusan_id', 1)->first()->c ?? 0,
+            'tbsm' => collect($pesertadu)->where('jurusan_id', 2)->first()->c ?? 0,
+            'atph' => collect($pesertadu)->where('jurusan_id', 3)->first()->c ?? 0,
+            'all' => collect($pesertadu)->sum('c') ?? 0
+		];
 
-        return view('admin.dashboard', compact('count'));
+
+        return view('admin.dashboard', compact('count', 'du'));
     }
 }
