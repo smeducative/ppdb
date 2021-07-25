@@ -125,7 +125,7 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
-				"buttons": ['copy', 'csv', 'excel']
+				"buttons": ['copy', 'csv', 'excel'],
             });
       });
 </script>

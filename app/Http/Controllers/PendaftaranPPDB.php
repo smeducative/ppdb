@@ -15,6 +15,13 @@ class PendaftaranPPDB extends Controller
         return view('ppdb.list', compact('pesertappdb'));
     }
 
+    public function listPendaftarJurusan($jurusan)
+    {
+        $pesertappdb = PesertaPPDB::whereYear('created_at', now()->year)->with('jurusan')->whereJurusanId($jurusan)->latest()->get();
+
+        return view('ppdb.list', compact('pesertappdb'));
+    }
+
     public function tambahPendaftar()
     {
         return view('ppdb.tambah');
