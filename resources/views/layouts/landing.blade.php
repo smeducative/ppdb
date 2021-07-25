@@ -6,6 +6,8 @@
     <title>@yield('title') - PPDB Smedip</title>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <body style="font-family: Poppins">
 
@@ -43,6 +45,9 @@
 
 <!-- AlpineJS Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+	<script>
+  AOS.init();
+</script>
 
 @yield('footer')
 

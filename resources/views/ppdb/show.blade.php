@@ -83,8 +83,15 @@
                                         <td width="5%">:</td>
                                         <td>
                                             <span>{{ $peserta->tempat_lahir }},
-                                                {{ $peserta->tanggal_lahir->format('d-m-Y') }}
-                                                ({{ $peserta->tanggal_lahir->timespan() }}) </span>
+                                                {{ $peserta->tanggal_lahir->format('d-m-Y') }}</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th width="30%">Umur</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->tanggal_lahir->timespan() }}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -167,6 +174,13 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th width="30%">Pekerjaan Ayah</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->pekerjaan_ayah }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <th width="30%">No. HP Ayah</th>
                                         <td width="5%">:</td>
                                         <td>
@@ -178,6 +192,13 @@
                                         <td width="5%">:</td>
                                         <td>
                                             <span>{{ $peserta->nama_ibu }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">Pekerjaan Ibu</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->pekerjaan_ibu }}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -284,6 +305,15 @@
                                                 @endswitch
                                         </td>
                                     </tr>
+
+
+                                    <tr>
+                                        <th width="30%">Saran dari</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->saran_dari }}</span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
@@ -291,6 +321,8 @@
 
                         <div class="card-footer">
 
+							Peserta yang dinyatakan diterima, melakukan daftar ulang di menu kwitansi.
+<br> <br>
                             <button id="btn-terima" class="btn btn-success">Terima</button>
                             <button id="btn-tolak" class="btn btn-danger">Tolak</button>
 
