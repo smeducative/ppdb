@@ -54,7 +54,11 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('/cetak/kwitansi/{uuid}/{id}', [KwitansiController::class, 'cetakKwitansiSingle'])->name('ppdb.cetak.kwitansi.single');
     });
 
-    Route::prefix('surat-diterima')->group(function () {
+    Route::prefix('formulir')->group(function () {
+		Route::get('show/{jurusan}', [FormulirController::class, 'showJurusanPeserta'])->name('ppdb.formulir.show.jurusan');
+
+        Route::post('/cetak/formulir/{jurusan}', [FormulirController::class, 'cetakFormulir'])->name('ppdb.cetak.formulir.semua');
+        Route::post('/cetak/formulir/{uuid}', [FormulirController::class, 'cetakFormulirSingle'])->name('ppdb.cetak.formulir');
     });
 
     Route::prefix('kartu-pendaftaran')->group(function () {
