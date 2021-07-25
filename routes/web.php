@@ -58,7 +58,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::prefix('kartu-pendaftaran')->group(function () {
         Route::get('show/{jurusan}', [KartuPendaftaranController::class, 'showJurusanPeserta'])->name('ppdb.kartu.show.jurusan');
 
-        Route::post('/cetak/kartu', [KartuPendaftaranController::class, 'cetakKartu'])->name('ppdb.cetak.kartu.semua');
+        Route::post('/cetak/kartu/{jurusan}', [KartuPendaftaranController::class, 'cetakKartu'])->name('ppdb.cetak.kartu.semua');
         Route::post('/cetak/kartu/{uuid}', [KartuPendaftaranController::class, 'cetakKartuSingle'])->name('ppdb.cetak.kartu');
     });
 });

@@ -12,12 +12,13 @@ class KartuPendaftaranController extends Controller
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->whereJurusanId($jurusan)->latest()->get();
 
-        return view('pdf.kartu-ppdb', compact('pesertappdb'));
+        return view('pdf.kartu-ppdb', compact('pesertappdb', 'jurusan'));
     }
 
-    public function cetakKartu()
+    public function cetakKartu($jurusan)
     {
         $pesertappdb = PesertaPPDB::with(['jurusan'])
+			->whereJurusanId($jurusan)
             ->whereYear('created_at', now()->year)
             ->get();
 

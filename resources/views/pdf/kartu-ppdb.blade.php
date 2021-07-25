@@ -35,7 +35,7 @@
 
                             <div class="card-tools">
 
-                                <form action="{{ route('ppdb.cetak.kartu.semua') }}" method="POST">
+                                <form action="{{ route('ppdb.cetak.kartu.semua', ['jurusan' => $jurusan]) }}" method="POST">
                                     @csrf
                                     <button class="btn btn-primary">
                                         <i class="fas fa-print"></i> Cetak Semua
@@ -43,7 +43,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body px-0">
                             @if (!$pesertappdb->isEmpty())
 
                             <div class="table-responsive">

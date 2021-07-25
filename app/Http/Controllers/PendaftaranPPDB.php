@@ -96,7 +96,7 @@ class PendaftaranPPDB extends Controller
 
     public function listDaftarUlang($jurusan)
     {
-        $pesertappdb = PesertaPPDB::with('jurusan')->has('kwitansi')->get(); // proto
+        $pesertappdb = PesertaPPDB::with('jurusan')->has('kwitansi')->whereJurusanId($jurusan)->get(); // proto
 
         return view('ppdb.list-daftar-ulang', compact('pesertappdb'));
     }

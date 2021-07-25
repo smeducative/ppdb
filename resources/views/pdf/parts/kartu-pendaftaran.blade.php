@@ -51,7 +51,7 @@
     </table>
 
     <!-- photo adn ttd -->
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-6">
             <div style="width: 140px; height: 160px; border: 3px solid black; border-radius: 8px; margin: 5px; margin-left: 20px;">
             </div>
