@@ -32,9 +32,9 @@ class JurusanSeeder extends Seeder
         ];
 
         $setting = [
-            'body' => [
+            'body' => json_encode([
                 'batas_akhir_ppdb'    => now()
-            ]
+            ])
         ];
 
         Jurusan::insert($data);

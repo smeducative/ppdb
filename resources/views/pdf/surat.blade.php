@@ -52,7 +52,7 @@
 
 							<div class="form-group">
 								<strong>  Batas Akhir Sekarang: </strong> <br>
-								<span> {{ (new App\Models\PpdbSetting)->body['batas_akhir_ppdb'] ?? now()->format('d-m-Y') }} </span>
+								<span> {{ optional((new App\Models\PpdbSetting)->latest()->first()->body)['batas_akhir_ppdb'] }} </span>
 							</div>
 
 							<div class="form-group">

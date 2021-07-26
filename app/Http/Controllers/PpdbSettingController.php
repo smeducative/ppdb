@@ -9,19 +9,17 @@ use App\Models\PpdbSetting;
 class PpdbSettingController extends Controller
 {
     public function setBatasAkhir()
-	{
-		$batas = PpdbSetting::latest()->first();
+    {
+        $batas = PpdbSetting::latest()->first();
 
-		$batas->body = [
-			'batas_akhir_ppdb'	=> request('batas_akhir_ppdb', now()->format('d-m-Y'))
-		];
+        $batas->update([
+            'body' => [
+                'batas_akhir_ppdb'  => request('batas_akhir_ppdb')
+            ]
+        ]);
 
-		dd($batas);
+        session()->flash('success', 'Batas akhir telah di tentukan');
 
-		$batas->save();
-
-		session()->flash('success', 'Batas akhir telah di tentukan');
-
-		return back();
-	}
+        return back();
+    }
 }

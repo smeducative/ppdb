@@ -9,9 +9,9 @@ class PpdbSetting extends Model
 {
     use HasFactory;
 
-	protected $guarded = [];
+    protected $guarded = [];
 
-	protected $casts = [
-		'body' => 'array'
-	];
+    protected $casts = [
+        'body' => 'array',
+    ];
 }
