@@ -28,6 +28,20 @@
         <div class="container-fluid">
 
             <div class="row">
+
+                <div class="col-md-3 mt-3">
+                    <div class="">
+                                <div class="form-group">
+                                    <label class="form-label">Data Tahun:</label>
+                                    <select class="custom-select form-control-border" id="ppdb-tahun">
+										@for($i = now()->year; $i >= 2021 ; $i--)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+										@endfor
+                                    </select>
+                                </div>
+                            </div>
+                </div>
+
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">

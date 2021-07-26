@@ -9,8 +9,12 @@ class FormulirController extends Controller
 {
     public function showJurusanPeserta($jurusan)
     {
+        $tahun = request('tahun', now()->year);
+
         $pesertappdb = PesertaPPDB::with('jurusan')
-            ->whereJurusanId($jurusan)->latest()->get();
+            ->whereJurusanId($jurusan)
+            ->whereYear('created_at', $tahun)
+            ->latest()->get();
 
         return view('pdf.formulir-ppdb', compact('pesertappdb', 'jurusan'));
     }

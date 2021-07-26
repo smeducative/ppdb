@@ -10,14 +10,16 @@ class PendaftaranPPDB extends Controller
 {
     public function listPendaftar()
     {
-        $pesertappdb = PesertaPPDB::whereYear('created_at', now()->year)->with('jurusan')->latest()->get();
+        $tahun = request('tahun', now()->year);
+        $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)->with('jurusan')->latest()->get();
 
         return view('ppdb.list', compact('pesertappdb'));
     }
 
     public function listPendaftarJurusan($jurusan)
     {
-        $pesertappdb = PesertaPPDB::whereYear('created_at', now()->year)->with('jurusan')->whereJurusanId($jurusan)->latest()->get();
+        $tahun = request('tahun', now()->year);
+        $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)->with('jurusan')->whereJurusanId($jurusan)->latest()->get();
 
         return view('ppdb.list', compact('pesertappdb'));
     }
@@ -76,10 +78,10 @@ class PendaftaranPPDB extends Controller
         $ppdb->no_kip = request('no_kip');
         $ppdb->no_hp = request('no_hp');
         $ppdb->nama_ayah = request('nama_ayah');
-		$ppdb->pekerjaan_ayah = request('pekerjaan_ayah');
+        $ppdb->pekerjaan_ayah = request('pekerjaan_ayah');
         $ppdb->no_hp_ayah = request('no_ayah');
         $ppdb->nama_ibu = request('nama_ibu');
-		$ppdb->pekerjaan_ibu = request('pekerjaan_ibu');
+        $ppdb->pekerjaan_ibu = request('pekerjaan_ibu');
         $ppdb->no_hp_ibu = request('no_ibu');
         $ppdb->akademik = [
             'kelas' => explode('/', request('peringkat'))[0] ?? '',
@@ -93,7 +95,7 @@ class PendaftaranPPDB extends Controller
             'juara_tingkat' => request('juara_tingkat') ?? ''
         ];
         $ppdb->rekomendasi_mwc = request()->has('rekomendasi_mwc') ? 1 : 0;
-		$ppdb->saran_dari = request('saran_dari');
+        $ppdb->saran_dari = request('saran_dari');
         $ppdb->save();
 
         session()->flash('success', 'peserta ppdb di tambahkan');
@@ -106,7 +108,8 @@ class PendaftaranPPDB extends Controller
 
     public function listDaftarUlang($jurusan)
     {
-        $pesertappdb = PesertaPPDB::with('jurusan')->has('kwitansi')->whereJurusanId($jurusan)->get(); // proto
+        $tahun = request('tahun', now()->year);
+        $pesertappdb = PesertaPPDB::with('jurusan')->has('kwitansi')->whereJurusanId($jurusan)->whereYear('created_at', $tahun)->get(); // proto
 
         return view('ppdb.list-daftar-ulang', compact('pesertappdb'));
     }

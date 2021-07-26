@@ -9,8 +9,12 @@ class KartuPendaftaranController extends Controller
 {
     public function showJurusanPeserta($jurusan)
     {
+        $tahun = request('tahun', now()->year);
+
         $pesertappdb = PesertaPPDB::with('jurusan')
-            ->whereJurusanId($jurusan)->latest()->get();
+            ->whereJurusanId($jurusan)
+            ->whereYear('created_at', $tahun)
+            ->latest()->get();
 
         return view('pdf.kartu-ppdb', compact('pesertappdb', 'jurusan'));
     }
@@ -18,7 +22,7 @@ class KartuPendaftaranController extends Controller
     public function cetakKartu($jurusan)
     {
         $pesertappdb = PesertaPPDB::with(['jurusan'])
-			->whereJurusanId($jurusan)
+            ->whereJurusanId($jurusan)
             ->whereYear('created_at', now()->year)
             ->get();
 

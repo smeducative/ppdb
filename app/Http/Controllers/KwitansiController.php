@@ -13,15 +13,22 @@ class KwitansiController extends Controller
     // show kwitansi   \
     public function showPesertaDiterima()
     {
-        $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)->latest()->get();
+        $tahun = request('tahun', now()->year);
+
+        $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)
+            ->whereYear('created_at', $tahun)
+            ->latest()->get();
 
         return view('pdf.kwitansi', compact('pesertappdb'));
     }
 
     public function showJurusanPeserta($jurusan)
     {
+        $tahun = request('tahun', now()->year);
+
         $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)
-            ->whereJurusanId($jurusan)->latest()->get();
+            ->whereJurusanId($jurusan)
+            ->whereYear('created_at', $tahun)->latest()->get();
 
         return view('pdf.kwitansi', compact('pesertappdb'));
     }
