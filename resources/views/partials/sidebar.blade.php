@@ -164,8 +164,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview  {{ request()->routeIs('ppdb.formulir.show.jurusan') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link  {{ request()->routeIs('ppdb.formulir.show.jurusan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
                             Form Pendaftaran
@@ -174,19 +174,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/master/baju-atph" class="nav-link">
+                            <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Form ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tbsm" class="nav-link">
+                            <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Form TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/master/baju-tkj" class="nav-link">
+                            <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Form TKJ</p>
                             </a>

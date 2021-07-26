@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PesertaPPDB;
 
 class FormulirController extends Controller
 {
@@ -17,7 +18,7 @@ class FormulirController extends Controller
     public function cetakFormulir($jurusan)
     {
         $pesertappdb = PesertaPPDB::with(['jurusan'])
-			->whereJurusanId($jurusan)
+            ->whereJurusanId($jurusan)
             ->whereYear('created_at', now()->year)
             ->get();
 

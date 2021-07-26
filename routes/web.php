@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\KartuPendaftaranController;
+use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\KwitansiController;
 use App\Http\Controllers\PendaftaranPPDB;
 use App\Models\Kwitansi;
@@ -55,16 +56,16 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     });
 
     Route::prefix('formulir')->group(function () {
-		Route::get('show/{jurusan}', [FormulirController::class, 'showJurusanPeserta'])->name('ppdb.formulir.show.jurusan');
+        Route::get('show/{jurusan}', [FormulirController::class, 'showJurusanPeserta'])->name('ppdb.formulir.show.jurusan');
 
         Route::post('/cetak/formulir/{jurusan}', [FormulirController::class, 'cetakFormulir'])->name('ppdb.cetak.formulir.semua');
-        Route::post('/cetak/formulir/{uuid}', [FormulirController::class, 'cetakFormulirSingle'])->name('ppdb.cetak.formulir');
+        Route::post('/cetak/formulir/{uuid}/single', [FormulirController::class, 'cetakFormulirSingle'])->name('ppdb.cetak.formulir');
     });
 
     Route::prefix('kartu-pendaftaran')->group(function () {
         Route::get('show/{jurusan}', [KartuPendaftaranController::class, 'showJurusanPeserta'])->name('ppdb.kartu.show.jurusan');
 
         Route::post('/cetak/kartu/{jurusan}', [KartuPendaftaranController::class, 'cetakKartu'])->name('ppdb.cetak.kartu.semua');
-        Route::post('/cetak/kartu/{uuid}', [KartuPendaftaranController::class, 'cetakKartuSingle'])->name('ppdb.cetak.kartu');
+        Route::post('/cetak/kartu/{uuid}/single', [KartuPendaftaranController::class, 'cetakKartuSingle'])->name('ppdb.cetak.kartu');
     });
 });

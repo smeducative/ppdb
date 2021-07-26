@@ -28,14 +28,14 @@
 <!-- Section 2 -->
 <section class="px-2 py-16 bg-white md:px-0" id="hero" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70">
   <div class="container items-center max-w-6xl px-5 md:px-8 mx-auto xl:px-5">
-    <div class="flex flex-col-reverse md:flex-wrap items-center sm:-mx-3">
+    <div class="flex flex-wrap items-center sm:-mx-3">
       <div class="w-full md:w-1/2 md:px-3">
         <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
           <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-            <span class="block xl:inline">Belajar di smedip</span>
-            <span class="block text-green-500 xl:inline">Sangat seru!</span>
+            <span class="block xl:inline">Penerimaan Peserta Didik Baru</span>
+            <span class="block text-green-500 xl:inline">Smedip!</span>
           </h1>
-          <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">Belajar tak pernah semenyenangkan ini setelah bergabung dengan smedip.</p>
+          {{-- <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">Belajar tak pernah semenyenangkan ini setelah bergabung dengan smedip.</p> --}}
           <div class="relative flex flex-col sm:flex-row sm:space-x-4">
             <a href="/formulir" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-green-500 sm:mb-0 hover:bg-green-600 sm:w-auto rounded">
               Pendaftaran PPDB
@@ -91,7 +91,7 @@
 
 <!-- Section 4 -->
 <section class="py-20 bg-gray-50" id="tempat-belajar" data-aos="zoom-in" data-aos-duration="1200" data-aos-offset="10">
-  <div class="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
+  <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
     <div class="flex flex-wrap items-center -mx-3">
       <div class="order-1 w-full px-3 lg:w-1/2 lg:order-0">
         <div class="w-full lg:max-w-md">
