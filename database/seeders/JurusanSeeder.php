@@ -30,6 +30,11 @@ class JurusanSeeder extends Seeder
             ],
         ];
 
+		$setting = [
+			'batas_akhir_ppdb'	=> now()
+		];
+
         Jurusan::insert($data);
+		PpdbSetting::insert($setting);
     }
 }

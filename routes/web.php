@@ -5,6 +5,7 @@ use App\Http\Controllers\KartuPendaftaranController;
 use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\PpdbSettingController;
 use App\Http\Controllers\PendaftaranPPDB;
 use App\Models\Kwitansi;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mend
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+
+	// ppdb setting
+	Route::put('/setting/batas_akhir', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
 
     Route::get('/ppdb/list-pendaftar', [PendaftaranPPDB::class, 'listPendaftar'])->name('ppdb.list.pendaftar');
 

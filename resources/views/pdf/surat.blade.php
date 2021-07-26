@@ -42,6 +42,37 @@
                             </div>
                 </div>
 
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title"> Atur batas daftar ulang </h3>
+						</div>
+						<form action="{{ route('ppdb.set.batas.akhir') }}" method="post">
+						<div class="card-body">
+
+							<div class="form-group">
+								<strong>  Batas Akhir Sekarang: </strong> <br>
+								<span> {{ (new App\Models\PpdbSetting)->body['batas_akhir_ppdb'] ?? now()->format('d-m-Y') }} </span>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">Batas Akhir Daftar Ulang</label>
+
+								<input type="date" name="batas_akhir_ppdb" class="form-control" placeholder="Batas Akhir daftar ulang" required>
+							</div>
+
+						</div>
+
+						<div class="card-footer">
+							@csrf
+							@method('PUT')
+							<button class="btn btn-primary" type="submit">Atur</button>
+						</div>
+						</form>
+
+					</div>
+				</div>
+
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
