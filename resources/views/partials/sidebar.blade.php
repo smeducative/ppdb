@@ -164,7 +164,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview  {{ request()->routeIs('ppdb.formulir.show.jurusan') ? 'menu-open' : '' }}">
+                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.formulir.show.jurusan') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link  {{ request()->routeIs('ppdb.formulir.show.jurusan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
@@ -193,8 +193,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.surat.show.jurusan') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.surat.show.jurusan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Surat Diterima
@@ -203,19 +203,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 3]) }}" class="nav-link">
+                            <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/surat/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat ATPH</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 2]) }}" class="nav-link">
+                            <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/surat/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat TBSM</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 1]) }}" class="nav-link">
+                            <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/surat/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat TKJ</p>
                             </a>

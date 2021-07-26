@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\KartuPendaftaranController;
 use App\Http\Controllers\FormulirController;
+use App\Http\Controllers\SuratController;
 use App\Http\Controllers\KwitansiController;
 use App\Http\Controllers\PendaftaranPPDB;
 use App\Models\Kwitansi;
@@ -53,6 +54,14 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         // cetak
         Route::post('/cetak/kwitansi/{uuid}', [KwitansiController::class, 'cetakKwitansi'])->name('ppdb.cetak.kwitansi');
         Route::post('/cetak/kwitansi/{uuid}/{id}', [KwitansiController::class, 'cetakKwitansiSingle'])->name('ppdb.cetak.kwitansi.single');
+    });
+
+
+    Route::prefix('surat')->group(function () {
+        Route::get('show/{jurusan}', [SuratController::class, 'showJurusanPeserta'])->name('ppdb.surat.show.jurusan');
+
+        Route::post('/cetak/surat/{jurusan}', [SuratController::class, 'cetakSurat'])->name('ppdb.cetak.surat.semua');
+        Route::post('/cetak/surat/{uuid}/single', [SuratController::class, 'cetakSuratSingle'])->name('ppdb.cetak.surat');
     });
 
     Route::prefix('formulir')->group(function () {
