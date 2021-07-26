@@ -88,7 +88,11 @@
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" name="nama_lengkap" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Nama lengkap" required>
+
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        Nama Lengkap Peserta
+                </p>
               </div>
             </div>
 
@@ -122,6 +126,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" name="tempat_lahir" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tempat lahir" required>
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        Tempat Lahir Peserta
+                </p>
               </div>
             </div>
 
@@ -134,6 +141,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="tanggal_lahir" data-mask required>
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                       Tanggal Lahir Peserta
+                    </p>
               </div>
             </div>
 
@@ -146,6 +156,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="number" name="nik" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NIK" required>
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        16 angka NIK sesuai yang tercantum di KK
+                    </p>
               </div>
             </div>
 
@@ -158,6 +171,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="number" name="nisn" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NISN">
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        NISN Peserta
+                    </p>
               </div>
             </div>
 
@@ -170,6 +186,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap" name="alamat_lengkap" required></textarea>
                 </div>
+                <p class="mt-2 text-sm text-gray-500">
+                        Alamat Lengkap Peserta
+                    </p>
               </div>
             </div>
 
@@ -183,6 +202,9 @@
                   @endforeach
                 </select>
               </div>
+              <p class="mt-2 text-sm text-gray-500">
+                        Jurusan pilihan
+                    </p>
             </div>
 
             {{-- asal sekolah --}}
@@ -195,6 +217,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah">
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        Asal Sekolah Peserta
+                    </p>
               </div>
             </div>
 
@@ -211,6 +236,9 @@
                     @endfor
                     </select>
                  </div>
+                  <p class="mt-2 text-sm text-gray-500">
+                        tahun Lulus Peserta
+                    </p>
               </div>
             </div>
 
@@ -224,6 +252,9 @@
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="number" name="nisn" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="No. HP">
                 </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        No. HP Peserta
+                    </p>
               </div>
             </div>
 
@@ -236,23 +267,35 @@
               {{-- identitas ayah --}}
               <div class="col-span-6 sm:col-span-3">
                 <label class="block text-sm font-medium text-gray-700">Nama Ayah</label>
-                <input type="text" name="nama_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                <input type="text" name="nama_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nama lengkap Ayah" required>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label class="block text-sm font-medium text-gray-700">No. HP Ayah</label>
-                <input type="text" name="no_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="no_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="No. HP Ayah">
               </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
+                <input type="text" name="pekerjaan_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Pekerjaan Ayah">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3"></div>
 
               {{-- idntitas ibu --}}
               <div class="col-span-6 sm:col-span-3">
                 <label class="block text-sm font-medium text-gray-700">Nama Ibu</label>
-                <input type="text" name="nama_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                <input type="text" name="nama_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nama Ibu" required>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label class="block text-sm font-medium text-gray-700">No. HP Ibu</label>
-                <input type="text" name="no_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input type="text" name="no_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="No. HP Ibu">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label class="block text-sm font-medium text-gray-700">Pekerjaan Ibu</label>
+                <input type="text" name="pekerjaan_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Pekerjaan Ibu">
               </div>
 
 
@@ -274,9 +317,12 @@
                     <div class="col-span-3 sm:col-span-2">
                         <label class="block text-sm font-medium text-gray-700">Ranking</label>
 
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" data-inputmask='"mask": "9/2/9"' placeholder="kelas/semester/peringkat" name="peringkat" data-mask>
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" data-inputmask='"mask": "9/9/9"' placeholder="kelas/semester/peringkat" name="peringkat" data-mask>
                         <!-- /.input group -->
                     </div>
+                     <p class="mt-2 text-sm text-gray-500">
+                        Format: kelas / semester / ranking. contoh: 7/1/1
+                    </p>
                 </div>
 
                 <div class="grid">
@@ -295,6 +341,7 @@
                         <label class="block text-sm font-medium text-gray-700">Jenis Lomba</label>
                         <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis_lomba" placeholder="misal: kejuaran catur"/>
                     </div>
+
                 </div>
 
                 <div class="grid grid-cols-6 gap-6">
@@ -306,6 +353,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label class="block text-sm font-medium text-gray-700">Tingkat</label>
                         <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="jtingkat" style="width: 100%;" name="juara_tingkat" required>
+                            <option value="">-- pilih tingkat --</option>
                             @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
 
                             <option value="{{ $tingkat }}">{{ $tingkat }}</option>
@@ -331,6 +379,16 @@
                             </div>
                             </div>
                     </div>
+                </div>
+
+
+
+                <div class="grid my-5">
+                    <div class="col-span-3 sm:col-span-2">
+                        <label class="block text-sm font-bold text-gray-700">Saran Dari</label>
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="saran_dari" placeholder="Dapat saran siapa?"/>
+                    </div>
+
                 </div>
             </div> <!-- row -->
 

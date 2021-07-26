@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Jurusan;
+use App\Models\PpdbSetting;
 use Illuminate\Database\Seeder;
 
 class JurusanSeeder extends Seeder
@@ -30,11 +31,13 @@ class JurusanSeeder extends Seeder
             ],
         ];
 
-		$setting = [
-			'batas_akhir_ppdb'	=> now()
-		];
+        $setting = [
+            'body' => [
+                'batas_akhir_ppdb'    => now()
+            ]
+        ];
 
         Jurusan::insert($data);
-		PpdbSetting::insert($setting);
+        PpdbSetting::insert($setting);
     }
 }

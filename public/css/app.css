@@ -862,6 +862,10 @@ select {
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
 }
+.my-5 {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+}
 .mt-2 {
 	margin-top: 0.5rem;
 }
@@ -1035,9 +1039,6 @@ select {
 }
 .flex-col {
 	flex-direction: column;
-}
-.flex-col-reverse {
-	flex-direction: column-reverse;
 }
 .flex-wrap {
 	flex-wrap: wrap;
@@ -1294,6 +1295,9 @@ select {
 }
 .pt-8 {
 	padding-top: 2rem;
+}
+.pr-10 {
+	padding-right: 2.5rem;
 }
 .text-left {
 	text-align: left;
@@ -1610,14 +1614,6 @@ select {
 		flex-direction: row;
 	}
 
-	.sm\:flex-row-reverse {
-		flex-direction: row-reverse;
-	}
-
-	.sm\:flex-col-reverse {
-		flex-direction: column-reverse;
-	}
-
 	.sm\:items-center {
 		align-items: center;
 	}
@@ -1746,10 +1742,6 @@ select {
 
 	.md\:flex-row {
 		flex-direction: row;
-	}
-
-	.md\:flex-wrap {
-		flex-wrap: wrap;
 	}
 
 	.md\:items-center {
