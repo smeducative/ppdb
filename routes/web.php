@@ -90,11 +90,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('/cetak/kartu/{uuid}/single', [KartuPendaftaranController::class, 'cetakKartuSingle'])->name('ppdb.cetak.kartu');
     });
 
-	Route::prefix('export')->group(function() {
+    Route::prefix('export')->group(function () {
 
-		// peserta ppdb
-		Route::post('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
-
-
-	});
+        // peserta ppdb
+        Route::post('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
+    });
 });

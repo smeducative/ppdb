@@ -46,6 +46,13 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Peserta PPDB</h3>
+
+                            <div class="card-tools">
+                                <form action="{{ route('export.peserta.ppdb') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Export</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body p-0 py-2">
                             @if (!$pesertappdb->isEmpty())
