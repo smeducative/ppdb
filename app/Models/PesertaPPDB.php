@@ -23,7 +23,9 @@ class PesertaPPDB extends Model
         'tanggal_lahir' => 'date'
     ];
 
-    protected $with = ['jurusan'];
+    protected $with = [
+        'jurusan'
+    ];
 
     public function jurusan()
     {
@@ -38,5 +40,10 @@ class PesertaPPDB extends Model
     public function Kwitansi()
     {
         return $this->hasMany(Kwitansi::class, 'peserta_ppdb_id');
+    }
+
+    public function ukuranSeragam()
+    {
+        return $this->hasOne(UkuranSeragam::class, 'peserta_ppdb_id');
     }
 }

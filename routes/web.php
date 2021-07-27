@@ -7,6 +7,7 @@ use App\Http\Controllers\SuratController;
 use App\Http\Controllers\KwitansiController;
 use App\Http\Controllers\PpdbSettingController;
 use App\Http\Controllers\PendaftaranPPDB;
+use App\Http\Controllers\UkuranSeragamController;
 use App\Models\Kwitansi;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,8 @@ Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mend
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
 
-	// ppdb setting
-	Route::put('/setting/batas_akhir', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
+    // ppdb setting
+    Route::put('/setting/batas_akhir', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
 
     Route::get('/ppdb/list-pendaftar', [PendaftaranPPDB::class, 'listPendaftar'])->name('ppdb.list.pendaftar');
 
@@ -60,6 +61,12 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('/cetak/kwitansi/{uuid}/{id}', [KwitansiController::class, 'cetakKwitansiSingle'])->name('ppdb.cetak.kwitansi.single');
     });
 
+
+    Route::prefix('ukuran-seragam')->group(function () {
+        Route::get('show/{jurusan}', [UkuranSeragamController::class, 'showJurusanPeserta'])->name('ppdb.seragam.show.jurusan');
+
+        Route::post('/ubah/seragam', [UkuranSeragamController::class, 'ubahUkuranSeragam'])->name('ppdb.ubah.seragam');
+    });
 
     Route::prefix('surat')->group(function () {
         Route::get('show/{jurusan}', [SuratController::class, 'showJurusanPeserta'])->name('ppdb.surat.show.jurusan');
