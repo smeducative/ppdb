@@ -8,6 +8,7 @@ use App\Http\Controllers\KwitansiController;
 use App\Http\Controllers\PpdbSettingController;
 use App\Http\Controllers\PendaftaranPPDB;
 use App\Http\Controllers\UkuranSeragamController;
+use App\Http\Controllers\ExportController;
 use App\Models\Kwitansi;
 use Illuminate\Support\Facades\Route;
 
@@ -88,4 +89,12 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('/cetak/kartu/{jurusan}', [KartuPendaftaranController::class, 'cetakKartu'])->name('ppdb.cetak.kartu.semua');
         Route::post('/cetak/kartu/{uuid}/single', [KartuPendaftaranController::class, 'cetakKartuSingle'])->name('ppdb.cetak.kartu');
     });
+
+	Route::prefix('export')->group(function() {
+
+		// peserta ppdb
+		Route::post('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
+
+
+	});
 });
