@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@inject('carbon', 'Carbon\Carbon')
+
 @section('title', 'Surat Diterima Peserta PPDB')
 
 @section('content')
@@ -51,14 +53,26 @@
 						<div class="card-body">
 
 							<div class="form-group">
-								<strong>  Batas Akhir Sekarang: </strong> <br>
-								<span> {{ optional((new App\Models\PpdbSetting)->latest()->first()->body)['batas_akhir_ppdb'] }} </span>
+								<strong>  No. Surat: </strong> <br>
+								<span> {{ optional((new App\Models\PpdbSetting)->latest()->first()->body)['no_surat'] }} </span>
+							</div>
+
+							<div class="form-group">
+								<strong>  Batas Akhir PPDB: </strong> <br>
+								<span> {{ $carbon->parse(optional((new App\Models\PpdbSetting)->latest()->first()->body)['batas_akhir_ppdb'])->translatedFormat('l, d F Y') }} </span>
 							</div>
 
 							<div class="form-group">
 								<label class="form-label">Batas Akhir Daftar Ulang</label>
 
-								<input type="date" name="batas_akhir_ppdb" class="form-control" placeholder="Batas Akhir daftar ulang" required>
+                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="batas_akhir_ppdb"
+                                                        data-mask required>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">Ubah No. Surat</label>
+
+								<input type="text" name="no_surat" class="form-control" placeholder="No Surat" required>
 							</div>
 
 						</div>
@@ -161,6 +175,7 @@
 <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
+    <script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
 
 <!-- Page specific script -->
 <script>
@@ -175,6 +190,8 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+
+            $('[data-mask]').inputmask()
       });
 </script>
 @endsection

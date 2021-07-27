@@ -27,7 +27,7 @@ class SuratController extends Controller
             ->whereYear('created_at', now()->year)
             ->get();
 
-        return view('pdf.cetak-kartu', compact('pesertappdb'));
+        return view('pdf.cetak-surat', compact('pesertappdb'));
     }
 
     public function cetakSuratSingle($uuid)
@@ -36,6 +36,6 @@ class SuratController extends Controller
             ->whereId($uuid)
             ->get();
 
-        return view('pdf.cetak-kartu', compact('pesertappdb'));
+        return view('pdf.cetak-surat', compact('pesertappdb'));
     }
 }

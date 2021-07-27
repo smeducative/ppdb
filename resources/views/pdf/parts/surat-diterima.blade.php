@@ -27,7 +27,7 @@
         <tr>
             <td width="13%">No</td>
             <td>:</td>
-            <td> &nbsp; Pan.PPDB/2021</td>
+            <td> &nbsp; {{ optional($setting->body)['no_surat'] }}</td>
         </tr>
         <tr>
             <td>Lamp.</td>
@@ -98,7 +98,7 @@
     Sehubungan dengan terbatas kelas yang ada, maka Bapak/Ibu/Saudara dapat segera langsung melaksanakan <strong>registrasi daftar
     ulang setelah dinyatakan diterima.</strong> <br>
     <strong>
-        Apabila sebelum batas akhir yang telah ditentukan ({{ $batas_du }})
+        Apabila sebelum batas akhir yang telah ditentukan ({{ $carbon->parse($setting->body['batas_akhir_ppdb'])->translatedFormat('d F Y') }})
     </strong>, kelas/rombel yang tersedia telah terpenuhi quotanya
     (jumlah peserta didik yang diterima), maka dengan berat hati kami sampaikan Putra/Putri Bapak/Ibu <strong>tidak dapat diterima</strong>
     di kelas tersebut. <br>
@@ -118,7 +118,7 @@
 <div class="row mt-2">
     <div class="col-md-6">&nbsp;</div>
     <div class="col-md-6 text-center">
-        <strong class="d-block">Karanganyar, {{ now()->format('d m Y') }}</strong>
+        <strong class="d-block">Karanganyar, {{ now()->translatedFormat('d F Y') }}</strong>
     </div>
 
     <div class="col-md-6">&nbsp;</div>
@@ -129,7 +129,7 @@
     </div>
 
     <div class="col-md-12 mt-5">
-        <strong>Nb:* Hari {{ $batas_du_before }}</strong>  Pukul 07.00, Siswa berangkat memakai seragam Osis SMP/MTs untuk <strong>persiapan/pembekalan
+        <strong>Nb:* Hari {{ $carbon->parse($setting->body['batas_akhir_ppdb'])->subDay()->translatedFormat('l. d F Y') }}</strong>  Pukul 07.00, Siswa berangkat memakai seragam Osis SMP/MTs untuk <strong>persiapan/pembekalan
         kegiatan Makesta.</strong>
     </div>
 </div>

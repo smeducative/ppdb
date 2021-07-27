@@ -14,7 +14,8 @@ class PpdbSettingController extends Controller
 
         $batas->update([
             'body' => [
-                'batas_akhir_ppdb'  => request('batas_akhir_ppdb')
+                'batas_akhir_ppdb'  => request('batas_akhir_ppdb'),
+                'no_surat'  => request('no_surat')
             ]
         ]);
 
