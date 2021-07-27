@@ -105,7 +105,7 @@
                         <div class="card-body px-0">
                             @if (!$pesertappdb->isEmpty())
 
-                            <div class="table-responsive">
+                            <div class="table-responsive text-nowrap">
                                 <table class="table table-striped table-bordered" id="list-ppdb">
                                     <thead>
                                         <tr>
