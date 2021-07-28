@@ -35,68 +35,68 @@
         <span>A.</span> &ensp; Identitas Diri
         <table style="margin-left: 32px;" width="100%">
             <tr>
-                <td width="27%">1. &ensp; Nama Lengkap</td>
+                <td width="29.6%">1. &ensp; Nama Lengkap</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->nama_lengkap }}</td>
             </tr>
             <tr>
-                <td width="27%">2. &ensp; Jenis Kelamin</td>
+                <td width="29.6%">2. &ensp; Jenis Kelamin</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->jenis_kelamin == 'l' ? 'Laki-laki' : 'Perempuan' }}</td>
             </tr>
             <tr>
-                <td width="27%">3. &ensp; Tempat Lahir</td>
+                <td width="29.6%">3. &ensp; Tempat Lahir</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->tempat_lahir }}</td>
             </tr>
 
             <tr>
-                <td width="27%">4. &ensp; Tanggal Lahir</td>
+                <td width="29.6%">4. &ensp; Tanggal Lahir</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->tanggal_lahir->translatedFormat('d F Y') }}</td>
             </tr>
             <tr>
-                <td width="27%">5. &ensp; NIK</td>
+                <td width="29.6%">5. &ensp; NIK</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->nik }}</td>
             </tr>
             <tr>
-                <td width="27%">6. &ensp; Alamat Lengkap</td>
+                <td width="29.6%">6. &ensp; Alamat Lengkap</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->alamat_lengkap }}</td>
             </tr>
             <tr>
-                <td width="27%">7. &ensp; Kompetensi Keahlian</td>
+                <td width="29.6%">7. &ensp; Kompetensi Keahlian</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->jurusan->nama }}</td>
             </tr>
             <tr>
-                <td width="27%">8. &ensp; Asal Sekolah</td>
+                <td width="29.6%">8. &ensp; Asal Sekolah</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->asal_sekolah }}</td>
             </tr>
             <tr>
-                <td width="27%">9. &ensp; Tahun Lulus</td>
+                <td width="29.6%">9. &ensp; Tahun Lulus</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->tahun_lulus }}</td>
             </tr>
             <tr>
-                <td width="27%">10. &ensp; NISN </td>
+                <td width="29.6%">10. &ensp; NISN </td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->nisn }}</td>
             </tr>
             <tr>
-                <td width="27%">11. &ensp; Penerima KIP</td>
+                <td width="29.6%">11. &ensp; Penerima KIP</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->penerima_kip == 'y' ? "Ya" : "Tidak" }}</td>
             </tr>
             <tr>
-                <td width="27%">12. &ensp; No. KIP</td>
+                <td width="29.6%">12. &ensp; No. KIP</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->no_kip }}</td>
             </tr>
             <tr>
-                <td width="27%">13. &ensp; No. Telepon</td>
+                <td width="29.6%">13. &ensp; No. Telepon</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->no_hp }}</td>
             </tr>

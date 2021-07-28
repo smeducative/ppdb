@@ -84,7 +84,7 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">
-                  Nama Lengkap
+                  Nama Lengkap <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" name="nama_lengkap" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Nama lengkap" required>
@@ -100,7 +100,7 @@
 
             <fieldset>
               <div>
-                <legend class="text-base font-medium text-gray-900">Jenis Kelamin</legend>
+                <legend class="text-base font-medium text-gray-900">Jenis Kelamin <span class="text-red-600">* wajib diisi</span></legend>
               </div>
               <div class="mt-4 space-y-4">
                 <div class="flex items-center">
@@ -121,7 +121,7 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Tempat Lahir
+                  Tempat Lahir <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" name="tempat_lahir" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tempat lahir" required>
@@ -136,7 +136,7 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Tanggal Lahir
+                  Tanggal Lahir <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="tanggal_lahir" data-mask required>
@@ -151,7 +151,7 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">
-                  NIK
+                  NIK <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input type="number" name="nik" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NIK" required>
@@ -181,7 +181,7 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">
-                  Alamat Lengkap
+                  Alamat Lengkap <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap" name="alamat_lengkap" required></textarea>
@@ -195,8 +195,8 @@
             <div class="grid">
 
               <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Pilihan Jurusan</label>
-                <select name="pilihan_jurusan" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label class="block text-sm font-medium text-gray-700">Pilihan Jurusan <span class="text-red-600">* wajib diisi</span></label>
+                <select name="pilihan_jurusan" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                   @foreach($jurusan->get() as $jrs)
                   <option value="{{ $jrs->id }}"> {{ $jrs->nama }} </option>
                   @endforeach
@@ -212,10 +212,10 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">
-                  Asal Sekolah
+                  Asal Sekolah <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah">
+                  <input type="text" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah" required>
                 </div>
                  <p class="mt-2 text-sm text-gray-500">
                         Asal Sekolah Peserta
@@ -227,10 +227,10 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">
-                  Tahun Lulus
+                  Tahun Lulus <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                    <select name="tahun_lulus" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <select name="tahun_lulus" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
                     @for($i = now()->year; $i >= 2015; $i--)
                         <option value="{{ $i }}"> {{ $i }} </option>
                     @endfor
@@ -247,10 +247,10 @@
             <div class="grid">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">
-                  No. HP
+                  No. HP <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" name="nisn" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="No. HP">
+                  <input type="number" name="no_hp" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="No. HP" required>
                 </div>
                  <p class="mt-2 text-sm text-gray-500">
                         No. HP Peserta
@@ -266,7 +266,7 @@
 
               {{-- identitas ayah --}}
               <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Nama Ayah</label>
+                <label class="block text-sm font-medium text-gray-700">Nama Ayah <span class="text-red-600">* wajib diisi</span></label>
                 <input type="text" name="nama_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nama lengkap Ayah" required>
               </div>
 
@@ -284,7 +284,7 @@
 
               {{-- idntitas ibu --}}
               <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Nama Ibu</label>
+                <label class="block text-sm font-medium text-gray-700">Nama Ibu <span class="text-red-600">* wajib diisi</span></label>
                 <input type="text" name="nama_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nama Ibu" required>
               </div>
 
@@ -352,7 +352,7 @@
 
                     <div class="col-span-6 sm:col-span-3">
                         <label class="block text-sm font-medium text-gray-700">Tingkat</label>
-                        <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="jtingkat" style="width: 100%;" name="juara_tingkat" required>
+                        <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="jtingkat" style="width: 100%;" name="juara_tingkat">
                             <option value="">-- pilih tingkat --</option>
                             @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
 
