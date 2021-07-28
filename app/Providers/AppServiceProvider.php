@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         App::setLocale('id');
 
-        Schema::setDefaultStringLength(191);
+        Schema::defaultStringLength(191);
     }
 }
