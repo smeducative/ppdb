@@ -30,7 +30,14 @@ class AdminController extends Controller
             'all' => collect($pesertadu)->sum('c') ?? 0
 		];
 
+		$compare = PesertaPPDB::select(\DB::raw('jurusan_id,jenis_kelamin, count(jenis_kelamin) as jk'))->groupBy('jurusan_id')->groupBy('jenis_kelamin')->get();
 
-        return view('admin.dashboard', compact('count', 'du'));
+		$compareSx = [
+			'p'	=> collect($compare)->where('jenis_kelamin', 'p')->pluck('jk'),
+			'l'	=> collect($compare)->where('jenis_kelamin', 'l')->pluck('jk')
+		];
+
+
+        return view('admin.dashboard', compact('count', 'du', 'compareSx'));
     }
 }
