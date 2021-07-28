@@ -27,7 +27,7 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping
         return PesertaPPDB::when($this->jurusan != null, function ($query) {
             $query->where('jurusan_id', $this->jurusan);
         })->when($this->diterima, function ($query) {
-            $query->whereDiterima(1);
+            $query->has('kwitansi')->whereDiterima(1);
         })
             ->whereYear('created_at', $this->tahun)->get();
     }
