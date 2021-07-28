@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         App::setLocale('id');
+
+        Schema::setDefaultStringLength(191);
     }
 }
