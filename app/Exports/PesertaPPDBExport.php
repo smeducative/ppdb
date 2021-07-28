@@ -11,11 +11,13 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping
 {
     public $jurusan;
     public $tahun;
+    public $diterima;
 
-    public function __construct($jurusan, $tahun)
+    public function __construct($jurusan, $tahun, $diterima)
     {
         $this->jurusan = $jurusan;
         $this->tahun = $tahun;
+        $this->diterima = $diterima;
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -24,6 +26,8 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping
     {
         return PesertaPPDB::when($this->jurusan != null, function ($query) {
             $query->where('jurusan_id', $this->jurusan);
+        })->when($this->diterima, function ($query) {
+            $query->whereDiterima(1);
         })
             ->whereYear('created_at', $this->tahun)->get();
     }
@@ -37,6 +41,7 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping
             'Jenis Kelamin',
             'Tempat Lahir',
             'Tanggal Lahir',
+            'Pilihan Jurusan',
             'NIK',
             'NISN',
             'Alamat Lengkap',
@@ -70,6 +75,7 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping
             $peserta->jenis_kelamin == 'l' ? 'Laki-laki' : 'Perempuan',
             $peserta->tempat_lahir,
             $peserta->tanggal_lahir->format('d F Y'),
+            $peserta->jurusan->nama,
             $peserta->nik,
             $peserta->nisn,
             $peserta->alamat_lengkap,

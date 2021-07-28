@@ -52,7 +52,14 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3>Peserta daftar ulang PPDB</h3>
+                            <h3>Peserta Daftar Ulang PPDB</h3>
+
+                            <div class="card-tools">
+                                 <form action="{{ route('export.peserta.ppdb') }}?jurusan={{ request()->segment(5) }}&diterima=1" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Export</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body p-0 py-2 table-responsive text-nowrap">
                             @if (!$pesertappdb->isEmpty())

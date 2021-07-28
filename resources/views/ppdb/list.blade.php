@@ -28,7 +28,6 @@
         <div class="container-fluid">
 
             <div class="row">
-
                 <div class="col-md-3 mt-3">
                     <div class="">
                                 <div class="form-group">
@@ -48,7 +47,7 @@
                             <h3>Peserta PPDB</h3>
 
                             <div class="card-tools">
-                                <form action="{{ route('export.peserta.ppdb') }}" method="POST">
+                                <form action="{{ route('export.peserta.ppdb') }}?jurusan={{ request()->segment(4) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Export</button>
                                 </form>
