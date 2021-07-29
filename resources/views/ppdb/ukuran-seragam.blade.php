@@ -60,7 +60,7 @@
 
                             <div class="card-tools">
 
-                                <form action="#" method="POST">
+                                <form action="{{ route('export.seragam') }}?jurusan={{ request()->segment(4) }}" method="POST">
                                     @csrf
                                     <button class="btn btn-primary">
                                         <i class="fas fa-print"></i> export

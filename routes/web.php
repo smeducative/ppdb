@@ -94,5 +94,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // peserta ppdb
         Route::post('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
+
+        // ukuran seragam
+        Route::post('ukuran-seragam', [ExportController::class, 'exportSeragam'])->name('export.seragam');
     });
 });
