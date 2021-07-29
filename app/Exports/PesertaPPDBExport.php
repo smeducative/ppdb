@@ -6,8 +6,9 @@ use App\Models\PesertaPPDB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping
+class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
 {
     public $jurusan;
     public $tahun;
