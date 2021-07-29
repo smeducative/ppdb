@@ -42,12 +42,12 @@
                         <div class="card-header">
                             <h3 class="card-title">Data diri peserta</h3>
 
-                            <div class="card-tools">
+                            {{-- <div class="card-tools">
                                 <button class="btn btn-primary" onclick="document.getElementById('unduh-dokumen').submit();"><i class="fas fa-print mr-2"></i> print</button>
                                 <form action="#" method="POST" id="unduh-dokumen">
                                     @csrf
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body p-0">
 

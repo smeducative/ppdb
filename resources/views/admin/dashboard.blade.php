@@ -178,7 +178,7 @@
 					<!-- BAR CHART -->
             <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">Perbandingan jenis kelamin</h3>
+                <h3 class="card-title">Perbandingan jenis kelamin pendaftar</h3>
 
                 <div class="card-tools">
 

@@ -29,8 +29,8 @@
                         </p>
                     </a>
                 </li> --}}
-                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') || request()->routeIs('ppdb.list.pendaftar.jurusan') ? 'menu-open' : ''  }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') || request()->routeIs('ppdb.list.pendaftar.jurusan') ? 'active' : ''  }}">
+                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') || request()->routeIs('ppdb.list.pendaftar.jurusan')|| request()->routeIs('ppdb.show.peserta') ? 'menu-open' : ''  }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') || request()->routeIs('ppdb.list.pendaftar.jurusan')|| request()->routeIs('ppdb.show.peserta') ? 'active' : ''  }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Pendaftaran PPDB
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('ppdb.list.pendaftar') }}" class="nav-link {{ request()->routeIs('ppdb.list.pendaftar') ? 'active' : ''  }}">
+                            <a href="{{ route('ppdb.list.pendaftar') }}" class="nav-link {{ request()->routeIs('ppdb.list.pendaftar') || request()->routeIs('ppdb.show.peserta') ? 'active' : ''  }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Semua Peserta</p>
                             </a>
