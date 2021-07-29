@@ -13,7 +13,7 @@ class KartuPendaftaranController extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->whereJurusanId($jurusan)
-            ->whereDiterima(1)
+            // ->whereDiterima(1)
             ->whereYear('created_at', $tahun)
             ->latest()->get();
 
@@ -24,7 +24,7 @@ class KartuPendaftaranController extends Controller
     {
         $pesertappdb = PesertaPPDB::with(['jurusan'])
             ->whereJurusanId($jurusan)
-            ->whereDiterima(1)
+            // ->whereDiterima(1)
             ->whereYear('created_at', now()->year)
             ->get();
 
