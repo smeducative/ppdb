@@ -34,6 +34,13 @@
 @endif
 
 <section class="mt-10 px-5 max-w-7xl mx-auto">
+
+    @if (session('success'))
+        <div class="mb-10 py-5 px-4 bg-green-100 text-green-700 border-l-2 border-green-700">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <h2 class="text-2xl ont-bold">Formulir PPDB</h2>
 </section>
 

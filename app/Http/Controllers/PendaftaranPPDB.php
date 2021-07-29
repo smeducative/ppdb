@@ -189,7 +189,7 @@ class PendaftaranPPDB extends Controller
         $ppdb->saran_dari = request('saran_dari');
         $ppdb->save();
 
-        session()->flash('success', 'berhasil');
+        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
 
         return back();
     }
