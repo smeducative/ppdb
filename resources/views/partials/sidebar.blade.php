@@ -257,6 +257,19 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">PENGATURAN AKUN</li>
+
+                <li class="nav-item">
+                    <a href="{{ route('setting.profile') }}" class="nav-link {{ request()->routeIs('setting.profile') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Pengaturan Profile
+                        </p>
+                    </a>
+                </li>
+
+
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

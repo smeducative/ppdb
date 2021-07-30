@@ -28,6 +28,13 @@ Route::view('/formulir', 'formulir');
 Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mendaftar');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
+
+    // setting profile
+    ROute::get('setting/profile', [AdminController::class, 'pengaturanAkun'])->name('setting.profile');
+    ROute::put('setting/profile', [AdminController::class, 'setAkun'])->name('setting.profile');
+
+
+
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // ppdb setting
