@@ -60,6 +60,6 @@
         <div class="col-md-6 text-center">
             <span>Karanganyar, {{ $peserta->created_at->translatedFormat('d F Y') }}</span>
             <strong class="d-block" style="font-size: 16px;">Panitia Pendaftaran</strong>
-            <div style="margin-top: 70px;">(______)</div>
+            <div style="margin-top: 70px;">( {{ auth()->user()->name }} )</div>
         </div>
     </div>

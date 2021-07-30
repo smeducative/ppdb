@@ -125,7 +125,7 @@
     <div class="col-md-6 mt-5">&nbsp;</div>
     <div class="col-md-6">&nbsp;</div>
     <div class="col-md-6 mt-5 text-center">
-        (_______________)
+        ( {{ auth()->user()->name }} )
     </div>
 
     <div class="col-md-12 mt-5">

@@ -192,10 +192,10 @@
             </tr>
         </table>
 
-        <span>C.</span> &ensp; Informasi Pendaftaran
+        <span>D.</span> &ensp; Informasi Pendaftaran
         <table style="margin-left: 32px;" width="100%">
             <tr>
-                <td width="27%">1. &ensp; Saran Mendaftar Dari</td>
+                <td width="29.6%">1. &ensp; Saran Mendaftar Dari</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->saran_dari }}</td>
             </tr>
@@ -224,7 +224,7 @@
                 <br>
                 <br>
                 <br>
-            <div class="col-md-6 text-center"> (_________________)</div>
+            <div class="col-md-6 text-center"> ( {{ auth()->user()->name }} )</div>
             <div class="col-md-6 text-center"> ( {{ $peserta->nama_lengkap }} ) </div>
         </div>
     </div>
