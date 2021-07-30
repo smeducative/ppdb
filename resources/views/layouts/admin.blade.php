@@ -45,14 +45,14 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
-                        <li class="user-header bg-primary">
+                        {{-- <li class="user-header bg-primary">
                             <img src="/img/img-admin/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 
                             <p>
                                 Alexander Pierce - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
-                        </li>
+                        </li> --}}
                         <!-- Menu Body -->
                         {{-- <li class="user-body">
                             <div class="row">
@@ -70,7 +70,7 @@
                         </li> --}}
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            {{-- <a href="#" class="btn btn-default btn-flat">Profile</a> --}}
                             <a href="#" onclick="document.getElementById('logout').submit()"
                                 class="btn btn-default btn-flat float-right">Sign out</a>
                         </li>
