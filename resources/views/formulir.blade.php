@@ -249,6 +249,27 @@
               </div>
             </div>
 
+            {{-- Penerima KIP --}}
+            <div class="grid">
+              <div class="col-span-3 sm:col-span-2">
+                <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input name="penerima_kip" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" id="pkip" onclick='fkip()'>
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="comments" class="font-medium text-gray-700">Penerima KIP</label>
+                                <p class="text-gray-500">Merupakan peserta Penerima KIP.</p>
+                            </div>
+                        </div>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="number" name="no_kip" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 disabled:bg-gray-500 disabled:opacity-20 disabled:cursor-not-allowed" id="input-kip" placeholder="No. KIP" disabled>
+                </div>
+                 <p class="mt-2 text-sm text-gray-500">
+                        No. KIP
+                    </p>
+              </div>
+            </div>
+
 
             {{-- Nomer HP --}}
             <div class="grid">
@@ -384,7 +405,7 @@
                                 <label for="comments" class="font-medium text-gray-700">Rekomendasi MWC</label>
                                 <p class="text-gray-500">Merupakan peserta rekomandasi MWC.</p>
                             </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -431,6 +452,20 @@
     <script>
         $(document).ready(function() {
             $('[data-mask]').inputmask()
+
+
         })
+            function fkip() {
+                let kip = $('#pkip:checked').length;
+
+                if (kip) {
+                    $('#input-kip').prop('disabled', false)
+                } else {
+
+                    $('#input-kip').prop('disabled', true)
+                    $('#input-kip').val('')
+                }
+
+            }
     </script>
 @endsection
