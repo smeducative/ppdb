@@ -262,7 +262,7 @@
                             </div>
                         </div>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" name="no_kip" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 disabled:bg-gray-500 disabled:opacity-20 disabled:cursor-not-allowed" id="input-kip" placeholder="No. KIP" disabled>
+                  <input type="text" name="no_kip" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 disabled:bg-gray-500 disabled:opacity-20 disabled:cursor-not-allowed" id="input-kip" placeholder="No. KIP" disabled>
                 </div>
                  <p class="mt-2 text-sm text-gray-500">
                         No. KIP
