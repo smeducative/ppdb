@@ -62,7 +62,7 @@ class AdminController extends Controller
             'password' => bcrypt(request('password'))
         ]);
 
-        session()->flash('success', 'Password berhasil di ganti');
+        session()->flash('success', 'Data user dam password berhasil di ganti');
 
         return back();
     }

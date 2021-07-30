@@ -261,7 +261,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('setting.profile') }}" class="nav-link {{ request()->routeIs('setting.profile') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                             Pengaturan Profile
                         </p>
