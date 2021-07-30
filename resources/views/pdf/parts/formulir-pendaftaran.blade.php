@@ -195,7 +195,7 @@
         <span>D.</span> &ensp; Informasi Pendaftaran
         <table style="margin-left: 32px;" width="100%">
             <tr>
-                <td width="29.6%">1. &ensp; Saran Mendaftar Dari</td>
+                <td width="29.2%">1. &ensp; Saran Mendaftar Dari</td>
                 <td width="1%">:</td>
                 <td>{{ $peserta->saran_dari }}</td>
             </tr>
