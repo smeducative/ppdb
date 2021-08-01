@@ -30,6 +30,14 @@
             <div class="row">
                 <div class="col-md-12">
 
+					@if (session()->has('warning'))
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Peringatan!</h5>
+                            {{ session('warning') }}
+                        </div>
+                    @endif
+
                    @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -42,12 +50,9 @@
                         <div class="card-header">
                             <h3 class="card-title">Data diri peserta</h3>
 
-                            {{-- <div class="card-tools">
-                                <button class="btn btn-primary" onclick="document.getElementById('unduh-dokumen').submit();"><i class="fas fa-print mr-2"></i> print</button>
-                                <form action="#" method="POST" id="unduh-dokumen">
-                                    @csrf
-                                </form>
-                            </div> --}}
+                            <div class="card-tools">
+                                <a class="btn btn-primary" href="{{ route('ppdb.edit.peserta', $peserta->id) }}"><i class="fas fa-edit mr-2"></i> edit</a>
+                            </div>
                         </div>
                         <div class="card-body p-0">
 

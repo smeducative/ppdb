@@ -45,9 +45,7 @@ class PendaftaranPPDB extends Controller
             "penerima_kip" => "nullable",
             "no_hp" => "required",
             "nama_ayah" => "required",
-            "no_ayah" => "required",
             "nama_ibu" => "required",
-            "no_ibu" => "required",
             "peringkat" => "nullable",
             "hafidz" => "nullable",
             "jenis_lomba" => "nullable",
@@ -120,6 +118,98 @@ class PendaftaranPPDB extends Controller
 
         return view('ppdb.show', compact('peserta'));
     }
+
+	/*
+	* Edit data peserta
+	*/
+	public function edit($id)
+	{
+		$peserta = PesertaPPDB::findOrFail($id);
+
+		return view('ppdb.edit', compact('peserta'));
+	}
+
+	public function update($id)
+	{
+        request()->validate([
+            "nama_lengkap" => "required",
+            "jenis_kelamin" => "required",
+            "tempat_lahir" => "required",
+            "tanggal_lahir" => "required",
+            "nik" => "required",
+            "alamat_lengkap" => "required",
+            "pilihan_jurusan" => "required",
+            "asal_sekolah" => "required",
+            "tahun_lulus" => "required",
+            "nisn" => "nullable",
+            "penerima_kip" => "nullable",
+            "no_hp" => "required",
+            "nama_ayah" => "required",
+            "nama_ibu" => "required",
+            "peringkat" => "nullable",
+            "hafidz" => "nullable",
+            "jenis_lomba" => "nullable",
+            "juara_ke" => "nullable",
+            "juara_tingkat" => "nullable",
+            "rekomendasi_mwc" => "nullable"
+        ]);
+
+        $no_urut = (new PesertaPPDB)->getNoUrut();
+        $jurusan = Jurusan::findOrFail(request('pilihan_jurusan'));
+
+        $ppdb = PesertaPPDB::findOrFail($id);
+
+		// check apakah peserta memgubah jurusan
+		if($ppdb->jurusan_id != $jurusan->id) {
+			// siswa ingin pindah jurusan
+        	$ppdb->no_urut = $no_urut;
+        	$ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
+        	$ppdb->jurusan_id = $jurusan->id;
+
+        	session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
+		}
+
+        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
+        $ppdb->nama_lengkap = request('nama_lengkap');
+        $ppdb->jenis_kelamin = request('jenis_kelamin');
+        $ppdb->tempat_lahir = request('tempat_lahir');
+        $ppdb->tanggal_lahir = request('tanggal_lahir');
+        $ppdb->nik = request('nik');
+        $ppdb->alamat_lengkap = request('alamat_lengkap');
+        $ppdb->asal_sekolah = request('asal_sekolah');
+        $ppdb->tahun_lulus = request('tahun_lulus');
+        $ppdb->nisn = request('nisn');
+        $ppdb->penerima_kip = request()->has('penerima_kip') ? 'y' : 'n';
+        $ppdb->no_kip = request('no_kip');
+        $ppdb->no_hp = request('no_hp');
+        $ppdb->nama_ayah = request('nama_ayah');
+        $ppdb->pekerjaan_ayah = request('pekerjaan_ayah');
+        $ppdb->no_hp_ayah = request('no_ayah');
+        $ppdb->nama_ibu = request('nama_ibu');
+        $ppdb->pekerjaan_ibu = request('pekerjaan_ibu');
+        $ppdb->no_hp_ibu = request('no_ibu');
+        $ppdb->akademik = [
+            'kelas' => explode('/', request('peringkat'))[0] ?? '',
+            'semester' => explode('/', request('peringkat'))[1] ?? '',
+            'peringkat' => explode('/', request('peringkat'))[2] ?? '',
+            'hafidz'    => request('hafidz') ?? ''
+        ];
+        $ppdb->non_akademik = [
+            'jenis_lomba' => request('jenis_lomba') ?? '',
+            'juara_ke'     => request('juara_ke') ?? '',
+            'juara_tingkat' => request('juara_tingkat') ?? ''
+        ];
+        $ppdb->rekomendasi_mwc = request()->has('rekomendasi_mwc') ? 1 : 0;
+        $ppdb->saran_dari = request('saran_dari');
+        $ppdb->save();
+
+        session()->flash('success', 'Data peserta telah di ubah');
+
+		return redirect()->route('ppdb.show.peserta', $ppdb->id);
+	}
+
+
+
 
     // formulir section
     public function mendaftar()

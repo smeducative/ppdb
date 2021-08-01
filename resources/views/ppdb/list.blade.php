@@ -42,6 +42,7 @@
                 </div>
 
                 <div class="col-md-12">
+
                     <div class="card">
                         <div class="card-header">
                             <h3>Peserta PPDB</h3>
@@ -110,9 +111,6 @@
         </div>
     </section>
 
-
-</div>
-</section>
 
 </div>
 @endsection

@@ -355,7 +355,7 @@
 
                 <div class="grid">
                     <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Hadidz / Hafidzoh</label>
+                        <label class="block text-sm font-medium text-gray-700">Hafidz / Hafidzoh</label>
                         <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="hafidz" placeholder="Hafidz / Hafidzoh"/>
                     </div>
                 </div>

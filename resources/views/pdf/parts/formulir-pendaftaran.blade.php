@@ -149,8 +149,8 @@
                 <td width="27%">a. &ensp; Kelas / Semester / Peringkat</td>
                 <td width="1%">:</td>
                 <td>@if ($peserta->akademik !== null)
-                    {{ $peserta->akademik['kelas'] }} {{ $peserta->akademik['kelas'] ? '-' : '' }}
-                    {{ $peserta->akademik['semester'] }} {{ $peserta->akademik['semester'] ? '-' : '' }}
+                    {{ $peserta->akademik['kelas'] }} {{ $peserta->akademik['kelas'] ? '/' : '' }}
+                    {{ $peserta->akademik['semester'] }} {{ $peserta->akademik['semester'] ? '/' : '' }}
                     {{ $peserta->akademik['peringkat'] }}
                 @endif</td>
             </tr>

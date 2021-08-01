@@ -30,8 +30,8 @@ Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mend
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     // setting profile
-    ROute::get('setting/profile', [AdminController::class, 'pengaturanAkun'])->name('setting.profile');
-    ROute::put('setting/profile', [AdminController::class, 'setAkun'])->name('setting.profile');
+    Route::get('setting/profile', [AdminController::class, 'pengaturanAkun'])->name('setting.profile');
+    Route::put('setting/profile', [AdminController::class, 'setAkun'])->name('setting.profile');
 
 
 
@@ -40,15 +40,27 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     // ppdb setting
     Route::put('/setting/batas_akhir', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
 
+	// list pendaftar
+
     Route::get('/ppdb/list-pendaftar', [PendaftaranPPDB::class, 'listPendaftar'])->name('ppdb.list.pendaftar');
 
     Route::get('/ppdb/list-pendaftar/{jurusan}', [PendaftaranPPDB::class, 'listPendaftarJurusan'])->name('ppdb.list.pendaftar.jurusan');
+
+	// tanbah pendaftar
 
     Route::get('/ppdb/tambah-pendaftar', [PendaftaranPPDB::class, 'tambahPendaftar'])->name('ppdb.tambah.pendaftar');
 
     Route::post('/ppdb/tambah-pendaftar', [PendaftaranPPDB::class, 'submitPendaftar'])->name('ppdb.tambah.pendaftar');
 
+	//-- lihat identias pendaftar
+
     Route::get('/ppdb/show/{id}', [PendaftaranPPDB::class, 'showPeserta'])->name('ppdb.show.peserta');
+
+	// edit pendaftar
+	Route::get('/ppdb/edit/{id}', [PendaftaranPPDB::class, 'edit'])->name('ppdb.edit.peserta');
+	Route::put('/ppdb/edit/{id}', [PendaftaranPPDB::class, 'update'])->name('ppdb.edit.peserta');
+
+	// daftar ulanng
 
     Route::post('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'terimaPeserta'])->name('ppdb.terima.peserta');
 
