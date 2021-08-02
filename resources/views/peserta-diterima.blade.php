@@ -1,8 +1,12 @@
 @extends('layouts.landing')
 
+@inject('setting', 'App\Models\PpdbSetting')
+@inject('carbon', 'Carbon\Carbon')
+
 @section('title', 'Daftar peserta diterima tahun ' . now()->year)
 
 @section('content')
+
 
 <!-- Section 1 -->
 <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
@@ -32,10 +36,12 @@
     <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
 
         <h2 class="h2">Hasil Seleksi PPDB</h2>
+        @if (now()->gt($carbon->parse($setting->latest()->first()->body['hasil_seleksi'])))
+
 
         <div class="mt-10 flex flex-col">
             <div class="overflow-x-auto">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="py-2 align-middle inline-block min-w-full">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -101,6 +107,11 @@
 </div>
   </div>
 </div>
+@else
+    <div class="p-5 border-t-2 border-green-600 w-full mt-5 bg-white rounded shadow">
+        Hasil seleksi akan di umumkan pada <strong class="text-green-600"> {{ $carbon->parse($setting->latest()->first()->body['hasil_seleksi'])->translatedFormat('d F Y') }} </strong>
+    </div>
+@endif
 </div>
 </section>
 @endsection
