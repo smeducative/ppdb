@@ -119,18 +119,18 @@ class PendaftaranPPDB extends Controller
         return view('ppdb.show', compact('peserta'));
     }
 
-	/*
+    /*
 	* Edit data peserta
 	*/
-	public function edit($id)
-	{
-		$peserta = PesertaPPDB::findOrFail($id);
+    public function edit($id)
+    {
+        $peserta = PesertaPPDB::findOrFail($id);
 
-		return view('ppdb.edit', compact('peserta'));
-	}
+        return view('ppdb.edit', compact('peserta'));
+    }
 
-	public function update($id)
-	{
+    public function update($id)
+    {
         request()->validate([
             "nama_lengkap" => "required",
             "jenis_kelamin" => "required",
@@ -154,20 +154,17 @@ class PendaftaranPPDB extends Controller
             "rekomendasi_mwc" => "nullable"
         ]);
 
-        $no_urut = (new PesertaPPDB)->getNoUrut();
         $jurusan = Jurusan::findOrFail(request('pilihan_jurusan'));
 
         $ppdb = PesertaPPDB::findOrFail($id);
 
-		// check apakah peserta memgubah jurusan
-		if($ppdb->jurusan_id != $jurusan->id) {
-			// siswa ingin pindah jurusan
-        	$ppdb->no_urut = $no_urut;
-        	$ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
-        	$ppdb->jurusan_id = $jurusan->id;
+        // check apakah peserta memgubah jurusan
+        if ($ppdb->jurusan_id != $jurusan->id) {
+            $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
+            $ppdb->jurusan_id = $jurusan->id;
 
-        	session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
-		}
+            session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
+        }
 
         $ppdb->semester = now()->year . '/' . now()->addYear()->year;
         $ppdb->nama_lengkap = request('nama_lengkap');
@@ -205,8 +202,8 @@ class PendaftaranPPDB extends Controller
 
         session()->flash('success', 'Data peserta telah di ubah');
 
-		return redirect()->route('ppdb.show.peserta', $ppdb->id);
-	}
+        return redirect()->route('ppdb.show.peserta', $ppdb->id);
+    }
 
 
 
