@@ -268,6 +268,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('ppdb.set.batas.akhir') }}" class="nav-link {{ request()->routeIs('ppdb.set.batas.akhir') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
+                            Pengaturan PPDB
+                        </p>
+                    </a>
+                </li>
+
 
 
             </ul>

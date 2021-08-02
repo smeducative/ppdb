@@ -34,7 +34,8 @@ class JurusanSeeder extends Seeder
         $setting = [
             'body' => json_encode([
                 'batas_akhir_ppdb'    => now(),
-                'no_surat' => '247/Pan.PPDB/2021'
+                'no_surat' => '247/Pan.PPDB/2021',
+                'hasil_akhir'   => now()
             ])
         ];
 

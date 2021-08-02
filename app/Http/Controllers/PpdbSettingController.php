@@ -15,11 +15,12 @@ class PpdbSettingController extends Controller
         $batas->update([
             'body' => [
                 'batas_akhir_ppdb'  => request('batas_akhir_ppdb'),
-                'no_surat'  => request('no_surat')
+                'no_surat'  => request('no_surat'),
+                'hasil_seleksi' => request('hasil_seleksi')
             ]
         ]);
 
-        session()->flash('success', 'Batas akhir telah di tentukan');
+        session()->flash('success', 'Pengaturan PPDB telah di ubah');
 
         return back();
     }

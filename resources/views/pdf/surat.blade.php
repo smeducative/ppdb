@@ -47,9 +47,8 @@
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title"> Atur batas daftar ulang </h3>
+							<h3 class="card-title"> Pengaturan Surat </h3>
 						</div>
-						<form action="{{ route('ppdb.set.batas.akhir') }}" method="post">
 						<div class="card-body">
 
 							<div class="form-group">
@@ -62,25 +61,10 @@
 								<span> {{ $carbon->parse(optional((new App\Models\PpdbSetting)->latest()->first()->body)['batas_akhir_ppdb'])->translatedFormat('l, d F Y') }} </span>
 							</div>
 
-							<div class="form-group">
-								<label class="form-label">Batas Akhir Daftar Ulang</label>
-
-                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="batas_akhir_ppdb"
-                                                        data-mask required>
-							</div>
-
-							<div class="form-group">
-								<label class="form-label">Ubah No. Surat</label>
-
-								<input type="text" name="no_surat" class="form-control" placeholder="No Surat" required>
-							</div>
-
 						</div>
 
 						<div class="card-footer">
-							@csrf
-							@method('PUT')
-							<button class="btn btn-primary" type="submit">Atur</button>
+							<a href="{{ route('ppdb.set.batas.akhir') }}" class="btn btn-primary" type="submit">Atur</a>
 						</div>
 						</form>
 
