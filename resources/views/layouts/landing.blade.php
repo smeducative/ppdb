@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - PPDB Smedip</title>
+    <title>@yield('title') - PPDB SMK Diponegoro Karangnyar</title>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">
 	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
@@ -38,7 +38,7 @@
             </a>
         </div>
         <p class="mt-8 text-base leading-6 text-center text-gray-400">
-            © 2021 SMK Diponegoro Karanganyar. All rights reserved.
+            © {{ now()->year }} SMK Diponegoro Karanganyar. All rights reserved.
         </p>
     </div>
 </footer>

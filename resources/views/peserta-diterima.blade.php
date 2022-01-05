@@ -36,7 +36,7 @@
     <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
 
         <h2 class="h2">Hasil Seleksi PPDB</h2>
-        @if (now()->gt($carbon->parse($setting->latest()->first()->body['hasil_seleksi'])))
+        @if (now()->gt($carbon->parse($setting->latest()->first()?->body['hasil_seleksi'] ?? now()->addDays(1))))
 
 
         <div class="mt-10 flex flex-col">

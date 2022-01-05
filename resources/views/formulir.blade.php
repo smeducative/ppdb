@@ -42,6 +42,7 @@
     @endif
 
     <h2 class="text-2xl ont-bold">Formulir PPDB</h2>
+    <p class="text-base">Isi formulir di bawah sesuai dengan data diri kamu yaa... </p>
 </section>
 
     <section class="w-full bg-gray-50 mt-10">
@@ -72,9 +73,9 @@
 
       {{-- step 3 - Jenis beasiswa --}}
       <div class="px-5" x-show="step === 3" x-transition>
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa</h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa / Prestasi</h3>
         <p class="mt-1 text-sm text-gray-600">
-          Jenis beasiswa peserta.
+          Jenis beasiswa peserta. diisi jika peserta memiliki beasiswa atau prestasi.
         </p>
       </div>
       {{-- end step --}}
@@ -425,15 +426,15 @@
 
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button x-show="step > 1" @click.prevent="step--" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-              Previous
+              Sebelumnya
             </button>
 
             <button x-show="step < 3" @click.prevent="step++" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Next
+              Selanjutnya
             </button>
 
             <button x-show="step === 3" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Save
+              Submit
             </button>
           </div>
         </div>
