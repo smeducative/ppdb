@@ -8,7 +8,7 @@
         <p class="text-center">
             <strong class="d-block" style="font-size: 22px;">PANITIA PENERIMAAN PESERTA DIDIK BARU</strong>
             <strong class="d-block">SMK DIPONEGORO KARANGANYAR</strong>
-            <span style="font-size: 18px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar 51182</span>
+            <span style="font-size: 18px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar kab. Pekalongan 51182</span>
         </p>
     </div>
 

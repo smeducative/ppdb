@@ -9,7 +9,7 @@
             <div class="text-center">
                 <strong class="d-block" style="font-size: 26px;">LEMBAGA PENDIDIKAN MA'ARIF NU KARANGANYAR</strong>
                 <strong class="d-block" style="font-size: 24px;">SMK DIPONEGORO KARANGANYAR</strong>
-                <span class="d-block" style="font-size: 18px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar
+                <span class="d-block" style="font-size: 18px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar kab. Pekalongan
                     51182</span>
                 <span style="font-size: 18px;">website: smkdiponegoropekalongan.sch.id e-mail: smkdipo.pekalongan@gmail.com</span>
             </div>
@@ -21,7 +21,7 @@
     <!-- hr -->
     <hr style="border: 2px solid black;">
     <div class="text-center">
-        <strong style="font-weight: bolder; font-size: 22px;"> FORMULIR PENDAFTARAN PESERTA DIDIK BARU TAHUN PELAJARAN {{ $peserta->created_at->format('Y') }} / {{ $peserta->created_at->addYear()->format('Y') }} </strong>
+        <strong style="font-weight: bolder; font-size: 22px;"> FORMULIR PENDAFTARAN PESERTA DIDIK BARU TAHUN AJARAN {{ $peserta->created_at->format('Y') }} / {{ $peserta->created_at->addYear()->format('Y') }} </strong>
     </div>
     <hr style="border: 2px solid black;">
 
@@ -217,8 +217,6 @@
 
             <div class="col-md-6 text-center"> Panitia PPDB</div>
             <div class="col-md-6 text-center"> Calon Peserta Didik </div>
-                <br>
-                <br>
                 <br>
                 <br>
                 <br>

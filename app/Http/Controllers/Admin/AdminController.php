@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PesertaPPDB;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,6 +21,7 @@ class AdminController extends Controller
             'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
             'tbsm' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($peserta)->where('jurusan_id', 3)->first()->c ?? 0,
+            'bcf' => collect($peserta)->where('jurusan_id', 4)->first()->c ?? 0,
             'all' => collect($peserta)->sum('c') ?? 0
         ];
 
@@ -27,16 +29,23 @@ class AdminController extends Controller
             'tkj' => collect($pesertadu)->where('jurusan_id', 1)->first()->c ?? 0,
             'tbsm' => collect($pesertadu)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($pesertadu)->where('jurusan_id', 3)->first()->c ?? 0,
+            'bcf' => collect($pesertadu)->where('jurusan_id', 4)->first()->c ?? 0,
             'all' => collect($pesertadu)->sum('c') ?? 0
         ];
 
-        $compare = PesertaPPDB::select(\DB::raw('jurusan_id,jenis_kelamin, count(jenis_kelamin) as jk'))->groupBy('jurusan_id')->groupBy('jenis_kelamin')->get();
+        $compare = Jurusan::with('pesertaPpdb:id,jurusan_id')->withCount([
+            'pesertaPpdb as l'   => function ($query) use ($tahun) {
+                $query->whereYear('created_at', $tahun)->where('jenis_kelamin', 'l');
+            },
+            'pesertaPpdb as p'   => function ($query) use ($tahun) {
+                $query->whereYear('created_at', $tahun)->where('jenis_kelamin', 'p');
+            },
+        ])->orderBy('id')->get();
 
         $compareSx = [
-            'p'    => collect($compare)->where('jenis_kelamin', 'p')->pluck('jk'),
-            'l'    => collect($compare)->where('jenis_kelamin', 'l')->pluck('jk')
+            'p'    => collect($compare)->pluck('p'),
+            'l'    => collect($compare)->pluck('l')
         ];
-
 
         return view('admin.dashboard', compact('count', 'du', 'compareSx'));
     }

@@ -25,7 +25,7 @@
                                     <label class="form-label">Data Tahun:</label>
                                     <select class="custom-select form-control-border" id="ppdb-tahun">
 										@for($i = now()->year; $i >= 2021 ; $i--)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{ $i }}" {{ request('tahun', 2022) == $i ? 'selected' : '' }}>{{ $i }}</option>
 										@endfor
                                     </select>
                                 </div>
@@ -40,6 +40,39 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
+            <h5 class="mb-2">Jumlah total</h5>
+            <div class="row">
+                 <!-- ./col -->
+                <div class="col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $count['all'] }}</h3>
+
+                            <p>Total Pendaftar</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                 <!-- ./col -->
+                <div class="col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $du['all'] }}</h3>
+
+                            <p>Total Daftar Ulang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
             <h5 class="mb-2">Info Pendaftar</h5>
             <div class="row">
                 <div class="col-lg-3 col-6">
@@ -89,18 +122,19 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ $count['all'] }}</h3>
+							<h3>{{ $count['bcf'] }}</h3>
 
-                            <p>Total Pendaftar</p>
+                            <p>BCF</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="ion ion-film-marker"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 4]) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+
                 <!-- ./col -->
             </div>
             <!-- /.row -->
@@ -155,18 +189,19 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ $du['all'] }}</h3>
+                            <h3>{{ $du['bcf'] }}</h3>
 
-                            <p>Total Pendaftar</p>
+                            <p>BCF</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="ion ion-film-marker"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 4]) }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+
                 <!-- ./col -->
             </div>
             <!-- /.row -->
@@ -221,13 +256,9 @@
 <script src="/plugins/chart.js/Chart.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			$("#ppdb-tahun").on('change', function (e) {
-				window.location.href = '?tahun='+e.target.value
-			})
-
 
 			var areaChartData = {
-			  labels  : ['TKJ', 'TBSM', 'ATPH'],
+			  labels  : ['TKJ', 'TBSM', 'ATPH', 'BCF'],
 			  datasets: [
 				{
 				  label               : 'Laki-laki',
@@ -287,6 +318,7 @@
 			  'TKJ',
 			  'TBSM',
 			  'ATPH',
+			  'BCF',
 		  ],
 		  datasets: [
 			{

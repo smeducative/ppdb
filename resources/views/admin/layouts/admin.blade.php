@@ -21,7 +21,7 @@
 </head>
 
 <body class="hold-transition login-page">
-    
+
     @yield('content')
 
     <!-- jQuery -->
@@ -30,6 +30,17 @@
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/js/js-admin/adminlte.min.js"></script>
+
+    <script>
+
+		$(document).ready(function () {
+			$("#ppdb-tahun").on('change', function (e) {
+				window.location.href += '?tahun='+e.target.value
+
+                alert('hellow')
+			});
+        });
+    </script>
 </body>
 
 </html>

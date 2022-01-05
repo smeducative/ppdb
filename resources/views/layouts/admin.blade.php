@@ -131,20 +131,14 @@
 
 
     @yield('footer')
-    {{-- <!-- page script -->
     <script>
-        $(function() {
-                    $("#example1").DataTable();
-                    $('#example2').DataTable({
-                        "paging": true,
-                        "lengthChange": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": false,
-                    });
-                });
-    </script> --}}
+
+        $(document).ready(function () {
+            $("#ppdb-tahun").on('change', function (e) {
+                window.location.href = '?tahun='+e.target.value
+			});
+        });
+    </script>
 </body>
 
 </html>

@@ -9,7 +9,7 @@
                 <strong class="d-block" style="font-size: 26px;">PANITIA PENERIMAAN PESERTA DIDIK BARU</strong>
                 <strong class="d-block" style="font-size: 26px;">LEMBAGA PENDIDIKAN MA'ARIF NU KARANGANYAR</strong>
                 <strong class="d-block" style="font-size: 24px;">SMK DIPONEGORO KARANGANYAR</strong>
-                <strong class="d-block" style="font-size: 24px;">TAHUN PELAJARAN {{ now()->year }}/{{ now()->addYear()->year }}</strong>
+                <strong class="d-block" style="font-size: 24px;">TAHUN AJARAN {{ now()->year }}/{{ now()->addYear()->year }}</strong>
                 <span class="d-block" style="font-size: 18px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar
                     51182</span>
                 <span style="font-size: 18px;">website: smkdiponegoropekalongan.sch.id e-mail:
@@ -62,22 +62,22 @@
 
 <table style="margin-left: 60px; font-size: 18px;">
     <tr>
-        <td width="60%">Nama</td>
+        <td width="30%">Nama</td>
         <td>:</td>
         <td> &nbsp; {{ $peserta->nama_lengkap }}</td>
     </tr>
     <tr>
-        <td width="60%">Nomor Pendaftaran</td>
+        <td width="30%">Nomor Pendaftaran</td>
         <td>:</td>
         <td> &nbsp; {{ $peserta->no_pendaftaran }}</td>
     </tr>
     <tr>
-        <td>Alamat</td>
+        <td width="30%">Alamat</td>
         <td>:</td>
         <td> &nbsp; {{ $peserta->alamat_lengkap }}</td>
     </tr>
     <tr>
-        <td>Asal Sekolah</td>
+        <td width="30%">Asal Sekolah</td>
         <td>:</td>
         <td> &nbsp; {{ $peserta->asal_sekolah }}</td>
     </tr>

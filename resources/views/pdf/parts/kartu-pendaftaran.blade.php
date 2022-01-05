@@ -9,7 +9,7 @@
         <div class="text-center">
             <strong class="d-block" style="font-size: 14px;">FORMULIR PENDAFTARAN PESERTA DIDIK BARU</strong>
             <strong class="d-block" style="font-size: 12px;">SMK DIPONEGORO KARANGANYAR</strong>
-            <span class="d-block" style="font-size: 12px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar 51182</span>
+            <span class="d-block" style="font-size: 12px;">Jl. Karanganyar Km. 1,5 Kayugeritan – Karanganyar kab. Pekalongan  51182</span>
             <span style="font-size: 11px;">website: smkdiponegoropekalongan.sch.id</span>
         </div>
     </div>
@@ -21,7 +21,7 @@
 
     <!-- heading -->
     <div class="text-center">
-        <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TH {{ $peserta->created_at->format('Y') . '/' . $peserta->created_at->addYear()->format('Y') }}</strong>
+        <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TA {{ $peserta->created_at->format('Y') . '/' . $peserta->created_at->addYear()->format('Y') }}</strong>
     </div>
 
 
