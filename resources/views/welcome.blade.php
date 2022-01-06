@@ -26,14 +26,15 @@
 </div>
 
 <!-- Section 2 -->
-<section class="px-2 py-16 bg-white md:px-0" id="hero" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70">
-  <div class="container items-center max-w-6xl px-5 md:px-8 mx-auto xl:px-5">
+<section class="relative px-2 py-16 xl:py-44 bg-green-100 md:px-0 object-cover" id="hero" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70"  style="background-image: url(/img/smedip2022-large.jpg); background-repeat: no-repeat; background-size: 100%;object-fit: cover; backdrop-filter: blur(6px)">
+  <div class="absolute inset-0 filter backdrop-blur-sm xl:backdrop-blur-md bg-black bg-opacity-10"></div>
+  <div class="relative container items-center max-w-6xl px-5 md:px-8 mx-auto xl:px-5">
     <div class="flex flex-wrap items-center sm:-mx-3">
-      <div class="w-full md:w-1/2 md:px-3">
-        <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-            <span class="block xl:inline">Penerimaan Peserta Didik Baru</span>
-            <span class="block text-green-500 xl:inline">Smedip!</span>
+      <div class="w-full md:px-3">
+        <div class="w-full pb-6 space-y-6 md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+          <h1 class="flex flex-col text-xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl bg-black bg-opacity-20 rounded-xl p-3">
+            <div class="block xl:inline text-white">Penerimaan Peserta Didik Baru</div>
+            <div class="block text-green-500 xl:inline">SMK Diponegoro Karanganyar</div>
           </h1>
           {{-- <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">Belajar tak pernah semenyenangkan ini setelah bergabung dengan smedip.</p> --}}
           <div class="relative flex flex-col sm:flex-row sm:space-x-4">
@@ -46,11 +47,6 @@
             </a>
           </div>
         </div>
-      </div>
-      <div class="w-full md:w-1/2" data-aos="fade-left" data-aos-duration="2000">
-        <div class="w-full h-auto overflow-hidden shadow-xl rounded">
-            <img src="/img/hey.png">
-          </div>
       </div>
     </div>
   </div>
@@ -71,7 +67,7 @@
                 Kejuruan
             </h2>
             <p class="pt-4 pb-8 m-0 leading-7 text-gray-700 border-0 border-gray-300 sm:pr-12 xl:pr-32 lg:text-lg">
-                Smedip mempunyai 3 kejuruan
+                SMK Diponegoro Karanganyar mempunyai 4 Kompetensi Keahlian
             </p>
             <ul class="p-0 m-0 leading-6 border-0 border-gray-300">
                 <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
@@ -82,6 +78,9 @@
                 </li>
                 <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
                     <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Agribisnis Tanaman Pangan dan Holtikultura
+                </li>
+                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
+                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Broadcasting dan Film
                 </li>
             </ul>
         </div>
