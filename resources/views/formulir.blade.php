@@ -29,11 +29,11 @@
   </div>
 </div>
 
-@if (session('success'))
+<section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
+    <img src="/img/smedip-ppdb-banner-2022.png" alt="smedip ppdb banner 2022" class="w-full">
+</section>
 
-@endif
-
-<section class="mt-10 px-5 max-w-7xl mx-auto">
+<section class="mt-10 px-5 max-w-6xl mx-auto">
 
     @if (session('success'))
         <div class="mb-10 py-5 px-4 bg-green-100 text-green-700 border-l-2 border-green-700">
@@ -46,10 +46,7 @@
 </section>
 
     <section class="w-full bg-gray-50 mt-10">
-        <!--
-  This example requires Tailwind CSS v2.0+
--->
-<div class="max-w-7xl mx-auto bg-gray-100 py-5">
+<div class="max-w-6xl mx-auto bg-gray-50 py-5">
   <div class="md:grid md:grid-cols-3 md:gap-6" x-data="{
     step: 1
   }" x-cloak @keyup.enter="step++">
@@ -344,13 +341,13 @@
 
                 <div class="grid mb-5">
                     <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Ranking</label>
+                        <label class="block text-sm font-medium text-gray-700">Ranking kelas</label>
 
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" data-inputmask='"mask": "9/9/9"' placeholder="kelas/semester/peringkat" name="peringkat" data-mask>
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Ranking kelas" name="peringkat">
                         <!-- /.input group -->
                     </div>
                      <p class="mt-2 text-sm text-gray-500">
-                        Format: kelas / semester / ranking. contoh: 7/1/1
+                        Contoh: Kelas 9 ranking 1
                     </p>
                 </div>
 
@@ -382,13 +379,16 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label class="block text-sm font-medium text-gray-700">Tingkat</label>
                         <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="jtingkat" style="width: 100%;" name="juara_tingkat">
-                            <option value="">-- pilih tingkat --</option>
                             @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
 
                             <option value="{{ $tingkat }}">{{ $tingkat }}</option>
                             @endforeach
                         </select>
                     </div>
+                </div>
+
+                <div class="text-sm text-gray-600">
+                    Kejuaraan minimal tingkat Kabupaten / kota
                 </div>
 
                 <div class="font-semibold text-xl mt-5">

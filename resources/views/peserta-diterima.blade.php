@@ -3,7 +3,7 @@
 @inject('setting', 'App\Models\PpdbSetting')
 @inject('carbon', 'Carbon\Carbon')
 
-@section('title', 'Daftar peserta diterima tahun ' . now()->year)
+@section('title', 'Alur dan Persyaratan pendaftar ' . now()->year . ' / ' . now()->addYear()->year)
 
 @section('content')
 
@@ -21,7 +21,8 @@
       </button>
     </div>
     <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-      <a class="px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/">Home</a>
+      <a class="px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+      href="/">Home</a>
       <a class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/formulir">Formulir Pendaftaran</a>
       {{-- <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Tempat Belajar</a>
       <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">FAQ</a> --}}
@@ -29,13 +30,67 @@
   </div>
 </div>
 
-<!-- section 1 -->
+<section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
+    <img src="/img/smedip-ppdb-banner-2022.png" alt="smedip ppdb banner 2022" class="w-full">
+</section>
 
-<section class="py-20 bg-gray-50" id="tempat-belajar" data-aos="zoom-in" data-aos-duration="1200" data-aos-offset="10">
-    <!-- This example requires Tailwind CSS v2.0+ -->
+<!-- Syarat Pendaftaran -->
+<section class="py-20 bg-gray-50" data-aos="zoom-in" data-aos-duration="1200" data-aos-offset="10">
+
+    <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16 mb-10">
+        <h2 class="text-xl font-bold">Alur Pendaftaran</h2>
+        <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
+            <ul class="text-base">
+                <li>
+                    - Calon Peserta Didik baru dapat mendaftar secara mandiri melalui website <a href="//s.id/ppdbsmedip22" target="_blank" class="text-green-500">PPDB Online Smedip</a> dan mengisi formulir pendaftaran sesuai data diri peserta.
+                </li>
+                <li>
+                    - Calon Peserta Didik baru dapat langsung datang ke <strong>SMK Diponegoro Karanganyar</strong> dengan membawa berkas persyaratan yang dibutuhkan.
+                </li>
+                <li>
+                    - Setelah dinyatakan diterima, peserta PPDB membayar biaya daftar ulang Sebesar Rp. 150.000,-
+                </li>
+                <li>
+                    - Berkas Pendaftaran dan Biaya Daftar Ulang diserahkan langsung ke <strong>SMK Diponegoro Karanganyar</strong>.
+                </li>
+                <li>
+                    - Jika membutuhkan info lebih lanjut, silahkan hubungi nomor di bawah ini: <br>
+                       <i> a.	Bu Widy Setyo Pratiwi, S.Pd. 	:	082221878684 </i><br>
+                        <i> b.	Pak Wiwit Setiyono, S.Pd.	:	085600086994</i>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16 mb-10">
+        <h2 class="text-xl font-bold">Berkas Persyaratan Pendaftar</h2>
+        <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
+            <ol class="text-base">
+                <li>
+                    a.	Foto Diri Berwarna Ukuran 3x4 sebanyak <strong> 2 lembar</strong>
+                </li>
+                <li>
+                    b.	Fotokopi Kartu Keluarga/KK sebanyak <strong> 2 lembar</strong>
+                </li>
+                <li>
+                    c.	Fotokopi Akte Kelahiran sebanyak <strong> 2 lembar</strong>
+                </li>
+                <li>
+                    d.	Fotokopi Kartu Indonesia Pintar/KIP sebanyak 2 lembar (bagi yang punya)
+                </li>
+                <li>
+                    e.	Fotokopi Ijazah sebanyak <strong> 2 lembar</strong> (jika sudah ada/menyusul)
+                </li>
+                <li>
+                    f.	Fotokopi Raport/Piagam/Sertifikat bagi yang pernah mendapat peringkat 1/2/3 atau juara 1/2/3 bidang akademik maupun non akademik minimal tingkat <strong> Kabupaten </strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
     <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
 
-        <h2 class="h2">Hasil Seleksi PPDB</h2>
+        <h2 class="text-xl font-bold">Hasil Seleksi PPDB</h2>
         @if (now()->gt($carbon->parse($setting->latest()->first()?->body['hasil_seleksi'] ?? now()->addDays(1))))
 
 

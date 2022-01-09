@@ -293,10 +293,10 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-medal"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" data-inputmask='"mask": "9/9/9"' placeholder="kelas/semester/peringkat" name="peringkat"
-                                                                data-mask>
+                                                            <input type="text" class="form-control" placeholder="Ranking kelas" name="peringkat"
+                                                            >
                                                         </div>
-         					<div class="form-text text-xs text-muted">format: kelas / semester / peringkat. contoh: 9/1/1</div>                                               <!-- /.input group -->
+         					<div class="form-text text-xs text-muted">Contoh: Kelas 9 ranking 1</div>                                               <!-- /.input group -->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -308,6 +308,7 @@
 
                                                 <div class="col-md-12">
                                                     <h3>Non Akademik</h3>
+                                                    <span>Minimal tingkat kabupaten</span>
                                                 </div>
 
                                                 <div class="col-md-12">
