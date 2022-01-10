@@ -9,7 +9,7 @@
     {{-- meta open graph --}}
     <meta property="og:title" content="@yield('title') - PPDB SMK Diponegoro Karanganyar" />
     <meta property="og:description" content="@yield('description')" />
-    <meta property="og:image" content="/img/smedip2022-large.jpg" />
+    <meta property="og:image" content="{{ url('/img/smedip2022-large.jpg') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="PPDB SMK Diponegoro Karanganyar" />
