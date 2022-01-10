@@ -287,16 +287,16 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Ranking</label>
+                                                        <label>Peringkat (Apabila pernah mendapat peringkat 1, 2 atau 3)</label>
 
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fas fa-medal"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" placeholder="Ranking kelas" name="peringkat"
+                                                            <input type="text" class="form-control" placeholder="Kelas / Semester / Peringkat" name="peringkat"
                                                             >
                                                         </div>
-         					<div class="form-text text-xs text-muted">Contoh: Kelas 9 ranking 1</div>                                               <!-- /.input group -->
+         					<div class="form-text text-xs text-muted">Contoh: Kelas 9 / Semester 1 / Peringkat 1</div>                                               <!-- /.input group -->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
