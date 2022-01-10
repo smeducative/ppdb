@@ -301,8 +301,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Hadidz / Hafidzoh</label>
-                                                        <input type="text" class="form-control" name="hafidz" placeholder="Hafidz / Hafidzoh"/>
+                                                        <label>Hadidz / Hafidzoh (minimal 1 juz Al-Qur'an)</label>
+                                                        <input type="text" class="form-control" name="hafidz" placeholder="Contoh: juz 1"/>
                                                     </div>
                                                 </div>
 
