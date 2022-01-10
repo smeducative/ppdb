@@ -55,8 +55,8 @@
                 </li>
                 <li>
                     - Jika membutuhkan info lebih lanjut, silahkan hubungi nomor di bawah ini: <br>
-                       <i> a.	Bu Widy Setyo Pratiwi, S.Pd. 	:	082221878684 </i><br>
-                        <i> b.	Pak Wiwit Setiyono, S.Pd.	:	085600086994</i>
+                       <i> a.	Bu Widy Setyo Pratiwi, S.Pd. 	: <a href="//wa.me/6282221979694" class="text-green-500 underline">082221979694</a> </i><br>
+                       <i> b.	Pak Wiwit Setiyono, S.Pd.	: <a href="//wa.me/6285600086994" class="text-green-500 underline"> 085600086994</a></i>
                 </li>
             </ul>
         </div>
@@ -89,6 +89,16 @@
     </div>
 
     <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
+        <h2 class="text-xl font-bold">Gelombang Pendaftaran</h2>
+
+        <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
+            <strong>Gelombang 1:</strong> <br>
+            <div class="font-light">3 Januari - 31 Maret 2022</div> <br>
+            <strong>Gelombang 2:</strong> <br>
+            <div class="font-light">1 April - 9 Juli 2022</div>
+        </div>
+    </div>
+    {{-- <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
 
         <h2 class="text-xl font-bold">Hasil Seleksi PPDB</h2>
         @if (now()->gt($carbon->parse($setting->latest()->first()?->body['hasil_seleksi'] ?? now()->addDays(1))))
@@ -110,12 +120,6 @@
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Asal Sekolah
             </th>
-            {{-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
-            </th>
-            <th scope="col" class="relative px-6 py-3">
-                <span class="sr-only">Edit</span>
-            </th> --}}
         </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200 text-xs md:text-sm">
@@ -141,12 +145,6 @@
                   <div class="text-sm text-gray-900">{{ $peserta->asal_sekolah }}</div>
                 <div class="text-sm text-gray-500">{{ $peserta->tahun_lulus }}</div>
               </td>
-            {{-- <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    {{ $peserta->asal_sekolah }}
-                </span>
-              </td> --}}
-
             </tr>
               @empty
               <tr>
@@ -154,11 +152,9 @@
               </tr>
 
               @endforelse
-
-            <!-- More people... -->
           </tbody>
         </table>
-    </div>
+    </div> -
 </div>
   </div>
 </div>
@@ -168,5 +164,6 @@
     </div>
 @endif
 </div>
+--}}
 </section>
 @endsection
