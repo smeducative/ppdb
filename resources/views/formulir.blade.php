@@ -189,11 +189,11 @@
                   Alamat Lengkap <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap" name="alamat_lengkap" required></textarea>
+                  <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap sesuai KK" name="alamat_lengkap" required></textarea>
                 </div>
                 <p class="mt-2 text-sm text-gray-500">
-                        Alamat Lengkap Peserta
-                    </p>
+                    Alamat Lengkap Peserta, lihat di KK
+                </p>
               </div>
             </div>
 
@@ -341,13 +341,14 @@
 
                 <div class="grid mb-5">
                     <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Ranking kelas</label>
+                        <label class="block text-sm font-medium text-gray-700">Peringkat kelas (Apabila pernah mendapatkan peringkat 1, 2 atau 3)</label>
 
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Ranking kelas" name="peringkat">
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="kelas/semester/peringkat" name="Peringkat / Semester / Kelas">
+
                         <!-- /.input group -->
                     </div>
                      <p class="mt-2 text-sm text-gray-500">
-                        Contoh: Kelas 9 ranking 1
+                        Contoh: Peringkat 1 / Semester 1 / Kelas 9
                     </p>
                 </div>
 
