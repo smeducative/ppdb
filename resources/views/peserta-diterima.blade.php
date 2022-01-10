@@ -40,7 +40,7 @@
     <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16 mb-10">
         <h2 class="text-xl font-bold">Alur Pendaftaran</h2>
         <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
-            <ul class="text-base">
+            <ul class="text-xs md:text-sm space-y-2">
                 <li>
                     - Calon Peserta Didik baru dapat mendaftar secara mandiri melalui website <a href="//s.id/ppdbsmedip22" target="_blank" class="text-green-500">PPDB Online Smedip</a> dan mengisi formulir pendaftaran sesuai data diri peserta.
                 </li>
@@ -65,7 +65,7 @@
     <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16 mb-10">
         <h2 class="text-xl font-bold">Berkas Persyaratan Pendaftar</h2>
         <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
-            <ol class="text-base">
+            <ol class="text-xs md:text-sm">
                 <li>
                     a.	Foto Diri Berwarna Ukuran 3x4 sebanyak <strong> 2 lembar</strong>
                 </li>
@@ -118,7 +118,7 @@
             </th> --}}
         </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-gray-200 text-xs md:text-sm">
               @forelse ((new App\Models\PesertaPPDB)->whereYear('created_at', request('tahun', now()->year))->whereDiterima(1)->get() as $peserta)
 
               <tr>

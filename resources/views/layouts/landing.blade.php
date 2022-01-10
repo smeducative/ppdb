@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - PPDB SMK Diponegoro Karangnyar</title>
+    <title>@yield('title') - PPDB SMK Diponegoro Karanganyar</title>
+    {{-- description --}}
+    <meta name="description" content="@yield('description')">
+    {{-- meta open graph --}}
+    <meta property="og:title" content="@yield('title') - PPDB SMK Diponegoro Karanganyar" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:image" content="/img/smedip2022-large.jpg" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PPDB SMK Diponegoro Karanganyar" />
+    <meta property="og:locale" content="id_ID" />
+
+
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">
 	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">

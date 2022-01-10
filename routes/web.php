@@ -26,8 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome');
 Route::view('/formulir', 'formulir');
 Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mendaftar');
-Route::view('/daftar-peserta-diterima', 'peserta-diterima')->name('daftar.peserta.diterima');
-
+Route::redirect('/daftar-peserta-diterima', '/alur-dan-persyaratan');
+Route::view('/alur-dan-persyaratan', 'peserta-diterima')->name('daftar.peserta.diterima');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
 

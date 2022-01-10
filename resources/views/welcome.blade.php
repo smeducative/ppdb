@@ -1,6 +1,7 @@
 @extends('layouts.landing')
 
-@section('title', 'PPDB')
+@section('title', 'Penerimaan Peserta Didik Baru ' . now()->year . '/' . now()->addYear()->year)
+@section('description', 'Telah dibuka penerimaan peserta didik baru. Tahun Ajaran ' . now()->year . '/' . now()->addYear()->year)
 
 @section('content')
 
@@ -43,7 +44,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
             <a href="{{ route('daftar.peserta.diterima') }}" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600 rounded">
-              Info PPDB
+              Alur dan Persyaratan
             </a>
           </div>
         </div>
