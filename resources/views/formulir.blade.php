@@ -343,12 +343,12 @@
                     <div class="col-span-3 sm:col-span-2">
                         <label class="block text-sm font-medium text-gray-700">Peringkat kelas (Apabila pernah mendapatkan peringkat 1, 2 atau 3)</label>
 
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="kelas/semester/peringkat" name="Peringkat / Semester / Kelas">
+                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="kelas/semester/peringkat" name="Kelas / Semester / Peringkat">
 
                         <!-- /.input group -->
                     </div>
                      <p class="mt-2 text-sm text-gray-500">
-                        Contoh: Peringkat 1 / Semester 1 / Kelas 9
+                        Contoh: Kelas 9 / Semester 1 / Peringkat 1
                     </p>
                 </div>
 
