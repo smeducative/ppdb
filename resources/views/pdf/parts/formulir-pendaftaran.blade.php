@@ -202,11 +202,11 @@
         </table>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
 
             </div>
-            <div class="col-md-6">
-                <div class="text-center mt-5 pr-10">
+            <div class="col-md-4">
+                <div class="text-center mt-5 pr-8">
                     <strong>Karanganyar, {{ $peserta->created_at->translatedFormat('d F Y') }}</strong>
                 </div>
             </div>
@@ -215,14 +215,18 @@
 
             </div>
 
-            <div class="col-md-6 text-center"> Panitia PPDB</div>
-            <div class="col-md-6 text-center"> Calon Peserta Didik </div>
+            <div class="col-md-4 text-center"> Panitia PPDB</div>
+            <div class="col-md-4 text-center float-right">
+                <div style="border: 1px solid black;width:2.79cm;height:3.8cm; flex: content ;justify-content: end; align-items: center; float: right;"> pas foto </div>
+            </div>
+            <div class="col-md-4 text-center"> Calon Peserta Didik </div>
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
-            <div class="col-md-6 text-center"> ( {{ auth()->user()->name }} )</div>
-            <div class="col-md-6 text-center"> ( {{ $peserta->nama_lengkap }} ) </div>
+            <div class="col-md-4 text-center"> ( {{ auth()->user()->name }} )</div>
+            <div class="col-md-4 text-center"> </div>
+            <div class="col-md-4 text-center"> ( {{ $peserta->nama_lengkap }} ) </div>
         </div>
     </div>
