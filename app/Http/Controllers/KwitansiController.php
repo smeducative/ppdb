@@ -35,7 +35,9 @@ class KwitansiController extends Controller
 
     public function tambahKwitansi($uuid)
     {
-        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
+        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi' => function ($query) {
+            $query->with('penerima');
+        }])->findOrFail($uuid);
 
         return view('ppdb.tambah-kwitansi', compact('peserta'));
     }
@@ -49,11 +51,11 @@ class KwitansiController extends Controller
 
         $peserta = PesertaPPDB::findOrFail($uuid);
 
-        $peserta->kwitansi()->create($data);
+        $peserta->kwitansi()->create($data + ['user_id' => request()->user()->id]);
 
         session()->flash('success', 'Kwitansi Berhasil di Tambahkan');
 
-        return back(201);
+        return back();
     }
 
     public function cetakKwitansi($uuid)

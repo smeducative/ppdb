@@ -72,13 +72,16 @@
                                         <td width="5%">:</td>
                                         <td>
                                             <input type="text" class="form-control" name="jenis_pembayaran" placeholder="Jenis Pembayaran" required>
+                                            <span class="text-secondary">contoh: daftar ulang, seragam, lainnya</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th width="30%">Jumlah</th>
                                         <td width="5%">:</td>
                                         <td>
-                                            <input type="text" class="form-control" name="nominal" placeholder="Nominal" required>
+                                            <input type="number" class="form-control" name="nominal" placeholder="Nominal" min=1 required>
+                                            <span class="text-secondary">contoh: 150000</span>
+                                            <span class="text-danger">*tanpa titik maupun koma</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -87,6 +90,7 @@
 
 
                         <div class="card-footer">
+                            <span>Pastikan untuk menerima biaya sebelum menambahkan kwitansi</span> <br>
                             <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
 
@@ -105,6 +109,9 @@
 
                             <div class="card-tools">
                                 <form action="{{ route('ppdb.cetak.kwitansi', ['uuid' => $peserta->id]) }}" method="POST">
+                                    <button class="btn btn-outline-success disabled">
+                                        Total terbayar: Rp. {{ number_format($peserta->kwitansi->sum('nominal'), 0, ',', '.') }}
+                                    </button>
                                     @csrf
 
                                     <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak Semua</button>
@@ -114,7 +121,7 @@
                         <div class="card-body table-responsive p-0">
 
                             @if ($peserta->kwitansi->count())
-                            <table class="table table-hover text-nowrap">
+                            <table class="table table-sm table-hover text-nowrap">
 
                                 <thead>
 
@@ -124,6 +131,7 @@
                                         <th>Jenis Pembayaran</th>
                                         <th>Jumlah</th>
                                         <th>Pada Tanggal</th>
+                                        <th>Penerima</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -136,8 +144,9 @@
                                         <td>{{ $peserta->no_pendaftaran }}</td>
                                         <td>{{ $peserta->nama_lengkap}}</td>
                                         <td>{{ $kwitansi->jenis_pembayaran }}</td>
-                                        <td>{{ $kwitansi->nominal }}</td>
-                                        <td>{{ $kwitansi->created_at->format('d-M-Y H:i') }}</td>
+                                        <td>Rp. {{ number_format($kwitansi->nominal, 0, ',', '.') }},-</td>
+                                        <td>{{ $kwitansi->created_at->translatedFormat('l, d F Y H:i') }}</td>
+                                        <td>{{ $kwitansi->penerima->name }}</td>
                                         <td>
                                             <form action="{{ route('ppdb.cetak.kwitansi.single', ['uuid' => $peserta->id, 'id' => $kwitansi->id]) }}" method="POST">
                                     @csrf

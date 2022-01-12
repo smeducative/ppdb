@@ -63,7 +63,7 @@
                             @if (!$pesertappdb->isEmpty())
 
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered" id="list-ppdb">
+                                <table class="table table-sm table-striped table-bordered" id="list-ppdb">
                                     <thead>
                                         <tr>
 
@@ -74,6 +74,7 @@
                                             <th>Asal Sekolah</th>
                                             <th>Pilihan Jurusan</th>
 											<th>Kwitansi</th>
+											<th>Terbayar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -87,7 +88,8 @@
                                             <td> {{ $peserta->no_hp }} </td>
                                             <td> {{ $peserta->asal_sekolah }} </td>
                                             <td> {{ $peserta->jurusan->nama }} </td>
-											<td> {{ $peserta->kwitansi->count() }} </td>
+											<td> {{ $peserta->kwitansi->count() }} ({{ $peserta->kwitansi->pluck('jenis_pembayaran')->join(',') }}) </td>
+											<td> Rp. {{ number_format($peserta->kwitansi->sum('nominal'), 0, ',', '.') }} </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

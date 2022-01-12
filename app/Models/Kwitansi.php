@@ -19,4 +19,9 @@ class Kwitansi extends Model
     {
         return $this->belongsTo(PesertaPPDB::class, 'peserta_ppdb_id');
     }
+
+    public function penerima()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
