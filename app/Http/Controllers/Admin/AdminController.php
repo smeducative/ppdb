@@ -21,7 +21,7 @@ class AdminController extends Controller
             'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
             'tbsm' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($peserta)->where('jurusan_id', 3)->first()->c ?? 0,
-            'bdf' => collect($peserta)->where('jurusan_id', 4)->first()->c ?? 0,
+            'bdp' => collect($peserta)->where('jurusan_id', 4)->first()->c ?? 0,
             'all' => collect($peserta)->sum('c') ?? 0
         ];
 
@@ -29,7 +29,7 @@ class AdminController extends Controller
             'tkj' => collect($pesertadu)->where('jurusan_id', 1)->first()->c ?? 0,
             'tbsm' => collect($pesertadu)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($pesertadu)->where('jurusan_id', 3)->first()->c ?? 0,
-            'bdf' => collect($pesertadu)->where('jurusan_id', 4)->first()->c ?? 0,
+            'bdp' => collect($pesertadu)->where('jurusan_id', 4)->first()->c ?? 0,
             'all' => collect($pesertadu)->sum('c') ?? 0
         ];
 
