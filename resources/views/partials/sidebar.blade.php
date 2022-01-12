@@ -75,7 +75,7 @@
 						<li class="nav-item">
                             <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list-pendaftar/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>BCF</p>
+                                <p>BDF</p>
                             </a>
                         </li>
                     </ul>
@@ -110,7 +110,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>DU BCF</p>
+                                <p>DU BDF</p>
                             </a>
                         </li>
                     </ul>
@@ -145,7 +145,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>BCF</p>
+                                <p>BDF</p>
                             </a>
                         </li>
                     </ul>
@@ -181,7 +181,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kartu BCF</p>
+                                <p>Kartu BDF</p>
                             </a>
                         </li>
                     </ul>
@@ -216,7 +216,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form BCF</p>
+                                <p>Form BDF</p>
                             </a>
                         </li>
                     </ul>
@@ -251,7 +251,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/surat/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Surat BCF</p>
+                                <p>Surat BDF</p>
                             </a>
                         </li>
                     </ul>
@@ -292,7 +292,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/kwitansi/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kwitansi BCF</p>
+                                <p>Kwitansi BDF</p>
                             </a>
                         </li>
                     </ul>

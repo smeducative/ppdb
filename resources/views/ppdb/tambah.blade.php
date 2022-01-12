@@ -328,7 +328,7 @@
                                                         <label>Tingkat</label>
                                                         <select class="form-control select2" id="jtingkat" style="width: 100%;" name="juara_tingkat">
                                                             <option value="">-- pilih tingkat --</option>
-                                                            @foreach (['kabupaten/kota', 'provinsi', 'nasional'] as $tingkat)
+                                                            @foreach (['kabupaten/kota', 'Karesidenan', 'provinsi', 'nasional'] as $tingkat)
 
                                                             <option value="{{ $tingkat }}">{{ $tingkat }}</option>
                                                             @endforeach

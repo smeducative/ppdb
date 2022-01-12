@@ -124,9 +124,9 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-							<h3>{{ $count['bcf'] }}</h3>
+							<h3>{{ $count['bdf'] }}</h3>
 
-                            <p>BCF</p>
+                            <p>BDF</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-film-marker"></i>
@@ -191,9 +191,9 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ $du['bcf'] }}</h3>
+                            <h3>{{ $du['bdf'] }}</h3>
 
-                            <p>BCF</p>
+                            <p>BDF</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-film-marker"></i>
@@ -258,7 +258,7 @@
 		$(document).ready(function () {
 
 			var areaChartData = {
-			  labels  : ['TKJ', 'TBSM', 'ATPH', 'BCF'],
+			  labels  : ['TKJ', 'TBSM', 'ATPH', 'BDF'],
 			  datasets: [
 				{
 				  label               : 'Laki-laki',

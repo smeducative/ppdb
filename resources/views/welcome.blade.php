@@ -81,7 +81,7 @@
                     <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Agribisnis Tanaman Pangan dan Holtikultura
                 </li>
                 <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Broadcasting dan Film
+                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Broadcasting dan Perfilman
                 </li>
             </ul>
         </div>
