@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RekapDanaKwitansiExport;
+use App\Exports\RekapRiwayatKwitansiExport;
 use App\Models\Kwitansi;
 use Illuminate\Http\Request;
 use App\Models\PesertaPPDB;
@@ -126,5 +127,14 @@ class KwitansiController extends Controller
         })->groupBy('jenis_pembayaran');
 
         return Excel::download(new RekapDanaKwitansiExport($danaKelola, $jenisPembayaran, $tahun), 'rekap-dana-kwitansi-ppdb-' . $tahun . '.xlsx');
+    }
+
+    public function cetakRekapRiwayatKwitansi()
+    {
+        $tahun = request('tahun', now()->year);
+
+        $kwitansies = Kwitansi::with(['pesertaPpdb', 'penerima'])->whereYear('created_at', $tahun)->get();
+
+        return Excel::download(new RekapRiwayatKwitansiExport($kwitansies, $tahun), 'rekap-riwayat-kwitansi-ppdb-' . $tahun . '.xlsx');
     }
 }

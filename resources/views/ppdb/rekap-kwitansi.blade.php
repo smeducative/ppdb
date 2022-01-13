@@ -134,6 +134,16 @@
 
                         <div class="card-header">
                             <h3 class="card-title">Riwayat kwitansi terakhir</h3>
+                            <div class="card-tools">
+                                <form action="{{ route('ppdb.rekap.kwitansi-riwayat') }}?tahun={{ request('tahun', now()->year) }}" method="POST">
+                                    @csrf
+
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-print mr-2"></i>
+                                        Export .xlsx
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body table-responsive p-0">
 
