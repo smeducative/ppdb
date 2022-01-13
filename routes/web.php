@@ -84,6 +84,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // rekap kwitansi
         Route::get('/rekap', [KwitansiController::class, 'rekapKwitansi'])->name('ppdb.rekap.kwitansi');
+        Route::post('/rekap/cetak-dana', [KwitansiController::class, 'cetakRekapDanaKwitansi'])->name('ppdb.rekap.kwitansi-dana');
+        Route::post('/rekap/cetak-riwayat', [KwitansiController::class, 'cetakRekapRiwayatKwitansi'])->name('ppdb.rekap.kwitansi-riwayat');
     });
 
 
