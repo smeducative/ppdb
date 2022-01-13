@@ -13,7 +13,7 @@ class Kwitansi extends Model
 
     protected $guarded = [];
 
-    protected $with = ['pesertaPpdb'];
+    protected $with = ['pesertaPpdb', 'penerima'];
 
     public function pesertaPpdb()
     {

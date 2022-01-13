@@ -256,8 +256,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.kwitansi.show') || request()->routeIs('ppdb.kwitansi.show.jurusan') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.kwitansi.show') || request()->routeIs('ppdb.kwitansi.show.jurusan') ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ request()->routeIs('ppdb.kwitansi.show') || request()->routeIs('ppdb.kwitansi.show.jurusan') || request()->routeIs('ppdb.rekap.kwitansi') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('ppdb.kwitansi.show') || request()->routeIs('ppdb.kwitansi.show.jurusan') || request()->routeIs('ppdb.rekap.kwitansi') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-money-check"></i>
                         <p>
                             Kwitansi
@@ -293,6 +293,12 @@
                             <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 4]) }}" class="nav-link {{ request()->is('dashboard/kwitansi/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kwitansi BDP</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.rekap.kwitansi') }}" class="nav-link {{ request()->routeIs('ppdb.rekap.kwitansi') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Rekap Kwitansi</p>
                             </a>
                         </li>
                     </ul>

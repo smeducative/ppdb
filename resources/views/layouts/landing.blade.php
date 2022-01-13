@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="PPDB SMK Diponegoro Karanganyar" />
     <meta property="og:locale" content="id_ID" />
-
+    <link rel="shortcut icon" href="/img/logo.png" type="image/png">
 
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">

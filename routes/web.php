@@ -9,7 +9,6 @@ use App\Http\Controllers\PpdbSettingController;
 use App\Http\Controllers\PendaftaranPPDB;
 use App\Http\Controllers\UkuranSeragamController;
 use App\Http\Controllers\ExportController;
-use App\Models\Kwitansi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,6 +81,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         // cetak
         Route::post('/cetak/kwitansi/{uuid}', [KwitansiController::class, 'cetakKwitansi'])->name('ppdb.cetak.kwitansi');
         Route::post('/cetak/kwitansi/{uuid}/{id}', [KwitansiController::class, 'cetakKwitansiSingle'])->name('ppdb.cetak.kwitansi.single');
+
+        // rekap kwitansi
+        Route::get('/rekap', [KwitansiController::class, 'rekapKwitansi'])->name('ppdb.rekap.kwitansi');
     });
 
 

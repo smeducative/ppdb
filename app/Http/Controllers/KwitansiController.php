@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kwitansi;
 use Illuminate\Http\Request;
 use App\Models\PesertaPPDB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use PDF;
 
@@ -17,7 +19,7 @@ class KwitansiController extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)
             ->whereYear('created_at', $tahun)
-            ->latest()->get();
+            ->latest('updated_at')->get();
 
         return view('pdf.kwitansi', compact('pesertappdb'));
     }
@@ -83,5 +85,27 @@ class KwitansiController extends Controller
         // return $pdf->stream('kwitansi-' . Str::slug($peserta->nama_lengkap) . '.pdf');
 
         return view('pdf.cetak-kwitansi', compact('pesertappdb'));
+    }
+
+    /**
+     * rekap kwitansi
+     *
+     * @return void
+     */
+    public function rekapKwitansi()
+    {
+        $tahun = request('tahun', now()->year);
+
+        $kwitansies = Kwitansi::whereYear('created_at', $tahun)->latest()->get();
+
+        $danaKelola = $kwitansies->sum('nominal');
+
+        $jenisPembayaran = $kwitansies->map(function ($item) {
+            $item->jenis_pembayaran = Str::title($item->jenis_pembayaran);
+
+            return $item;
+        })->groupBy('jenis_pembayaran');
+
+        return view('ppdb.rekap-kwitansi', compact('kwitansies', 'danaKelola', 'jenisPembayaran'));
     }
 }
