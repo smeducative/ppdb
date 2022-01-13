@@ -298,7 +298,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.rekap.kwitansi') }}" class="nav-link {{ request()->routeIs('ppdb.rekap.kwitansi') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Rekap Kwitansi</p>
+                                <p>Rekap Pembayaran</p>
                             </a>
                         </li>
                     </ul>
