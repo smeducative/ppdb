@@ -294,4 +294,15 @@ class PendaftaranPPDB extends Controller
 
         return back();
     }
+
+    public function hapusPeserta($uuid)
+    {
+        $peserta = PesertaPPDB::findOrFail($uuid);
+
+        $peserta->delete();
+
+        session()->flash('success', 'Peserta telah dihapus');
+
+        return redirect()->route('ppdb.list.pendaftar');
+    }
 }

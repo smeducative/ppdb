@@ -43,6 +43,14 @@
 
                 <div class="col-md-12">
 
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Success!</h5>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="card">
                         <div class="card-header">
                             <h3>Peserta PPDB</h3>

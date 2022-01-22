@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PesertaPPDB extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $keyType = 'string';
 
@@ -34,7 +35,7 @@ class PesertaPPDB extends Model
 
     public function getNoUrut()
     {
-        return $this->whereYear('created_at', now()->year)->count() + 1;
+        return $this->whereYear('created_at', now()->year)->withTrashed()->max('no_urut') + 1;
     }
 
     public function Kwitansi()

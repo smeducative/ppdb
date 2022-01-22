@@ -61,6 +61,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     // edit pendaftar
     Route::get('/ppdb/edit/{id}', [PendaftaranPPDB::class, 'edit'])->name('ppdb.edit.peserta');
     Route::put('/ppdb/edit/{id}', [PendaftaranPPDB::class, 'update'])->name('ppdb.edit.peserta');
+    Route::delete('/ppdb/delete/{id}', [PendaftaranPPDB::class, 'hapusPeserta'])->name('ppdb.delete.peserta');
 
     // daftar ulanng
 

@@ -45,6 +45,14 @@
 
                         <div class="card-header">
                             <h3 class="card-title">Data diri pendaftar</h3>
+
+                            <div class="card-tools">
+                                <form action="{{ route('ppdb.delete.peserta', $peserta->id) }}" method="post" id="delete-peserta">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                                </form>
+                            </div>
                         </div>
 
                         <form action="{{ route('ppdb.edit.peserta', $peserta->id) }}" method="post">
@@ -403,6 +411,7 @@
 <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <link rel="stylesheet" href="/plugins/bs-stepper/css/bs-stepper.min.css">
+<link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 @endsection
 
 @section('footer')
@@ -411,6 +420,7 @@
 
     <script src="/plugins/bs-stepper/js/bs-stepper.min.js"></script>
     <script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
 
     <script>
         $(function() {
@@ -446,6 +456,28 @@
 
             let step = document.getElementById('stepper')
             window.stepper = new Stepper(step)
+        })
+    </script>
+    <script>
+        let deletePeserta = document.getElementById('delete-peserta')
+
+        deletePeserta.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            console.log('opo')
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Hapus Peserta?',
+                text: 'Peserta akan di hapus dari pendaftar ppdb',
+                showCancelButton: true,
+            }).then((res) => {
+
+                if(res.isConfirmed) {
+                    deletePeserta.submit()
+                }
+
+            });
         })
     </script>
 @endsection
