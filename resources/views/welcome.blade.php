@@ -18,7 +18,7 @@
       </button>
     </div>
     <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-      <a class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#hero">Home</a>
+      <a class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover :bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#hero">Home</a>
       <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#kejuruan">Kejuruan</a>
       <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#tempat-belajar">Tempat Belajar</a>
       <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">FAQ</a>
@@ -27,23 +27,24 @@
 </div>
 
 <!-- Section 2 -->
-<section class="relative px-2 py-16 xl:py-44 bg-green-100 md:px-0 object-cover" id="hero" data-aos="fade-right" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70"  style="background-image: url(/img/smedip2022-large.jpg); background-repeat: no-repeat; background-size: 100%;object-fit: cover; backdrop-filter: blur(6px)">
-  <div class="absolute inset-0 filter backdrop-blur-sm xl:backdrop-blur-md bg-black bg-opacity-10"></div>
-  <div class="relative container items-center max-w-6xl px-5 md:px-8 mx-auto xl:px-5">
+<section class="relative px-2 py-8 xl:py-44 bg-green-700 md:px-0 object-cover" id="hero" style="background-image: url(/img/smedip2022-large.jpg); background-repeat: no-repeat; background-size: auto 100%; object-fit: cover" >
+  <div class="absolute inset-0 xl:backdrop-blur-sm bg-black bg-opacity-30 md:bg-opacity-70"></div>
+  <div class="relative container items-center max-w-6xl px-5 md:px-8 mx-auto xl:px-5"  data-aos="fade-right" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70">
     <div class="flex flex-wrap items-center sm:-mx-3">
       <div class="w-full md:px-3">
-        <div class="w-full pb-6 space-y-6 md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-          <h1 class="flex flex-col text-xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl bg-black bg-opacity-20 rounded-xl p-3">
+        <div class="w-full pb-6 space-y-6 md:space-y-4 lg:space-y-8 xl:space-y-9">
+          <div class="flex flex-col text-xl font-extrabold tracking-tight text-gray-900 md:text-6xl text-center md:text-left">
             <div class="block xl:inline text-white">Penerimaan Peserta Didik Baru</div>
-            <div class="block text-green-500 xl:inline">SMK Diponegoro Karanganyar</div>
-          </h1>
+            <div class="block xl:inline text-white text-lg sm:text-4xl font-semibold">Tahun Ajaran {{ now()->year . '/' . now()->addYear()->year }} </div>
+            <div class="block text-green-600 xl:inline bg-yellow-300 border-b-2 border-green-600">SMK Diponegoro Karanganyar</div>
+          </div>
           {{-- <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">Belajar tak pernah semenyenangkan ini setelah bergabung dengan smedip.</p> --}}
           <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-            <a href="/formulir" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-green-500 sm:mb-0 hover:bg-green-600 sm:w-auto rounded">
+            <a href="/formulir" class="flex items-center w-full px-4 md:px-6 py-3 mb-3 text-md text-white bg-green-500 sm:mb-0 hover:bg-green-700 sm:w-auto rounded shadow">
               Pendaftaran PPDB
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
-            <a href="{{ route('daftar.peserta.diterima') }}" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600 rounded">
+            <a href="{{ route('daftar.peserta.diterima') }}" class="flex items-center px-4 md:px-6 py-3 text-gray-500 bg-white hover:bg-gray-200 hover:text-gray-600 rounded shadow">
               Alur dan Persyaratan
             </a>
           </div>
@@ -51,6 +52,22 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- Section list -->
+<section class="w-full bg-white pt-7 pb-7 md:py-10" data-aos="zoom-in" data-aos-duration="1200" data-aos-offset="10">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-3">
+            <h1 class="text-xl font-bold text-center">Brosur PPDB 2022</h1>
+            <span class="text-sm font-light text-gray-500 text-center">Klik gambar untuk mengunduh brosur</span>
+        </div>
+
+        <div class="flex items-center justify-center md:flex-row p-5">
+            <a href="/img/brosur-ppdb-2022-smedip.png" download="brosur-ppdb-2022-smedip.png">
+                <img src="/img/brosur-ppdb-2022-smedip.png" alt="brosur" class="">
+            </a>
+        </div>
+    </div>
 </section>
 
 <!-- Section 3 -->

@@ -16,7 +16,7 @@
     <meta property="og:locale" content="id_ID" />
     <link rel="shortcut icon" href="/img/logo.png" type="image/png">
 
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">
 	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
