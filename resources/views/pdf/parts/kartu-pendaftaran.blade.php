@@ -51,15 +51,15 @@
     </table>
 
     <!-- photo adn ttd -->
-    <div class="row mt-4">
+    <div class="row mt-2">
         <div class="col-md-6">
-            <div style="width: 140px; height: 160px; border: 3px solid black; border-radius: 8px; margin: 5px; margin-left: 20px;">
+            <div style="width: 120px; height: 140px; border: 3px solid black; border-radius: 8px; margin: 5px; margin-left: 20px;">
             </div>
         </div>
 
         <div class="col-md-6 text-center">
             <span>Karanganyar, {{ $peserta->created_at->translatedFormat('d F Y') }}</span>
             <strong class="d-block" style="font-size: 16px;">Panitia Pendaftaran</strong>
-            <div style="margin-top: 70px;">( {{ auth()->user()->name }} )</div>
+            <div style="margin-top: 50px;">( {{ auth()->user()->name }} )</div>
         </div>
     </div>
