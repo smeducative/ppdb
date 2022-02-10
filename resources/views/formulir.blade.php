@@ -92,11 +92,10 @@
                   Nama Lengkap <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="nama_lengkap" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Nama lengkap" required>
-
+                  <input type="text" name="nama_lengkap" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Nama lengkap sesuai Ijazah" required>
                 </div>
                  <p class="mt-2 text-sm text-gray-500">
-                        Nama Lengkap Peserta
+                        Nama lengkap peserta sesuai yang tercantum di Ijazah
                 </p>
               </div>
             </div>

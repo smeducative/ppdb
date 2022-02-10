@@ -105,7 +105,7 @@
 												<label>Nama Lengkap <strong class="text-danger"> * </strong> </label>
                                                 <input type="text" class="form-control" name="nama_lengkap" id="name" value="{{ old('nama_lengkap') }}"
                                                     placeholder="Nama Lengkap" autofocus required>
-												<div class="form-text text-xs text-muted">Nama lengkap peserta</div>
+												<div class="form-text text-xs text-muted">Nama lengkap peserta sesuai yang tercantum di Ijazah</div>
                                             </div>
 
                                             {{-- jenis kelamin --}}
