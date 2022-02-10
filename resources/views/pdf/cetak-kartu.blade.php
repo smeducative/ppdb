@@ -7,7 +7,7 @@
 @foreach ($pesertappdb as $peserta)
 
         @if($loop->iteration % 6 == 1)
-            <div class="row mt-2" style="page-break-after: always;">
+            <div class="row" style="page-break-after: always;">
         @endif
 
                 <div class="col-md-6">
@@ -22,4 +22,13 @@
 
 @endforeach
 
+@endsection
+
+@section('head')
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
 @endsection
