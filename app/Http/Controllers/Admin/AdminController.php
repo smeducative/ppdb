@@ -13,9 +13,9 @@ class AdminController extends Controller
     {
         $tahun = request('tahun', now()->year);
 
-        $peserta = PesertaPPDB::with('jurusan')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
+        $peserta = PesertaPPDB::select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
-        $pesertadu = PesertaPPDB::has('kwitansi')->with('jurusan')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
+        $pesertadu = PesertaPPDB::has('kwitansi')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
         $count = [
             'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
@@ -42,12 +42,29 @@ class AdminController extends Controller
             },
         ])->orderBy('id')->get();
 
+        $compareDu = Jurusan::withCount([
+            'pesertaPpdb as l'   => function ($query) use ($tahun) {
+                $query->has('kwitansi')->whereYear('created_at', $tahun)->where('jenis_kelamin', 'l')->where('diterima', 1);
+            },
+            'pesertaPpdb as p'   => function ($query) use ($tahun) {
+                $query->has('kwitansi')->whereYear('created_at', $tahun)->where('jenis_kelamin', 'p')->where('diterima', 1);
+            },
+        ])->orderBy('id')->get();
+
         $compareSx = [
             'p'    => collect($compare)->pluck('p'),
             'l'    => collect($compare)->pluck('l')
         ];
 
-        return view('admin.dashboard', compact('count', 'du', 'compareSx'));
+        $compareDx = [
+            'p'    => collect($compareDu)->pluck('p'),
+            'l'    => collect($compareDu)->pluck('l')
+        ];
+
+        // perbandingan per jumlah sekolah pendaftar
+        $pendaftarPerSekolah = PesertaPPDB::select(\DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
+
+        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah'));
     }
 
     public function pengaturanAkun()
