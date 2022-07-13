@@ -276,6 +276,14 @@
                     <div class="card card-warning">
                         <div class="card-header">
                             <h3 class="card-title">Jumlah pendaftar per sekolah</h3>
+
+                            <div class="card-tools">
+                                <form action="{{ route('export.rekap-sekolah') }}" method="post">
+                                    @csrf
+
+                                    <button type="submit" class="btn btn-primary">export .xlsx</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body p-0 py-2 table-responsive text-nowrap">
                             @if (!$pendaftarPerSekolah->isEmpty())

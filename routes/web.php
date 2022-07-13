@@ -124,5 +124,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // ukuran seragam
         Route::post('ukuran-seragam', [ExportController::class, 'exportSeragam'])->name('export.seragam');
+
+        // export rekap sekolah
+        Route::post('rekap-sekolah', [ExportController::class, 'exportRekapSekolah'])->name('export.rekap-sekolah');
     });
 });
