@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PesertaPPDBExport;
+use App\Exports\RekapSekolahExport;
 use App\Exports\SeragamExport;
 use App\Models\Jurusan;
+use App\Models\PesertaPPDB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
@@ -35,5 +38,15 @@ class ExportController extends Controller
         $filename = 'Ukuran-seragam-' . optional($abb)->abbreviation . '-' . $tahun . '.xlsx';
 
         return Excel::download(new SeragamExport($jurusan, $tahun), $filename);
+    }
+
+    public function exportRekapSekolah()
+    {
+        $tahun = request('tahun', now()->year);
+
+        // perbandingan per jumlah sekolah pendaftar
+        $pendaftarPerSekolah = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
+
+        return Excel::download(new RekapSekolahExport($tahun, $pendaftarPerSekolah), 'Rekap-sekolah-' . $tahun . '.xlsx');
     }
 }
