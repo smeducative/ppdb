@@ -110,7 +110,7 @@
                             <div class="card-tools">
                                 <form action="{{ route('ppdb.cetak.kwitansi', ['uuid' => $peserta->id]) }}" method="POST">
                                     <button class="btn btn-outline-success disabled">
-                                        Total terbayar: Rp. {{ number_format($peserta->kwitansi->sum('nominal'), 0, ',', '.') }}
+                                        Total terbayar: Rp. {{ number_format($peserta->kwitansi->filter(fn ($k) => is_null($k->deleted_at))->sum('nominal'), 0, ',', '.') }}
                                     </button>
                                     @csrf
 
@@ -126,7 +126,6 @@
                                 <thead>
 
                                     <tr>
-                                        <th>Nama Lengkap</th>
                                         <th>Jenis Pembayaran</th>
                                         <th>Jumlah</th>
                                         <th>Pada Tanggal</th>
@@ -139,16 +138,27 @@
 
 
                                     @foreach ($peserta->kwitansi as $kwitansi)
-                                    <tr>
-                                        <td>
-                                            {{ $peserta->nama_lengkap}} <br>
-                                            {{ $peserta->no_pendaftaran }}
-                                        </td>
+                                    <tr @class([
+                                        'table-danger' => $kwitansi->deleted_at
+                                    ])>
                                         <td>{{ $kwitansi->jenis_pembayaran }}</td>
-                                        <td>Rp. {{ number_format($kwitansi->nominal, 0, ',', '.') }},-</td>
+                                        <td>
+                                            <div>
+                                                Rp. {{ number_format($kwitansi->nominal, 0, ',', '.') }},-
+                                            </div>
+                                        </td>
                                         <td>{{ $kwitansi->created_at->translatedFormat('l, d F Y H:i') }}</td>
-                                        <td>{{ $kwitansi->penerima->name }}</td>
+                                        <td>
+                                            <div>
+                                                <strong class="text-success">diterima</strong> <br>
+                                                <span>
+                                                    {{ $kwitansi->penerima->name }}
+                                                </span>
+                                            </div>
+                                        </td>
                                         <td class="d-flex gap-2">
+                                            @if (!$kwitansi->deleted_at)
+
                                             <form action="{{ route('ppdb.cetak.kwitansi.single', ['uuid' => $peserta->id, 'id' => $kwitansi->id]) }}" method="POST">
                                             @csrf
 
@@ -163,6 +173,14 @@
                                             <button type="submit" class="btn btn-danger"> <i class="fas fa-trash mr-2"></i> Hapus</button>
 
                                             </form>
+                                            @else
+                                            <div>
+                                                <strong class="text-danger">dihapus</strong> <br>
+                                                <span>
+                                                    {{ $kwitansi->deletedBy->name }}
+                                                </span>
+                                            </div>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

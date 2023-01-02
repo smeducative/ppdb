@@ -71,7 +71,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $kwitansies->count() }}</h3>
+                            <h3>{{ $kwitansies->filter(fn ($d) => is_null($d->deleted_at))->count() }}</h3>
 
                             <p>Jumlah Kwitansi</p>
                         </div>
@@ -167,7 +167,9 @@
 
 
                                     @foreach ($kwitansies as $kwitansi)
-                                    <tr>
+                                    <tr @class([
+                                        'table-danger'  => $kwitansi->deleted_at
+                                    ])>
                                         <td>{{ $kwitansi->pesertaPpdb->no_pendaftaran }}</td>
                                         <td>{{ $kwitansi->pesertaPpdb->nama_lengkap}}</td>
                                         <td>{{ $kwitansi->jenis_pembayaran }}</td>
@@ -175,12 +177,22 @@
                                         <td>{{ $kwitansi->created_at->translatedFormat('l, d F Y H:i') }}</td>
                                         <td>{{ $kwitansi->penerima->name }}</td>
                                         <td>
+                                            @if (!$kwitansi->deleted_at)
                                             <form action="{{ route('ppdb.cetak.kwitansi.single', ['uuid' => $kwitansi->pesertaPpdb->id, 'id' => $kwitansi->id]) }}" method="POST">
-                                    @csrf
+                                                @csrf
 
-                                    <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak</button>
+                                                <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak</button>
 
-                                </form> </td>
+                                            </form>
+                                            @else
+                                            <div>
+                                                <strong class="text-danger">dihapus</strong> <br>
+                                                <span>
+                                                    {{ $kwitansi->deletedBy->name }}
+                                                </span>
+                                            </div>
+                                            @endif
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

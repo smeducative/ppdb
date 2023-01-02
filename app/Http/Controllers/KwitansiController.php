@@ -37,9 +37,7 @@ class KwitansiController extends Controller
 
     public function tambahKwitansi($uuid)
     {
-        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi' => function ($query) {
-            $query->with('penerima');
-        }])->findOrFail($uuid);
+        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi' => fn ($query) => $query->withTrashed()->latest()])->findOrFail($uuid);
 
         return view('ppdb.tambah-kwitansi', compact('peserta'));
     }
@@ -107,11 +105,11 @@ class KwitansiController extends Controller
     {
         $tahun = request('tahun', now()->year);
 
-        $kwitansies = Kwitansi::whereYear('created_at', $tahun)->latest()->get();
+        $kwitansies = Kwitansi::withTrashed()->whereYear('created_at', $tahun)->latest()->get();
 
-        $danaKelola = $kwitansies->sum('nominal');
+        $danaKelola = $kwitansies->filter(fn ($d) => is_null($d->deleted_at))->sum('nominal');
 
-        $jenisPembayaran = $kwitansies->map(function ($item) {
+        $jenisPembayaran = $kwitansies->filter(fn ($d) => is_null($d->deleted_at))->map(function ($item) {
             $item->jenis_pembayaran = Str::title($item->jenis_pembayaran);
 
             return $item;
