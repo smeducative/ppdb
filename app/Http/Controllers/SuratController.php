@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\PesertaPPDB;
 
-use Illuminate\Http\Request;
-
 class SuratController extends Controller
 {
     public function showJurusanPeserta($jurusan)

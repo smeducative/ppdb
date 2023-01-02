@@ -13,7 +13,9 @@ use Maatwebsite\Excel\Events\AfterSheet;
 class RekapRiwayatKwitansiExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping, WithCustomStartCell, WithEvents
 {
     public $index = 1;
+
     public $kwitansies;
+
     public $tahun;
 
     public function __construct($kwitansies, $tahun)
@@ -65,7 +67,7 @@ class RekapRiwayatKwitansiExport implements FromCollection, ShouldAutoSize, With
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-                $event->sheet->setCellValue('A1', 'Rekap Riwayat Kwitansi PPDB Tahun ' . $this->tahun);
+                $event->sheet->setCellValue('A1', 'Rekap Riwayat Kwitansi PPDB Tahun '.$this->tahun);
                 $event->sheet->mergeCells('A1:G1');
 
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
@@ -74,11 +76,11 @@ class RekapRiwayatKwitansiExport implements FromCollection, ShouldAutoSize, With
                 $event->sheet->getStyle('A1')->getFont()->setSize(14);
 
                 // set background color
-                $event->sheet->getStyle('A3:' . $event->sheet->getHighestColumn() . '3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFCCCCCC');
+                $event->sheet->getStyle('A3:'.$event->sheet->getHighestColumn().'3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFCCCCCC');
 
                 // set border to entire table
-                $event->sheet->getStyle('A3:' . $event->sheet->getHighestColumn() . $event->sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            }
+                $event->sheet->getStyle('A3:'.$event->sheet->getHighestColumn().$event->sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            },
         ];
     }
 }

@@ -45,45 +45,25 @@
     <p class="text-base">Isi formulir di bawah sesuai dengan data diri kamu yaa... </p>
 </section>
 
-    <section class="w-full bg-gray-50 mt-10">
+<section class="w-full bg-gray-100 mt-10">
+<form action="{{ route('ppdb.mendaftar') }}" method="POST">
+    @csrf
 <div class="max-w-6xl mx-auto bg-gray-50 py-5">
-  <div class="md:grid md:grid-cols-3 md:gap-6" x-data="{
-    step: 1
-  }" x-cloak @keyup.enter="step++">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
     <div class="md:col-span-1">
-
       {{-- step 1 - data diri --}}
-      <div class="px-5" x-show="step === 1" x-transition>
+      <div class="px-5">
         <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Diri</h3>
         <p class="mt-1 text-sm text-gray-600">
           Informasi tentang data diri peserta.
         </p>
       </div>
-
-      {{-- step 2 - identitas orang tua --}}
-      <div class="px-5" x-show="step === 2" x-transition>
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Orang Tua</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Informasi data orang tua peserta.
-        </p>
-      </div>
-
-      {{-- step 3 - Jenis beasiswa --}}
-      <div class="px-5" x-show="step === 3" x-transition>
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa / Prestasi</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Jenis beasiswa peserta. diisi jika peserta memiliki beasiswa atau prestasi.
-        </p>
-      </div>
-      {{-- end step --}}
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
-      <form action="{{ route('ppdb.mendaftar') }}" method="POST">
-          @csrf
         <div class="shadow sm:rounded-md sm:overflow-hidden">
 
           {{-- step 1 - identitas peserta --}}
-          <div x-show="step === 1" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6">
 
             {{-- Nama lengkap --}}
             <div class="grid">
@@ -284,6 +264,20 @@
             </div>
 
           </div>
+        </div>
+    </div>
+
+    {{-- step 2 --}}
+    <div class="md:col-span-1">
+      {{-- step 2 - identitas orang tua --}}
+      <div class="px-5" x-show="step === 2" x-transition>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Orang Tua</h3>
+        <p class="mt-1 text-sm text-gray-600">
+          Informasi data orang tua peserta.
+        </p>
+      </div>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
 
           {{-- step 2 - identitas orang tua --}}
           <div x-show="step === 2" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
@@ -327,9 +321,23 @@
             </div>
 
           </div>
+    </div>
+    {{-- end: step 2 --}}
 
-          {{-- tep 3 - jenis beasiswa --}}
-          <div x-show="step === 3" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+    {{-- step 3 --}}
+    <div class="md:col-span-1">
+      {{-- step 3 - Jenis beasiswa --}}
+      <div class="px-5">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa / Prestasi</h3>
+        <p class="mt-1 text-sm text-gray-600">
+          Jenis beasiswa peserta. diisi jika peserta memiliki beasiswa atau prestasi.
+        </p>
+      </div>
+      {{-- end step --}}
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
+                  {{-- tep 3 - jenis beasiswa --}}
+          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6">
 
             <div>
 
@@ -425,25 +433,18 @@
 
 
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button x-show="step > 1" @click.prevent="step--" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
-              Sebelumnya
-            </button>
-
-            <button x-show="step < 3" @click.prevent="step++" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Selanjutnya
-            </button>
-
-            <button x-show="step === 3" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Submit
             </button>
           </div>
-        </div>
-      </form>
+
     </div>
+    {{-- end: step 3 --}}
   </div>
 </div>
 
     </section>
+      </form>
 @endsection
 
 @section('footer')    <!-- jQuery -->

@@ -14,7 +14,6 @@ class CreatePesertaPpdbTable extends Migration
     public function up()
     {
         Schema::create('peserta_ppdb', function (Blueprint $table) {
-
             // identitas diri
             $table->uuid('id');
             $table->integer('jurusan_id');
@@ -57,10 +56,8 @@ class CreatePesertaPpdbTable extends Migration
             // saran dari
             $table->string('saran_dari')->nullable();
 
-
             // additional
             $table->string('password')->nullable();
-
 
             // di terima apa tidak akan di lakkukan pengecekan oleh admin
             // 0 = proses seleksi

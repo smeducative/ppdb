@@ -4,14 +4,16 @@ namespace App\Exports;
 
 use App\Models\PesertaPPDB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
 {
     public $jurusan;
+
     public $tahun;
+
     public $diterima;
 
     public function __construct($jurusan, $tahun, $diterima)
@@ -20,6 +22,7 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
         $this->tahun = $tahun;
         $this->diterima = $diterima;
     }
+
     /**
      * @return \Illuminate\Support\Collection
      */
@@ -63,7 +66,7 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
             'Non Akademik Juara ke',
             'Non Akademik Tingkat',
             'Rekomendasi MWC',
-            'Saran Dari'
+            'Saran Dari',
         ];
     }
 
@@ -91,13 +94,13 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
             $peserta->nama_ibu,
             $peserta->pekerjaan_ibu,
             $peserta->no_hp_ibu,
-            $peserta->akademik['kelas'] . ' / ' . $peserta->akademik['semester'] . ' / ' . $peserta->akademik['peringkat'],
+            $peserta->akademik['kelas'].' / '.$peserta->akademik['semester'].' / '.$peserta->akademik['peringkat'],
             $peserta->akademik['hafidz'],
             $peserta->non_akademik['jenis_lomba'],
             $peserta->non_akademik['juara_ke'],
             $peserta->non_akademik['juara_tingkat'],
             $peserta->rekomendasi_mwc == 1 ? 'Ya' : 'Tidak',
-            $peserta->saran_dari
+            $peserta->saran_dari,
         ];
     }
 }

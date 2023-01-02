@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\PesertaPPDB;
+use Illuminate\Database\Seeder;
 
 class PesertaPPDBSeeder extends Seeder
 {

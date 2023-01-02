@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use App\Exports\RekapDanaKwitansiExport;
 use App\Exports\RekapRiwayatKwitansiExport;
 use App\Models\Kwitansi;
-use Illuminate\Http\Request;
 use App\Models\PesertaPPDB;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class KwitansiController extends Controller
 {
-
     // show kwitansi   \
     public function showPesertaDiterima()
     {
@@ -51,7 +48,7 @@ class KwitansiController extends Controller
     {
         $data = request()->validate([
             'jenis_pembayaran' => ['required'],
-            'nominal'   => ['required']
+            'nominal' => ['required'],
         ]);
 
         $peserta = PesertaPPDB::findOrFail($uuid);
@@ -80,7 +77,7 @@ class KwitansiController extends Controller
             'jurusan',
             'kwitansi' => function ($query) use ($id) {
                 $query->whereId($id);
-            }
+            },
         ])->where('diterima', 1)->findOrFail($uuid);
 
         // $pdf = PDF::loadView('pdf.cetak-kwitansi', $peserta);
@@ -126,7 +123,7 @@ class KwitansiController extends Controller
             return $item;
         })->groupBy('jenis_pembayaran');
 
-        return Excel::download(new RekapDanaKwitansiExport($danaKelola, $jenisPembayaran, $tahun), 'rekap-dana-kwitansi-ppdb-' . $tahun . '.xlsx');
+        return Excel::download(new RekapDanaKwitansiExport($danaKelola, $jenisPembayaran, $tahun), 'rekap-dana-kwitansi-ppdb-'.$tahun.'.xlsx');
     }
 
     public function cetakRekapRiwayatKwitansi()
@@ -135,6 +132,6 @@ class KwitansiController extends Controller
 
         $kwitansies = Kwitansi::with(['pesertaPpdb', 'penerima'])->whereYear('created_at', $tahun)->get();
 
-        return Excel::download(new RekapRiwayatKwitansiExport($kwitansies, $tahun), 'rekap-riwayat-kwitansi-ppdb-' . $tahun . '.xlsx');
+        return Excel::download(new RekapRiwayatKwitansiExport($kwitansies, $tahun), 'rekap-riwayat-kwitansi-ppdb-'.$tahun.'.xlsx');
     }
 }

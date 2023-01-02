@@ -17,26 +17,26 @@ class JurusanSeeder extends Seeder
     {
         $data = [
             [
-                'id'    => 1,
-                'nama'  => 'Teknik Komputer dan Jaringan',
-                'abbreviation'  => 'TKJ'
+                'id' => 1,
+                'nama' => 'Teknik Komputer dan Jaringan',
+                'abbreviation' => 'TKJ',
             ], [
-                'id'    => 2,
-                'nama'  => 'Teknik dan Bisnis Sepeda Motor',
-                'abbreviation'  => 'TBSM'
+                'id' => 2,
+                'nama' => 'Teknik dan Bisnis Sepeda Motor',
+                'abbreviation' => 'TBSM',
             ], [
-                'id'    => 3,
-                'nama'  => 'Agribisnis Tanaman Pangan dan Holtikultura',
-                'abbreviation'  => 'ATPH'
+                'id' => 3,
+                'nama' => 'Agribisnis Tanaman Pangan dan Holtikultura',
+                'abbreviation' => 'ATPH',
             ],
         ];
 
         $setting = [
             'body' => json_encode([
-                'batas_akhir_ppdb'    => now(),
+                'batas_akhir_ppdb' => now(),
                 'no_surat' => '247/Pan.PPDB/2021',
-                'hasil_akhir'   => now()
-            ])
+                'hasil_akhir' => now(),
+            ]),
         ];
 
         Jurusan::insert($data);

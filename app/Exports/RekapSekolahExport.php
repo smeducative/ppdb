@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class RekapSekolahExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithHeadings, WithMapping
 {
     public $tahun;
+
     public $pendaftarPerSekolah;
 
     public function __construct($tahun, $pendaftarPerSekolah)
@@ -20,8 +21,8 @@ class RekapSekolahExport implements FromCollection, ShouldAutoSize, WithCustomSt
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return $this->pendaftarPerSekolah;

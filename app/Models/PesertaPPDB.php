@@ -21,11 +21,11 @@ class PesertaPPDB extends Model
     protected $casts = [
         'akademik' => 'array',
         'non_akademik' => 'array',
-        'tanggal_lahir' => 'date'
+        'tanggal_lahir' => 'date',
     ];
 
     protected $with = [
-        'jurusan'
+        'jurusan',
     ];
 
     public function jurusan()

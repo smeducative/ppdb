@@ -15,7 +15,7 @@ class CreatePpdbSettingsTable extends Migration
     {
         Schema::create('ppdb_settings', function (Blueprint $table) {
             $table->id();
-			$table->json('body')->nullable();
+            $table->json('body')->nullable();
             $table->timestamps();
         });
     }

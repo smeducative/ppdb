@@ -13,14 +13,16 @@ use Maatwebsite\Excel\Events\AfterSheet;
 class RekapDanaKwitansiExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping, WithCustomStartCell, WithEvents
 {
     public $danaKelola;
+
     public $jenisPembayaran;
+
     public $tahun;
 
     /**
      * __construct
      *
-     * @param  mixed $danaKelola
-     * @param  mixed $jenisPembayaran
+     * @param  mixed  $danaKelola
+     * @param  mixed  $jenisPembayaran
      * @return void
      */
     public function __construct($danaKelola, $jenisPembayaran, $tahun)
@@ -48,7 +50,7 @@ class RekapDanaKwitansiExport implements FromCollection, ShouldAutoSize, WithHea
         return [
             'Jenis Pembayaran',
             'Jumlah Dana',
-            'Jumlah Kwitansi'
+            'Jumlah Kwitansi',
         ];
     }
 
@@ -57,7 +59,7 @@ class RekapDanaKwitansiExport implements FromCollection, ShouldAutoSize, WithHea
         return [
             $row->first()->jenis_pembayaran,
             $row->sum('nominal'),
-            $row->count()
+            $row->count(),
         ];
     }
 
@@ -66,7 +68,7 @@ class RekapDanaKwitansiExport implements FromCollection, ShouldAutoSize, WithHea
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 // set cell header to rekap dana
-                $event->sheet->setCellValue("A1", "Rekap dana pembayaran PPDB Tahun " . $this->tahun);
+                $event->sheet->setCellValue('A1', 'Rekap dana pembayaran PPDB Tahun '.$this->tahun);
                 // merge cell
                 $event->sheet->mergeCells('A1:C1');
 
@@ -78,11 +80,11 @@ class RekapDanaKwitansiExport implements FromCollection, ShouldAutoSize, WithHea
                 $event->sheet->getStyle('A1')->getFont()->setSize(14);
 
                 // set background color
-                $event->sheet->getStyle('A3:' . $event->sheet->getHighestColumn() . '3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF35D7EC');
+                $event->sheet->getStyle('A3:'.$event->sheet->getHighestColumn().'3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF35D7EC');
 
                 // set border to entire table
-                $event->sheet->getStyle('A3:' . $event->sheet->getHighestColumn() . $event->sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            }
+                $event->sheet->getStyle('A3:'.$event->sheet->getHighestColumn().$event->sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            },
         ];
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\KartuPendaftaranController;
-use App\Http\Controllers\FormulirController;
-use App\Http\Controllers\SuratController;
-use App\Http\Controllers\KwitansiController;
-use App\Http\Controllers\PpdbSettingController;
-use App\Http\Controllers\PendaftaranPPDB;
-use App\Http\Controllers\UkuranSeragamController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\FormulirController;
+use App\Http\Controllers\KartuPendaftaranController;
+use App\Http\Controllers\KwitansiController;
+use App\Http\Controllers\PendaftaranPPDB;
+use App\Http\Controllers\PpdbSettingController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\UkuranSeragamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +29,6 @@ Route::redirect('/daftar-peserta-diterima', '/alur-dan-persyaratan');
 Route::view('/alur-dan-persyaratan', 'peserta-diterima')->name('daftar.peserta.diterima');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
-
     // setting profile
     Route::get('setting/profile', [AdminController::class, 'pengaturanAkun'])->name('setting.profile');
     Route::put('setting/profile', [AdminController::class, 'setAkun'])->name('setting.profile');
@@ -38,9 +37,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::view('/setting/ppdb', 'admin.pengaturan-ppdb')->name('ppdb.set.batas.akhir');
     Route::put('/setting/ppdb', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
 
-
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-
 
     // list pendaftar
 
@@ -69,7 +66,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::get('/ppdb/list/terdaftar-ulang/{jurusan}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
 
-
     Route::prefix('kwitansi')->group(function () {
         Route::get('show', [KwitansiController::class, 'showPesertaDiterima'])->name('ppdb.kwitansi.show');
         Route::get('show/{jurusan}', [KwitansiController::class, 'showJurusanPeserta'])->name('ppdb.kwitansi.show.jurusan');
@@ -77,7 +73,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         // tambah kwitansi
         Route::get('/tambah/{uuid}', [KwitansiController::class, 'tambahKwitansi'])->name('ppdb.kwitansi.tambah');
         Route::post('/tambah/{uuid}', [KwitansiController::class, 'storeKwitansi'])->name('ppdb.kwitansi.tambah');
-
 
         // cetak
         Route::post('/cetak/kwitansi/{uuid}', [KwitansiController::class, 'cetakKwitansi'])->name('ppdb.cetak.kwitansi');
@@ -88,7 +83,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('/rekap/cetak-dana', [KwitansiController::class, 'cetakRekapDanaKwitansi'])->name('ppdb.rekap.kwitansi-dana');
         Route::post('/rekap/cetak-riwayat', [KwitansiController::class, 'cetakRekapRiwayatKwitansi'])->name('ppdb.rekap.kwitansi-riwayat');
     });
-
 
     Route::prefix('ukuran-seragam')->group(function () {
         Route::get('show/{jurusan}', [UkuranSeragamController::class, 'showJurusanPeserta'])->name('ppdb.seragam.show.jurusan');
@@ -118,7 +112,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     });
 
     Route::prefix('export')->group(function () {
-
         // peserta ppdb
         Route::post('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
 
