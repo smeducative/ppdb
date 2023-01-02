@@ -60,6 +60,17 @@ class KwitansiController extends Controller
         return back();
     }
 
+    public function hapusKwitansi($id)
+    {
+        /** @var \App\Models\Kwitansi $kwitansi */
+        $kwitansi = Kwitansi::findOrFail($id);
+
+        $kwitansi->delete();
+
+        session()->flash('success', 'Kwitansi Berhasil di Hapus');
+        return back();
+    }
+
     public function cetakKwitansi($uuid)
     {
         $pesertappdb = PesertaPPDB::with(['jurusan', 'kwitansi'])->where('diterima', 1)->findOrFail($uuid);

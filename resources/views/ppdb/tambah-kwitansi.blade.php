@@ -126,7 +126,6 @@
                                 <thead>
 
                                     <tr>
-                                        <th>No. Peserta</th>
                                         <th>Nama Lengkap</th>
                                         <th>Jenis Pembayaran</th>
                                         <th>Jumlah</th>
@@ -141,19 +140,30 @@
 
                                     @foreach ($peserta->kwitansi as $kwitansi)
                                     <tr>
-                                        <td>{{ $peserta->no_pendaftaran }}</td>
-                                        <td>{{ $peserta->nama_lengkap}}</td>
+                                        <td>
+                                            {{ $peserta->nama_lengkap}} <br>
+                                            {{ $peserta->no_pendaftaran }}
+                                        </td>
                                         <td>{{ $kwitansi->jenis_pembayaran }}</td>
                                         <td>Rp. {{ number_format($kwitansi->nominal, 0, ',', '.') }},-</td>
                                         <td>{{ $kwitansi->created_at->translatedFormat('l, d F Y H:i') }}</td>
                                         <td>{{ $kwitansi->penerima->name }}</td>
-                                        <td>
+                                        <td class="d-flex gap-2">
                                             <form action="{{ route('ppdb.cetak.kwitansi.single', ['uuid' => $peserta->id, 'id' => $kwitansi->id]) }}" method="POST">
-                                    @csrf
+                                            @csrf
 
-                                    <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak</button>
+                                            <button type="submit" class="btn btn-primary"> <i class="fas fa-print mr-2"></i> Cetak</button>
 
-                                </form> </td>
+                                            </form>
+
+                                            <form action="{{ route('ppdb.kwitansi.hapus', ['id' => $kwitansi->id]) }}" method="POST" class="ml-2 hps-kwitansi">
+                                                @method('delete')
+                                                @csrf
+
+                                            <button type="submit" class="btn btn-danger"> <i class="fas fa-trash mr-2"></i> Hapus</button>
+
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -176,3 +186,4 @@
 
 </div>
 @endsection
+
