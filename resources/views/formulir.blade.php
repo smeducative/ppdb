@@ -33,7 +33,7 @@
     <img src="/img/smedip-ppdb-banner-2022.png" alt="smedip ppdb banner 2022" class="w-full">
 </section>
 
-<section class="mt-10 px-5 max-w-6xl mx-auto">
+<section class="mt-10 p-5 max-w-6xl mx-auto">
 
     @if (session('success'))
         <div class="mb-10 py-5 px-4 bg-green-100 text-green-700 border-l-2 border-green-700">
@@ -41,14 +41,14 @@
         </div>
     @endif
 
-    <h2 class="text-2xl ont-bold">Formulir PPDB</h2>
-    <p class="text-base">Isi formulir di bawah sesuai dengan data diri kamu yaa... </p>
+    <h2 class="text-2xl font-bold">Formulir PPDB</h2>
+    <p class="text-base">Isi formulir di bawah sesuai dengan data dirimu</p>
 </section>
 
-<section class="w-full bg-gray-100 mt-10">
+<section class="py-12 w-full bg-gray-100">
 <form action="{{ route('ppdb.mendaftar') }}" method="POST">
     @csrf
-<div class="max-w-6xl mx-auto bg-gray-50 py-5">
+<div class="max-w-6xl mx-auto bg-gray-100 py-5">
   <div class="md:grid md:grid-cols-3 md:gap-6">
     <div class="md:col-span-1">
       {{-- step 1 - data diri --}}
@@ -63,7 +63,7 @@
         <div class="shadow sm:rounded-md sm:overflow-hidden">
 
           {{-- step 1 - identitas peserta --}}
-          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
 
             {{-- Nama lengkap --}}
             <div class="grid">
@@ -267,6 +267,7 @@
         </div>
     </div>
 
+    <div class="col-span-3 p-3"></div>
     {{-- step 2 --}}
     <div class="md:col-span-1">
       {{-- step 2 - identitas orang tua --}}
@@ -280,7 +281,7 @@
     <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
 
           {{-- step 2 - identitas orang tua --}}
-          <div x-show="step === 2" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+          <div x-show="step === 2" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
             <div class="grid grid-cols-6 gap-6">
 
               {{-- identitas ayah --}}
@@ -324,6 +325,7 @@
     </div>
     {{-- end: step 2 --}}
 
+    <div class="col-span-3 p-3"></div>
     {{-- step 3 --}}
     <div class="md:col-span-1">
       {{-- step 3 - Jenis beasiswa --}}
@@ -337,7 +339,7 @@
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
                   {{-- tep 3 - jenis beasiswa --}}
-          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6">
+          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
 
             <div>
 
