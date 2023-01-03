@@ -30,7 +30,7 @@
 </div>
 
 <section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
-    <img src="/img/smedip-ppdb-banner-2022.png" alt="smedip ppdb banner 2022" class="w-full">
+    <img src="https://lh3.googleusercontent.com/9Hhw5JswoGmGAYtLxJ8jMwo8vIOjJIqQQKrwoyjSWIuWIiC-3u-X9B5btDhQ6h2KhiubEQ3TWqYaZdmvcCrRmduSqxCHdf-R3rGqsNVtwsx0VsrqqqAXTDJ7QCP6Fr2mGFr_y78HJWg=w1920-h1080" alt="smedip ppdb banner 2022" class="w-full">
 </section>
 
 <section class="mt-10 p-5 max-w-6xl mx-auto">
