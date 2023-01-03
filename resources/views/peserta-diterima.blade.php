@@ -31,7 +31,7 @@
 </div>
 
 <section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
-    <img src="/img/smedip-ppdb-banner-2022.png" alt="smedip ppdb banner 2022" class="w-full">
+    <img src="https://lh3.googleusercontent.com/9Hhw5JswoGmGAYtLxJ8jMwo8vIOjJIqQQKrwoyjSWIuWIiC-3u-X9B5btDhQ6h2KhiubEQ3TWqYaZdmvcCrRmduSqxCHdf-R3rGqsNVtwsx0VsrqqqAXTDJ7QCP6Fr2mGFr_y78HJWg=w1920-h1080" alt="smedip ppdb banner 2022" class="w-full">
 </section>
 
 <!-- Syarat Pendaftaran -->
@@ -93,9 +93,9 @@
 
         <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
             <strong>Gelombang 1:</strong> <br>
-            <div class="font-light">3 Januari - 31 Maret 2022</div> <br>
+            <div class="font-light">3 Januari - 31 Maret 2023</div> <br>
             <strong>Gelombang 2:</strong> <br>
-            <div class="font-light">1 April - 9 Juli 2022</div>
+            <div class="font-light">1 April - 9 Juli 2023</div>
         </div>
     </div>
     {{-- <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
