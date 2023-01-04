@@ -3,6 +3,8 @@
 @section('title', 'Penerimaan Peserta Didik Baru ' . now()->year . '/' . now()->addYear()->year)
 @section('description', 'Telah dibuka penerimaan peserta didik baru. Tahun Ajaran ' . now()->year . '/' . now()->addYear()->year)
 
+@inject('jurusan', 'App\Models\Jurusan')
+
 @section('content')
 
 <!-- Section 1 -->
@@ -88,18 +90,14 @@
                 SMK Diponegoro Karanganyar mempunyai 4 Kompetensi Keahlian
             </p>
             <ul class="p-0 m-0 leading-6 border-0 border-gray-300">
+                @foreach ($jurusan->orderByDesc('id')->get() as $jurusan)
                 <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Teknik Komputer dan Jaringan
+                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full">
+                        <span class="text-sm font-bold">✓</span>
+                    </span>
+                    {{ $jurusan->nama }} ({{ $jurusan->abbreviation }})
                 </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Teknik Bisnis Sepeda Motor
-                </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Agribisnis Tanaman Pangan dan Holtikultura
-                </li>
-                <li class="box-border relative py-1 pl-0 text-left text-gray-500 border-solid">
-                    <span class="inline-flex items-center justify-center w-6 h-6 mr-2 text-white bg-green-400 rounded-full"><span class="text-sm font-bold">✓</span></span> Broadcasting dan Perfilman
-                </li>
+                @endforeach
             </ul>
         </div>
         <!-- End  Content -->

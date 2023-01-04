@@ -28,6 +28,21 @@ class PesertaPPDB extends Model
         'jurusan',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->attributes['nama_lengkap'] = str($model->attributes['nama_lengkap'])->title();
+            $model->attributes['tempat_lahir'] = str($model->attributes['tempat_lahir'])->title();
+        });
+
+        static::updating(function ($model) {
+            $model->attributes['nama_lengkap'] = str($model->attributes['nama_lengkap'])->title();
+            $model->attributes['tempat_lahir'] = str($model->attributes['tempat_lahir'])->title();
+        });
+    }
+
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);
@@ -35,7 +50,9 @@ class PesertaPPDB extends Model
 
     public function getNoUrut()
     {
-        return $this->whereYear('created_at', now()->year)->withTrashed()->max('no_urut') + 1;
+        return $this->whereYear('created_at', now()->year)
+            ->whereJurusanId(request('pilihan_jurusan'))
+            ->withTrashed()->max('no_urut') + 1;
     }
 
     public function Kwitansi()
