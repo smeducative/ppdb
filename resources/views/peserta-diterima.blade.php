@@ -31,7 +31,7 @@
 </div>
 
 <section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
-    <img src="https://lh3.googleusercontent.com/9Hhw5JswoGmGAYtLxJ8jMwo8vIOjJIqQQKrwoyjSWIuWIiC-3u-X9B5btDhQ6h2KhiubEQ3TWqYaZdmvcCrRmduSqxCHdf-R3rGqsNVtwsx0VsrqqqAXTDJ7QCP6Fr2mGFr_y78HJWg=w1920-h1080" alt="smedip ppdb banner 2022" class="w-full">
+    <img src="https://lh3.googleusercontent.com/Xm8YgmjeQvM5Yyos6xO9__-lKuGkJIVRVD-5QaO7Yh8ElwL04zWK7b-Ay8MFxmq0Ief8D5JcDsxDyEDlUk0KP2CsiNKduWO94tuZyq4jXCO9sA5LfBXLOjhgUJ2ARloZTvTlVt-R=w2400" alt="smedip ppdb banner 2022" class="w-full">
 </section>
 
 <!-- Syarat Pendaftaran -->
