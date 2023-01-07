@@ -54,9 +54,9 @@
                     - Berkas Pendaftaran dan Biaya Daftar Ulang diserahkan langsung ke <strong>SMK Diponegoro Karanganyar</strong>.
                 </li>
                 <li>
-                    - Jika membutuhkan info lebih lanjut, silahkan hubungi nomor di bawah ini: <br>
-                       <i> a.	Bu Widy Setyo Pratiwi, S.Pd. 	: <a href="//wa.me/6282221979694" class="text-green-500 underline">082221979694</a> </i><br>
-                       <i> b.	Pak Wiwit Setiyono, S.Pd.	: <a href="//wa.me/6285600086994" class="text-green-500 underline"> 085600086994</a></i>
+                    - Jika membutuhkan info lebih lanjut, silahkan hubungi nomor di bawah ini: <br> <br>
+                    <i> a.	Pak Wiwit Setiyono, S.Pd.	: <a href="//wa.me/6285600086994" class="text-green-500 underline"> 0856-0008-6994</a></i> <br>
+                    <i> b.	Bu Ike Herawati, S.Pd. 	: <a href="//wa.me/6282329333883" class="text-green-500 underline">0823-2933-3883</a> </i><br>
                 </li>
             </ul>
         </div>
@@ -93,9 +93,9 @@
 
         <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
             <strong>Gelombang 1:</strong> <br>
-            <div class="font-light">3 Januari - 31 Maret 2023</div> <br>
+            <div class="font-light">2 Januari - 30 Maret 2023</div> <br>
             <strong>Gelombang 2:</strong> <br>
-            <div class="font-light">1 April - 9 Juli 2023</div>
+            <div class="font-light">1 April - 8 Juli 2023</div>
         </div>
     </div>
     {{-- <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
