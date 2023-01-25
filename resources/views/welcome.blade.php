@@ -59,15 +59,18 @@
 <!-- Section list -->
 <section class="w-full bg-white pt-7 pb-7 md:py-10" data-aos="zoom-in" data-aos-duration="1200" data-aos-offset="10">
     <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-3">
-            <h1 class="text-xl font-bold text-center">Brosur PPDB 2022</h1>
-            <span class="text-sm font-light text-gray-500 text-center">Klik gambar untuk mengunduh brosur</span>
+        <div class="text-center my-8">
+            <h1 class="text-2xl font-bold text-center">Brosur PPDB 2023</h1>
+            <span class="text-sm font-light text-gray-500 text-center italic">Klik gambar untuk mengunduh brosur</span>
         </div>
 
-        <div class="flex items-center justify-center md:flex-row p-5">
-            <a href="/img/brosur-ppdb-2022-smedip.png" download="brosur-ppdb-2022-smedip.png">
-                <img src="/img/brosur-ppdb-2022-smedip.png" alt="brosur" class="">
-            </a>
+        <div class="p-12 flex md:flex-row items-center justify-center">
+            <div class="flex items-center justify-center" >
+                <a href="https://drive.google.com/file/d/17zamo0Rg6KE4Y283BSQfJ7HohjHx_jeq/view?usp=sharing" target="__blank">
+                    <img src="https://lh3.googleusercontent.com/wcBZyHl1dMxgLwNXLYy12mDRA0vAjwnGLPomhGVKyGuISV7ZFeqD-phHhfrCWUv8besKJiCHhhoNkR9l9zOSZuXEAyMCxD6hsXIZ1vJ-02zdwVsU5iIHPgRpONxDYguW6q6ENtQV=w2400" alt="brosur" class="object-fit">
+                    <img src="https://lh3.googleusercontent.com/mfu68k-BhLVe0DcCUXhh4kux_4xUSkwFnWHgGQFtl3s0BUVbG2tk7ZUcpHo6bXKReBlYaZS4g96Dsa1InDhNJ3Z_9Upn0yIUe2g__GZdg8Bj6mwZZNYbbTiPV6vFDC2zyupUmF-3=w2400" alt="brosur" class="object-fit">
+                </a>
+            </div>
         </div>
     </div>
 </section>
