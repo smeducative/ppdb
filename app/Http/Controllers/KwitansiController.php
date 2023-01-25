@@ -105,7 +105,9 @@ class KwitansiController extends Controller
     {
         $tahun = request('tahun', now()->year);
 
-        $kwitansies = Kwitansi::withTrashed()->whereYear('created_at', $tahun)->latest()->get();
+        $kwitansies = Kwitansi::withTrashed()->has('pesertaPpdb')
+                        ->with(['pesertaPpdb', 'penerima', 'deletedBy'])
+                        ->whereYear('created_at', $tahun)->latest()->get();
 
         $danaKelola = $kwitansies->filter(fn ($d) => is_null($d->deleted_at))->sum('nominal');
 
