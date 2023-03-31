@@ -18,7 +18,7 @@ class AdminController extends Controller
 
 	$penerimaan = [
 	   'diterima' => $acc->where('diterima', 1)->count(),
-	   'ditolak' => $acc->where('diterima', 0)->count(),
+	   'ditolak' => $acc->where('diterima', 2)->count(),
 	];
 
         $pesertadu = PesertaPPDB::has('kwitansi')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
