@@ -14,6 +14,13 @@ class AdminController extends Controller
 
         $peserta = PesertaPPDB::select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
+	$acc = PesertaPPDB::whereYear('created_at', $tahun)->get();
+
+	$penerimaan = [
+	   'diterima' => $acc->where('diterima', 1)->count(),
+	   'ditolak' => $acc->where('diterima', 0)->count(),
+	];
+
         $pesertadu = PesertaPPDB::has('kwitansi')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
         $count = [
@@ -63,7 +70,7 @@ class AdminController extends Controller
         // perbandingan per jumlah sekolah pendaftar
         $pendaftarPerSekolah = PesertaPPDB::select(\DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
 
-        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah'));
+        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan'));
     }
 
     public function pengaturanAkun()
