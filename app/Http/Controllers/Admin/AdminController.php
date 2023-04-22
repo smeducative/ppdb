@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Jurusan;
 use App\Models\PesertaPPDB;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -12,16 +13,16 @@ class AdminController extends Controller
     {
         $tahun = request('tahun', now()->year);
 
-        $peserta = PesertaPPDB::select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
+        $peserta = PesertaPPDB::select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
-	$acc = PesertaPPDB::whereYear('created_at', $tahun)->get();
+        $acc = PesertaPPDB::whereYear('created_at', $tahun)->get();
 
-	$penerimaan = [
-	   'diterima' => $acc->where('diterima', 1)->count(),
-	   'ditolak' => $acc->where('diterima', 2)->count(),
-	];
+        $penerimaan = [
+        'diterima' => $acc->where('diterima', 1)->count(),
+        'ditolak' => $acc->where('diterima', 2)->count(),
+        ];
 
-        $pesertadu = PesertaPPDB::has('kwitansi')->select(\DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
+        $pesertadu = PesertaPPDB::has('kwitansi')->select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
         $count = [
             'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
@@ -67,10 +68,29 @@ class AdminController extends Controller
             'l' => collect($compareDu)->pluck('l'),
         ];
 
-        // perbandingan per jumlah sekolah pendaftar
-        $pendaftarPerSekolah = PesertaPPDB::select(\DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
+        $lastYear = now()->setYear($tahun)->subYear()->format('Y');
 
-        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan'));
+        // perbandingan pendaftar bulanan per tahun sekarang dengan tahun sebelumnya
+        $yearDiff = PesertaPPDB::select(
+            DB::raw('YEAR(created_at) as tahun, MONTH(created_at) as bulan, count(*) as jumlah_pendaftar'))
+            ->whereRaw("YEAR(created_at) >= $lastYear")
+            ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
+            ->get();
+
+        $months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+        $yearDiff = $yearDiff->map(function ($item) use ($months) {
+            return [
+                'tahun' => $item->tahun,
+                'bulan' => $months[$item->bulan - 1],
+                'jumlah_pendaftar' => $item->jumlah_pendaftar,
+            ];
+        })->groupBy('tahun');
+
+        // perbandingan per jumlah sekolah pendaftar
+        $pendaftarPerSekolah = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
+
+        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'tahun', 'lastYear'));
     }
 
     public function pengaturanAkun()

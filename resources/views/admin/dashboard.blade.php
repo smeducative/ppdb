@@ -98,7 +98,7 @@
                     </div>
                 </div>
 	    </div>
-             
+
             <h5 class="mb-2">Info Pendaftar</h5>
             <div class="row">
                 <div class="col-lg-3 col-6">
@@ -298,6 +298,21 @@
                     <!-- /.card -->
 				</div>
 
+                {{-- perbandingan pendaftar pertahun --}}
+				<div class="col-md-12">
+					<!-- PIE CHART -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Perbandingan pendaftar perbulan dengan tahun sebelumnya</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="yearDiff" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+				</div>
+
                 <div class="col-md-12">
                     <div class="card card-warning">
                         <div class="card-header">
@@ -465,6 +480,46 @@
                 type: 'bar',
                 data: barDuChartData,
                 options: barDuChartOptions
+            })
+
+			//-------------
+            //- Perbandingan pendaftar pertahun BAR CHART -
+            //-------------
+            var areaYearChartData = {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                    datasets: [{
+                        label: 'Tahun {{ $lastYear }}',
+                        data: {!! $yearDiff[$lastYear]->pluck('jumlah_pendaftar') !!},
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Tahun {{ $tahun }}',
+                        data: {!! $yearDiff[$tahun]->pluck('jumlah_pendaftar') !!},
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+            }
+
+            var barYearCanvas = $('#yearDiff').get(0).getContext('2d')
+            var barYearData = $.extend(true, {}, areaYearChartData)
+            var lastYear = areaYearChartData.datasets[0]
+            var year = areaYearChartData.datasets[1]
+            barYearData.datasets[0] = year
+            barYearData.datasets[1] = lastYear
+
+            var baryYearOpt = {
+                responsive              : true,
+                maintainAspectRatio     : false,
+                datasetFill             : false
+            }
+
+            new Chart(barYearCanvas, {
+                type: 'bar',
+                data: barYearData,
+                options: baryYearOpt
             })
 
 
