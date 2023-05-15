@@ -188,7 +188,7 @@
             <tr>
                 <td width="27%">a. &ensp; Rekomendasi MWC</td>
                 <td width="1%">:</td>
-                <td>{{ $peserta->Rekomendasi_mwc ? 'Ya' : '' }}</td>
+                <td>{{ $peserta->rekomendasi_mwc ? 'Ya' : 'Tidak' }}</td>
             </tr>
         </table>
 
