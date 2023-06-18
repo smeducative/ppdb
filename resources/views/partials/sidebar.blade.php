@@ -55,21 +55,21 @@
 						<li class="nav-item">
                             <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list-pendaftar/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>ATPH</p>
+                                <p>AT</p>
                             </a>
                         </li>
 
 						<li class="nav-item">
                             <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 2]) }}" class="nav-link  {{ request()->is('dashboard/ppdb/list-pendaftar/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>TBSM</p>
+                                <p>TO</p>
                             </a>
                         </li>
 
 						<li class="nav-item">
                             <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list-pendaftar/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>TKJ</p>
+                                <p>TJKT</p>
                             </a>
                         </li>
 						<li class="nav-item">
@@ -92,19 +92,19 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>DU ATPH</p>
+                                <p>DU AT</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>DU TBSM</p>
+                                <p>DU TO</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>DU TKJ</p>
+                                <p>DU TJKT</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -127,19 +127,19 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>ATPH</p>
+                                <p>AT</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>TBSM</p>
+                                <p>TO</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>TKJ</p>
+                                <p>TJKT</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -163,19 +163,19 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kartu ATPH</p>
+                                <p>Kartu AT</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kartu TBSM</p>
+                                <p>Kartu TO</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kartu TKJ</p>
+                                <p>Kartu TJKT</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -198,19 +198,19 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form ATPH</p>
+                                <p>Form AT</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form TBSM</p>
+                                <p>Form TO</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/formulir/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form TKJ</p>
+                                <p>Form TJKT</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -233,19 +233,19 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/surat/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Surat ATPH</p>
+                                <p>Surat AT</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/surat/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Surat TBSM</p>
+                                <p>Surat TO</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/surat/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Surat TKJ</p>
+                                <p>Surat TJKT</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -274,19 +274,19 @@
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/kwitansi/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kwitansi ATPH</p>
+                                <p>Kwitansi AT</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 2]) }}" class="nav-link {{ request()->is('dashboard/kwitansi/show/2') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kwitansi TBSM</p>
+                                <p>Kwitansi TO</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 1]) }}" class="nav-link {{ request()->is('dashboard/kwitansi/show/1') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kwitansi TKJ</p>
+                                <p>Kwitansi TJKT</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -322,9 +322,6 @@
                         </p>
                     </a>
                 </li>
-
-
-
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
