@@ -303,6 +303,41 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">Penerima Beasiswa</li>
+
+                <li class="nav-item">
+                    <a href="{{ route('ppdb.beasiswa.mwc') }}" class="nav-link {{ request()->routeIs('ppdb.beasiswa.mwc') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-award"></i>
+                        <p>
+                            Rekomendasi MWC
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('ppdb.beasiswa.akademik') }}" class="nav-link {{ request()->routeIs('ppdb.beasiswa.akademik') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-trophy"></i>
+                        <p>
+                            Akademik
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('ppdb.beasiswa.non-akademik') }}" class="nav-link {{ request()->routeIs('ppdb.beasiswa.non-akademik') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-star"></i>
+                        <p>
+                            Non Akademik
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('ppdb.beasiswa.kip') }}" class="nav-link {{ request()->routeIs('ppdb.beasiswa.kip') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-medal"></i>
+                        <p>
+                            KIP
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">PENGATURAN AKUN</li>
 
                 <li class="nav-item">
