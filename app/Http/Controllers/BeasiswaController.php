@@ -14,6 +14,7 @@ class BeasiswaController extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')->whereRekomendasiMwc(1)
             ->whereYear('created_at', $tahun)
+            ->latest()
             ->get();
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
@@ -33,6 +34,7 @@ class BeasiswaController extends Controller
             ->where('akademik->semester', '!=', "")
             ->where('akademik->peringkat', '!=', "")
             ->whereYear('created_at', $tahun)
+            ->latest()
             ->get();
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
@@ -52,6 +54,7 @@ class BeasiswaController extends Controller
             ->where('non_akademik->juara_ke', '!=', "")
             ->where('non_akademik->juara_tingkat', '!=', "")
             ->whereYear('created_at', $tahun)
+            ->latest()
             ->get();
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
@@ -69,6 +72,7 @@ class BeasiswaController extends Controller
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->where('penerima_kip', 'y')
             ->whereYear('created_at', $tahun)
+            ->latest()
             ->get();
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
