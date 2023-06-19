@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\KartuPendaftaranController;
@@ -121,5 +122,16 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // export rekap sekolah
         Route::post('rekap-sekolah', [ExportController::class, 'exportRekapSekolah'])->name('export.rekap-sekolah');
+    });
+
+    // beasiswa route
+    Route::prefix('beasiswa')->group(function () {
+        // route berdasarkan jenis beasiswa
+        // beasiswa rekomendasi mwc, akademik, non akademik, kip
+        Route::get('rekomendasi-mwc', [BeasiswaController::class, 'rekomendasiMwc'])->name('ppdb.beasiswa.mwc');
+        Route::get('akademik', [BeasiswaController::class, 'beasiswaAkademik'])->name('ppdb.beasiswa.akademik');
+        Route::get('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik');
+        Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
+
     });
 });

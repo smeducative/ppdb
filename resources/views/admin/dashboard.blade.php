@@ -107,7 +107,7 @@
                         <div class="inner">
 							<h3>{{ $count['atph'] }}</h3>
 
-                            <p>ATPH</p>
+                            <p>AT</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-leaf"></i>
@@ -122,7 +122,7 @@
                         <div class="inner">
 							<h3>{{ $count['tbsm'] }}</h3>
 
-                            <p>TBSM</p>
+                            <p>TO</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-settings"></i>
@@ -137,7 +137,7 @@
                         <div class="inner">
 							<h3>{{ $count['tkj'] }}</h3>
 
-                            <p>TKJ</p>
+                            <p>TJKT</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-wifi"></i>
@@ -174,7 +174,7 @@
                         <div class="inner">
                             <h3>{{ $du['atph'] }}</h3>
 
-                            <p>ATPH</p>
+                            <p>AT</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-leaf"></i>
@@ -189,7 +189,7 @@
                         <div class="inner">
                             <h3>{{ $du['tbsm'] }}</h3>
 
-                            <p>TBSM</p>
+                            <p>TO</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-settings"></i>
@@ -204,7 +204,7 @@
                         <div class="inner">
                             <h3>{{ $du['tkj'] }}</h3>
 
-                            <p>TKJ</p>
+                            <p>TJKT</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-wifi"></i>
@@ -380,7 +380,7 @@
 
             // pendaftar
 			var areaChartData = {
-			  labels  : ['TKJ', 'TBSM', 'ATPH', 'BDP'],
+			  labels  : ['TJKT', 'TO', 'AT', 'BDP'],
 			  datasets: [
 				{
 				  label               : 'Laki-laki',
@@ -432,7 +432,7 @@
 
             // daftar ulang
 			var areaDuChartData = {
-			  labels  : ['TKJ', 'TBSM', 'ATPH', 'BDP'],
+			  labels  : ['TJKT', 'TO', 'AT', 'BDP'],
 			  datasets: [
 				{
 				  label               : 'Laki-laki',
@@ -528,12 +528,7 @@
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
         var donutData        = {
-        labels: [
-            'TKJ',
-            'TBSM',
-            'ATPH',
-            'BDP',
-        ],
+        labels: ['TJKT', 'TO', 'AT', 'BDP'],
         datasets: [
             {
             data: {!! collect($count)->except('all')->values() !!},
@@ -562,12 +557,7 @@
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
         var donutDuData        = {
-            labels: [
-                'TKJ',
-                'TBSM',
-                'ATPH',
-                'BDP',
-            ],
+            labels: ['TJKT', 'TO', 'AT', 'BDP'],
             datasets: [
                 {
                 data: {!! collect($du)->except('all')->values() !!},
