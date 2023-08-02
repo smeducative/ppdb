@@ -56,7 +56,7 @@
                             <h3>Peserta PPDB</h3>
 
                             <div class="card-tools">
-                                <form action="{{ route('export.peserta.ppdb') }}?jurusan={{ request()->segment(4) }}" method="POST">
+                                <form action="{{ route('export.peserta.ppdb') }}?jurusan={{ request()->segment(4) }}&tahun={{ request('tahun', now()->year) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Export</button>
                                 </form>
