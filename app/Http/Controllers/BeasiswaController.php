@@ -20,7 +20,7 @@ class BeasiswaController extends Controller
             ->get();
 
         // if request has export and value of export is mwc
-        if ($request->isMethod('post') && $request->has('export')) {
+        if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-rekomendasi-mwc.xlsx');
         }
 
@@ -45,7 +45,7 @@ class BeasiswaController extends Controller
             ->get();
 
          // if request has export and value of export is mwc
-        if ($request->isMethod('post') && $request->has('export')) {
+        if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-akademik.xlsx');
         }
 
@@ -70,7 +70,7 @@ class BeasiswaController extends Controller
             ->get();
 
          // if request has export and value of export is mwc
-        if ($request->isMethod('post') && $request->has('export')) {
+        if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-non-akademik.xlsx');
         }
 
@@ -93,7 +93,7 @@ class BeasiswaController extends Controller
             ->get();
 
          // if request has export and value of export is mwc
-        if ($request->isMethod('post') && $request->has('export')) {
+        if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-kip.xlsx');
         }
 

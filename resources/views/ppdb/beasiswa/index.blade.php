@@ -54,7 +54,7 @@
                         <div class="card-header">
                             <h3>Peserta {{ $title }}</h3>
                             <div class="card-tools">
-                                <form action="?export" method="post">
+                                <form action="" method="post">
                                     @csrf
                                     <button class="btn btn-primary">export</button>
                                 </form>
