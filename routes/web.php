@@ -129,9 +129,13 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         // route berdasarkan jenis beasiswa
         // beasiswa rekomendasi mwc, akademik, non akademik, kip
         Route::get('rekomendasi-mwc', [BeasiswaController::class, 'rekomendasiMwc'])->name('ppdb.beasiswa.mwc');
+        Route::post('rekomendasi-mwc', [BeasiswaController::class, 'rekomendasiMwc'])->name('ppdb.beasiswa.mwc.export');
         Route::get('akademik', [BeasiswaController::class, 'beasiswaAkademik'])->name('ppdb.beasiswa.akademik');
+        Route::post('akademik', [BeasiswaController::class, 'beasiswaAkademik'])->name('ppdb.beasiswa.akademik.export');
         Route::get('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik');
+        Route::post('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik.export');
         Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
+        Route::post('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip.export');
 
     });
 });

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BeasiswaExport;
 use App\Models\PesertaPPDB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BeasiswaController extends Controller
 {
@@ -16,6 +18,11 @@ class BeasiswaController extends Controller
             ->whereYear('created_at', $tahun)
             ->latest()
             ->get();
+
+        // if request has export and value of export is mwc
+        if ($request->isMethod('post') && $request->has('export')) {
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-rekomendasi-mwc.xlsx');
+        }
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
     }
@@ -37,6 +44,11 @@ class BeasiswaController extends Controller
             ->latest()
             ->get();
 
+         // if request has export and value of export is mwc
+        if ($request->isMethod('post') && $request->has('export')) {
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-akademik.xlsx');
+        }
+
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
     }
 
@@ -57,6 +69,11 @@ class BeasiswaController extends Controller
             ->latest()
             ->get();
 
+         // if request has export and value of export is mwc
+        if ($request->isMethod('post') && $request->has('export')) {
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-non-akademik.xlsx');
+        }
+
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
     }
 
@@ -74,6 +91,11 @@ class BeasiswaController extends Controller
             ->whereYear('created_at', $tahun)
             ->latest()
             ->get();
+
+         // if request has export and value of export is mwc
+        if ($request->isMethod('post') && $request->has('export')) {
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-kip.xlsx');
+        }
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
     }

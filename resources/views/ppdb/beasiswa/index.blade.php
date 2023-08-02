@@ -31,15 +31,15 @@
 
                 <div class="col-md-3 mt-3">
                     <div class="">
-                                <div class="form-group">
-                                    <label class="form-label">Data Tahun:</label>
-                                    <select class="custom-select form-control-border" id="ppdb-tahun">
-										@for($i = now()->year; $i >= 2021 ; $i--)
-                                        <option value="{{ $i }}">{{ $i }}</option>
-										@endfor
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label">Data Tahun:</label>
+                            <select class="custom-select form-control-border" id="ppdb-tahun">
+                                @for($i = now()->year; $i >= 2021 ; $i--)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-12">
@@ -53,6 +53,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h3>Peserta {{ $title }}</h3>
+                            <div class="card-tools">
+                                <form action="?export" method="post">
+                                    @csrf
+                                    <button class="btn btn-primary">export</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="card-body p-0 py-2 table-responsive text-nowrap">
                             @if (!$pesertappdb->isEmpty())
