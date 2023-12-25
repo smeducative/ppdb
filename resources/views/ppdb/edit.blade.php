@@ -163,6 +163,54 @@
                                                 <textarea type="text" class="form-control" name="alamat_lengkap"                                              placeholder="Alamat Lengkap" required>{{ $peserta->alamat_lengkap }}</textarea>
                                             </div>
 
+                                            {{-- Dukuh --}}
+                                            <div class="form-group">
+                                                <label>Dukuh</label>
+                                                <input type="text" class="form-control" name="dukuh" value="{{ $peserta->dukuh }}" placeholder="Dukuh">
+                                            </div>
+
+                                            {{-- RT --}}
+                                            <div class="form-group">
+                                                <label>RT</label>
+                                                <input type="text" class="form-control" name="rt" value="{{ $peserta->rt }}" placeholder="RT">
+                                            </div>
+
+                                            {{-- RW --}}
+                                            <div class="form-group">
+                                                <label>RW</label>
+                                                <input type="text" class="form-control" name="rw" value="{{ $peserta->rw }}" placeholder="RW">
+                                            </div>
+
+                                            {{-- Desa/Kelurahan --}}
+                                            <div class="form-group">
+                                                <label>Desa/Kelurahan</label>
+                                                <input type="text" class="form-control" name="desa_kelurahan" value="{{ $peserta->desa_kelurahan }}" placeholder="Desa/Kelurahan">
+                                            </div>
+
+                                            {{-- Kecamatan --}}
+                                            <div class="form-group">
+                                                <label>Kecamatan</label>
+                                                <input type="text" class="form-control" name="kecamatan" value="{{ $peserta->kecamatan }}" placeholder="Kecamatan">
+                                            </div>
+
+                                            {{-- Kabupaten/Kota --}}
+                                            <div class="form-group">
+                                                <label>Kabupaten/Kota</label>
+                                                <input type="text" class="form-control" name="kabupaten_kota" value="{{ $peserta->kabupaten_kota }}" placeholder="Kabupaten/Kota">
+                                            </div>
+
+                                            {{-- Provinsi --}}
+                                            <div class="form-group">
+                                                <label>Provinsi</label>
+                                                <input type="text" class="form-control" name="provinsi" value="{{ $peserta->provinsi }}" placeholder="Provinsi">
+                                            </div>
+
+                                            {{-- kode pos --}}
+                                            <div class="form-group">
+                                                <label>Kodepos</label>
+                                                <input type="text" class="form-control" name="kode_pos" value="{{ $peserta->kode_pos }}" placeholder="kode_pos">
+                                            </div>
+
                                             {{-- Pilihan jurusan --}}
                                             <div class="form-group">
                                                 <label>Pilihan Jurusan  <strong class="text-danger"> * </strong></label>

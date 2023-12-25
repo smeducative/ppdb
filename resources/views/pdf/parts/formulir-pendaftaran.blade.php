@@ -63,7 +63,13 @@
             <tr>
                 <td width="29.6%">6. &ensp; Alamat Lengkap</td>
                 <td width="1%">:</td>
-                <td>{{ $peserta->alamat_lengkap }}</td>
+                <td>
+                    {{ $peserta->alamat_lengkap }},
+                    {{ $peserta->rt }} / {{ $peserta->rw }} {{ $peserta->dukuh }},
+                    {{ $peserta->desa_kelurahan }}, {{ $peserta->kecamatan }}, {{ $peserta->kabupaten }}, {{ $peserta->provinsi }}
+                    {{-- kodepos --}}
+                    {{ $peserta->kode_pos ? 'Kode Pos ' . $peserta->kode_pos : '' }}
+                </td>
             </tr>
             <tr>
                 <td width="29.6%">7. &ensp; Kompetensi Keahlian</td>

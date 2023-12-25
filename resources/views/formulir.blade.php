@@ -163,17 +163,59 @@
 
             {{-- alamat lengkap --}}
             <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  Alamat Lengkap <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap sesuai KK" name="alamat_lengkap" required></textarea>
+                <div class="col-span-3 sm:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700">
+                        Alamat Lengkap <span class="text-red-600">* wajib diisi</span>
+                    </label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                        <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap sesuai KK" name="alamat_lengkap" required></textarea>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500">
+                            Alamat Lengkap Peserta, lihat di KK
+                    </p>
                 </div>
-                <p class="mt-2 text-sm text-gray-500">
-                    Alamat Lengkap Peserta, lihat di KK
-                </p>
-              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="dukuh" class="block text-sm font-medium text-gray-700">Dukuh</label>
+                    <input type="text" name="dukuh" id="dukuh" autocomplete="dukuh" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Dukuh">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="rt" class="block text-sm font-medium text-gray-700">RT</label>
+                    <input type="text" name="rt" id="rt" autocomplete="rt" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="RT">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="rw" class="block text-sm font-medium text-gray-700">RW</label>
+                    <input type="text" name="rw" id="rw" autocomplete="rw" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="RW">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="desa_kelurahan" class="block text-sm font-medium text-gray-700">Desa/Kelurahan</label>
+                    <input type="text" name="desa_kelurahan" id="desa_kelurahan" autocomplete="desa_kelurahan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Desa/Kelurahan">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="kecamatan" class="block text-sm font-medium text-gray-700">Kecamatan</label>
+                    <input type="text" name="kecamatan" id="kecamatan" autocomplete="kecamatan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kecamatan">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="kabupaten_kota" class="block text-sm font-medium text-gray-700">Kabupaten/Kota</label>
+                    <input type="text" name="kabupaten_kota" id="kabupaten_kota" autocomplete="kabupaten_kota" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kabupaten/Kota">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="provinsi" class="block text-sm font-medium text-gray-700">Provinsi</label>
+                    <input type="text" name="provinsi" id="provinsi" autocomplete="provinsi" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Provinsi">
+                </div>
+
+                <div class="col-span-3 sm:col-span-1">
+                    <label for="kode_pos" class="block text-sm font-medium text-gray-700">Kode Pos</label>
+                    <input type="text" name="kode_pos" id="kode_pos" autocomplete="kode_pos" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos">
+                </div>
             </div>
 
             <div class="grid">

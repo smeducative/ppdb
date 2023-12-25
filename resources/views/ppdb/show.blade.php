@@ -142,6 +142,62 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th width="30%">Dukuh</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->dukuh }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">RT</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->rt }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">RW</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->rw }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">Desa/Kelurahan</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->desa_kelurahan }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">Kecamatan</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->kecamatan }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">Kabupaten/Kota</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->kabupaten_kota }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">Provinsi</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->provinsi }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%">Kode Pos</th>
+                                        <td width="5%">:</td>
+                                        <td>
+                                            <span>{{ $peserta->kode_pos }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <th width="30%">No. HP</th>
                                         <td width="5%">:</td>
                                         <td>

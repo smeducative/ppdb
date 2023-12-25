@@ -155,6 +155,55 @@
                                                     placeholder="Alamat Lengkap" required></textarea>
                                             </div>
 
+                                            {{-- Dukuh --}}
+                                            <div class="form-group">
+                                                <label>Dukuh</label>
+                                                <input type="text" class="form-control" name="dukuh" value="{{ old('dukuh') }}" placeholder="Dukuh">
+                                            </div>
+
+                                            {{-- RT --}}
+                                            <div class="form-group">
+                                                <label>RT</label>
+                                                <input type="text" class="form-control" name="rt" value="{{ old('rt') }}" placeholder="RT">
+                                            </div>
+
+                                            {{-- RW --}}
+                                            <div class="form-group">
+                                                <label>RW</label>
+                                                <input type="text" class="form-control" name="rw" value="{{ old('rw') }}" placeholder="RW">
+                                            </div>
+
+                                            {{-- Desa/Kelurahan --}}
+                                            <div class="form-group">
+                                                <label>Desa/Kelurahan</label>
+                                                <input type="text" class="form-control" name="desa_kelurahan" value="{{ old('desa_kelurahan') }}" placeholder="Desa/Kelurahan">
+                                            </div>
+
+                                            {{-- Kecamatan --}}
+                                            <div class="form-group">
+                                                <label>Kecamatan</label>
+                                                <input type="text" class="form-control" name="kecamatan" value="{{ old('kecamatan') }}" placeholder="Kecamatan">
+                                            </div>
+
+                                            {{-- Kabupaten/Kota --}}
+                                            <div class="form-group">
+                                                <label>Kabupaten/Kota</label>
+                                                <input type="text" class="form-control" name="kabupaten_kota" value="{{ old('kabupaten_kota') }}" placeholder="Kabupaten/Kota">
+                                            </div>
+
+                                            {{-- Provinsi --}}
+                                            <div class="form-group">
+                                                <label>Provinsi</label>
+                                                <input type="text" class="form-control" name="provinsi" value="{{ old('provinsi') }}" placeholder="Provinsi">
+                                            </div>
+
+                                            {{-- kode pos --}}
+                                            <div class="form-group">
+                                                <label>Kodepos</label>
+                                                <input type="text" class="form-control" name="kode_pos" value="{{ old('kode_pos') }}" placeholder="kode_pos">
+                                            </div>
+
+
                                             {{-- Pilihan jurusan --}}
                                             <div class="form-group">
                                                 <label>Pilihan Jurusan  <strong class="text-danger"> * </strong></label>
