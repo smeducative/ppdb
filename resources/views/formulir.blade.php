@@ -29,9 +29,9 @@
   </div>
 </div>
 
-<section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
+{{-- <section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
     <img src="https://lh3.googleusercontent.com/Xm8YgmjeQvM5Yyos6xO9__-lKuGkJIVRVD-5QaO7Yh8ElwL04zWK7b-Ay8MFxmq0Ief8D5JcDsxDyEDlUk0KP2CsiNKduWO94tuZyq4jXCO9sA5LfBXLOjhgUJ2ARloZTvTlVt-R=w2400" alt="smedip ppdb banner 2022" class="w-full">
-</section>
+</section> --}}
 
 <section class="mt-10 p-5 max-w-6xl mx-auto">
 
