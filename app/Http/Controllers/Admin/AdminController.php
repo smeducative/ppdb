@@ -72,7 +72,8 @@ class AdminController extends Controller
 
         // perbandingan pendaftar bulanan per tahun sekarang dengan tahun sebelumnya
         $yearDiff = PesertaPPDB::select(
-            DB::raw('YEAR(created_at) as tahun, MONTH(created_at) as bulan, count(*) as jumlah_pendaftar'))
+            DB::raw('YEAR(created_at) as tahun, MONTH(created_at) as bulan, count(*) as jumlah_pendaftar')
+            )
             ->whereRaw("YEAR(created_at) >= $lastYear")
             ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
             ->get();
@@ -86,6 +87,11 @@ class AdminController extends Controller
                 'jumlah_pendaftar' => $item->jumlah_pendaftar,
             ];
         })->groupBy('tahun');
+
+        // if now year isnot in the yeardiff, add it
+        if (! $yearDiff->has(now()->year)) {
+            $yearDiff->put(now()->year, collect());
+        }
 
         // perbandingan per jumlah sekolah pendaftar
         $pendaftarPerSekolah = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
