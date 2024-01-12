@@ -13,7 +13,7 @@
                     <li class="mb-3 border-l-4 border-amber-400 pl-3"> Calon Peserta Didik baru dapat langsung datang ke
                         SMK Diponegoro Karanganyar dengan membawa berkas persyaratan yang dibutuhkan.</li>
                     <li class="mb-3 border-l-4 border-amber-400 pl-3"> Setelah dinyatakan diterima, peserta PPDB membayar
-                        biaya daftar ulang Sebesar Rp. 150.000,-</li>
+                        biaya daftar ulang Sebesar Rp. 180.000,-</li>
                     <li class="mb-3 border-l-4 border-amber-400 pl-3"> Berkas Pendaftaran dan Biaya Daftar Ulang
                         diserahkan langsung ke SMK Diponegoro Karanganyar.</li>
                 </ol>

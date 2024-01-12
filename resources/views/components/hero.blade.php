@@ -32,7 +32,7 @@
             size="lg"
             style="outline"
             rel="noopener"
-            href="https://drive.google.com/file/d/17zamo0Rg6KE4Y283BSQfJ7HohjHx_jeq/view?usp=sharing"
+            href="https://drive.google.com/file/d/1iSbYvUck5iXxGPyOUx0eo2mONBij1pCb/view?usp=sharing"
             target="_blank">Unduh Brosur</x-ui.link
           >
         </div>
