@@ -16,11 +16,13 @@
     <meta property="og:locale" content="id_ID" />
     <link rel="shortcut icon" href="/img/logo.png" type="image/png">
 
-    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+    @vite(["resources/css/app.css", "resources/js/app.js"])
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" media="all">
 	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    @yield('head')
 </head>
 <body style="font-family: Poppins; scroll-behavior: smooth;">
 

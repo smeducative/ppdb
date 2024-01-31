@@ -29,9 +29,9 @@
   </div>
 </div>
 
-{{-- <section class="bg-white max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
-    <img src="https://lh3.googleusercontent.com/Xm8YgmjeQvM5Yyos6xO9__-lKuGkJIVRVD-5QaO7Yh8ElwL04zWK7b-Ay8MFxmq0Ief8D5JcDsxDyEDlUk0KP2CsiNKduWO94tuZyq4jXCO9sA5LfBXLOjhgUJ2ARloZTvTlVt-R=w2400" alt="smedip ppdb banner 2022" class="w-full">
-</section> --}}
+<section class="bg-yellow-500 max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
+    <img src="https://lh3.googleusercontent.com/pw/ABLVV86CCHaYAIn7wx4S7aRWQC5jrZNBJ6u0x5I4U5m8yyfiKG4zC-RWdusaEvMO_Jh0ECjHmWHr5G-K9wBhqigFxRw4D-58vDHSyoB-HLlsAmF87occQDk=w2400" alt="smedip ppdb banner 2022" class="w-full">
+</section>
 
 <section class="mt-10 p-5 max-w-6xl mx-auto">
 
@@ -241,7 +241,7 @@
                   Asal Sekolah <span class="text-red-600">* wajib diisi</span>
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah" required>
+                  <select id="asal-sekolah" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah"></select>
                 </div>
                  <p class="mt-2 text-sm text-gray-500">
                         Asal Sekolah Peserta
@@ -491,6 +491,11 @@
       </form>
 @endsection
 
+@section('head')
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+@endsection
+
 @section('footer')    <!-- jQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>
 
@@ -499,6 +504,54 @@
         $(document).ready(function() {
             $('[data-mask]').inputmask()
 
+
+            new TomSelect('#asal-sekolah', {
+    valueField: 'nama',
+    labelField: 'nama',
+    searchField: 'nama',
+    // mengambil data dari sumber eksternal
+    load: function(query, callback) {
+        var url = `https://data-sekolah.vercel.app/api/search?name=${encodeURIComponent(query)}&type=SMP,MTs,MA&limit=25`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                callback(data.data);
+            })
+            .catch(() => {
+                callback();
+            });
+    },
+    // fungsi kustom untuk merender opsi dan item
+    render: {
+        option: function(item, escape) {
+            return `<div class="py-2">
+                        <div class="mb-1">
+                            <span class="h4">${escape(item.nama)}</span>
+                        </div>
+                        <div class="text-muted">NPSN: ${escape(item.npsn)}</div>
+                        <div class="text-muted">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
+                        <div class="text-muted">Status: ${escape(item.status)}</div>
+                        <div class="text-muted">District: ${escape(item.district.nama)}</div>
+                        <div class="text-muted">City: ${escape(item.kota.nama)}</div>
+                        <div class="text-muted">Province: ${escape(item.provinsi.nama)}</div>
+                    </div>`;
+        },
+        item: function(item, escape) {
+            return `<div class="py-2">
+                        <div class="mb-1">
+                            <span class="h4">${escape(item.nama)}</span>
+                        </div>
+                        <div class="text-muted">NPSN: ${escape(item.npsn)}</div>
+                        <div class="text-muted">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
+                        <div class="text-muted">Status: ${escape(item.status)}</div>
+                        <div class="text-muted">District: ${escape(item.district.nama)}</div>
+                        <div class="text-muted">City: ${escape(item.kota.nama)}</div>
+                        <div class="text-muted">Province: ${escape(item.provinsi.nama)}</div>
+                    </div>`;
+        }
+    },
+});
 
         })
             function fkip() {

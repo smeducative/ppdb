@@ -1,14 +1,7 @@
-const colors = require("tailwindcss/colors");
-
-module.exports = {
-    mode: "jit",
-    purge: ["./resources/views/**/*.{blade.php,php}"],
-    darkMode: false, // or 'media' or 'class'
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ["./resources/views/**/*.{blade.php,php}"],
     theme: {
-        ...colors,
-        extend: {},
-    },
-    variants: {
         extend: {},
     },
     plugins: [require("@tailwindcss/forms")],
