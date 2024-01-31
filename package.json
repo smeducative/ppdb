@@ -1,13 +1,9 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "dev": "vite",
+        "build": "vite build"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.7",
@@ -18,5 +14,9 @@
         "postcss": "^8.1.14",
         "tailwindcss": "^3.4.0",
         "webpack-cli": "^5.0.1"
+    },
+    "dependencies": {
+        "laravel-vite-plugin": "^1.0.1",
+        "vite": "^5.0.12"
     }
 }
