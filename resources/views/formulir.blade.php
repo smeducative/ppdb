@@ -5,498 +5,597 @@
 @section('title', 'Formulir Pendaftaran')
 
 @section('content')
-{{-- header --}}
+    {{-- header --}}
 
-<!-- Section 1 -->
-<!-- Section 1 -->
-<div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
-  <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-    <div class="p-4 flex flex-row items-center justify-between">
-      <a href="/" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">PPDB Smedip</a>
-      <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-          <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-          <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </div>
-    <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-      <a class="px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#hero">Home</a>
-      <a class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Formulir Pendaftaran</a>
-      {{-- <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Tempat Belajar</a>
+    <!-- Section 1 -->
+    <!-- Section 1 -->
+    <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="/"
+                    class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">PPDB
+                    Smedip</a>
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{ 'flex': open, 'hidden': !open }"
+                class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <a class="px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                    href="#hero">Home</a>
+                <a class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                    href="#">Formulir Pendaftaran</a>
+                {{-- <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Tempat Belajar</a>
       <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">FAQ</a> --}}
-    </nav>
-  </div>
-</div>
-
-<section class="bg-yellow-500 max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
-    <img src="https://lh3.googleusercontent.com/pw/ABLVV86CCHaYAIn7wx4S7aRWQC5jrZNBJ6u0x5I4U5m8yyfiKG4zC-RWdusaEvMO_Jh0ECjHmWHr5G-K9wBhqigFxRw4D-58vDHSyoB-HLlsAmF87occQDk=w2400" alt="smedip ppdb banner 2022" class="w-full">
-</section>
-
-<section class="mt-10 p-5 max-w-6xl mx-auto">
-
-    @if (session('success'))
-        <div class="mb-10 py-5 px-4 bg-green-100 text-green-700 border-l-2 border-green-700">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <h2 class="text-2xl font-bold">Formulir PPDB</h2>
-    <p class="text-base">Isi formulir di bawah sesuai dengan data dirimu</p>
-</section>
-
-<section class="py-12 w-full bg-gray-100">
-<form action="{{ route('ppdb.mendaftar') }}" method="POST">
-    @csrf
-<div class="max-w-6xl mx-auto bg-gray-100 py-5">
-  <div class="md:grid md:grid-cols-3 md:gap-6">
-    <div class="md:col-span-1">
-      {{-- step 1 - data diri --}}
-      <div class="px-5">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Diri</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Informasi tentang data diri peserta.
-        </p>
-      </div>
-    </div>
-    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
-        <div class="shadow sm:rounded-md sm:overflow-hidden">
-
-          {{-- step 1 - identitas peserta --}}
-          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
-
-            {{-- Nama lengkap --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  Nama Lengkap <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="nama_lengkap" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Nama lengkap sesuai Ijazah" required>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        Nama lengkap peserta sesuai yang tercantum di Ijazah
-                </p>
-              </div>
-            </div>
-
-            {{-- Jenis Kelamin --}}
-
-            <fieldset>
-              <div>
-                <legend class="text-base font-medium text-gray-900">Jenis Kelamin <span class="text-red-600">* wajib diisi</span></legend>
-              </div>
-              <div class="mt-4 space-y-4">
-                <div class="flex items-center">
-                  <input name="jenis_kelamin" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="l" checked="checked">
-                  <label class="ml-3 block text-sm font-medium text-gray-700">
-                    Laki-laki
-                  </label>
-                </div>
-                <div class="flex items-center">
-                  <input name="jenis_kelamin" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" value="p">
-                  <label class="ml-3 block text-sm font-medium text-gray-700">
-                    Perempuan
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-            {{-- Tempat Lahir --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Tempat Lahir <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="tempat_lahir" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tempat lahir" required>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        Tempat Lahir Peserta
-                </p>
-              </div>
-            </div>
-
-            {{-- Tanggal Lahir --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label for="company-website" class="block text-sm font-medium text-gray-700">
-                  Tanggal Lahir <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="tanggal_lahir" data-mask required>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                       Tanggal Lahir Peserta
-                    </p>
-              </div>
-            </div>
-
-            {{-- nik --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  NIK <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" name="nik" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NIK" required>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        16 angka NIK sesuai yang tercantum di KK
-                    </p>
-              </div>
-            </div>
-
-            {{-- nisn --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  NISN
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" name="nisn" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="NISN">
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        NISN Peserta
-                    </p>
-              </div>
-            </div>
-
-            {{-- alamat lengkap --}}
-            <div class="grid">
-                <div class="col-span-3 sm:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700">
-                        Alamat Lengkap <span class="text-red-600">* wajib diisi</span>
-                    </label>
-                    <div class="mt-1 flex rounded-md shadow-sm">
-                        <textarea class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Alamat lengkap sesuai KK" name="alamat_lengkap" required></textarea>
-                    </div>
-                    <p class="mt-2 text-sm text-gray-500">
-                            Alamat Lengkap Peserta, lihat di KK
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="dukuh" class="block text-sm font-medium text-gray-700">Dukuh</label>
-                    <input type="text" name="dukuh" id="dukuh" autocomplete="dukuh" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Dukuh">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="rt" class="block text-sm font-medium text-gray-700">RT</label>
-                    <input type="text" name="rt" id="rt" autocomplete="rt" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="RT">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="rw" class="block text-sm font-medium text-gray-700">RW</label>
-                    <input type="text" name="rw" id="rw" autocomplete="rw" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="RW">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="desa_kelurahan" class="block text-sm font-medium text-gray-700">Desa/Kelurahan</label>
-                    <input type="text" name="desa_kelurahan" id="desa_kelurahan" autocomplete="desa_kelurahan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Desa/Kelurahan">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="kecamatan" class="block text-sm font-medium text-gray-700">Kecamatan</label>
-                    <input type="text" name="kecamatan" id="kecamatan" autocomplete="kecamatan" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kecamatan">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="kabupaten_kota" class="block text-sm font-medium text-gray-700">Kabupaten/Kota</label>
-                    <input type="text" name="kabupaten_kota" id="kabupaten_kota" autocomplete="kabupaten_kota" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kabupaten/Kota">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="provinsi" class="block text-sm font-medium text-gray-700">Provinsi</label>
-                    <input type="text" name="provinsi" id="provinsi" autocomplete="provinsi" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Provinsi">
-                </div>
-
-                <div class="col-span-3 sm:col-span-1">
-                    <label for="kode_pos" class="block text-sm font-medium text-gray-700">Kode Pos</label>
-                    <input type="text" name="kode_pos" id="kode_pos" autocomplete="kode_pos" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Kode Pos">
-                </div>
-            </div>
-
-            <div class="grid">
-
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Pilihan Jurusan <span class="text-red-600">* wajib diisi</span></label>
-                <select name="pilihan_jurusan" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                  @foreach($jurusan->get() as $jrs)
-                  <option value="{{ $jrs->id }}"> {{ $jrs->nama }} </option>
-                  @endforeach
-                </select>
-              </div>
-              <p class="mt-2 text-sm text-gray-500">
-                        Jurusan pilihan
-                    </p>
-            </div>
-
-            {{-- asal sekolah --}}
-
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  Asal Sekolah <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <select id="asal-sekolah" name="asal_sekolah" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Asal Sekolah"></select>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        Asal Sekolah Peserta
-                    </p>
-              </div>
-            </div>
-
-            {{-- tahun lulus --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  Tahun Lulus <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                    <select name="tahun_lulus" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                    @for($i = now()->year; $i >= 2015; $i--)
-                        <option value="{{ $i }}"> {{ $i }} </option>
-                    @endfor
-                    </select>
-                 </div>
-                  <p class="mt-2 text-sm text-gray-500">
-                        tahun Lulus Peserta
-                    </p>
-              </div>
-            </div>
-
-            {{-- Penerima KIP --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input name="penerima_kip" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" id="pkip" onclick='fkip()'>
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label for="comments" class="font-medium text-gray-700">Penerima KIP</label>
-                                <p class="text-gray-500">Merupakan peserta Penerima KIP.</p>
-                            </div>
-                        </div>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="no_kip" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 disabled:bg-gray-500 disabled:opacity-20 disabled:cursor-not-allowed" id="input-kip" placeholder="No. KIP" disabled>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        No. KIP
-                    </p>
-              </div>
-            </div>
-
-
-            {{-- Nomer HP --}}
-            <div class="grid">
-              <div class="col-span-3 sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700">
-                  No. HP <span class="text-red-600">* wajib diisi</span>
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" name="no_hp" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="No. HP" required>
-                </div>
-                 <p class="mt-2 text-sm text-gray-500">
-                        No. HP Peserta
-                    </p>
-              </div>
-            </div>
-
-          </div>
+            </nav>
         </div>
     </div>
 
-    <div class="col-span-3 p-3"></div>
-    {{-- step 2 --}}
-    <div class="md:col-span-1">
-      {{-- step 2 - identitas orang tua --}}
-      <div class="px-5" x-show="step === 2" x-transition>
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Orang Tua</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Informasi data orang tua peserta.
-        </p>
-      </div>
-    </div>
-    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
+    <section class="bg-yellow-500 max-w-6xl mx-auto" data-aos="zoom-out" data-aos-duration="1200" data-aos-offset="10">
+        <img src="https://lh3.googleusercontent.com/pw/ABLVV86CCHaYAIn7wx4S7aRWQC5jrZNBJ6u0x5I4U5m8yyfiKG4zC-RWdusaEvMO_Jh0ECjHmWHr5G-K9wBhqigFxRw4D-58vDHSyoB-HLlsAmF87occQDk=w2400"
+            alt="smedip ppdb banner 2022" class="w-full">
+    </section>
 
-          {{-- step 2 - identitas orang tua --}}
-          <div x-show="step === 2" x-transition class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
-            <div class="grid grid-cols-6 gap-6">
+    <section class="mt-10 p-5 max-w-6xl mx-auto">
 
-              {{-- identitas ayah --}}
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Nama Ayah <span class="text-red-600">* wajib diisi</span></label>
-                <input type="text" name="nama_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nama lengkap Ayah" required>
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">No. HP Ayah</label>
-                <input type="text" name="no_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="No. HP Ayah">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
-                <input type="text" name="pekerjaan_ayah" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Pekerjaan Ayah">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3"></div>
-
-              {{-- idntitas ibu --}}
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Nama Ibu <span class="text-red-600">* wajib diisi</span></label>
-                <input type="text" name="nama_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nama Ibu" required>
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">No. HP Ibu</label>
-                <input type="text" name="no_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="No. HP Ibu">
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label class="block text-sm font-medium text-gray-700">Pekerjaan Ibu</label>
-                <input type="text" name="pekerjaan_ibu" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Pekerjaan Ibu">
-              </div>
-
-
+        @if (session('success'))
+            <div class="mb-10 py-5 px-4 bg-green-100 text-green-700 border-l-2 border-green-700">
+                {{ session('success') }}
             </div>
+        @endif
 
-          </div>
-    </div>
-    {{-- end: step 2 --}}
+        <h2 class="text-2xl font-bold">Formulir PPDB</h2>
+        <p class="text-base">Isi formulir di bawah sesuai dengan data dirimu</p>
+    </section>
 
-    <div class="col-span-3 p-3"></div>
-    {{-- step 3 --}}
-    <div class="md:col-span-1">
-      {{-- step 3 - Jenis beasiswa --}}
-      <div class="px-5">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa / Prestasi</h3>
-        <p class="mt-1 text-sm text-gray-600">
-          Jenis beasiswa peserta. diisi jika peserta memiliki beasiswa atau prestasi.
-        </p>
-      </div>
-      {{-- end step --}}
-    </div>
-    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
-                  {{-- tep 3 - jenis beasiswa --}}
-          <div class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
-
-            <div>
-
-                <div class="font-bold text-xl">
-                    <h3>Akademik</h3>
-                </div>
-
-
-                <div class="grid mb-5">
-                    <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Peringkat kelas (Apabila pernah mendapatkan peringkat 1, 2 atau 3)</label>
-
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="kelas/semester/peringkat" name="Kelas / Semester / Peringkat">
-
-                        <!-- /.input group -->
+    <section class="py-12 w-full bg-gray-100">
+        <form action="{{ route('ppdb.mendaftar') }}" method="POST">
+            @csrf
+            <div class="max-w-6xl mx-auto bg-gray-100 py-5">
+                <div class="md:grid md:grid-cols-3 md:gap-6">
+                    <div class="md:col-span-1">
+                        {{-- step 1 - data diri --}}
+                        <div class="px-5">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Diri</h3>
+                            <p class="mt-1 text-sm text-gray-600">
+                                Informasi tentang data diri peserta.
+                            </p>
+                        </div>
                     </div>
-                     <p class="mt-2 text-sm text-gray-500">
-                        Contoh: Kelas 9 / Semester 1 / Peringkat 1
-                    </p>
-                </div>
+                    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
+                        <div class="shadow sm:rounded-md sm:overflow-hidden">
 
-                <div class="grid">
-                    <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Hafidz / Hafidzoh (minimal 1 juz Al-Qur'an)</label>
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="hafidz" placeholder="Contoh: juz 1"/>
-                    </div>
-                </div>
+                            {{-- step 1 - identitas peserta --}}
+                            <div class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
 
-                <div class="font-bold text-xl mt-5">
-                    <h3>Non Akademik</h3>
-                </div>
+                                {{-- Nama lengkap --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            Nama Lengkap <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="text" name="nama_lengkap"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="Nama lengkap sesuai Ijazah" required>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            Nama lengkap peserta sesuai yang tercantum di Ijazah
+                                        </p>
+                                    </div>
+                                </div>
 
-                <div class="grid mb-5">
-                    <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Jenis Lomba</label>
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis_lomba" placeholder="misal: kejuaran catur"/>
-                    </div>
+                                {{-- Jenis Kelamin --}}
 
-                </div>
+                                <fieldset>
+                                    <div>
+                                        <legend class="text-base font-medium text-gray-900">Jenis Kelamin <span
+                                                class="text-red-600">* wajib diisi</span></legend>
+                                    </div>
+                                    <div class="mt-4 space-y-4">
+                                        <div class="flex items-center">
+                                            <input name="jenis_kelamin" type="radio"
+                                                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                                value="l" checked="checked">
+                                            <label class="ml-3 block text-sm font-medium text-gray-700">
+                                                Laki-laki
+                                            </label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input name="jenis_kelamin" type="radio"
+                                                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                                value="p">
+                                            <label class="ml-3 block text-sm font-medium text-gray-700">
+                                                Perempuan
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                {{-- Tempat Lahir --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label for="company-website" class="block text-sm font-medium text-gray-700">
+                                            Tempat Lahir <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="text" name="tempat_lahir"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="Tempat lahir" required>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            Tempat Lahir Peserta
+                                        </p>
+                                    </div>
+                                </div>
 
-                <div class="grid grid-cols-6 gap-6">
-                    <div class="col-span-6 sm:col-span-3">
-                        <label class="block text-sm font-medium text-gray-700">Juara ke</label>
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="juara_ke" placeholder="Juara ke" />
-                    </div>
+                                {{-- Tanggal Lahir --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label for="company-website" class="block text-sm font-medium text-gray-700">
+                                            Tanggal Lahir <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="text"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy"
+                                                placeholder="dd-mm-yyyy" name="tanggal_lahir" data-mask required>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            Tanggal Lahir Peserta
+                                        </p>
+                                    </div>
+                                </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                        <label class="block text-sm font-medium text-gray-700">Tingkat</label>
-                        <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="jtingkat" style="width: 100%;" name="juara_tingkat">
-                            <option value="">-- pilih tingkat --</option>
-                            @foreach (['kabupaten/kota', 'Karesidenan', 'provinsi', 'nasional'] as $tingkat)
-                            <option value="{{ $tingkat }}">{{ $tingkat }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
+                                {{-- nik --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            NIK <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="number" name="nik"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="NIK" required>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            16 angka NIK sesuai yang tercantum di KK
+                                        </p>
+                                    </div>
+                                </div>
 
-                <div class="text-sm text-gray-600">
-                    Kejuaraan minimal tingkat Kabupaten / kota
-                </div>
+                                {{-- nisn --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            NISN
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="number" name="nisn"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="NISN">
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            NISN Peserta
+                                        </p>
+                                    </div>
+                                </div>
 
-                <div class="font-semibold text-xl mt-5">
-                    <h3>Rekomendasi</h3>
-                </div>
+                                {{-- alamat lengkap --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            Alamat Lengkap <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <textarea
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="Alamat lengkap sesuai KK" name="alamat_lengkap" required></textarea>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            Alamat Lengkap Peserta, lihat di KK
+                                        </p>
+                                    </div>
+                                </div>
 
-                <div class="grid">
-                    {{-- <label>Rekomendasi</label> --}}
-                    <div class="mt-4">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input name="rekomendasi_mwc" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                            </div>
-                            <div class="ml-3 text-sm">
-                                <label for="comments" class="font-medium text-gray-700">Rekomendasi MWC</label>
-                                <p class="text-gray-500">Merupakan peserta rekomandasi MWC.</p>
+                                <div class="grid grid-cols-3 gap-6">
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="dukuh"
+                                            class="block text-sm font-medium text-gray-700">Dukuh</label>
+                                        <input type="text" name="dukuh" id="dukuh" autocomplete="dukuh"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Dukuh">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="rt" class="block text-sm font-medium text-gray-700">RT</label>
+                                        <input type="text" name="rt" id="rt" autocomplete="rt"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="RT">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="rw" class="block text-sm font-medium text-gray-700">RW</label>
+                                        <input type="text" name="rw" id="rw" autocomplete="rw"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="RW">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="desa_kelurahan"
+                                            class="block text-sm font-medium text-gray-700">Desa/Kelurahan</label>
+                                        <input type="text" name="desa_kelurahan" id="desa_kelurahan"
+                                            autocomplete="desa_kelurahan"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Desa/Kelurahan">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="kecamatan"
+                                            class="block text-sm font-medium text-gray-700">Kecamatan</label>
+                                        <input type="text" name="kecamatan" id="kecamatan" autocomplete="kecamatan"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Kecamatan">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="kabupaten_kota"
+                                            class="block text-sm font-medium text-gray-700">Kabupaten/Kota</label>
+                                        <input type="text" name="kabupaten_kota" id="kabupaten_kota"
+                                            autocomplete="kabupaten_kota"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Kabupaten/Kota">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="provinsi"
+                                            class="block text-sm font-medium text-gray-700">Provinsi</label>
+                                        <input type="text" name="provinsi" id="provinsi" autocomplete="provinsi"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Provinsi">
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <label for="kode_pos" class="block text-sm font-medium text-gray-700">Kode
+                                            Pos</label>
+                                        <input type="text" name="kode_pos" id="kode_pos" autocomplete="kode_pos"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Kode Pos">
+                                    </div>
+                                </div>
+
+                                <div class="grid">
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label class="block text-sm font-medium text-gray-700">Pilihan Jurusan <span
+                                                class="text-red-600">* wajib diisi</span></label>
+                                        <select name="pilihan_jurusan"
+                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            required>
+                                            @foreach ($jurusan->get() as $jrs)
+                                                <option value="{{ $jrs->id }}"> {{ $jrs->nama }} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-500">
+                                        Jurusan pilihan
+                                    </p>
+                                </div>
+
+                                {{-- asal sekolah --}}
+
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            Asal Sekolah <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <select id="asal-sekolah" name="asal_sekolah"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="Asal Sekolah"></select>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            Asal Sekolah Peserta
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {{-- tahun lulus --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            Tahun Lulus <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <select name="tahun_lulus"
+                                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                required>
+                                                @for ($i = now()->year; $i >= 2015; $i--)
+                                                    <option value="{{ $i }}"> {{ $i }} </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            tahun Lulus Peserta
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {{-- Penerima KIP --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <div class="flex items-start">
+                                            <div class="flex items-center h-5">
+                                                <input name="penerima_kip" type="checkbox"
+                                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                                    id="pkip" onclick='fkip()'>
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="comments" class="font-medium text-gray-700">Penerima
+                                                    KIP</label>
+                                                <p class="text-gray-500">Merupakan peserta Penerima KIP.</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="text" name="no_kip"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 disabled:bg-gray-500 disabled:opacity-20 disabled:cursor-not-allowed"
+                                                id="input-kip" placeholder="No. KIP" disabled>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            No. KIP
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                {{-- Nomer HP --}}
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">
+                                            No. HP <span class="text-red-600">* wajib diisi</span>
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="number" name="no_hp"
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                placeholder="No. HP" required>
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-500">
+                                            No. HP Peserta
+                                        </p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
 
-
-
-                <div class="grid my-5">
-                    <div class="col-span-3 sm:col-span-2">
-                        <label class="block text-sm font-bold text-gray-700">Saran Dari</label>
-                        <input type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="saran_dari" placeholder="Dapat saran siapa?"/>
+                    <div class="col-span-3 p-3"></div>
+                    {{-- step 2 --}}
+                    <div class="md:col-span-1">
+                        {{-- step 2 - identitas orang tua --}}
+                        <div class="px-5" x-show="step === 2" x-transition>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Identitas Orang Tua</h3>
+                            <p class="mt-1 text-sm text-gray-600">
+                                Informasi data orang tua peserta.
+                            </p>
+                        </div>
                     </div>
+                    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
 
+                        {{-- step 2 - identitas orang tua --}}
+                        <div x-show="step === 2" x-transition
+                            class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
+                            <div class="grid grid-cols-6 gap-6">
+
+                                {{-- identitas ayah --}}
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700">Nama Ayah <span
+                                            class="text-red-600">* wajib diisi</span></label>
+                                    <input type="text" name="nama_ayah"
+                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Nama lengkap Ayah" required>
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700">No. HP Ayah</label>
+                                    <input type="text" name="no_ayah"
+                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="No. HP Ayah">
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
+                                    <input type="text" name="pekerjaan_ayah"
+                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Pekerjaan Ayah">
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3"></div>
+
+                                {{-- idntitas ibu --}}
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700">Nama Ibu <span
+                                            class="text-red-600">* wajib diisi</span></label>
+                                    <input type="text" name="nama_ibu"
+                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Nama Ibu" required>
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700">No. HP Ibu</label>
+                                    <input type="text" name="no_ibu"
+                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="No. HP Ibu">
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label class="block text-sm font-medium text-gray-700">Pekerjaan Ibu</label>
+                                    <input type="text" name="pekerjaan_ibu"
+                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Pekerjaan Ibu">
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    {{-- end: step 2 --}}
+
+                    <div class="col-span-3 p-3"></div>
+                    {{-- step 3 --}}
+                    <div class="md:col-span-1">
+                        {{-- step 3 - Jenis beasiswa --}}
+                        <div class="px-5">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Jenis Beasiswa / Prestasi</h3>
+                            <p class="mt-1 text-sm text-gray-600">
+                                Jenis beasiswa peserta. diisi jika peserta memiliki beasiswa atau prestasi.
+                            </p>
+                        </div>
+                        {{-- end step --}}
+                    </div>
+                    <div class="mt-5 md:mt-0 md:col-span-2 px-0 md:px-4">
+                        {{-- tep 3 - jenis beasiswa --}}
+                        <div class="p-6 md:px-4 md:py-5 bg-white space-y-6 border border-gray-300 rounded shadow">
+
+                            <div>
+
+                                <div class="font-bold text-xl">
+                                    <h3>Akademik</h3>
+                                </div>
+
+
+                                <div class="grid mb-5">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">Peringkat kelas (Apabila
+                                            pernah mendapatkan peringkat 1, 2 atau 3)</label>
+
+                                        <input type="text"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="kelas/semester/peringkat" name="Kelas / Semester / Peringkat">
+
+                                        <!-- /.input group -->
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-500">
+                                        Contoh: Kelas 9 / Semester 1 / Peringkat 1
+                                    </p>
+                                </div>
+
+                                <div class="grid">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">Hafidz / Hafidzoh (minimal 1
+                                            juz Al-Qur'an)</label>
+                                        <input type="text"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            name="hafidz" placeholder="Contoh: juz 1" />
+                                    </div>
+                                </div>
+
+                                <div class="font-bold text-xl mt-5">
+                                    <h3>Non Akademik</h3>
+                                </div>
+
+                                <div class="grid mb-5">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700">Jenis Lomba</label>
+                                        <input type="text"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            name="jenis_lomba" placeholder="misal: kejuaran catur" />
+                                    </div>
+
+                                </div>
+
+                                <div class="grid grid-cols-6 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label class="block text-sm font-medium text-gray-700">Juara ke</label>
+                                        <input type="text"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            name="juara_ke" placeholder="Juara ke" />
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label class="block text-sm font-medium text-gray-700">Tingkat</label>
+                                        <select
+                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            id="jtingkat" style="width: 100%;" name="juara_tingkat">
+                                            <option value="">-- pilih tingkat --</option>
+                                            @foreach (['kabupaten/kota', 'Karesidenan', 'provinsi', 'nasional'] as $tingkat)
+                                                <option value="{{ $tingkat }}">{{ $tingkat }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="text-sm text-gray-600">
+                                    Kejuaraan minimal tingkat Kabupaten / kota
+                                </div>
+
+                                <div class="font-semibold text-xl mt-5">
+                                    <h3>Rekomendasi</h3>
+                                </div>
+
+                                <div class="grid">
+                                    {{-- <label>Rekomendasi</label> --}}
+                                    <div class="mt-4">
+                                        <div class="flex items-start">
+                                            <div class="flex items-center h-5">
+                                                <input name="rekomendasi_mwc" type="checkbox"
+                                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="comments" class="font-medium text-gray-700">Rekomendasi
+                                                    MWC</label>
+                                                <p class="text-gray-500">Merupakan peserta rekomandasi MWC.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="grid my-5">
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <label class="block text-sm font-bold text-gray-700">Saran Dari</label>
+                                        <input type="text"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            name="saran_dari" placeholder="Dapat saran siapa?" />
+                                    </div>
+
+                                </div>
+                            </div> <!-- row -->
+
+                        </div>
+
+
+                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                            <button
+                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Submit
+                            </button>
+                        </div>
+
+                    </div>
+                    {{-- end: step 3 --}}
                 </div>
-            </div> <!-- row -->
-
-          </div>
-
-
-          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Submit
-            </button>
-          </div>
-
-    </div>
-    {{-- end: step 3 --}}
-  </div>
-</div>
+            </div>
 
     </section>
-      </form>
+    </form>
 @endsection
 
 @section('head')
-<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 @endsection
 
-@section('footer')    <!-- jQuery -->
+@section('footer') <!-- jQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>
 
     <script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
@@ -506,65 +605,67 @@
 
 
             new TomSelect('#asal-sekolah', {
-    valueField: 'nama',
-    labelField: 'nama',
-    searchField: 'nama',
-    // mengambil data dari sumber eksternal
-    load: function(query, callback) {
-        var url = `https://data-sekolah.vercel.app/api/search?name=${encodeURIComponent(query)}&type=SMP,MTs,MA&limit=25`;
+                valueField: 'nama',
+                labelField: 'nama',
+                searchField: 'nama',
+                // mengambil data dari sumber eksternal
+                load: function(query, callback) {
+                    var url =
+                        `https://data-sekolah.vercel.app/api/search?name=${encodeURIComponent(query)}&type=SMP,MTs&limit=25`;
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                callback(data.data);
-            })
-            .catch(() => {
-                callback();
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            callback(data.data);
+                        })
+                        .catch(() => {
+                            callback();
+                        });
+                },
+                // fungsi kustom untuk merender opsi dan item
+                render: {
+                    option: function(item, escape) {
+                        return `<div class="py-2">
+                        <div class="mb-1">
+                            <span class="h4">${escape(item.nama)}</span>
+                        </div>
+                        <div class="text-gray-500">NPSN: ${escape(item.npsn)}</div>
+                        <div class="text-gray-500">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
+                        <div class="text-gray-500">Status: ${escape(item.status)}</div>
+                        <div class="text-gray-500">District: ${escape(item.district.nama)}</div>
+                        <div class="text-gray-500">City: ${escape(item.kota.nama)}</div>
+                        <div class="text-gray-500">Province: ${escape(item.provinsi.nama)}</div>
+                    </div>`;
+                    },
+                    item: function(item, escape) {
+                        return `<div class="py-2">
+                        <div class="mb-1">
+                            <span class="h4">${escape(item.nama)}</span>
+                        </div>
+                        <div class="text-gray-500">NPSN: ${escape(item.npsn)}</div>
+                        <div class="text-gray-500">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
+                        <div class="text-gray-500">Status: ${escape(item.status)}</div>
+                        <div class="text-gray-500">District: ${escape(item.district.nama)}</div>
+                        <div class="text-gray-500">City: ${escape(item.kota.nama)}</div>
+                        <div class="text-gray-500">Province: ${escape(item.provinsi.nama)}</div>
+                    </div>`;
+                    }
+                },
             });
-    },
-    // fungsi kustom untuk merender opsi dan item
-    render: {
-        option: function(item, escape) {
-            return `<div class="py-2">
-                        <div class="mb-1">
-                            <span class="h4">${escape(item.nama)}</span>
-                        </div>
-                        <div class="text-muted">NPSN: ${escape(item.npsn)}</div>
-                        <div class="text-muted">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
-                        <div class="text-muted">Status: ${escape(item.status)}</div>
-                        <div class="text-muted">District: ${escape(item.district.nama)}</div>
-                        <div class="text-muted">City: ${escape(item.kota.nama)}</div>
-                        <div class="text-muted">Province: ${escape(item.provinsi.nama)}</div>
-                    </div>`;
-        },
-        item: function(item, escape) {
-            return `<div class="py-2">
-                        <div class="mb-1">
-                            <span class="h4">${escape(item.nama)}</span>
-                        </div>
-                        <div class="text-muted">NPSN: ${escape(item.npsn)}</div>
-                        <div class="text-muted">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
-                        <div class="text-muted">Status: ${escape(item.status)}</div>
-                        <div class="text-muted">District: ${escape(item.district.nama)}</div>
-                        <div class="text-muted">City: ${escape(item.kota.nama)}</div>
-                        <div class="text-muted">Province: ${escape(item.provinsi.nama)}</div>
-                    </div>`;
-        }
-    },
-});
 
         })
-            function fkip() {
-                let kip = $('#pkip:checked').length;
 
-                if (kip) {
-                    $('#input-kip').prop('disabled', false)
-                } else {
+        function fkip() {
+            let kip = $('#pkip:checked').length;
 
-                    $('#input-kip').prop('disabled', true)
-                    $('#input-kip').val('')
-                }
+            if (kip) {
+                $('#input-kip').prop('disabled', false)
+            } else {
 
+                $('#input-kip').prop('disabled', true)
+                $('#input-kip').val('')
             }
+
+        }
     </script>
 @endsection
