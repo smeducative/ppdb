@@ -611,7 +611,7 @@
                 // mengambil data dari sumber eksternal
                 load: function(query, callback) {
                     var url =
-                        `https://data-sekolah.vercel.app/api/search?name=${encodeURIComponent(query)}&type=SMP,MTs&limit=25`;
+                        `https://data-sekolah.vercel.app/api/search?keyword=${encodeURIComponent(query)}&type=SMP,MTs&limit=25`;
 
                     fetch(url)
                         .then(response => response.json())
@@ -622,6 +622,7 @@
                             callback();
                         });
                 },
+                create: true,
                 // fungsi kustom untuk merender opsi dan item
                 render: {
                     option: function(item, escape) {
@@ -629,20 +630,15 @@
                         <div class="mb-1">
                             <span class="h4">${escape(item.nama)}</span>
                         </div>
-                        <div class="text-gray-500">NPSN: ${escape(item.npsn)}</div>
                         <div class="text-gray-500">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
                         <div class="text-gray-500">Status: ${escape(item.status)}</div>
                     </div>`;
                     },
                     item: function(item, escape) {
-                        return `<div class="py-2">
+                        return `
                         <div class="mb-1">
                             <span class="h4">${escape(item.nama)}</span>
-                        </div>
-                        <div class="text-gray-500">NPSN: ${escape(item.npsn)}</div>
-                        <div class="text-gray-500">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
-                        <div class="text-gray-500">Status: ${escape(item.status)}</div>
-                    </div>`;
+                        </div>`;
                     }
                 },
             });
