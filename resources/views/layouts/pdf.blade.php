@@ -8,19 +8,13 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/css-admin/adminlte.min.css') }}">
     <style>
-        .page-break {
+        /* .page-break {
             page-break-after: always;
-        }
-
-        @page {
-            size: B4;
-        }
+        } */
     </style>
 </head>
 
 <body>
-
-
     @yield('content')
 
     <script>
