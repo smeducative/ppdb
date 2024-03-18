@@ -11,16 +11,10 @@
         .page-break {
             page-break-after: always;
         }
-
-        @page {
-            size: B4;
-        }
     </style>
 </head>
 
 <body>
-
-
     @yield('content')
 
     <script>

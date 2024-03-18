@@ -44,9 +44,9 @@
     </table>
 
     <div class="row mb-5">
-        <div class="col-md-4">&nbsp;</div>
-        <div class="col-md-4">&nbsp;</div>
-        <div class="col-md-4" style="font-size: 19px;">
+        <div class="col-4">&nbsp;</div>
+        <div class="col-4">&nbsp;</div>
+        <div class="col-4" style="font-size: 19px;">
             <strong class="d-block">Kepada:</strong>
             <strong class="d-block">Yth. Orang Tua/Wali Siswa Baru</strong>
             <strong class="d-block">Di:</strong>
@@ -116,19 +116,19 @@
 </div>
 
 <div class="row mt-2">
-    <div class="col-md-6">&nbsp;</div>
-    <div class="col-md-6 text-center">
+    <div class="col-6">&nbsp;</div>
+    <div class="col-6 text-center">
         <strong class="d-block">Karanganyar, {{ now()->translatedFormat('d F Y') }}</strong>
     </div>
 
-    <div class="col-md-6">&nbsp;</div>
-    <div class="col-md-6 mt-5">&nbsp;</div>
-    <div class="col-md-6">&nbsp;</div>
-    <div class="col-md-6 mt-5 text-center">
+    <div class="col-6">&nbsp;</div>
+    <div class="col-6 mt-5">&nbsp;</div>
+    <div class="col-6">&nbsp;</div>
+    <div class="col-6 mt-5 text-center">
         ( {{ auth()->user()->name }} )
     </div>
 
-    <div class="col-md-12 mt-5">
+    <div class="col-12 mt-5">
         <strong>Nb:* Hari {{ $carbon->parse($setting->body['batas_akhir_ppdb'])->subDay()->translatedFormat('l. d F Y') }}</strong>  Pukul 07.00, Siswa berangkat memakai seragam Osis SMP/MTs untuk <strong>persiapan/pembekalan
         kegiatan Makesta.</strong>
     </div>
