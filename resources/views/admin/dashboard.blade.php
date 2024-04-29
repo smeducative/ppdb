@@ -148,7 +148,7 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-orange">
                         <div class="inner">
 							<h3>{{ $count['bdp'] }}</h3>
 
@@ -215,7 +215,7 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-orange">
                         <div class="inner">
                             <h3>{{ $du['bdp'] }}</h3>
 
