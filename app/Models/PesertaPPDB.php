@@ -24,9 +24,7 @@ class PesertaPPDB extends Model
         'tanggal_lahir' => 'date',
     ];
 
-    protected $with = [
-        'jurusan',
-    ];
+    protected $with = ['jurusan'];
 
     protected static function boot()
     {
@@ -52,7 +50,8 @@ class PesertaPPDB extends Model
     {
         return $this->whereYear('created_at', now()->year)
             ->whereJurusanId(request('pilihan_jurusan'))
-            ->withTrashed()->max('no_urut') + 1;
+            ->withTrashed()
+            ->max('no_urut') + 1;
     }
 
     public function Kwitansi()
@@ -63,5 +62,16 @@ class PesertaPPDB extends Model
     public function ukuranSeragam()
     {
         return $this->hasOne(UkuranSeragam::class, 'peserta_ppdb_id');
+    }
+
+    public function toWhatsapp($no)
+    {
+        if (! $no) return $no;
+
+        $no = preg_replace('/^0/', '62', $no);
+        $no = preg_replace('/^8/', '628', $no);
+
+        // Menghasilkan URL WhatsApp
+        return 'https://wa.me/' . $no;
     }
 }
