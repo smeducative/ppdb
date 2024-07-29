@@ -17,6 +17,10 @@ class AdminController extends Controller
 
         $acc = PesertaPPDB::whereYear('created_at', $tahun)->get();
 
+        if (!$acc) {
+            return abort(404);
+        }
+
         $penerimaan = [
         'diterima' => $acc->where('diterima', 1)->count(),
         'ditolak' => $acc->where('diterima', 2)->count(),

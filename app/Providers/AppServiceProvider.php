@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\View\Composers\YearVisibleComposer;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
         App::setLocale('id');
 
         Schema::defaultStringLength(191);
+
+        Facades\View::composer('*', YearVisibleComposer::class);
     }
 }
