@@ -65,7 +65,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::post('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'terimaPeserta'])->name('ppdb.terima.peserta');
 
-    Route::get('/ppdb/list/terdaftar-ulang/{jurusan}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
+    Route::get('/ppdb/list/terdaftar-ulang/{jurusan?}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
 
     Route::prefix('kwitansi')->group(function () {
         Route::get('show', [KwitansiController::class, 'showPesertaDiterima'])->name('ppdb.kwitansi.show');
@@ -87,7 +87,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     });
 
     Route::prefix('ukuran-seragam')->group(function () {
-        Route::get('show/{jurusan}', [UkuranSeragamController::class, 'showJurusanPeserta'])->name('ppdb.seragam.show.jurusan');
+        Route::get('show/{jurusan?}', [UkuranSeragamController::class, 'showJurusanPeserta'])->name('ppdb.seragam.show.jurusan');
 
         Route::post('/ubah/seragam', [UkuranSeragamController::class, 'ubahUkuranSeragam'])->name('ppdb.ubah.seragam');
     });

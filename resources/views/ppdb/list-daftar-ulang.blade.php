@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label class="form-label">Data Tahun:</label>
                                 <select class="custom-select form-control-border" id="ppdb-tahun">
-                                    @for ($i = now()->year; $i >= 2021; $i--)
+                                    @for($i = now()->year; $i >= $years_visible ; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
@@ -71,9 +71,7 @@
                                         <table class="table table-striped table-bordered" id="list-ppdb">
                                             <thead>
                                                 <tr>
-
-                                                    <th>No. Pendaftaran</th>
-                                                    <th>Nama</th>
+                                                    <th>No. Pendaftaran / Nama</th>
                                                     <th>Tempat, Tanggal Lahir</th>
                                                     <th>No. Telepon</th>
                                                     <th>Asal Sekolah</th>
@@ -83,9 +81,14 @@
                                             <tbody>
                                                 @foreach ($pesertappdb as $peserta)
                                                     <tr>
-                                                        <td> {{ $peserta->no_pendaftaran }} </td>
-                                                        <td> <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
-                                                                {{ $peserta->nama_lengkap }}</a> </td>
+                                                        <td>
+                                                            <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
+                                                                {{ $peserta->nama_lengkap }}</a>
+                                                                <br>
+                                                                <span class="text-secondary">
+                                                                    {{ $peserta->no_pendaftaran }}
+                                                                </span>
+                                                            </td>
                                                         <td> {{ $peserta->tempat_lahir }},
                                                             {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
                                                         <td>
@@ -94,7 +97,7 @@
                                                             </a>
                                                         </td>
                                                         <td> {{ $peserta->asal_sekolah }} </td>
-                                                        <td> {{ $peserta->jurusan->nama }} </td>
+                                                        <td> {{ $peserta->jurusan->abbreviation }} </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

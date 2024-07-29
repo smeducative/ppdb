@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Data Tahun:</label>
                                     <select class="custom-select form-control-border" id="ppdb-tahun">
-										@for($i = now()->year; $i >= 2021 ; $i--)
+										@for($i = now()->year; $i >= $years_visible ; $i--)
                                         <option value="{{ $i }}" {{ request('tahun', now()->year) == $i ? 'selected' : '' }}>{{ $i }}</option>
 										@endfor
                                     </select>
@@ -487,13 +487,16 @@
             //-------------
             var areaYearChartData = {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-                    datasets: [{
+                    datasets: [
+                    @isset($yearDiff[$lastYear])
+                    {
                         label: 'Tahun {{ $lastYear }}',
                         data: {!! $yearDiff[$lastYear]->pluck('jumlah_pendaftar') !!},
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
                     },
+                    @endisset
                     {
                         label: 'Tahun {{ $tahun }}',
                         data: {!! $yearDiff[$tahun]->pluck('jumlah_pendaftar') !!},
@@ -505,10 +508,15 @@
 
             var barYearCanvas = $('#yearDiff').get(0).getContext('2d')
             var barYearData = $.extend(true, {}, areaYearChartData)
-            var lastYear = areaYearChartData.datasets[0]
             var year = areaYearChartData.datasets[1]
             barYearData.datasets[0] = year
+
+            @isset($yearDiff[$lastYear])
+
+            var lastYear = areaYearChartData.datasets[0]
             barYearData.datasets[1] = lastYear
+
+            @endisset
 
             var baryYearOpt = {
                 responsive              : true,

@@ -14,6 +14,9 @@ class PesertaPPDBSeeder extends Seeder
      */
     public function run()
     {
-        PesertaPPDB::factory(500)->create();
+        PesertaPPDB::factory(5)->create();
+
+        // add more 300 but for the before this year
+        PesertaPPDB::factory(5)->create(['created_at' => now()->subYear()]);
     }
 }

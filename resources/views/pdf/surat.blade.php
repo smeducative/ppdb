@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Data Tahun:</label>
                                     <select class="custom-select form-control-border" id="ppdb-tahun">
-										@for($i = now()->year; $i >= 2021 ; $i--)
+										@for($i = now()->year; $i >= $years_visible ; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
 										@endfor
                                     </select>

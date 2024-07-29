@@ -119,10 +119,14 @@ class PendaftaranPPDB extends Controller
 
     // show daftar ulang
 
-    public function listDaftarUlang($jurusan)
+    public function listDaftarUlang($jurusan = null)
     {
         $tahun = request('tahun', now()->year);
-        $pesertappdb = PesertaPPDB::with('jurusan')->has('kwitansi')->whereJurusanId($jurusan)->whereYear('created_at', $tahun)->get(); // proto
+        $pesertappdb = PesertaPPDB::with('jurusan')
+                ->has('kwitansi')
+                ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+                ->whereYear('created_at', $tahun)
+                ->get(); // proto
 
         return view('ppdb.list-daftar-ulang', compact('pesertappdb'));
     }

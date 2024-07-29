@@ -26,7 +26,9 @@ class SeragamExport implements FromCollection, WithHeadings, WithMapping, Should
     public function collection()
     {
         return PesertaPPDB::with('ukuranSeragam')
-            ->whereJurusanId($this->jurusan)
+            ->when($this->jurusan != null, function ($query) {
+                return $query->where('jurusan_id', $this->jurusan);
+            })
             ->whereDiterima(1)
             ->whereYear('created_at', $this->tahun)
             ->get();
@@ -37,6 +39,9 @@ class SeragamExport implements FromCollection, WithHeadings, WithMapping, Should
         return [
             'No Pendaftaran',
             'Nama Lengkap',
+            'Jenis Kelamin',
+            'Tempat Lahir',
+            'Tgl Lahir',
             'Baju (wear pack)',
             'Jas',
             'Sepatu',
@@ -49,6 +54,9 @@ class SeragamExport implements FromCollection, WithHeadings, WithMapping, Should
         return [
             $row->no_pendaftaran,
             $row->nama_lengkap,
+            $row->jenis_kelamin === 'p' ? 'Perempuan' : 'Laki-laki',
+            $row->tempat_lahir,
+            $row->tanggal_lahir?->format('d-m-Y'),
             $row->ukuranSeragam->baju ?? '-',
             $row->ukuranSeragam->jas ?? '-',
             $row->ukuranSeragam->sepatu ?? '-',

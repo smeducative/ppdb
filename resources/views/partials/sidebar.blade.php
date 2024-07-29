@@ -90,6 +90,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('ppdb.daftar.ulang.list') }}" class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Semua Peserta</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU AT</p>
@@ -124,6 +130,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.seragam.show.jurusan') }}" class="nav-link {{ request()->is('dashboard/ukuran-seragam/show') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Semua Peserta</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 3]) }}" class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/3') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
