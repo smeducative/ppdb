@@ -88,7 +88,7 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
             $peserta->tempat_lahir,
             $peserta->tanggal_lahir->format('d F Y'),
             $peserta->jurusan->nama,
-            $peserta->nik,
+            '\''.$peserta->nik,
             $peserta->nisn,
             $peserta->alamat_lengkap,
             $peserta->dukuh,
