@@ -75,9 +75,8 @@
                                 <table class="table table-striped table-bordered" id="list-ppdb">
                                     <thead>
                                         <tr>
-
-                                            <th>No. Pendaftaran</th>
-                                            <th>Nama</th>
+                                            <th>No. Pendaftaran / Nama</th>
+                                            <th>Jenis Kelamin</th>
                                             <th>Baju</th>
                                             <th>Jas</th>
                                             <th>Sepatu</th>
@@ -88,9 +87,14 @@
                                     <tbody>
                                         @foreach ($pesertappdb as $peserta)
                                         <tr>
-                                            <td> {{ $peserta->no_pendaftaran }} </td>
-                                            <td> <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
-                                                    {{ $peserta->nama_lengkap }}</a> </td>
+                                            <td>
+                                                <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
+                                                    {{ $peserta->nama_lengkap }}
+                                                </a>
+                                                <br>
+                                                <small>{{ $peserta->no_pendaftaran }}</small>
+                                                </td>
+                                            <td> {{ $peserta->jenis_kelamin == 'l' ? 'Laki-laki' : 'Perempuan' }} </td>
                                             <td> {{ $peserta->ukuranSeragam->baju ?? '-' }} </td>
                                             <td> {{ $peserta->ukuranSeragam->jas ?? '-' }} </td>
                                             <td> {{ $peserta->ukuranSeragam->sepatu ?? '-' }} </td>

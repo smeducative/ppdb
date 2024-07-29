@@ -7,12 +7,12 @@ use App\Models\UkuranSeragam;
 
 class UkuranSeragamController extends Controller
 {
-    public function showJurusanPeserta($jurusan)
+    public function showJurusanPeserta($jurusan = null)
     {
         $tahun = request('tahun', now()->year);
 
         $pesertappdb = PesertaPPDB::with(['jurusan', 'ukuranSeragam'])->where('diterima', 1)
-            ->whereJurusanId($jurusan)
+            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)->latest()->get();
 
         return view('ppdb.ukuran-seragam', compact('pesertappdb'));
