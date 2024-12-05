@@ -1,10 +1,10 @@
 <div class="bg-white py-12" data-aos="fade-up" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70">
+    <div class="bg-red-700 py-16 mb-12 text-center">
+        <h1 class="text-white text-3xl lg:text-4xl xl:text-5xl font-bold lg:tracking-tight underline decoration-amber-400">
+            Rincian Perolehan Beasiswa
+        </h1>
+    </div>
     <main class="max-w-screen-xl mx-auto px-5 items-center pt-16 pb-8 md:pt-8 gap-6">
-        <div class="mb-12 text-center">
-            <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold lg:tracking-tight underline decoration-amber-400">
-                Rincian Perolehan Beasiswa
-            </h1>
-        </div>
 
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -19,7 +19,7 @@
                 </p>
 
                 <table class="mt-8 border border-gray-800 text-sm">
-                    <thead class="bg-teal-200">
+                    <thead class="bg-red-500">
                         <tr>
                             <th class="border border-black p-2" rowspan="2">PERINGKAT KELAS</th>
                             <th class="border border-black p-2" colspan="2">BESAR BEASISWA & SYARAT</th>
@@ -63,7 +63,7 @@
                 </p>
 
                 <table class="mt-8 w-full border border-gray-800 text-sm">
-                    <thead class="bg-teal-200">
+                    <thead class="bg-red-500">
                         <tr>
                             <th class="border border-black p-2">JUARA</th>
                             <th class="border border-black p-2">KABUPATEN</th>

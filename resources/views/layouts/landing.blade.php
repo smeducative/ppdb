@@ -29,7 +29,7 @@
     @yield('content')
 
 <!-- Section 5 -->
-<footer class="bg-black text-white px-5 py-12">
+<footer class="bg-red-800 text-white px-5 py-12">
     <div class="max-w-screen-xl mx-auto">
 
         {{-- logo --}}

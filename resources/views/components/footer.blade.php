@@ -1,6 +1,6 @@
-<div class="bg-teal-200">
+<div class="bg-red-700">
     <div class="max-w-screen-xl mx-auto flex flex-col items-center py-12 text-center">
-        <div class="text-xl font-bold text-black">
+        <div class="text-xl font-bold text-white">
             Masih bingung dengan Pendaftaran Peserta Didik Baru?
 Yuk, tanyakan langsung.
         </div>

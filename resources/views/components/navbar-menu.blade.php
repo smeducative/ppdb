@@ -3,8 +3,8 @@
         x-init="$watch('open', value => console.log(value))">
         <div class="flex w-full lg:w-auto items-center justify-between">
             <a href="/" class="text-lg flex items-center">
-                <img src="/img/ppdb24.png" alt="ppdb smedip 2024" class="h-12">
-                <img src="/img/smedip-kristal.png" alt="ppdb smedip 2024" class="h-10">
+                <img src="/img/ppdb25-black.png" alt="ppdb smedip 2025" class="h-12">
+                <img src="/img/smedip-kristal.png" alt="ppdb smedip 2025" class="h-10">
                 {{-- <span class="font-bold text-slate-800">Smedip</span><span class="text-slate-500">24</span> --}}
             </a>
             {{-- <div class="block lg:hidden">
