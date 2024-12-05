@@ -1,5 +1,5 @@
 
-<div class="bg-teal-200">
+<div class="bg-red-700">
 
     <main class="max-w-screen-xl mx-auto px-5 grid lg:grid-cols-2 place-items-center pt-3 pb-8 md:pb-0 md:pt-8">
       <div class="md:order-1 block" data-aos="fade-left" data-aos-duration="1000" data-aos-easing="linear" data-aos-offset="70">
@@ -13,8 +13,8 @@
         <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">
           Penerimaan Peserta Didik Baru
         </h1>
-        <p class="text-lg mt-4 text-slate-600 max-w-xl">
-            Telah dibuka penerimaan peserta didik baru. Tahun Ajaran {{ now()->year }}/{{ now()->addYear()->year }}.
+        <p class="text-lg mt-4 text-white max-w-xl">
+            Telah dibuka penerimaan peserta didik baru. Tahun Ajaran 2025/2026.
         </p>
         <p class="text-xl font-bold underline">
             SMK Diponegoro Karanganyar
