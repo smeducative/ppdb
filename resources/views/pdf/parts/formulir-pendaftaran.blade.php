@@ -218,7 +218,7 @@
     </div>
     <div class="col-4">
         <div class="text-center mt-3 pr-8">
-            <strong>Karanganyar, {{ $peserta->created_at->translatedFormat('d F Y') }}</strong>
+            <strong>Pekalongan, {{ $peserta->created_at->translatedFormat('d F Y') }}</strong>
         </div>
     </div>
 

@@ -129,7 +129,7 @@
 <div class="row mt-5" style="font-size: 20px">
     <div class="col-6">&nbsp;</div>
     <div class="col-6 text-center">
-        <strong class="d-block">Karanganyar, {{ now()->translatedFormat('d F Y') }}</strong>
+        <strong class="d-block">Pekalongan, {{ now()->translatedFormat('d F Y') }}</strong>
     </div>
 
     <div class="col-6">&nbsp;</div>

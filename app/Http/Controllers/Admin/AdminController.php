@@ -15,32 +15,36 @@ class AdminController extends Controller
 
         $peserta = PesertaPPDB::select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
-        $acc = PesertaPPDB::whereYear('created_at', $tahun)->get();
+        $acc = PesertaPPDB::whereYear('created_at', $tahun);
 
-        if (!$acc) {
+        if (!$acc->count()) {
             return abort(404);
         }
 
         $penerimaan = [
-        'diterima' => $acc->where('diterima', 1)->count(),
-        'ditolak' => $acc->where('diterima', 2)->count(),
+            'diterima' => $acc->where('diterima', 1)->count(),
+            'ditolak' => $acc->where('diterima', 2)->count(),
         ];
 
         $pesertadu = PesertaPPDB::has('kwitansi')->select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
         $count = [
             'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
-            'tbsm' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
+            'to' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($peserta)->where('jurusan_id', 3)->first()->c ?? 0,
             'bdp' => collect($peserta)->where('jurusan_id', 4)->first()->c ?? 0,
+            'tkr' => collect($peserta)->where('jurusan_id', 5)->first()->c ?? 0,
+            'tsm' => collect($peserta)->where('jurusan_id', 6)->first()->c ?? 0,
             'all' => collect($peserta)->sum('c') ?? 0,
         ];
 
         $du = [
             'tkj' => collect($pesertadu)->where('jurusan_id', 1)->first()->c ?? 0,
-            'tbsm' => collect($pesertadu)->where('jurusan_id', 2)->first()->c ?? 0,
+            'to' => collect($pesertadu)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($pesertadu)->where('jurusan_id', 3)->first()->c ?? 0,
             'bdp' => collect($pesertadu)->where('jurusan_id', 4)->first()->c ?? 0,
+            'tkr' => collect($pesertadu)->where('jurusan_id', 5)->first()->c ?? 0,
+            'tsm' => collect($pesertadu)->where('jurusan_id', 6)->first()->c ?? 0,
             'all' => collect($pesertadu)->sum('c') ?? 0,
         ];
 
@@ -77,7 +81,7 @@ class AdminController extends Controller
         // perbandingan pendaftar bulanan per tahun sekarang dengan tahun sebelumnya
         $yearDiff = PesertaPPDB::select(
             DB::raw('YEAR(created_at) as tahun, MONTH(created_at) as bulan, count(*) as jumlah_pendaftar')
-            )
+        )
             ->whereRaw("YEAR(created_at) >= $lastYear")
             ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
             ->get();

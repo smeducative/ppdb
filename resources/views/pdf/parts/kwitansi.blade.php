@@ -49,7 +49,7 @@
 </table>
 
 <div class="text-right w-full px-5">
-    Karanganyar, {{ $kwitansi->created_at->format('d-m-Y') }}
+    Pekalongan, {{ $kwitansi->created_at->format('d-m-Y') }}
 </div>
 
 <div class="px-3 d-flex mt-2">

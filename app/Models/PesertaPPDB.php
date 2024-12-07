@@ -43,7 +43,7 @@ class PesertaPPDB extends Model
 
     public function jurusan()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(Jurusan::class)->withTrashed();
     }
 
     public function getNoUrut()

@@ -603,42 +603,112 @@
         $(document).ready(function() {
             $('[data-mask]').inputmask()
 
+            const offlineSchoolData = [{
+                    nama: "MTS MA'ARIF KARANGANYAR",
+                    bentuk_pendidikan: "MTs",
+                    status: "Swasta"
+                },
+                {
+                    nama: "SMP N 1 KARANGANYAR",
+                    bentuk_pendidikan: "SMP",
+                    status: "Negeri"
+                },
+                {
+                    nama: "SMP N 2 KARANGANYAR",
+                    bentuk_pendidikan: "SMP",
+                    status: "Negeri"
+                },
+                {
+                    nama: "MTS YMI WONOPRINGGO",
+                    bentuk_pendidikan: "MTs",
+                    status: "Swasta"
+                },
+                {
+                    nama: "SMP N 4 KAJEN",
+                    bentuk_pendidikan: "SMP",
+                    status: "Negeri"
+                },
+                {
+                    nama: "SMP ISLAM WONOPRINGGO",
+                    bentuk_pendidikan: "SMP",
+                    status: "Swasta"
+                },
+                {
+                    nama: "SMP N 1 WONOPRINGGO",
+                    bentuk_pendidikan: "SMP",
+                    status: "Negeri"
+                },
+                {
+                    nama: "SMP ISLAM YMI WONOPRINGGO",
+                    bentuk_pendidikan: "SMP",
+                    status: "Swasta"
+                },
+                {
+                    nama: "SMP SATU ATAP BRENGKOLANG",
+                    bentuk_pendidikan: "SMP",
+                    status: "Negeri"
+                },
+                {
+                    nama: "SMP N 3 KAJEN",
+                    bentuk_pendidikan: "SMP",
+                    status: "Negeri"
+                },
+                {
+                    nama: "MTS YAPIK KARANGANYAR",
+                    bentuk_pendidikan: "MTs",
+                    status: "Swasta"
+                },
+                {
+                    nama: "MTS SYARIF HIDAYATULLAH",
+                    bentuk_pendidikan: "MTs",
+                    status: "Swasta"
+                },
+                {
+                    nama: "SMP NUSANTARA GONDANG",
+                    bentuk_pendidikan: "SMP",
+                    status: "Swasta"
+                },
+                {
+                    nama: "SMP NU KAJEN",
+                    bentuk_pendidikan: "SMP",
+                    status: "Swasta"
+                },
+                {
+                    nama: "MTS HASBULLAH",
+                    bentuk_pendidikan: "MTs",
+                    status: "Swasta"
+                }
+            ];
 
             new TomSelect('#asal-sekolah', {
                 valueField: 'nama',
                 labelField: 'nama',
                 searchField: 'nama',
-                // mengambil data dari sumber eksternal
-                load: function(query, callback) {
-                    var url =
-                        `https://data-sekolah.vercel.app/api/search?keyword=${encodeURIComponent(query)}&type=SMP,MTs&limit=25`;
-
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                            callback(data.data);
-                        })
-                        .catch(() => {
-                            callback();
-                        });
-                },
+                options: offlineSchoolData,
                 create: true,
-                // fungsi kustom untuk merender opsi dan item
+                // Custom search function for offline data
+                score: function(search) {
+                    const scoringFunction = this.getScoreFunction(search);
+                    return function(item) {
+                        return scoringFunction(item);
+                    };
+                },
+                // Custom render functions remain the same
                 render: {
                     option: function(item, escape) {
                         return `<div class="py-2">
-                        <div class="mb-1">
-                            <span class="h4">${escape(item.nama)}</span>
-                        </div>
-                        <div class="text-gray-500">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
-                        <div class="text-gray-500">Status: ${escape(item.status)}</div>
-                    </div>`;
+                <div class="mb-1">
+                    <span class="h4">${escape(item.nama)}</span>
+                </div>
+                <div class="text-gray-500">Bentuk Pendidikan: ${escape(item.bentuk_pendidikan)}</div>
+                <div class="text-gray-500">Status: ${escape(item.status)}</div>
+            </div>`;
                     },
                     item: function(item, escape) {
                         return `
-                        <div class="mb-1">
-                            <span class="h4">${escape(item.nama)}</span>
-                        </div>`;
+            <div class="mb-1">
+                <span class="h4">${escape(item.nama)}</span>
+            </div>`;
                     }
                 },
             });
