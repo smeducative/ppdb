@@ -28,13 +28,17 @@ class AdminController extends Controller
 
         $pesertadu = PesertaPPDB::has('kwitansi')->select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
+        // based on id
+        // tjk = 1,  atph = 3, 
+        // bdp = 4, tsm = 6, tkr = 7
+
         $count = [
             'tkj' => collect($peserta)->where('jurusan_id', 1)->first()->c ?? 0,
             'to' => collect($peserta)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($peserta)->where('jurusan_id', 3)->first()->c ?? 0,
             'bdp' => collect($peserta)->where('jurusan_id', 4)->first()->c ?? 0,
-            'tkr' => collect($peserta)->where('jurusan_id', 6)->first()->c ?? 0,
-            'tsm' => collect($peserta)->where('jurusan_id', 7)->first()->c ?? 0,
+            'tsm' => collect($peserta)->where('jurusan_id', 6)->first()->c ?? 0,
+            'tkr' => collect($peserta)->where('jurusan_id', 7)->first()->c ?? 0,
             'all' => collect($peserta)->sum('c') ?? 0,
         ];
 
@@ -43,8 +47,8 @@ class AdminController extends Controller
             'to' => collect($pesertadu)->where('jurusan_id', 2)->first()->c ?? 0,
             'atph' => collect($pesertadu)->where('jurusan_id', 3)->first()->c ?? 0,
             'bdp' => collect($pesertadu)->where('jurusan_id', 4)->first()->c ?? 0,
-            'tkr' => collect($pesertadu)->where('jurusan_id', 6)->first()->c ?? 0,
-            'tsm' => collect($pesertadu)->where('jurusan_id', 7)->first()->c ?? 0,
+            'tsm' => collect($pesertadu)->where('jurusan_id', 6)->first()->c ?? 0,
+            'tkr' => collect($pesertadu)->where('jurusan_id', 7)->first()->c ?? 0,
             'all' => collect($pesertadu)->sum('c') ?? 0,
         ];
 
