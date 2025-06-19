@@ -66,6 +66,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::post('/ppdb/daftar-ulang/{uuid}', [PendaftaranPPDB::class, 'terimaPeserta'])->name('ppdb.terima.peserta');
 
     Route::get('/ppdb/list/terdaftar-ulang/{jurusan?}', [PendaftaranPPDB::class, 'listDaftarUlang'])->name('ppdb.daftar.ulang.list');
+    Route::get('/ppdb/list/belum-daftar-ulang/{jurusan?}', [PendaftaranPPDB::class, 'listBelumDaftarUlang'])->name('ppdb.belum.daftar.ulang.list');
 
     Route::prefix('kwitansi')->group(function () {
         Route::get('show', [KwitansiController::class, 'showPesertaDiterima'])->name('ppdb.kwitansi.show');
@@ -122,6 +123,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // export rekap sekolah
         Route::post('rekap-sekolah', [ExportController::class, 'exportRekapSekolah'])->name('export.rekap-sekolah');
+
+        // export belum daftar ulang
+        Route::post('belum-daftar-ulang', [ExportController::class, 'exportBelumDaftarUlang'])->name('export.belum.daftar.ulang');
     });
 
     // beasiswa route
@@ -136,6 +140,5 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik.export');
         Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
         Route::post('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip.export');
-
     });
 });
