@@ -3,14 +3,14 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
         <img src="/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">PPDB | Admin</span>
+        <span class="font-weight-light brand-text">PPDB | Admin</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+            <ul class="flex-column nav nav-pills nav-sidebar" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item">
@@ -24,7 +24,7 @@
                 </li>
                 {{-- <li class="nav-item">
                     <a href="/master/jurusan" class="nav-link">
-                        <i class="nav-icon fas fa-list-alt"></i>
+                        <i class="fa-list-alt nav-icon fas"></i>
                         <p>
                             Jurusan
                         </p>
@@ -37,7 +37,7 @@
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Pendaftaran PPDB
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -112,7 +112,7 @@
                         <i class="nav-icon fas fa-check-double"></i>
                         <p>
                             List Daftar Ulang
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -170,13 +170,77 @@
                     </ul>
                 </li>
                 <li
+                    class="nav-item has-treeview {{ request()->routeIs('ppdb.belum.daftar.ulang.list') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ request()->routeIs('ppdb.belum.daftar.ulang.list') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-times-circle"></i>
+                        <p>
+                            List Belum Daftar Ulang
+                            <i class="right fa-angle-left fas"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list') }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Semua Peserta</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 3]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/3') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>BDU AT</p>
+                            </a>
+                        </li>
+                        @if (request()->query('tahun', now()->year) < 2025)
+                            <li class="nav-item">
+                                <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 2]) }}"
+                                    class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/2') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>BDU TO</p>
+                                </a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 1]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/1') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>BDU TJKT</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 4]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/4') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>BDU BDP</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 6]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/6') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>BDU TSM</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 7]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/7') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>BDU TKR</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li
                     class="nav-item has-treeview {{ request()->routeIs('ppdb.seragam.show.jurusan') ? 'menu-open' : '' }}">
                     <a href="#"
                         class="nav-link {{ request()->routeIs('ppdb.seragam.show.jurusan') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tshirt"></i>
                         <p>
                             List Ukuran Baju
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -241,7 +305,7 @@
                         <i class="nav-icon fas fa-id-card"></i>
                         <p>
                             Kartu Pendaftaran
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -298,7 +362,7 @@
                         <i class="nav-icon fas fa-file"></i>
                         <p>
                             Form Pendaftaran
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -355,7 +419,7 @@
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Surat Diterima
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -412,7 +476,7 @@
                         <i class="nav-icon fas fa-money-check"></i>
                         <p>
                             Kwitansi
-                            <i class="right fas fa-angle-left"></i>
+                            <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
