@@ -54,7 +54,7 @@ class PesertaPPDB extends Model
             ->max('no_urut') + 1;
     }
 
-    public function Kwitansi()
+    public function kwitansi()
     {
         return $this->hasMany(Kwitansi::class, 'peserta_ppdb_id');
     }

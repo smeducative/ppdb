@@ -54,12 +54,12 @@
                                         </select>
                                     </div>
                                 </form>
-                                <form action="{{ route('export.belum.daftar.ulang') }}" method="post" style="display: inline-block;">
+                                <form
+                                    action="{{ route('export.belum.daftar.ulang') }}?jurusan={{ request()->segment(5) }}&tahun={{ request('tahun', now()->year) }}"
+                                    method="POST"
+                                    style="display: inline-block;">
                                     @csrf
                                     <input type="hidden" name="tahun" value="{{ request('tahun', now()->year) }}">
-                                    @if(request()->segment(4))
-                                        <input type="hidden" name="jurusan" value="{{ request()->segment(4) }}">
-                                    @endif
                                     <button type="submit" class="btn btn-sm btn-primary">Export</button>
                                 </form>
                             </div>

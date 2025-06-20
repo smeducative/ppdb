@@ -32,6 +32,8 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
             $query->where('jurusan_id', $this->jurusan);
         })->when($this->diterima, function ($query) {
             $query->has('kwitansi')->whereDiterima(1);
+        })->when($this->diterima == 0, function ($query) {
+            $query->doesntHave('kwitansi');
         })
             ->whereYear('created_at', $this->tahun)->get();
     }
@@ -88,8 +90,8 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
             $peserta->tempat_lahir,
             $peserta->tanggal_lahir->format('d F Y'),
             $peserta->jurusan->nama,
-            '\''.$peserta->nik,
-            '\''.$peserta->nisn,
+            '\'' . $peserta->nik,
+            '\'' . $peserta->nisn,
             $peserta->alamat_lengkap,
             $peserta->dukuh,
             $peserta->rt,
@@ -102,15 +104,15 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
             $peserta->asal_sekolah,
             $peserta->tahun_lulus,
             $peserta->penerima_kip == 'y' ? 'Ya' : 'Tidak',
-            '\''.$peserta->no_kip,
-            '\''.$peserta->no_hp,
+            '\'' . $peserta->no_kip,
+            '\'' . $peserta->no_hp,
             $peserta->nama_ayah,
             $peserta->pekerjaan_ayah,
-            '\''.$peserta->no_hp_ayah,
+            '\'' . $peserta->no_hp_ayah,
             $peserta->nama_ibu,
             $peserta->pekerjaan_ibu,
-            '\''.$peserta->no_hp_ibu,
-            $peserta->akademik['kelas'].' / '.$peserta->akademik['semester'].' / '.$peserta->akademik['peringkat'],
+            '\'' . $peserta->no_hp_ibu,
+            $peserta->akademik['kelas'] . ' / ' . $peserta->akademik['semester'] . ' / ' . $peserta->akademik['peringkat'],
             $peserta->akademik['hafidz'],
             $peserta->non_akademik['jenis_lomba'],
             $peserta->non_akademik['juara_ke'],

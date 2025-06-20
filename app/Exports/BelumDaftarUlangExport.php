@@ -4,10 +4,11 @@ namespace App\Exports;
 
 use App\Models\PesertaPPDB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class BelumDaftarUlangExport implements FromCollection, WithHeadings, WithMapping
+class BelumDaftarUlangExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
 {
     protected $tahun;
     protected $jurusan;
@@ -25,7 +26,7 @@ class BelumDaftarUlangExport implements FromCollection, WithHeadings, WithMappin
     {
         return PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
-            ->when($this->jurusan, fn($q) => $q->whereJurusanId($this->jurusan))
+            ->when($this->jurusan != null, fn($q) => $q->whereJurusanId($this->jurusan))
             ->whereYear('created_at', $this->tahun)
             ->get();
     }
@@ -45,21 +46,21 @@ class BelumDaftarUlangExport implements FromCollection, WithHeadings, WithMappin
         ];
     }
 
-    public function map($peserta): array
+    public function map($row): array
     {
         static $index = 0;
         $index++;
 
         return [
             $index,
-            $peserta->no_pendaftaran,
-            $peserta->nama_lengkap,
-            $peserta->jurusan->nama_jurusan ?? '-',
-            $peserta->asal_sekolah,
-            $peserta->tahun_lulus,
-            $peserta->diterima == 1 ? 'Diterima' : ($peserta->diterima == 2 ? 'Ditolak' : 'Belum Diverifikasi'),
-            $peserta->no_hp,
-            $peserta->alamat_lengkap,
+            $row->no_pendaftaran,
+            $row->nama_lengkap,
+            $row->jurusan->nama ?? '-',
+            $row->asal_sekolah,
+            $row->tahun_lulus,
+            $row->diterima == 1 ? 'Diterima' : ($row->diterima == 2 ? 'Ditolak' : 'Belum Diverifikasi'),
+            $row->no_hp,
+            $row->alamat_lengkap,
         ];
     }
 }
