@@ -55,8 +55,8 @@ class ExportController extends Controller
 
         $abb = Jurusan::find($jurusan);
 
-        $filename = 'Belum-Daftar-Ulang-' . optional($abb)->abbreviation . '-' . $tahun . '.xlsx';
+        $filename = 'peserta_ppdb_belum_daftar_ulang_' . optional($abb)->abbreviation . '-' . $tahun . '.xlsx';
 
-        return Excel::download(new \App\Exports\BelumDaftarUlangExport($tahun, $jurusan), $filename);
+        return Excel::download(new PesertaPPDBExport($jurusan, $tahun, 0), $filename);
     }
 }
