@@ -16,11 +16,14 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
 
     public $diterima;
 
-    public function __construct($jurusan, $tahun, $diterima)
+    public $all;
+
+    public function __construct($jurusan, $tahun, $diterima, $all = null)
     {
         $this->jurusan = $jurusan;
         $this->tahun = $tahun;
         $this->diterima = $diterima;
+        $this->all = $all;
     }
 
     /**
@@ -28,6 +31,13 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
      */
     public function collection()
     {
+        if ($this->all) {
+            return PesertaPPDB::when($this->jurusan != null, function ($query) {
+                $query->where('jurusan_id', $this->jurusan);
+            })
+                ->whereYear('created_at', $this->tahun)->get();
+        }
+
         return PesertaPPDB::when($this->jurusan != null, function ($query) {
             $query->where('jurusan_id', $this->jurusan);
         })->when($this->diterima, function ($query) {

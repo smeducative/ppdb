@@ -17,13 +17,14 @@ class ExportController extends Controller
         $jurusan = request('jurusan');
         $diterima = request('diterima', 0);
         $tahun = request('tahun', now()->year);
+        $all = request('all', 0);
 
         $abb = Jurusan::find($jurusan);
 
         $acc = $diterima == 1 ? 'data_peserta_ppdb_diterima_' : 'peserta_ppdb_';
         $filename = $acc . optional($abb)->abbreviation . '-' . $tahun . '.xlsx';
 
-        return Excel::download(new PesertaPPDBExport($jurusan, $tahun, $diterima), $filename);
+        return Excel::download(new PesertaPPDBExport($jurusan, $tahun, $diterima, $all), $filename);
     }
 
     public function exportSeragam()

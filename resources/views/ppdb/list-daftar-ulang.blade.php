@@ -9,12 +9,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="mb-2 row">
                     <div class="col-sm-6">
                         <h1>Dashboard</h1>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
+                        <ol class="float-sm-right breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Daftar Ulang Peserta PPDB</li>
                         </ol>
@@ -29,13 +29,13 @@
 
                 <div class="row">
 
-                    <div class="col-md-3 mt-3">
+                    <div class="mt-3 col-md-3">
                         <div class="">
                             <div class="form-group">
                                 <label class="form-label">Data Tahun:</label>
-                                <select class="custom-select form-control-border" id="ppdb-tahun">
+                                <select class="form-control-border custom-select" id="ppdb-tahun">
                                     @for($i = now()->year; $i >= $years_visible ; $i--)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                        <option value="{{ $i }}" {{ request('tahun', now()->year) == $i ? 'selected' : '' }}>{{ $i }}</option>
                                     @endfor
                                 </select>
                             </div>
@@ -57,18 +57,18 @@
 
                                 <div class="card-tools">
                                     <form
-                                        action="{{ route('export.peserta.ppdb') }}?jurusan={{ request()->segment(5) }}&diterima=1"
+                                        action="{{ route('export.peserta.ppdb') }}?jurusan={{ request()->segment(5) }}&tahun={{ request('tahun') }}&diterima=1&all=0"
                                         method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-primary">Export</button>
                                     </form>
                                 </div>
                             </div>
-                            <div class="card-body p-0 py-2 table-responsive text-nowrap">
+                            <div class="table-responsive p-0 py-2 text-nowrap card-body">
                                 @if (!$pesertappdb->isEmpty())
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered" id="list-ppdb">
+                                        <table class="table table-bordered table-striped" id="list-ppdb">
                                             <thead>
                                                 <tr>
                                                     <th>No. Pendaftaran / Nama</th>
