@@ -174,7 +174,13 @@ class AdminController extends Controller
             ->limit(10) // Limit to top 10 schools for the chart
             ->get();
 
-        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime'));
+        $pendaftarPerSekolahCount = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))
+            ->whereYear('created_at', $tahun)
+            ->groupBy('asal_sekolah')
+            ->orderByDesc('as_count')
+            ->get();
+
+        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount'));
     }
 
     public function pengaturanAkun()

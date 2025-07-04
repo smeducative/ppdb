@@ -419,7 +419,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive p-0 py-2 text-nowrap card-body">
-                                @if (!$pendaftarPerSekolah->isEmpty())
+                                @if (!$pendaftarPerSekolahCount->isEmpty())
 
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="list-sekolah">
@@ -431,7 +431,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($pendaftarPerSekolah as $sekolah)
+                                                @foreach ($pendaftarPerSekolahCount as $sekolah)
                                                     <tr>
                                                         <td> {{ $sekolah->asal_sekolah }} </td>
                                                         <td> {{ $sekolah->as_count }} </td>

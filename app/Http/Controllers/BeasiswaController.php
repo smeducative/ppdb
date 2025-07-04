@@ -44,7 +44,7 @@ class BeasiswaController extends Controller
             ->latest()
             ->get();
 
-         // if request has export and value of export is mwc
+        // if request has export and value of export is mwc
         if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-akademik.xlsx');
         }
@@ -69,7 +69,7 @@ class BeasiswaController extends Controller
             ->latest()
             ->get();
 
-         // if request has export and value of export is mwc
+        // if request has export and value of export is mwc
         if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-non-akademik.xlsx');
         }
@@ -81,7 +81,7 @@ class BeasiswaController extends Controller
     public function beasiswaKIP(Request $request)
     {
         $tahun = request('tahun', now()->year);
-        $title = 'Beasiswa Non Akademik';
+        $title = 'Beasiswa KIP';
 
         // column akademik is json
         // {"kelas":"","semester":"","peringkat":"","hafidz":""}
@@ -92,9 +92,34 @@ class BeasiswaController extends Controller
             ->latest()
             ->get();
 
-         // if request has export and value of export is mwc
+        // if request has export and value of export is mwc
         if ($request->isMethod('post')) {
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-kip.xlsx');
+        }
+
+        return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
+    }
+
+    // beasiswa Tahfidz (Akademik Hafidz/Hafidzoh)
+    public function beasiswaTahfidz(Request $request)
+    {
+        $tahun = request('tahun', now()->year);
+        $title = 'Beasiswa Akademik [Tahfidz]';
+
+        // column akademik is json
+        // {"kelas":"","semester":"","peringkat":"","hafidz":""}
+        // filter where hafidz is not empty
+        $pesertappdb = PesertaPPDB::with('jurusan')
+            ->where('akademik->hafidz', '!=', "")
+            ->where('akademik->hafidz', '!=', "-")
+            ->where('akademik->hafidz', '!=', "_")
+            ->whereYear('created_at', $tahun)
+            ->latest()
+            ->get();
+
+        // if request has export
+        if ($request->isMethod('post')) {
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-tahfidz.xlsx');
         }
 
         return view('ppdb.beasiswa.index', compact('pesertappdb', 'title'));
