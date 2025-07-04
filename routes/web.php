@@ -140,5 +140,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik.export');
         Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
         Route::post('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip.export');
+        Route::get('tahfidz', [BeasiswaController::class, 'beasiswaTahfidz'])->name('ppdb.beasiswa.tahfidz');
+        Route::post('tahfidz', [BeasiswaController::class, 'beasiswaTahfidz'])->name('ppdb.beasiswa.tahfidz.export');
     });
 });

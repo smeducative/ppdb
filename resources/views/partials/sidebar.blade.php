@@ -562,6 +562,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('ppdb.beasiswa.tahfidz') }}"
+                        class="nav-link {{ request()->routeIs('ppdb.beasiswa.tahfidz') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Akademik [Tahfidz]
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('ppdb.beasiswa.non-akademik') }}"
                         class="nav-link {{ request()->routeIs('ppdb.beasiswa.non-akademik') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-star"></i>
