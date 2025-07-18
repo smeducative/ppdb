@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label class="form-label">Data Tahun:</label>
                                 <select class="form-control-border custom-select" id="ppdb-tahun">
-                                    @for($i = now()->year; $i >= $years_visible ; $i--)
+                                    @for ($i = now()->year; $i >= $years_visible; $i--)
                                         <option value="{{ $i }}"
                                             {{ request('tahun', now()->year) == $i ? 'selected' : '' }}>{{ $i }}
                                         </option>
@@ -155,7 +155,11 @@
 
             $('#list-ppdb').DataTable({
                 "paging": true,
-                "lengthChange": false,
+                "lengthChange": true,
+                "lengthMenu": [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
                 "searching": true,
                 "ordering": false,
                 "info": true,

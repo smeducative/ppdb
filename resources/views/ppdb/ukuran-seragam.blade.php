@@ -232,7 +232,11 @@
 
             $('#list-ppdb').DataTable({
                 "paging": true,
-                "lengthChange": false,
+                "lengthChange": true,
+                "lengthMenu": [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
                 "searching": true,
                 "ordering": false,
                 "info": true,
