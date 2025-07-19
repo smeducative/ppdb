@@ -34,8 +34,10 @@
                             <div class="form-group">
                                 <label class="form-label">Data Tahun:</label>
                                 <select class="form-control-border custom-select" id="ppdb-tahun">
-                                    @for($i = now()->year; $i >= $years_visible ; $i--)
-                                        <option value="{{ $i }}" {{ request('tahun', now()->year) == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                    @for ($i = now()->year; $i >= $years_visible; $i--)
+                                        <option value="{{ $i }}"
+                                            {{ request('tahun', now()->year) == $i ? 'selected' : '' }}>{{ $i }}
+                                        </option>
                                     @endfor
                                 </select>
                             </div>
@@ -84,11 +86,11 @@
                                                         <td>
                                                             <a href="{{ route('ppdb.show.peserta', $peserta->id) }}">
                                                                 {{ $peserta->nama_lengkap }}</a>
-                                                                <br>
-                                                                <span class="text-secondary">
-                                                                    {{ $peserta->no_pendaftaran }}
-                                                                </span>
-                                                            </td>
+                                                            <br>
+                                                            <span class="text-secondary">
+                                                                {{ $peserta->no_pendaftaran }}
+                                                            </span>
+                                                        </td>
                                                         <td> {{ $peserta->tempat_lahir }},
                                                             {{ $peserta->tanggal_lahir->format('d-m-Y') }} </td>
                                                         <td>
@@ -142,7 +144,11 @@
 
             $('#list-ppdb').DataTable({
                 "paging": true,
-                "lengthChange": false,
+                "lengthChange": true,
+                "lengthMenu": [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
                 "searching": true,
                 "ordering": false,
                 "info": true,

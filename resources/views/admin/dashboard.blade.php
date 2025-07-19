@@ -217,7 +217,8 @@
                             <div class="icon">
                                 <i class="ion ion-settings"></i>
                             </div>
-                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}" class="small-box-footer">More
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}"
+                                class="small-box-footer">More
                                 info <i class="fa-arrow-circle-right fas"></i></a>
                         </div>
                     </div>
@@ -233,7 +234,8 @@
                             <div class="icon">
                                 <i class="ion ion-settings"></i>
                             </div>
-                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}" class="small-box-footer">More
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 2]) }}"
+                                class="small-box-footer">More
                                 info <i class="fa-arrow-circle-right fas"></i></a>
                         </div>
                     </div>
@@ -446,6 +448,50 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Top 10 Sekolah Daftar Ulang</h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="daftarUlangSchoolChart"
+                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Jumlah daftar ulang per sekolah</h3>
+                            </div>
+                            <div class="table-responsive p-0 py-2 text-nowrap card-body">
+                                @if (!$daftarUlangPerSekolahCount->isEmpty())
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="list-sekolah-du">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Sekolah</th>
+                                                    <th>Jumlah</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($daftarUlangPerSekolahCount as $sekolah)
+                                                    <tr>
+                                                        <td> {{ $sekolah->asal_sekolah }} </td>
+                                                        <td> {{ $sekolah->as_count }} </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @else
+                                    belum ada peserta
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- row graphic card -->
             </div><!-- /.container-fluid -->
@@ -462,7 +508,11 @@
 
             $('#list-sekolah').DataTable({
                 "paging": true,
-                "lengthChange": false,
+                "lengthChange": true,
+                "lengthMenu": [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
                 "searching": true,
                 "ordering": false,
                 "info": true,
@@ -582,7 +632,9 @@
             var barYearElem = $('#yearDiff').get(0);
             if (barYearElem) {
                 var areaYearChartData = {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov',
+                        'Des'
+                    ],
                     datasets: [
                         @isset($yearDiff[$lastYear])
                             {
@@ -631,7 +683,9 @@
             var barYearDaftarUlangElem = $('#yearDiffDaftarUlang').get(0);
             if (barYearDaftarUlangElem) {
                 var areaYearDaftarUlangChartData = {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov',
+                        'Des'
+                    ],
                     datasets: [
                         @isset($yearDiffDaftarUlang[$lastYear])
                             {
@@ -849,6 +903,54 @@
                     options: genderOverTimeOptions
                 });
             }
+
+            //-------------
+            //- BAR CHART for Top Daftar Ulang Schools -
+            //-------------
+            var daftarUlangSchoolElem = $('#daftarUlangSchoolChart').get(0);
+            if (daftarUlangSchoolElem) {
+                var daftarUlangSchoolData = {
+                    labels: {!! $daftarUlangPerSekolah->pluck('asal_sekolah') !!},
+                    datasets: [{
+                        label: 'Jumlah Daftar Ulang',
+                        data: {!! $daftarUlangPerSekolah->pluck('as_count') !!},
+                        backgroundColor: 'rgba(255, 159, 64, 0.9)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                }
+
+                var daftarUlangSchoolCanvas = daftarUlangSchoolElem.getContext('2d');
+                var daftarUlangSchoolOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+
+                new Chart(daftarUlangSchoolCanvas, {
+                    type: 'bar',
+                    data: daftarUlangSchoolData,
+                    options: daftarUlangSchoolOptions
+                });
+            }
+
+            $('#list-sekolah-du').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "lengthMenu": [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"]
+                ],
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
 
         });
     </script>

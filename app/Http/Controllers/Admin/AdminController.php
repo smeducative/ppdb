@@ -180,7 +180,22 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get();
 
-        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount'));
+        $daftarUlangPerSekolah = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))
+            ->has('kwitansi')
+            ->whereYear('created_at', $tahun)
+            ->groupBy('asal_sekolah')
+            ->orderByDesc('as_count')
+            ->limit(10) // Limit to top 10 schools for the chart
+            ->get();
+
+        $daftarUlangPerSekolahCount = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))
+            ->has('kwitansi')
+            ->whereYear('created_at', $tahun)
+            ->groupBy('asal_sekolah')
+            ->orderByDesc('as_count')
+            ->get();
+
+        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount', 'daftarUlangPerSekolah', 'daftarUlangPerSekolahCount'));
     }
 
     public function pengaturanAkun()
