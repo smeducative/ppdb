@@ -1,5 +1,6 @@
-import lodash from "lodash";
 import axios from "axios";
+import lodash from "lodash";
+import "./lib/route";
 
 window._ = lodash;
 

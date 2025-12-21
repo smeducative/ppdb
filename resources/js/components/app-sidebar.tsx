@@ -1,153 +1,184 @@
-import {
-	CreditCard,
-	FileText,
-	GraduationCap,
-	LayoutDashboard,
-	Settings2,
-	Shirt,
-	Users,
-} from "lucide-react";
-import type * as React from "react";
+"use client";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
-import { TeamSwitcher } from "@/components/team-switcher";
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
 	SidebarHeader,
+	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-import type { User } from "@/types";
+import type { PageProps } from "@/types";
+import { Link, usePage } from "@inertiajs/react";
+import {
+	Award,
+	FileText,
+	GraduationCap,
+	LayoutDashboard,
+	Receipt,
+	Settings,
+	Shirt,
+	UserCheck,
+	Users,
+} from "lucide-react";
 
-// This is sample data.
-const data = {
-	teams: [
-		{
-			name: "SMK Diponegoro",
-			logo: GraduationCap,
-			plan: "PPDB",
-		},
-	],
-	navMain: [
-		{
-			title: "Dashboard",
-			url: "/dashboard",
-			icon: LayoutDashboard,
-			isActive: true,
-		},
-		{
-			title: "Pendaftaran",
-			url: "#",
-			icon: Users,
-			items: [
-				{
-					title: "List Pendaftar",
-					url: "/dashboard/ppdb/list-pendaftar",
-				},
-				{
-					title: "Tambah Pendaftar",
-					url: "/dashboard/ppdb/tambah-pendaftar",
-				},
-				{
-					title: "Daftar Ulang",
-					url: "/dashboard/ppdb/list/terdaftar-ulang",
-				},
-				{
-					title: "Belum Daftar Ulang",
-					url: "/dashboard/ppdb/list/belum-daftar-ulang",
-				},
-			],
-		},
-		{
-			title: "Keuangan",
-			url: "#",
-			icon: CreditCard,
-			items: [
-				{
-					title: "Rekap Kwitansi",
-					url: "/dashboard/kwitansi/rekap",
-				},
-			],
-		},
-		{
-			title: "Logistik",
-			url: "#",
-			icon: Shirt,
-			items: [
-				{
-					title: "Ukuran Seragam",
-					url: "/dashboard/ukuran-seragam/show",
-				},
-			],
-		},
-		{
-			title: "Dokumen",
-			url: "#",
-			icon: FileText,
-			items: [
-				{
-					title: "Surat",
-					url: "/dashboard/surat/show/1", // Default to TKJ or handle properly
-				},
-				{
-					title: "Formulir",
-					url: "/dashboard/formulir/show/1",
-				},
-				{
-					title: "Kartu Pendaftaran",
-					url: "/dashboard/kartu-pendaftaran/show/1",
-				},
-			],
-		},
-		{
-			title: "Beasiswa",
-			url: "#",
-			icon: GraduationCap,
-			items: [
-				{
-					title: "Rekomendasi MWC",
-					url: "/dashboard/beasiswa/rekomendasi-mwc",
-				},
-				{ title: "Akademik", url: "/dashboard/beasiswa/akademik" },
-				{ title: "Non Akademik", url: "/dashboard/beasiswa/non-akademik" },
-				{ title: "KIP", url: "/dashboard/beasiswa/kip" },
-				{ title: "Tahfidz", url: "/dashboard/beasiswa/tahfidz" },
-			],
-		},
-		{
-			title: "Settings",
-			url: "#",
-			icon: Settings2,
-			items: [
-				{
-					title: "Profile",
-					url: "/dashboard/setting/profile",
-				},
-				{
-					title: "PPDB",
-					url: "/dashboard/setting/ppdb",
-				},
-			],
-		},
-	],
-};
+const navMain = [
+	{
+		title: "Dashboard",
+		url: "/dashboard",
+		icon: LayoutDashboard,
+		isActive: true,
+	},
+	{
+		title: "Pendaftar",
+		url: "#",
+		icon: Users,
+		items: [
+			{
+				title: "Daftar Pendaftar",
+				url: "/dashboard/ppdb/list-pendaftar",
+			},
+			{
+				title: "Tambah Pendaftar",
+				url: "/dashboard/ppdb/tambah-pendaftar",
+			},
+		],
+	},
+	{
+		title: "Daftar Ulang",
+		url: "#",
+		icon: UserCheck,
+		items: [
+			{
+				title: "Sudah Daftar Ulang",
+				url: "/dashboard/ppdb/list/terdaftar-ulang",
+			},
+			{
+				title: "Belum Daftar Ulang",
+				url: "/dashboard/ppdb/list/belum-daftar-ulang",
+			},
+		],
+	},
+	{
+		title: "Kwitansi",
+		url: "#",
+		icon: Receipt,
+		items: [
+			{
+				title: "Daftar Kwitansi",
+				url: "/dashboard/kwitansi/show",
+			},
+			{
+				title: "Rekap Kwitansi",
+				url: "/dashboard/kwitansi/rekap",
+			},
+		],
+	},
+	{
+		title: "Dokumen",
+		url: "#",
+		icon: FileText,
+		items: [
+			{
+				title: "Surat",
+				url: "/dashboard/surat/show/TKJ",
+			},
+			{
+				title: "Formulir",
+				url: "/dashboard/formulir/show/TKJ",
+			},
+			{
+				title: "Kartu Pendaftaran",
+				url: "/dashboard/kartu-pendaftaran/show/TKJ",
+			},
+		],
+	},
+	{
+		title: "Beasiswa",
+		url: "#",
+		icon: Award,
+		items: [
+			{
+				title: "Rekomendasi MWC",
+				url: "/dashboard/beasiswa/rekomendasi-mwc",
+			},
+			{
+				title: "Akademik",
+				url: "/dashboard/beasiswa/akademik",
+			},
+			{
+				title: "Non Akademik",
+				url: "/dashboard/beasiswa/non-akademik",
+			},
+			{
+				title: "KIP",
+				url: "/dashboard/beasiswa/kip",
+			},
+			{
+				title: "Tahfidz",
+				url: "/dashboard/beasiswa/tahfidz",
+			},
+		],
+	},
+	{
+		title: "Ukuran Seragam",
+		url: "/dashboard/ukuran-seragam/show",
+		icon: Shirt,
+	},
+	{
+		title: "Pengaturan",
+		url: "#",
+		icon: Settings,
+		items: [
+			{
+				title: "Profil",
+				url: "/dashboard/setting/profile",
+			},
+			{
+				title: "PPDB",
+				url: "/dashboard/setting/ppdb",
+			},
+		],
+	},
+];
 
-export function AppSidebar({
-	user,
-	...props
-}: React.ComponentProps<typeof Sidebar> & { user: User }) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const { auth } = usePage<PageProps>().props;
+
 	return (
-		<Sidebar collapsible="icon" {...props}>
+		<Sidebar variant="sidebar" collapsible="icon" {...props}>
 			<SidebarHeader>
-				<TeamSwitcher teams={data.teams} />
+				<SidebarMenu>
+					<SidebarMenuItem>
+						<SidebarMenuButton size="lg" asChild>
+							<Link href="/dashboard">
+								<div className="flex justify-center items-center bg-sidebar-primary rounded-lg size-8 aspect-square text-sidebar-primary-foreground">
+									<GraduationCap className="size-4" />
+								</div>
+								<div className="flex-1 grid text-sm text-left leading-tight">
+									<span className="font-semibold truncate">PPDB</span>
+									<span className="text-xs truncate">Admin Panel</span>
+								</div>
+							</Link>
+						</SidebarMenuButton>
+					</SidebarMenuItem>
+				</SidebarMenu>
 			</SidebarHeader>
 			<SidebarContent>
-				<NavMain items={data.navMain} />
+				<NavMain items={navMain} />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={{ name: user.name, email: user.email, avatar: "" }} />
+				<NavUser
+					user={{
+						name: auth.user.name,
+						email: auth.user.email,
+						avatar: "",
+					}}
+				/>
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>

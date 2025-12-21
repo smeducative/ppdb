@@ -138,7 +138,7 @@ export default function Dashboard({
 
 			<div className="space-y-6">
 				{/* Stats Cards */}
-				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-4">
 					<StatsCard
 						title="Total Pendaftar"
 						value={count.all}
@@ -165,8 +165,8 @@ export default function Dashboard({
 					/>
 				</div>
 
-				<h3 className="text-lg font-medium">Info Pendaftar</h3>
-				<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+				<h3 className="font-medium text-lg">Info Pendaftar</h3>
+				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-5">
 					<StatsCard
 						title="AT"
 						value={count.atph}
@@ -199,7 +199,7 @@ export default function Dashboard({
 					/>
 				</div>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="gap-4 grid md:grid-cols-2">
 					<Card>
 						<CardHeader>
 							<CardTitle>Perbandingan Pendaftar Jenis Kelamin</CardTitle>
@@ -332,7 +332,7 @@ export default function Dashboard({
 					</CardContent>
 				</Card>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="gap-4 grid md:grid-cols-2">
 					<Card>
 						<CardHeader>
 							<CardTitle>Jumlah Pendaftar Per Sekolah (Top 10)</CardTitle>
@@ -340,7 +340,7 @@ export default function Dashboard({
 						<CardContent>
 							<div className="overflow-x-auto">
 								<table className="w-full text-sm text-left">
-									<thead className="text-xs text-gray-700 uppercase bg-gray-50">
+									<thead className="bg-gray-50 text-gray-700 text-xs uppercase">
 										<tr>
 											<th className="px-6 py-3">Nama Sekolah</th>
 											<th className="px-6 py-3">Jumlah</th>
@@ -370,7 +370,7 @@ export default function Dashboard({
 						<CardContent>
 							<div className="overflow-x-auto">
 								<table className="w-full text-sm text-left">
-									<thead className="text-xs text-gray-700 uppercase bg-gray-50">
+									<thead className="bg-gray-50 text-gray-700 text-xs uppercase">
 										<tr>
 											<th className="px-6 py-3">Nama Sekolah</th>
 											<th className="px-6 py-3">Jumlah</th>
@@ -411,12 +411,12 @@ function StatsCard({
 }) {
 	return (
 		<Card className={className}>
-			<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-				<CardTitle className="text-sm font-medium">{title}</CardTitle>
-				<Icon className="h-4 w-4 text-muted-foreground" />
+			<CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
+				<CardTitle className="font-medium text-sm">{title}</CardTitle>
+				<Icon className="w-4 h-4 text-muted-foreground" />
 			</CardHeader>
 			<CardContent>
-				<div className="text-2xl font-bold">{value}</div>
+				<div className="font-bold text-2xl">{value}</div>
 			</CardContent>
 		</Card>
 	);

@@ -11,38 +11,37 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { usePage } from "@inertiajs/react";
 import type { PropsWithChildren } from "react";
 
-export default function AuthenticatedLayout({
-	children,
-	header,
-}: PropsWithChildren<{
-	header?: string;
-}>) {
-	const { auth } = usePage<AppPageProps>().props;
-	const user = auth.user;
+interface AuthenticatedLayoutProps {
+	header: string;
+}
 
+export default function AuthenticatedLayout({
+	header,
+	children,
+}: PropsWithChildren<AuthenticatedLayoutProps>) {
 	return (
 		<SidebarProvider>
-			<AppSidebar user={user} />
+			<AppSidebar />
 			<SidebarInset>
-				<header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 border-b">
+				<header className="flex items-center gap-2 h-16 group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 transition-[width,height] ease-linear shrink-0">
 					<div className="flex items-center gap-2 px-4">
 						<SidebarTrigger className="-ml-1" />
-						<Separator orientation="vertical" className="mr-2 h-4" />
+						<Separator
+							orientation="vertical"
+							className="mr-2 data-[orientation=vertical]:h-4"
+						/>
 						<Breadcrumb>
 							<BreadcrumbList>
 								<BreadcrumbItem>
-									<BreadcrumbPage>{header || "Dashboard"}</BreadcrumbPage>
+									<BreadcrumbPage>{header}</BreadcrumbPage>
 								</BreadcrumbItem>
 							</BreadcrumbList>
 						</Breadcrumb>
 					</div>
 				</header>
-				<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-					<main className="py-6">{children}</main>
-				</div>
+				<div className="flex flex-col flex-1 gap-4 p-4 pt-0">{children}</div>
 			</SidebarInset>
 		</SidebarProvider>
 	);
