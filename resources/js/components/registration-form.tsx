@@ -1,8 +1,47 @@
+import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "@inertiajs/react";
+import gsap from "gsap";
+import {
+	Award,
+	CheckCircle2,
+	ChevronLeft,
+	ChevronRight,
+	GraduationCap,
+	MessageSquare,
+	User,
+	Users,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 interface RegistrationFormProps {
 	jurusanOptions?: { value: number | string; label: string }[];
 }
+
+const steps = [
+	{ id: 1, title: "Identitas Diri", icon: User },
+	{ id: 2, title: "Data Orang Tua", icon: Users },
+	{ id: 3, title: "Prestasi", icon: Award },
+	{ id: 4, title: "Rekomendasi", icon: MessageSquare },
+];
 
 const defaultJurusanOptions = [
 	{ value: "tjkt", label: "Teknik Jaringan Komputer dan Telekomunikasi" },
@@ -10,6 +49,24 @@ const defaultJurusanOptions = [
 	{ value: "bdp", label: "Broadcasting dan Perfilman" },
 	{ value: "tsm", label: "Teknik Sepeda Motor" },
 	{ value: "tkr", label: "Teknik Kendaraan Ringan" },
+];
+
+const pekerjaanOptions = [
+	"PNS",
+	"TNI/Polri",
+	"Wiraswasta",
+	"Karyawan Swasta",
+	"Petani",
+	"Buruh",
+	"Pedagang",
+	"Lainnya",
+];
+
+const tingkatOptions = [
+	{ value: "kabupaten", label: "Kabupaten/Kota" },
+	{ value: "karesidenan", label: "Karesidenan" },
+	{ value: "provinsi", label: "Provinsi" },
+	{ value: "nasional", label: "Nasional" },
 ];
 
 export function RegistrationForm({
@@ -82,7 +139,7 @@ export function RegistrationForm({
 			{ opacity: 0, x: 20 },
 			{ opacity: 1, x: 0, duration: 0.4, ease: "power2.out" },
 		);
-	}, [currentStep]);
+	}, [currentStep, formRef]);
 
 	const nextStep = () => {
 		if (currentStep < 4) setCurrentStep(currentStep + 1);
@@ -94,7 +151,7 @@ export function RegistrationForm({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		post(route("ppdb.register.submit"), {
+		post("/register", {
 			onSuccess: () => {
 				// Handle success (maybe show a different UI or redirect)
 			},
@@ -165,7 +222,7 @@ export function RegistrationForm({
 				ref={cardRef}
 				className="border-0 shadow-2xl shadow-primary/5 rounded-3xl overflow-hidden"
 			>
-				<CardHeader className="bg-gradient-to-r from-primary/5 to-accent/50 border-b">
+				<CardHeader className="bg-linear-to-r from-primary/5 to-accent/50 border-b">
 					<CardTitle className="flex items-center gap-3 text-xl">
 						{(() => {
 							const StepIcon = steps[currentStep - 1].icon;

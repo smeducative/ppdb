@@ -1,10 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Link } from "@inertiajs/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Car, Film, Leaf, Monitor, Wrench } from "lucide-react";
+import { Car, Film, Leaf, Monitor, Wrench } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -171,7 +169,7 @@ export function ProgramsSection() {
 							className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
 							style={{ perspective: "1000px" }}
 						>
-							<div className={`h-2 bg-gradient-to-r ${program.gradient}`} />
+							<div className={`h-2 bg-linear-to-r ${program.gradient}`} />
 
 							<div className="p-6">
 								<div className="flex items-start justify-between mb-4">
@@ -238,7 +236,7 @@ export function ProgramsSection() {
 					))}
 				</div>
 
-				<div className="text-center mt-12">
+				{/* <div className="text-center mt-12">
 					<Button
 						size="lg"
 						variant="outline"
@@ -250,7 +248,7 @@ export function ProgramsSection() {
 							<ArrowRight className="w-4 h-4" />
 						</Link>
 					</Button>
-				</div>
+				</div> */}
 			</div>
 		</section>
 	);

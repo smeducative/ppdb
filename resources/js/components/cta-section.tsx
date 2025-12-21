@@ -71,7 +71,7 @@ export function CTASection() {
 
 				<p className="text-primary-foreground/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
 					Jangan lewatkan kesempatan untuk menjadi bagian dari keluarga besar
-					SMK Diponegoro Karanganyar. Pendaftaran tahun ajaran 2025/2026 telah
+					SMK Diponegoro Karanganyar. Pendaftaran tahun ajaran 2026/2027 telah
 					dibuka!
 				</p>
 
@@ -82,7 +82,7 @@ export function CTASection() {
 						className="rounded-full px-8 h-14 text-base shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
 						asChild
 					>
-						<Link href="https://forms.example.com/spmb" className="gap-2">
+						<Link href="/register" className="gap-2">
 							Daftar Online Sekarang
 							<ArrowRight className="w-5 h-5" />
 						</Link>
@@ -106,7 +106,7 @@ export function CTASection() {
 					</div>
 					<div className="text-left">
 						<p className="font-bold text-white text-lg">Periode Pendaftaran</p>
-						<p className="text-white/80">1 Januari - 30 Juni 2025</p>
+						<p className="text-white/80">1 Januari - 30 Juni 2026</p>
 					</div>
 				</div>
 			</div>

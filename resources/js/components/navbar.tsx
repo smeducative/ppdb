@@ -22,7 +22,7 @@ export function Navbar() {
 	const linksRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLDivElement>(null);
 
-	const isRegistrationPage = pathname === "/pendaftaran";
+	const isRegistrationPage = pathname === "/register";
 
 	useEffect(() => {
 		const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -113,11 +113,12 @@ export function Navbar() {
 							className="rounded-full px-6 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-105 transition-all duration-300"
 							asChild
 						>
-							<Link href="/pendaftaran">Daftar Sekarang</Link>
+							<Link href="/register">Daftar Sekarang</Link>
 						</Button>
 					</div>
 
 					<button
+						type="button"
 						className={`md:hidden p-2 rounded-xl transition-colors ${scrolled || isRegistrationPage ? "hover:bg-primary/10" : "hover:bg-white/10"}`}
 						onClick={() => setIsOpen(!isOpen)}
 						aria-label="Toggle menu"

@@ -27,9 +27,10 @@ const quickLinks = [
 ];
 
 const programs = [
-	{ label: "Teknik Komputer & Jaringan", href: "#jurusan" },
-	{ label: "Agribisnis Tanaman Pangan", href: "#jurusan" },
-	{ label: "Teknik Sepeda Motor", href: "#jurusan" },
+	{ label: "Teknik Jaringan Komputer & Telekomunikasi", href: "#jurusan" },
+	{ label: "Teknik Otomotif", href: "#jurusan" },
+	{ label: "Agribisnis Tanaman / Smart Farming", href: "#jurusan" },
+	{ label: "Broadcasting dan Perfilman", href: "#jurusan" },
 ];
 
 export function Footer() {
@@ -60,6 +61,7 @@ export function Footer() {
 	return (
 		<footer ref={footerRef} className="bg-foreground text-background relative">
 			<button
+				type="button"
 				onClick={scrollToTop}
 				className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300"
 				aria-label="Scroll to top"
@@ -87,22 +89,39 @@ export function Footer() {
 							</div>
 						</Link>
 						<p className="text-sm text-background/70 leading-relaxed">
-							Mewujudkan generasi yang beriman, berilmu, dan terampil untuk
-							menghadapi tantangan dunia kerja global.
+							Terwujudnya Sekolah Sebagai Pusat Pendidikan dan Pelatihan
+							Kejuruan dengan Layanan Pendidikan yang Modern yang Menghasilkan
+							SDM Unggul dalam Prestasi dan Berakhlak Islami (MAU: Modern,
+							Agamis, Unggul).
 						</p>
 						<div className="flex gap-3">
 							{[
-								{ icon: Facebook, href: "#" },
-								{ icon: Instagram, href: "#" },
-								{ icon: Youtube, href: "#" },
-							].map((social, i) => (
-								<Link
-									key={i}
+								{
+									name: "Facebook",
+									icon: Facebook,
+									href: "https://www.facebook.com/smkdipokar/",
+								},
+								{
+									name: "Instagram",
+									icon: Instagram,
+									href: "https://www.instagram.com/smkdiponegoro",
+								},
+								{
+									name: "TikTok",
+									icon: Youtube,
+									href: "https://www.tiktok.com/@smkdiponegoro",
+								},
+							].map((social) => (
+								<a
+									key={social.name}
 									href={social.href}
+									target="_blank"
+									rel="noopener noreferrer"
 									className="w-10 h-10 bg-background/10 rounded-xl flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
+									aria-label={social.name}
 								>
 									<social.icon className="w-5 h-5" />
-								</Link>
+								</a>
 							))}
 						</div>
 					</div>
@@ -112,8 +131,8 @@ export function Footer() {
 							Link Cepat
 						</h4>
 						<ul className="space-y-3">
-							{quickLinks.map((link, index) => (
-								<li key={index}>
+							{quickLinks.map((link) => (
+								<li key={link.href}>
 									<Link
 										href={link.href}
 										className="text-sm text-background/70 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block"
@@ -130,8 +149,8 @@ export function Footer() {
 							Program Keahlian
 						</h4>
 						<ul className="space-y-3">
-							{programs.map((program, index) => (
-								<li key={index}>
+							{programs.map((program) => (
+								<li key={program.label}>
 									<Link
 										href={program.href}
 										className="text-sm text-background/70 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block"
@@ -151,11 +170,11 @@ export function Footer() {
 									icon: MapPin,
 									text: "Jl. Raya Karanganyar KM 1.5, Kayugeritan, Kec. Karanganyar, Kabupaten Pekalongan, Jawa Tengah 51182",
 								},
-								{ icon: Phone, text: "(0285) 123456" },
-								{ icon: Mail, text: "info@smkdiponegoro-karanganyar.sch.id" },
+								{ icon: Phone, text: "+62 812 2000 1409" },
+								{ icon: Mail, text: "smkdipo.pekalongan@gmail.com" },
 								{ icon: Clock, text: "Senin - Sabtu: 07:00 - 15:00" },
-							].map((item, index) => (
-								<li key={index} className="flex items-start gap-3 group">
+							].map((item) => (
+								<li key={item.text} className="flex items-start gap-3 group">
 									<div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
 										<item.icon className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
 									</div>

@@ -81,14 +81,14 @@ export function HeroSection() {
 			{/* Gradient overlay */}
 			<div
 				ref={overlayRef}
-				className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 -z-10"
+				className="absolute inset-0 bg-linear-to-b from-black/60 via-black/50 to-black/70 -z-10"
 			/>
 
 			{/* Decorative elements */}
-			<div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary/20 to-transparent -z-10" />
-			<div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-background to-transparent z-10" />
+			<div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-primary/20 to-transparent -z-10" />
+			<div className="absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-background to-transparent z-10" />
 
-			<div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 pb-32 relative z-20">
+			<div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-36 pb-32 relative z-20">
 				<h1
 					ref={headingRef}
 					className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6"
@@ -100,7 +100,7 @@ export function HeroSection() {
 						SMK Diponegoro Karanganyar
 					</span>
 					<span className="block mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-white/90">
-						Tahun Ajaran 2025/2026
+						Tahun Ajaran 2026/2027
 					</span>
 				</h1>
 
@@ -122,7 +122,7 @@ export function HeroSection() {
 						className="rounded-full px-10 h-14 text-lg shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90"
 						asChild
 					>
-						<Link href="/pendaftaran" className="gap-2">
+						<Link href="/register" className="gap-2">
 							Daftar Sekarang
 							<ArrowRight className="w-5 h-5" />
 						</Link>
@@ -144,10 +144,10 @@ export function HeroSection() {
 					{[
 						{ icon: Users, value: "500+", label: "Siswa Aktif" },
 						{ icon: Award, value: "5", label: "Program Keahlian" },
-						{ icon: Calendar, value: "2005", label: "Tahun Berdiri" },
-					].map((stat, i) => (
+						{ icon: Calendar, value: "2008", label: "Tahun Berdiri" },
+					].map((stat) => (
 						<div
-							key={i}
+							key={stat.label}
 							className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 hover:bg-white/20 hover:scale-105 transition-all duration-300"
 						>
 							<div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">

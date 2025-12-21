@@ -1,70 +1,70 @@
 {
-  "_button-1drXWy07.js": {
-    "file": "assets/button-1drXWy07.js",
+  "_button-6FdPtnRd.js": {
+    "file": "assets/button-6FdPtnRd.js",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_navbar-DmkrjxCC.js": {
-    "file": "assets/navbar-DmkrjxCC.js",
+  "_navbar-G5HWpBT6.js": {
+    "file": "assets/navbar-G5HWpBT6.js",
     "imports": [
       "resources/js/app.tsx",
-      "_button-1drXWy07.js"
+      "_button-6FdPtnRd.js"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-TXRYQg1a.css",
+    "file": "assets/app-acFQad4G.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/Pages/Landing.tsx": {
     "css": [
-      "assets/app-TXRYQg1a.css"
+      "assets/app-acFQad4G.css"
     ],
-    "file": "assets/Landing-KZ5JEY7U.js",
+    "file": "assets/Landing-UbrECCY5.js",
     "imports": [
       "resources/js/app.tsx",
-      "_button-1drXWy07.js",
-      "_navbar-DmkrjxCC.js"
+      "_button-6FdPtnRd.js",
+      "_navbar-G5HWpBT6.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Landing.tsx"
   },
   "resources/js/Pages/Welcome.tsx": {
     "css": [
-      "assets/app-TXRYQg1a.css"
+      "assets/app-acFQad4G.css"
     ],
-    "file": "assets/Welcome-UmvYIcGa.js",
+    "file": "assets/Welcome-V543RS3I.js",
     "imports": [
       "resources/js/app.tsx",
-      "_button-1drXWy07.js"
+      "_button-6FdPtnRd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Welcome.tsx"
   },
   "resources/js/Pages/pendaftaran.tsx": {
     "css": [
-      "assets/app-TXRYQg1a.css"
+      "assets/app-acFQad4G.css"
     ],
-    "file": "assets/pendaftaran-cTpm0M55.js",
+    "file": "assets/pendaftaran-b5tUDDrl.js",
     "imports": [
       "resources/js/app.tsx",
-      "_navbar-DmkrjxCC.js",
-      "_button-1drXWy07.js"
+      "_navbar-G5HWpBT6.js",
+      "_button-6FdPtnRd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/pendaftaran.tsx"
   },
   "resources/js/app.tsx": {
     "css": [
-      "assets/app-TXRYQg1a.css"
+      "assets/app-acFQad4G.css"
     ],
     "dynamicImports": [
       "resources/js/Pages/Landing.tsx",
       "resources/js/Pages/Welcome.tsx",
       "resources/js/Pages/pendaftaran.tsx"
     ],
-    "file": "assets/app-uUzPcFm0.js",
+    "file": "assets/app-mNGqd_uz.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   }
