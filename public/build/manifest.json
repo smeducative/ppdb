@@ -1,12 +1,71 @@
 {
+  "_button-1drXWy07.js": {
+    "file": "assets/button-1drXWy07.js",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "_navbar-DmkrjxCC.js": {
+    "file": "assets/navbar-DmkrjxCC.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_button-1drXWy07.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-PKawAAP5.css",
+    "file": "assets/app-TXRYQg1a.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
-  "resources/js/app.js": {
-    "file": "assets/app-vFeZHEzX.js",
+  "resources/js/Pages/Landing.tsx": {
+    "css": [
+      "assets/app-TXRYQg1a.css"
+    ],
+    "file": "assets/Landing-KZ5JEY7U.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_button-1drXWy07.js",
+      "_navbar-DmkrjxCC.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Landing.tsx"
+  },
+  "resources/js/Pages/Welcome.tsx": {
+    "css": [
+      "assets/app-TXRYQg1a.css"
+    ],
+    "file": "assets/Welcome-UmvYIcGa.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_button-1drXWy07.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Welcome.tsx"
+  },
+  "resources/js/Pages/pendaftaran.tsx": {
+    "css": [
+      "assets/app-TXRYQg1a.css"
+    ],
+    "file": "assets/pendaftaran-cTpm0M55.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_navbar-DmkrjxCC.js",
+      "_button-1drXWy07.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/pendaftaran.tsx"
+  },
+  "resources/js/app.tsx": {
+    "css": [
+      "assets/app-TXRYQg1a.css"
+    ],
+    "dynamicImports": [
+      "resources/js/Pages/Landing.tsx",
+      "resources/js/Pages/Welcome.tsx",
+      "resources/js/Pages/pendaftaran.tsx"
+    ],
+    "file": "assets/app-uUzPcFm0.js",
     "isEntry": true,
-    "src": "resources/js/app.js"
+    "src": "resources/js/app.tsx"
   }
 }

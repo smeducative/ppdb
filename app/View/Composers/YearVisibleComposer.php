@@ -12,16 +12,17 @@ class YearVisibleComposer
     /**
      * Create a new profile composer.
      */
-    public function __construct(protected PesertaPPDB $users)
-    {
-    }
+    public function __construct(protected PesertaPPDB $users) {}
 
     /**
      * Bind data to the view.
      */
     public function compose(View $view): void
     {
-        $oldestYear = Cache::remember('oldest_year', 60 * 24 * 28, fn() => $this->users->oldest('created_at')->first()->created_at->year);
+        $oldestYear = Cache::remember('oldest_year', 60 * 24 * 28, function () {
+            $oldest = $this->users->oldest('created_at')->first();
+            return $oldest ? $oldest->created_at->year : date('Y');
+        });
 
         $view->with('years_visible', $oldestYear);
     }
