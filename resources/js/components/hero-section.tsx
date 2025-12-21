@@ -72,7 +72,7 @@ export function HeroSection() {
 		>
 			<div className="hero-bg absolute inset-0 -z-10">
 				<img
-					src="/indonesian-vocational-high-school-modern-building-.jpg"
+					src="/img/gedung-smk-bg.png"
 					alt="SMK Diponegoro Karanganyar"
 					className="w-full h-full object-cover scale-110"
 				/>

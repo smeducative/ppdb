@@ -7,7 +7,6 @@ import {
 	ArrowUp,
 	Clock,
 	Facebook,
-	GraduationCap,
 	Instagram,
 	Mail,
 	MapPin,
@@ -75,16 +74,20 @@ export function Footer() {
 			>
 				<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
 					<div className="space-y-6">
-						<Link href="/" className="flex items-center gap-3 group">
-							<div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-								<GraduationCap className="w-7 h-7 text-primary-foreground" />
+						<Link href="/" className="flex flex-col items-start gap-3 group">
+							<div className="w-12 h-12 rounded-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+								<img
+									src="/img/logo.png"
+									alt="SMK Diponegoro Karanganyar Logo"
+									className="w-full h-full object-contain"
+								/>
 							</div>
 							<div>
 								<p className="font-bold text-background text-lg leading-tight">
-									SMK Diponegoro
+									SMK Diponegoro Karanganyar
 								</p>
 								<p className="text-xs text-background/70 font-medium">
-									Karanganyar
+									Kab. Pekalongan
 								</p>
 							</div>
 						</Link>

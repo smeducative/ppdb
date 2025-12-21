@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link, usePage } from "@inertiajs/react";
 import gsap from "gsap";
-import { GraduationCap, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
@@ -77,19 +77,23 @@ export function Navbar() {
 						href="/"
 						className="flex items-center gap-3 group"
 					>
-						<div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-primary/30 group-hover:scale-105 transition-all duration-300">
-							<GraduationCap className="w-7 h-7 text-primary-foreground" />
+						<div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-primary/30 group-hover:scale-105 transition-all duration-300">
+							<img
+								src="/img/logo.png"
+								alt="SMK Diponegoro Karanganyar Logo"
+								className="w-full h-full object-contain"
+							/>
 						</div>
 						<div className="hidden sm:block">
 							<p
 								className={`font-bold text-lg leading-tight transition-colors ${logoTextColor}`}
 							>
-								SMK Diponegoro
+								SMK Diponegoro Karanganyar
 							</p>
 							<p
 								className={`text-xs font-medium transition-colors ${scrolled || isRegistrationPage ? "text-muted-foreground" : "text-white/70"}`}
 							>
-								Karanganyar
+								Kab. Pekalongan
 							</p>
 						</div>
 					</Link>

@@ -231,7 +231,7 @@ export function FacilitiesSection() {
 					className="mt-16 relative rounded-3xl overflow-hidden group"
 				>
 					<img
-						src="/modern-indonesian-school-computer-laboratory-with-.jpg"
+						src="/img/facilities/modern-computer-lab.png"
 						alt="Fasilitas SMK Diponegoro Karanganyar"
 						className="w-full h-72 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
 					/>
