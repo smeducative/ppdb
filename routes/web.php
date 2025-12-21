@@ -45,7 +45,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::put('setting/profile', [AdminController::class, 'setAkun'])->name('setting.profile');
 
     // ppdb setting
-    Route::view('/setting/ppdb', 'admin.pengaturan-ppdb')->name('ppdb.set.batas.akhir');
+    Route::get('/setting/ppdb', [PpdbSettingController::class, 'index'])->name('ppdb.set.batas.akhir');
     Route::put('/setting/ppdb', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
 
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');

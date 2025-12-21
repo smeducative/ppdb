@@ -195,14 +195,14 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get();
 
-        return view('admin.dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount', 'daftarUlangPerSekolah', 'daftarUlangPerSekolahCount'));
+        return inertia('Admin/Dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount', 'daftarUlangPerSekolah', 'daftarUlangPerSekolahCount'));
     }
 
     public function pengaturanAkun()
     {
         $user = auth()->user();
 
-        return view('admin.profile', compact('user'));
+        return inertia('Admin/Profile', compact('user'));
     }
 
     public function setAkun()

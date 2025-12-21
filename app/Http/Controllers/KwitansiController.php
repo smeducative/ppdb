@@ -13,33 +13,41 @@ use PDF;
 class KwitansiController extends Controller
 {
     // show kwitansi   \
+    // show kwitansi
     public function showPesertaDiterima()
     {
         $tahun = request('tahun', now()->year);
+        $jurusan = request('jurusan');
+        $search = request('search');
 
-        $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)
+        $pesertappdb = PesertaPPDB::with('jurusan', 'kwitansi')
+            ->where('diterima', 1)
             ->whereYear('created_at', $tahun)
-            ->latest('updated_at')->get();
+            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($search, function ($query, $search) {
+                $query->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+            })
+            ->latest('updated_at')
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('pdf.kwitansi', compact('pesertappdb'));
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Kwitansi/Index', compact('pesertappdb', 'tahun', 'years', 'jurusan'));
     }
 
     public function showJurusanPeserta($jurusan)
     {
-        $tahun = request('tahun', now()->year);
-
-        $pesertappdb = PesertaPPDB::with('jurusan')->where('diterima', 1)
-            ->whereJurusanId($jurusan)
-            ->whereYear('created_at', $tahun)->latest()->get();
-
-        return view('pdf.kwitansi', compact('pesertappdb'));
+        return redirect()->route('ppdb.kwitansi.index', ['jurusan' => $jurusan]);
     }
 
     public function tambahKwitansi($uuid)
     {
-        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi' => fn ($query) => $query->withTrashed()->latest()])->findOrFail($uuid);
+        $peserta = PesertaPPDB::with(['jurusan', 'kwitansi' => fn($query) => $query->withTrashed()->latest()->with('penerima', 'deletedBy')])->findOrFail($uuid);
 
-        return view('ppdb.tambah-kwitansi', compact('peserta'));
+        return inertia('Admin/Kwitansi/Create', compact('peserta'));
     }
 
     public function storeKwitansi($uuid)
@@ -105,19 +113,31 @@ class KwitansiController extends Controller
     {
         $tahun = request('tahun', now()->year);
 
-        $kwitansies = Kwitansi::withTrashed()->has('pesertaPpdb')
-                        ->with(['pesertaPpdb', 'penerima', 'deletedBy'])
-                        ->whereYear('created_at', $tahun)->latest()->get();
+        $kwitansiesAll = Kwitansi::withTrashed()
+            ->has('pesertaPpdb')
+            ->whereYear('created_at', $tahun)
+            ->get();
 
-        $danaKelola = $kwitansies->filter(fn ($d) => is_null($d->deleted_at))->sum('nominal');
+        $danaKelola = $kwitansiesAll->filter(fn($d) => is_null($d->deleted_at))->sum('nominal');
 
-        $jenisPembayaran = $kwitansies->filter(fn ($d) => is_null($d->deleted_at))->map(function ($item) {
-            $item->jenis_pembayaran = Str::title($item->jenis_pembayaran);
+        $jenisPembayaran = $kwitansiesAll->filter(fn($d) => is_null($d->deleted_at))
+            ->groupBy(fn($item) => Str::title($item->jenis_pembayaran))
+            ->map(fn($group) => [
+                'count' => $group->count(),
+                'total' => $group->sum('nominal')
+            ]);
 
-            return $item;
-        })->groupBy('jenis_pembayaran');
+        $kwitansiesHistory = Kwitansi::withTrashed()
+            ->has('pesertaPpdb')
+            ->with(['pesertaPpdb', 'penerima', 'deletedBy'])
+            ->whereYear('created_at', $tahun)
+            ->latest()
+            ->paginate(50)
+            ->withQueryString();
 
-        return view('ppdb.rekap-kwitansi', compact('kwitansies', 'danaKelola', 'jenisPembayaran'));
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Kwitansi/Rekap', compact('kwitansiesHistory', 'danaKelola', 'jenisPembayaran', 'tahun', 'years'));
     }
 
     public function cetakRekapDanaKwitansi()
@@ -134,7 +154,7 @@ class KwitansiController extends Controller
             return $item;
         })->groupBy('jenis_pembayaran');
 
-        return Excel::download(new RekapDanaKwitansiExport($danaKelola, $jenisPembayaran, $tahun), 'rekap-dana-kwitansi-ppdb-'.$tahun.'.xlsx');
+        return Excel::download(new RekapDanaKwitansiExport($danaKelola, $jenisPembayaran, $tahun), 'rekap-dana-kwitansi-ppdb-' . $tahun . '.xlsx');
     }
 
     public function cetakRekapRiwayatKwitansi()
@@ -143,6 +163,6 @@ class KwitansiController extends Controller
 
         $kwitansies = Kwitansi::with(['pesertaPpdb', 'penerima'])->whereYear('created_at', $tahun)->get();
 
-        return Excel::download(new RekapRiwayatKwitansiExport($kwitansies, $tahun), 'rekap-riwayat-kwitansi-ppdb-'.$tahun.'.xlsx');
+        return Excel::download(new RekapRiwayatKwitansiExport($kwitansies, $tahun), 'rekap-riwayat-kwitansi-ppdb-' . $tahun . '.xlsx');
     }
 }

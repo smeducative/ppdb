@@ -11,9 +11,22 @@ class PendaftaranPPDB extends Controller
     public function listPendaftar()
     {
         $tahun = request('tahun', now()->year);
-        $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)->with('jurusan')->latest()->get();
+        $search = request('search');
 
-        return view('ppdb.list', compact('pesertappdb'));
+        $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)
+            ->with(['jurusan']) // Eager load relationships
+            ->when($search, function ($query, $search) {
+                $query->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Ppdb/ListPendaftar', compact('pesertappdb', 'tahun', 'years'));
     }
 
     public function listPendaftarJurusan($jurusan)
@@ -26,7 +39,8 @@ class PendaftaranPPDB extends Controller
 
     public function tambahPendaftar()
     {
-        return view('ppdb.tambah');
+        $jurusan = Jurusan::all();
+        return inertia('Admin/Ppdb/Create', compact('jurusan'));
     }
 
     public function submitPendaftar()
@@ -122,32 +136,54 @@ class PendaftaranPPDB extends Controller
     public function listDaftarUlang($jurusan = null)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
+
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->has('kwitansi')
             ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
-            ->get(); // proto
+            ->when($search, function ($query, $search) {
+                $query->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('ppdb.list-daftar-ulang', compact('pesertappdb'));
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Ppdb/ListDaftarUlang', compact('pesertappdb', 'tahun', 'years', 'jurusan'));
     }
 
     public function listBelumDaftarUlang($jurusan = null)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
+
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
             ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
-            ->get();
+            ->when($search, function ($query, $search) {
+                $query->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('ppdb.list-belum-daftar-ulang', compact('pesertappdb'));
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Ppdb/ListBelumDaftarUlang', compact('pesertappdb', 'tahun', 'years', 'jurusan'));
     }
 
     public function showPeserta($id)
     {
-        $peserta = PesertaPPDB::find($id);
+        $peserta = PesertaPPDB::with('jurusan')->findOrFail($id);
 
-        return view('ppdb.show', compact('peserta'));
+        return inertia('Admin/Ppdb/Show', compact('peserta'));
     }
 
     /*
@@ -156,8 +192,9 @@ class PendaftaranPPDB extends Controller
     public function edit($id)
     {
         $peserta = PesertaPPDB::findOrFail($id);
+        $jurusan = Jurusan::all();
 
-        return view('ppdb.edit', compact('peserta'));
+        return inertia('Admin/Ppdb/Edit', compact('peserta', 'jurusan'));
     }
 
     public function update($id)
