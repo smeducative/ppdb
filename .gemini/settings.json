@@ -1,12 +1,5 @@
 {
     "mcpServers": {
-        "shadcn": {
-            "command": "bunx",
-            "args": [
-                "shadcn@latest",
-                "mcp"
-            ]
-        },
         "laravel-boost": {
             "command": "wsl.exe",
             "args": [
