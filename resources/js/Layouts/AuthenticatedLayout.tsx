@@ -11,37 +11,49 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
-import type { PropsWithChildren } from "react";
+import { Toaster } from "@/components/ui/sonner";
+import { usePage } from "@inertiajs/react";
+import { type PropsWithChildren, useEffect } from "react";
+import { toast } from "sonner";
 
-interface AuthenticatedLayoutProps {
-	header: string;
+interface AuthenticatedLayoutProps extends PropsWithChildren {
+	header?: string;
 }
 
 export default function AuthenticatedLayout({
 	header,
 	children,
-}: PropsWithChildren<AuthenticatedLayoutProps>) {
+}: AuthenticatedLayoutProps) {
+	const { flash } = usePage().props;
+
+	useEffect(() => {
+		if (flash?.success) {
+			toast.success(flash.success);
+		}
+		if (flash?.error) {
+			toast.error(flash.error);
+		}
+	}, [flash]);
+
 	return (
 		<SidebarProvider>
 			<AppSidebar />
+
 			<SidebarInset>
-				<header className="flex items-center gap-2 h-16 group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 transition-[width,height] ease-linear shrink-0">
-					<div className="flex items-center gap-2 px-4">
-						<SidebarTrigger className="-ml-1" />
-						<Separator
-							orientation="vertical"
-							className="mr-2 data-[orientation=vertical]:h-4"
-						/>
-						<Breadcrumb>
-							<BreadcrumbList>
-								<BreadcrumbItem>
-									<BreadcrumbPage>{header}</BreadcrumbPage>
-								</BreadcrumbItem>
-							</BreadcrumbList>
-						</Breadcrumb>
-					</div>
+				<header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+					<SidebarTrigger className="-ml-1" />
+					<Separator orientation="vertical" className="mr-2 h-4" />
+					<Breadcrumb>
+						<BreadcrumbList>
+							<BreadcrumbItem>
+								<BreadcrumbPage>{header ?? "Dashboard"}</BreadcrumbPage>
+							</BreadcrumbItem>
+						</BreadcrumbList>
+					</Breadcrumb>
 				</header>
-				<div className="flex flex-col flex-1 gap-4 p-4 pt-0">{children}</div>
+				<div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
+
+				<Toaster />
 			</SidebarInset>
 		</SidebarProvider>
 	);

@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import {
 	Film,
@@ -133,7 +132,7 @@ export default function Dashboard({
 	});
 
 	return (
-		<AuthenticatedLayout header="Dashboard">
+		<>
 			<Head title="Dashboard" />
 
 			<div className="space-y-6">
@@ -394,7 +393,7 @@ export default function Dashboard({
 					</Card>
 				</div>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }
 
