@@ -7,7 +7,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import { format } from "date-fns";
 
@@ -121,14 +120,14 @@ export default function ListDaftarUlang({
 
 	const handleYearChange = (value: string) => {
 		router.get(
-			route("ppdb.list.daftar.ulang"),
-			{ tahun: value, jurusan },
+			window.location.pathname,
+			{ tahun: value },
 			{ preserveState: true },
 		);
 	};
 
 	return (
-		<AuthenticatedLayout header="List Peserta Daftar Ulang">
+		<>
 			<Head title="List Peserta Daftar Ulang" />
 
 			<div className="space-y-6">
@@ -172,11 +171,11 @@ export default function ListDaftarUlang({
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.list.daftar.ulang")}
+					searchEndpoint={route("ppdb.daftar.ulang.list")}
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
 					additionalParams={{ jurusan }}
 				/>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

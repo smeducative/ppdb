@@ -14,7 +14,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import { format } from "date-fns";
 
@@ -153,7 +152,7 @@ export default function Index({
 	};
 
 	return (
-		<AuthenticatedLayout header={title}>
+		<>
 			<Head title={title} />
 
 			<div className="space-y-6">
@@ -245,6 +244,6 @@ export default function Index({
 					/>
 				</div>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

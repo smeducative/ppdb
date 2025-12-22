@@ -6,7 +6,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
@@ -142,14 +141,14 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 
 	const handleYearChange = (value: string) => {
 		router.get(
-			route("ppdb.kwitansi.index"),
+			route("ppdb.kwitansi.show"),
 			{ tahun: value, jurusan },
 			{ preserveState: true },
 		);
 	};
 
 	return (
-		<AuthenticatedLayout header="Dashboard Kwitansi">
+		<>
 			<Head title="Dashboard Kwitansi" />
 
 			<div className="space-y-6">
@@ -194,11 +193,11 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.kwitansi.index")}
+					searchEndpoint={route("ppdb.kwitansi.show")}
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
 					additionalParams={{ jurusan }}
 				/>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

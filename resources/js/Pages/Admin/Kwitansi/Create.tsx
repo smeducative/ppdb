@@ -1,13 +1,13 @@
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,14 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
 } from "@/components/ui/table";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { format } from "date-fns";
 
@@ -91,7 +90,7 @@ export default function Create({ peserta }: Props) {
 		.reduce((sum, k) => sum + k.nominal, 0);
 
 	return (
-		<AuthenticatedLayout header="Tambah Kwitansi">
+		<>
 			<Head title="Tambah Kwitansi" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
@@ -297,6 +296,6 @@ export default function Create({ peserta }: Props) {
 					</CardContent>
 				</Card>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

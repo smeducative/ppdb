@@ -12,7 +12,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { cn } from "@/lib/utils";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
@@ -95,7 +94,7 @@ export default function Create({ jurusan }: Props) {
 	const { flash } = usePage<any>().props;
 
 	return (
-		<AuthenticatedLayout header="Tambah Peserta PPDB">
+		<>
 			<Head title="Tambah Peserta PPDB" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
@@ -557,6 +556,6 @@ export default function Create({ jurusan }: Props) {
 					</form>
 				</Card>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

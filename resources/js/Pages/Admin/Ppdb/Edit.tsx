@@ -29,7 +29,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { cn } from "@/lib/utils";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
@@ -174,7 +173,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 	const { flash } = usePage<any>().props;
 
 	return (
-		<AuthenticatedLayout header="Edit Peserta PPDB">
+		<>
 			<Head title="Edit Peserta PPDB" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
@@ -664,6 +663,6 @@ export default function Edit({ jurusan, peserta }: Props) {
 					</form>
 				</Card>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

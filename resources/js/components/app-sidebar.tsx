@@ -49,6 +49,7 @@ import {
 
 const jurusanItems = [
 	{ id: 3, name: "AT" },
+	{ id: 2, name: "TO" },
 	{ id: 1, name: "TKJ" },
 	{ id: 4, name: "BDP" },
 	{ id: 6, name: "TSM" },
@@ -56,10 +57,18 @@ const jurusanItems = [
 ];
 
 export function AppSidebar() {
-	const { url, props } = usePage();
+	const { url, props } = usePage<any>();
 	const user = props.auth?.user;
+	const tahun = props.tahun || new Date().getFullYear();
 
 	const isActive = (path: string) => url.startsWith(path);
+
+	const visibleJurusan = jurusanItems.filter((j) => {
+		if (j.id === 2) {
+			return Number(tahun) < 2025;
+		}
+		return true;
+	});
 
 	return (
 		<Sidebar collapsible="icon" variant="inset">
@@ -131,7 +140,7 @@ export function AppSidebar() {
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -170,7 +179,7 @@ export function AppSidebar() {
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -211,7 +220,7 @@ export function AppSidebar() {
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -250,7 +259,7 @@ export function AppSidebar() {
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -284,7 +293,7 @@ export function AppSidebar() {
 								title="Kartu Pendaftaran"
 								defaultOpen={isActive("/dashboard/kartu-pendaftaran")}
 							>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -310,7 +319,7 @@ export function AppSidebar() {
 								title="Form Pendaftaran"
 								defaultOpen={isActive("/dashboard/formulir")}
 							>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -334,7 +343,7 @@ export function AppSidebar() {
 								title="Surat Diterima"
 								defaultOpen={isActive("/dashboard/surat")}
 							>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -371,7 +380,7 @@ export function AppSidebar() {
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
-								{jurusanItems.map((jurusan) => (
+								{visibleJurusan.map((jurusan) => (
 									<SidebarMenuSubItem key={jurusan.id}>
 										<SidebarMenuSubButton
 											asChild
@@ -485,7 +494,7 @@ export function AppSidebar() {
 							<SidebarMenuItem>
 								<SidebarMenuButton
 									asChild
-									isActive={url.includes("/pengaturan-ppdb")}
+									isActive={url.includes("/setting/ppdb")}
 								>
 									<Link href={route("ppdb.set.batas.akhir")}>
 										<Settings className="size-4" />

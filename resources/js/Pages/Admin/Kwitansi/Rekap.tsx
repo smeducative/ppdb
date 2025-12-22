@@ -16,7 +16,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, router, usePage } from "@inertiajs/react";
 import { format } from "date-fns";
 
@@ -69,6 +68,7 @@ export default function Rekap({
 	kwitansiesHistory,
 	danaKelola,
 	jenisPembayaran,
+	tahun,
 	years,
 }: Props) {
 	const { csrf_token } = usePage<any>().props;
@@ -89,7 +89,7 @@ export default function Rekap({
 	};
 
 	return (
-		<AuthenticatedLayout header="Rekap Kwitansi">
+		<>
 			<Head title="Rekap Kwitansi" />
 
 			<div className="space-y-6">
@@ -267,6 +267,6 @@ export default function Rekap({
 					</Card>
 				</div>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

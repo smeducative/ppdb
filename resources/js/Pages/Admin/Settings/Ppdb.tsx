@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, usePage } from "@inertiajs/react";
 
 interface PpdbSetting {
@@ -56,7 +55,7 @@ export default function Ppdb({ setting }: Props) {
 	};
 
 	return (
-		<AuthenticatedLayout header="Pengaturan PPDB">
+		<>
 			<Head title="Pengaturan PPDB" />
 
 			<div className="max-w-2xl mx-auto space-y-6">
@@ -160,6 +159,6 @@ export default function Ppdb({ setting }: Props) {
 					</form>
 				</Card>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

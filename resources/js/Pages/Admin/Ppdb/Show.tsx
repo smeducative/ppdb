@@ -19,7 +19,6 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 
 interface Jurusan {
@@ -118,7 +117,7 @@ export default function Show({ peserta }: Props) {
 	);
 
 	return (
-		<AuthenticatedLayout header={peserta.nama_lengkap}>
+		<>
 			<Head title={peserta.nama_lengkap} />
 
 			<div className="max-w-4xl mx-auto space-y-6">
@@ -312,6 +311,6 @@ export default function Show({ peserta }: Props) {
 					</CardFooter>
 				</Card>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

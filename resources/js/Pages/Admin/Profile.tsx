@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import type { User } from "@/types";
 import { Head, useForm, usePage } from "@inertiajs/react";
 
@@ -34,7 +33,7 @@ export default function Profile({ user }: Props) {
 	const { flash } = usePage<any>().props;
 
 	return (
-		<AuthenticatedLayout header="Pengaturan Akun">
+		<>
 			<Head title="Pengaturan Akun" />
 
 			<div className="max-w-2xl mx-auto space-y-6">
@@ -105,6 +104,6 @@ export default function Profile({ user }: Props) {
 					</form>
 				</Card>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

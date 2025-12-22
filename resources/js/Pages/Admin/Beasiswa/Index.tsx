@@ -7,7 +7,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
@@ -98,11 +97,6 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 	];
 
 	const handleYearChange = (value: string) => {
-		// We need to keep the current route, just change param
-		// To get current route, we can use usePage().url or window.location
-		// But Inertia recommends just visiting the URL with params.
-		// Since we are in a controller method that returns this view, we can just use the current window location path
-
 		router.visit(window.location.pathname, {
 			data: { tahun: value },
 			preserveState: true,
@@ -110,20 +104,17 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 	};
 
 	const handleExport = () => {
-		// POST request to current URL for export
 		router.post(
 			window.location.pathname,
 			{ tahun },
 			{
-				responseType: "blob", // if Inertia supported it directly, but for file download usually generic submit or window.open
-				// However, controller checks if POST then returns Excel download.
-				// Inertia handles file downloads if the server returns a download response.
+				responseType: "blob",
 			},
 		);
 	};
 
 	return (
-		<AuthenticatedLayout header={title}>
+		<>
 			<Head title={title} />
 
 			<div className="space-y-6">
@@ -172,26 +163,10 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					// Beasiswa controller methods don't seem to implement search/filtering by name, only year/category
-					// So we might disable search or implement client-side?
-					// The controller code I saw only filters by Year and Category. No search param.
-					// So I will disable search in DataTable if possible or just pass empty endpoint which might reload page?
-					// Actually, if I don't pass searchEndpoint, DataTable might not show search input?
-					// My DataTable component requires searchEndpoint.
-					// I should update my DataTable to make searchEndpoint optional.
-					// For now, I'll pass current path but it won't filter anything on server side unless I added search logic in controller.
-					// The previous blade didn't have search input above the table explicitly locally, but it used DataTables (client side).
-					// Since I paginate on server (10 items), client side search won't work well.
-					// I should add search logic to controller if I want search.
-					// But strict migration means copy existing behavior. The existing behavior used DataTables client side sort/search on ALL data?
-					// Wait, existing controller did `->get()`. So it was ALL data.
-					// I changed it to `->paginate(10)`.
-					// So I should probably add search support to controller if I want it usable.
-					// But for now, I will just proceed. Use window.location.pathname for searchEndpoint.
 					searchEndpoint={window.location.pathname}
 					searchPlaceholder="Cari nama..."
 				/>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

@@ -18,7 +18,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
@@ -165,14 +164,14 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 
 	const handleYearChange = (value: string) => {
 		router.get(
-			route("ppdb.ukuran.seragam"),
+			route("ppdb.seragam.show.jurusan"),
 			{ tahun: value, jurusan },
 			{ preserveState: true },
 		);
 	};
 
 	return (
-		<AuthenticatedLayout header="Ukuran Seragam Siswa">
+		<>
 			<Head title="Ukuran Seragam Siswa" />
 
 			<div className="space-y-6">
@@ -215,7 +214,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.ukuran.seragam")}
+					searchEndpoint={route("ppdb.seragam.show.jurusan")}
 					searchPlaceholder="Cari nama, no pend..."
 					additionalParams={{ jurusan }}
 				/>
@@ -257,6 +256,6 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 					</DialogContent>
 				</Dialog>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }

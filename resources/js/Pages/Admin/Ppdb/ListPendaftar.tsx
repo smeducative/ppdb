@@ -8,7 +8,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 
 interface Jurusan {
@@ -123,14 +122,14 @@ export default function ListPendaftar({ pesertappdb, tahun, years }: Props) {
 
 	const handleYearChange = (year: string) => {
 		router.get(
-			route("ppdb.list.pendaftar"),
+			window.location.pathname,
 			{ tahun: year },
 			{ preserveState: true },
 		);
 	};
 
 	return (
-		<AuthenticatedLayout header="List Peserta PPDB">
+		<>
 			<Head title="List Peserta PPDB" />
 
 			<div className="space-y-6">
@@ -154,7 +153,7 @@ export default function ListPendaftar({ pesertappdb, tahun, years }: Props) {
 						<Button asChild>
 							{/* Using Link with method post for export */}
 							<Link
-								href={`${route("export.peserta.ppdb")}?tahun=${tahun}&all=1`}
+								href={`${route("export.peserta.ppdb")}?tahun=${tahun}&all=1&jurusan=${row.original.jurusan?.id || ""}`}
 								method="post"
 								as="button"
 							>
@@ -172,6 +171,6 @@ export default function ListPendaftar({ pesertappdb, tahun, years }: Props) {
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
 				/>
 			</div>
-		</AuthenticatedLayout>
+		</>
 	);
 }
