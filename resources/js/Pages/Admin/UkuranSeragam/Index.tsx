@@ -1,5 +1,5 @@
 import { AlertMessages } from "@/components/alert-messages";
-import { DataTable } from "@/components/data-table";
+import { type Column, DataTable } from "@/components/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +20,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
-import type { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
 
 interface Jurusan {
@@ -109,7 +108,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 		});
 	};
 
-	const columns: ColumnDef<Peserta>[] = [
+	const columns: Column<Peserta>[] = [
 		{
 			accessorKey: "no_pendaftaran",
 			header: "No. Pendaftaran",

@@ -1,5 +1,5 @@
 import { AlertMessages } from "@/components/alert-messages";
-import { DataTable } from "@/components/data-table";
+import { type Column, DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
 import {
 	Select,
@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/select";
 import { formatDate } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
-import type { ColumnDef } from "@tanstack/react-table";
 
 interface Jurusan {
 	id: number;
@@ -51,48 +50,72 @@ interface Props {
 export default function Index({ pesertappdb, tahun, years, title }: Props) {
 	const { flash } = usePage<any>().props;
 
-	const columns: ColumnDef<Peserta>[] = [
+	const columns: Column<Peserta>[] = [
 		{
-			accessorKey: "no_pendaftaran",
-			header: "No. Pendaftaran",
+			header: "Identitas Peserta",
+			className: "min-w-[200px]",
 			cell: ({ row }) => (
-				<div>
-					<div className="font-medium text-primary">
-						{row.getValue("no_pendaftaran")}
+				<div className="flex flex-col">
+					<span className="text-xs text-muted-foreground font-mono">
+						{row.original.no_pendaftaran}
+					</span>
+					<Link
+						href={route("ppdb.show.peserta", row.original.id)}
+						className="text-primary hover:underline font-bold"
+					>
+						{row.original.nama_lengkap}
+					</Link>
+					<span className="text-xs sm:hidden text-muted-foreground mt-1 text-blue-600 dark:text-blue-400">
+						{row.original.jurusan?.nama || "-"}
+					</span>
+				</div>
+			),
+		},
+		{
+			header: "Info Peserta",
+			className: "hidden md:table-cell",
+			cell: ({ row }) => (
+				<div className="flex flex-col text-sm">
+					<div className="flex items-center gap-1">
+						<span className="text-muted-foreground">TTL:</span>
+						<span>
+							{row.original.tempat_lahir},{" "}
+							{formatDate(row.original.tanggal_lahir)}
+						</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<span className="text-muted-foreground">Asal:</span>
+						<span className="truncate max-w-[150px]">
+							{row.original.asal_sekolah}
+						</span>
 					</div>
 				</div>
 			),
 		},
 		{
-			accessorKey: "nama_lengkap",
-			header: "Nama Lengkap",
+			header: "Kontak",
+			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
-				<Link
-					href={route("ppdb.show.peserta", row.original.id)}
-					className="hover:underline font-medium"
+				<a
+					href={`https://wa.me/${row.original.no_hp}`}
+					target="_blank"
+					rel="noreferrer"
+					className="text-green-600 dark:text-green-400 hover:underline font-medium text-sm flex items-center gap-1"
 				>
-					{row.getValue("nama_lengkap")}
-				</Link>
+					{row.original.no_hp}
+				</a>
 			),
 		},
 		{
-			id: "ttl",
-			header: "Tempat, Tanggal Lahir",
-			cell: ({ row }) => {
-				return `${row.original.tempat_lahir}, ${formatDate(row.original.tanggal_lahir)}`;
-			},
-		},
-		{
-			accessorKey: "no_hp",
-			header: "No. Telepon",
-		},
-		{
-			accessorKey: "asal_sekolah",
-			header: "Asal Sekolah",
-		},
-		{
-			accessorKey: "jurusan.abbreviation",
-			header: "Pilihan Jurusan",
+			header: "Jurusan",
+			className: "hidden sm:table-cell",
+			cell: ({ row }) => (
+				<div className="text-sm font-medium">
+					{row.original.jurusan?.abbreviation ||
+						row.original.jurusan?.nama ||
+						"-"}
+				</div>
+			),
 		},
 	];
 
@@ -121,7 +144,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 				<AlertMessages flash={flash} />
 
 				<div
-					className="bg-blue-500/10 border-l-4 border-blue-500 text-blue-700 dark:text-blue-400 p-4"
+					className="bg-blue-500/10 border-l-4 border-blue-500 text-blue-700 dark:text-blue-400 p-4 rounded"
 					role="alert"
 				>
 					<p className="font-bold">Info!</p>

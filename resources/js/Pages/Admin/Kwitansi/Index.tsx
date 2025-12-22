@@ -1,4 +1,4 @@
-import { DataTable } from "@/components/data-table";
+import { type Column, DataTable } from "@/components/data-table";
 import {
 	Select,
 	SelectContent,
@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/select";
 import { formatDate } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
-import type { ColumnDef } from "@tanstack/react-table";
 
 interface Jurusan {
 	id: number;
@@ -63,7 +62,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 		}).format(amount);
 	};
 
-	const columns: ColumnDef<Peserta>[] = [
+	const columns: Column<Peserta>[] = [
 		{
 			accessorKey: "no_pendaftaran",
 			header: "No. Pendaftaran",

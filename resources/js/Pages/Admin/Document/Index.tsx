@@ -79,46 +79,56 @@ export default function Index({
 
 	const columns: Column<Peserta>[] = [
 		{
-			accessorKey: "no_pendaftaran",
-			header: "No. Pendaftaran",
+			header: "Identitas Peserta",
+			className: "min-w-[200px]",
 			cell: ({ row }) => (
-				<div>
-					<div className="font-medium text-primary">
-						{row.getValue("no_pendaftaran")}
+				<div className="flex flex-col">
+					<span className="text-xs text-muted-foreground font-mono">
+						{row.original.no_pendaftaran}
+					</span>
+					<Link
+						href={route("ppdb.show.peserta", row.original.id)}
+						className="text-primary hover:underline font-bold"
+					>
+						{row.original.nama_lengkap}
+					</Link>
+					<span className="text-xs sm:hidden text-muted-foreground mt-1">
+						{row.original.jurusan?.nama || "-"}
+					</span>
+				</div>
+			),
+		},
+		{
+			header: "Info Peserta",
+			className: "hidden md:table-cell",
+			cell: ({ row }) => (
+				<div className="flex flex-col text-sm">
+					<div className="flex items-center gap-1">
+						<span className="text-muted-foreground">TTL:</span>
+						<span>
+							{row.original.tempat_lahir},{" "}
+							{formatDate(row.original.tanggal_lahir)}
+						</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<span className="text-muted-foreground">Asal:</span>
+						<span className="truncate max-w-[150px]">
+							{row.original.asal_sekolah}
+						</span>
 					</div>
 				</div>
 			),
 		},
 		{
-			accessorKey: "nama_lengkap",
-			header: "Nama Lengkap",
+			header: "Jurusan",
+			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
-				<Link
-					href={route("ppdb.show.peserta", row.original.id)}
-					className="hover:underline font-medium"
-				>
-					{row.getValue("nama_lengkap")}
-				</Link>
+				<div className="text-sm font-medium">
+					{row.original.jurusan?.abbreviation ||
+						row.original.jurusan?.nama ||
+						"-"}
+				</div>
 			),
-		},
-		{
-			id: "ttl",
-			header: "Tempat, Tanggal Lahir",
-			cell: ({ row }) => {
-				return `${row.original.tempat_lahir}, ${formatDate(row.original.tanggal_lahir)}`;
-			},
-		},
-		{
-			accessorKey: "no_hp",
-			header: "No. Telepon",
-		},
-		{
-			accessorKey: "asal_sekolah",
-			header: "Asal Sekolah",
-		},
-		{
-			accessorKey: "jurusan.nama",
-			header: "Pilihan Jurusan",
 		},
 		{
 			id: "actions",

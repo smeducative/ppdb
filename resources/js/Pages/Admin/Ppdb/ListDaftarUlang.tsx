@@ -55,66 +55,70 @@ export default function ListDaftarUlang({
 }: Props) {
 	const columns: Column<Peserta>[] = [
 		{
-			accessorKey: "no_pendaftaran",
-			header: "No. Pendaftaran",
+			header: "Identitas Peserta",
+			className: "min-w-[200px]",
 			cell: ({ row }) => (
-				<div>
-					<div className="font-medium">
-						<Link
-							href={route("ppdb.show.peserta", row.original.id)}
-							className="text-primary hover:underline font-medium"
-						>
-							{row.getValue("no_pendaftaran")}
-						</Link>
+				<div className="flex flex-col">
+					<span className="text-xs text-muted-foreground font-mono">
+						{row.original.no_pendaftaran}
+					</span>
+					<Link
+						href={route("ppdb.show.peserta", row.original.id)}
+						className="text-primary hover:underline font-bold"
+					>
+						{row.original.nama_lengkap}
+					</Link>
+					<span className="text-xs sm:hidden text-muted-foreground mt-1 text-blue-600 dark:text-blue-400">
+						{row.original.jurusan?.nama || "-"}
+					</span>
+				</div>
+			),
+		},
+		{
+			header: "Info Peserta",
+			className: "hidden md:table-cell",
+			cell: ({ row }) => (
+				<div className="flex flex-col text-sm">
+					<div className="flex items-center gap-1">
+						<span className="text-muted-foreground">TTL:</span>
+						<span>
+							{row.original.tempat_lahir},{" "}
+							{formatDate(row.original.tanggal_lahir)}
+						</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<span className="text-muted-foreground">Asal:</span>
+						<span className="truncate max-w-[150px]">
+							{row.original.asal_sekolah}
+						</span>
 					</div>
 				</div>
 			),
 		},
 		{
-			accessorKey: "nama_lengkap",
-			header: "Nama Lengkap",
-			cell: ({ row }) => (
-				<Link
-					href={route("ppdb.show.peserta", row.original.id)}
-					className="hover:underline font-medium"
-				>
-					{row.getValue("nama_lengkap")}
-				</Link>
-			),
-		},
-		{
-			accessorKey: "ttl",
-			header: "Tempat, Tanggal Lahir",
-			cell: ({ row }) => {
-				return (
-					<div>
-						{row.original.tempat_lahir},{" "}
-						{formatDate(row.original.tanggal_lahir)}
-					</div>
-				);
-			},
-		},
-		{
-			accessorKey: "no_hp",
-			header: "No. HP",
+			header: "Kontak",
+			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
 				<a
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="text-green-600 dark:text-green-400 hover:underline font-medium"
+					className="text-green-600 dark:text-green-400 hover:underline font-medium text-sm flex items-center gap-1"
 				>
-					{row.getValue("no_hp")}
+					{row.original.no_hp}
 				</a>
 			),
 		},
 		{
-			accessorKey: "asal_sekolah",
-			header: "Asal Sekolah",
-		},
-		{
-			accessorKey: "jurusan.abbreviation",
 			header: "Jurusan",
+			className: "hidden sm:table-cell",
+			cell: ({ row }) => (
+				<div className="text-sm font-medium">
+					{row.original.jurusan?.abbreviation ||
+						row.original.jurusan?.nama ||
+						"-"}
+				</div>
+			),
 		},
 	];
 

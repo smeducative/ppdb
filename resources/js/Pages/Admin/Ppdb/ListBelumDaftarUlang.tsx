@@ -1,4 +1,5 @@
-import { DataTable } from "@/components/data-table";
+import { Head, Link, router } from "@inertiajs/react";
+import { type Column, DataTable } from "@/components/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,8 +9,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Head, Link, router } from "@inertiajs/react";
-import type { ColumnDef } from "@tanstack/react-table";
 
 interface Jurusan {
 	id: number;
@@ -55,7 +54,7 @@ export default function ListBelumDaftarUlang({
 	years,
 	jurusan,
 }: Props) {
-	const columns: ColumnDef<Peserta>[] = [
+	const columns: Column<Peserta>[] = [
 		{
 			accessorKey: "no_pendaftaran",
 			header: "No. Pendaftaran",
@@ -76,12 +75,26 @@ export default function ListBelumDaftarUlang({
 			),
 		},
 		{
-			accessorKey: "jurusan.abbreviation",
 			header: "Jurusan",
+			cell: ({ row }) => (
+				<div className="text-sm font-medium">
+					{row.original.jurusan?.abbreviation ||
+						row.original.jurusan?.nama ||
+						"-"}
+				</div>
+			),
 		},
 		{
 			accessorKey: "asal_sekolah",
 			header: "Asal Sekolah",
+			cell: ({ row }) => (
+				<div
+					className="text-sm text-muted-foreground truncate max-w-[200px]"
+					title={row.original.asal_sekolah}
+				>
+					{row.original.asal_sekolah}
+				</div>
+			),
 		},
 		{
 			accessorKey: "no_hp",
@@ -188,6 +201,10 @@ export default function ListBelumDaftarUlang({
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
 					additionalParams={{ jurusan }}
 				/>
+			</div>
+		</>
+	);
+}
 			</div>
 		</>
 	);
