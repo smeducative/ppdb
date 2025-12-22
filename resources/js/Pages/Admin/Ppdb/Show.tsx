@@ -163,7 +163,7 @@ export default function Show({ peserta }: Props) {
 							/>
 							<InfoRow
 								label="Tempat, Tanggal Lahir"
-								value={`${peserta.tempat_lahir}, ${new Date(peserta.tanggal_lahir).toLocaleDateString("id-ID")}`}
+								value={`${peserta.tempat_lahir}, ${formatDate(peserta.tanggal_lahir)}`}
 							/>
 							<InfoRow label="Asal Sekolah" value={peserta.asal_sekolah} />
 							<InfoRow label="Tahun Lulus" value={peserta.tahun_lulus} />

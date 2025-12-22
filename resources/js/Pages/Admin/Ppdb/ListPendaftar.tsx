@@ -118,11 +118,7 @@ export default function ListPendaftar({
 		},
 		{
 			header: "Tanggal Daftar",
-			cell: ({ row }) => (
-				<span>
-					{new Date(row.original.created_at).toLocaleDateString("id-ID")}
-				</span>
-			),
+			cell: ({ row }) => <span>{formatDateTime(row.original.created_at)}</span>,
 		},
 	];
 

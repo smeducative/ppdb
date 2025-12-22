@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { ModeToggle } from "@/components/mode-toggle";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -50,6 +51,10 @@ export default function AuthenticatedLayout({
 							</BreadcrumbItem>
 						</BreadcrumbList>
 					</Breadcrumb>
+					{/* Theme Switcher - posisi di kanan */}
+					<div className="ml-auto">
+						<ModeToggle />
+					</div>
 				</header>
 				<div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
 

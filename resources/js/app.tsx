@@ -1,6 +1,7 @@
 import "../css/app.css";
 import "./bootstrap";
 
+import { ThemeProvider } from "@/components/theme-provider";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { createInertiaApp } from "@inertiajs/react";
 import type { ReactNode } from "react";
@@ -33,7 +34,16 @@ createInertiaApp({
 	setup({ el, App, props }) {
 		const root = createRoot(el);
 
-		root.render(<App {...props} />);
+		root.render(
+			<ThemeProvider
+				attribute="class"
+				defaultTheme="system"
+				enableSystem
+				disableTransitionOnChange
+			>
+				<App {...props} />
+			</ThemeProvider>,
+		);
 	},
 	progress: {
 		color: "#4B5563",

@@ -29,6 +29,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { formatDateShort } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
@@ -100,13 +101,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 		jenis_kelamin: peserta.jenis_kelamin || "l",
 		tempat_lahir: peserta.tempat_lahir || "",
 		tanggal_lahir: peserta.tanggal_lahir
-			? new Date(peserta.tanggal_lahir)
-					.toLocaleDateString("id-ID", {
-						day: "2-digit",
-						month: "2-digit",
-						year: "numeric",
-					})
-					.replace(/\//g, "-")
+			? formatDateShort(peserta.tanggal_lahir)
 			: "",
 		nik: peserta.nik || "",
 		alamat_lengkap: peserta.alamat_lengkap || "",
@@ -267,6 +262,9 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="nama_lengkap"
 											value={data.nama_lengkap}
 											onChange={(e) => setData("nama_lengkap", e.target.value)}
+											placeholder="Masukkan nama lengkap sesuai ijazah"
+											minLength={3}
+											maxLength={100}
 											required
 										/>
 										{errors.nama_lengkap && (
@@ -300,6 +298,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="tempat_lahir"
 											value={data.tempat_lahir}
 											onChange={(e) => setData("tempat_lahir", e.target.value)}
+											placeholder="Contoh: Karanganyar"
 											required
 										/>
 									</div>
@@ -328,6 +327,10 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="nik"
 											value={data.nik}
 											onChange={(e) => setData("nik", e.target.value)}
+											placeholder="Masukkan 16 digit NIK"
+											minLength={16}
+											maxLength={16}
+											pattern="[0-9]{16}"
 											required
 										/>
 									</div>
@@ -336,9 +339,12 @@ export default function Edit({ jurusan, peserta }: Props) {
 										<Label htmlFor="no_hp">No. HP (Whatsapp) *</Label>
 										<Input
 											id="no_hp"
-											type="number"
+											type="tel"
 											value={data.no_hp}
 											onChange={(e) => setData("no_hp", e.target.value)}
+											placeholder="Contoh: 08xxxxxxxxxx"
+											minLength={10}
+											maxLength={15}
 											required
 										/>
 									</div>
@@ -350,6 +356,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 										id="alamat_lengkap"
 										value={data.alamat_lengkap}
 										onChange={(e) => setData("alamat_lengkap", e.target.value)}
+										placeholder="Masukkan alamat lengkap sesuai KK"
 										required
 									/>
 								</div>
@@ -428,6 +435,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="asal_sekolah"
 											value={data.asal_sekolah}
 											onChange={(e) => setData("asal_sekolah", e.target.value)}
+											placeholder="Contoh: SMP N 1 Karanganyar"
 											required
 										/>
 									</div>
@@ -460,6 +468,9 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="nisn"
 											value={data.nisn}
 											onChange={(e) => setData("nisn", e.target.value)}
+											placeholder="Masukkan 10 digit NISN"
+											minLength={10}
+											maxLength={10}
 										/>
 									</div>
 
@@ -492,6 +503,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="nama_ayah"
 											value={data.nama_ayah}
 											onChange={(e) => setData("nama_ayah", e.target.value)}
+											placeholder="Nama lengkap ayah"
 											required
 										/>
 									</div>
@@ -499,8 +511,10 @@ export default function Edit({ jurusan, peserta }: Props) {
 										<Label htmlFor="no_ayah">No. HP Ayah</Label>
 										<Input
 											id="no_ayah"
+											type="tel"
 											value={data.no_ayah}
 											onChange={(e) => setData("no_ayah", e.target.value)}
+											placeholder="Contoh: 08xxxxxxxxxx"
 										/>
 									</div>
 									<div className="space-y-2">
@@ -511,6 +525,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											onChange={(e) =>
 												setData("pekerjaan_ayah", e.target.value)
 											}
+											placeholder="Contoh: Wiraswasta, Petani, PNS"
 										/>
 									</div>
 
@@ -522,6 +537,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="nama_ibu"
 											value={data.nama_ibu}
 											onChange={(e) => setData("nama_ibu", e.target.value)}
+											placeholder="Nama lengkap ibu kandung"
 											required
 										/>
 									</div>
@@ -529,8 +545,10 @@ export default function Edit({ jurusan, peserta }: Props) {
 										<Label htmlFor="no_ibu">No. HP Ibu</Label>
 										<Input
 											id="no_ibu"
+											type="tel"
 											value={data.no_ibu}
 											onChange={(e) => setData("no_ibu", e.target.value)}
+											placeholder="Contoh: 08xxxxxxxxxx"
 										/>
 									</div>
 									<div className="space-y-2">
@@ -539,6 +557,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											id="pekerjaan_ibu"
 											value={data.pekerjaan_ibu}
 											onChange={(e) => setData("pekerjaan_ibu", e.target.value)}
+											placeholder="Contoh: Ibu rumah tangga, Guru"
 										/>
 									</div>
 								</div>
