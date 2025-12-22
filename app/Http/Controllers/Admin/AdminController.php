@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DocumentFilterRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Jurusan;
 use App\Models\PesertaPPDB;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function dashboard()
+    public function dashboard(DocumentFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
+        $tahun = $request->input('tahun', now()->year);
 
         $peserta = PesertaPPDB::select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
@@ -146,7 +148,7 @@ class AdminController extends Controller
             },
             'pesertaPpdb as ditolak' => function ($query) use ($tahun) {
                 $query->whereYear('created_at', $tahun)->where('diterima', 2);
-            }
+            },
         ])->orderBy('id')->get();
 
         // Gender distribution over time (monthly)
@@ -205,16 +207,13 @@ class AdminController extends Controller
         return inertia('Admin/Profile', compact('user'));
     }
 
-    public function setAkun()
+    public function setAkun(UpdateProfileRequest $request)
     {
-        $data = request()->validate([
-            'name' => ['required'],
-            'password' => ['required', 'confirmed'],
-        ]);
+        $request->validated();
 
         auth()->user()->update([
-            'name' => request('name'),
-            'password' => bcrypt(request('password')),
+            'name' => $request->input('name'),
+            'password' => bcrypt($request->input('password')),
         ]);
 
         session()->flash('success', 'Data user dan password berhasil di ganti');

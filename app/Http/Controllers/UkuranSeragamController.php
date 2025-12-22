@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentFilterRequest;
+use App\Http\Requests\UpdateUkuranSeragamRequest;
 use App\Models\PesertaPPDB;
 use App\Models\UkuranSeragam;
 
 class UkuranSeragamController extends Controller
 {
-    public function showJurusanPeserta($jurusan = null)
+    public function showJurusanPeserta(DocumentFilterRequest $request, $jurusan = null)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
 
         $pesertappdb = PesertaPPDB::with(['jurusan', 'ukuranSeragam'])->where('diterima', 1)
             ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
@@ -20,7 +22,7 @@ class UkuranSeragamController extends Controller
                     ->orWhere('no_pendaftaran', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(request('per_page', 10))
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -28,15 +30,17 @@ class UkuranSeragamController extends Controller
         return inertia('Admin/UkuranSeragam/Index', compact('pesertappdb', 'tahun', 'years', 'jurusan'));
     }
 
-    public function ubahUkuranSeragam()
+    public function ubahUkuranSeragam(UpdateUkuranSeragamRequest $request)
     {
+        $request->validated();
+
         $peserta = UkuranSeragam::updateOrCreate(
-            ['peserta_ppdb_id' => request('uuid')],
+            ['peserta_ppdb_id' => $request->input('uuid')],
             [
-                'baju' => request('baju'),
-                'jas' => request('jas'),
-                'sepatu' => request('sepatu'),
-                'peci' => request('peci'),
+                'baju' => $request->input('baju'),
+                'jas' => $request->input('jas'),
+                'sepatu' => $request->input('sepatu'),
+                'peci' => $request->input('peci'),
             ]
         );
 

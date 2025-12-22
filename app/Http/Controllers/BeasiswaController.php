@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BeasiswaExport;
+use App\Http\Requests\BeasiswaFilterRequest;
 use App\Models\PesertaPPDB;
-use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BeasiswaController extends Controller
 {
-    public function rekomendasiMwc(Request $request)
+    public function rekomendasiMwc(BeasiswaFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
         $title = 'Beasiswa Rekomendasi MWC';
 
         $query = PesertaPPDB::with('jurusan')->whereRekomendasiMwc(1)
@@ -32,7 +32,7 @@ class BeasiswaController extends Controller
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-rekomendasi-mwc.xlsx');
         }
 
-        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
+        $pesertappdb = $query->paginate($request->input('per_page', 10))->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
 
@@ -40,10 +40,10 @@ class BeasiswaController extends Controller
     }
 
     // beasiswa akademik
-    public function beasiswaAkademik(Request $request)
+    public function beasiswaAkademik(BeasiswaFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
         $title = 'Beasiswa Akademik';
 
         // column akademik is json
@@ -71,17 +71,17 @@ class BeasiswaController extends Controller
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-akademik.xlsx');
         }
 
-        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
+        $pesertappdb = $query->paginate($request->input('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
     }
 
     // beasiswa non akademik
-    public function beasiswaNonAkademik(Request $request)
+    public function beasiswaNonAkademik(BeasiswaFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
         $title = 'Beasiswa Non Akademik';
 
         // column non akademik is json
@@ -109,17 +109,17 @@ class BeasiswaController extends Controller
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-non-akademik.xlsx');
         }
 
-        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
+        $pesertappdb = $query->paginate($request->input('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
     }
 
     // beasiswa KIP
-    public function beasiswaKIP(Request $request)
+    public function beasiswaKIP(BeasiswaFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
         $title = 'Beasiswa KIP';
 
         // column akademik is json
@@ -145,17 +145,17 @@ class BeasiswaController extends Controller
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-kip.xlsx');
         }
 
-        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
+        $pesertappdb = $query->paginate($request->input('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
     }
 
     // beasiswa Tahfidz (Akademik Hafidz/Hafidzoh)
-    public function beasiswaTahfidz(Request $request)
+    public function beasiswaTahfidz(BeasiswaFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
         $title = 'Beasiswa Akademik [Tahfidz]';
 
         // column akademik is json
@@ -183,7 +183,7 @@ class BeasiswaController extends Controller
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-tahfidz.xlsx');
         }
 
-        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
+        $pesertappdb = $query->paginate($request->input('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));

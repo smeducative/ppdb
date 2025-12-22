@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentFilterRequest;
+use App\Http\Requests\StorePendaftarRequest;
+use App\Http\Requests\UpdatePendaftarRequest;
+use App\Http\Requests\UpdatePesertaStatusRequest;
 use App\Models\Jurusan;
 use App\Models\PesertaPPDB;
 use Illuminate\Support\Str;
 
 class PendaftaranPPDB extends Controller
 {
-    public function listPendaftar()
+    public function listPendaftar(DocumentFilterRequest $request)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
 
         $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)
             ->with(['jurusan']) // Eager load relationships
@@ -23,7 +27,7 @@ class PendaftaranPPDB extends Controller
                 });
             })
             ->latest()
-            ->paginate(request('per_page', 10))
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -31,10 +35,10 @@ class PendaftaranPPDB extends Controller
         return inertia('Admin/Ppdb/ListPendaftar', compact('pesertappdb', 'tahun', 'years'));
     }
 
-    public function listPendaftarJurusan($jurusan)
+    public function listPendaftarJurusan(DocumentFilterRequest $request, $jurusan)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
 
         $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)
             ->with(['jurusan'])
@@ -47,7 +51,7 @@ class PendaftaranPPDB extends Controller
                 });
             })
             ->latest()
-            ->paginate(request('per_page', 10))
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -62,88 +66,30 @@ class PendaftaranPPDB extends Controller
         return inertia('Admin/Ppdb/Create', compact('jurusan'));
     }
 
-    public function submitPendaftar()
+    public function submitPendaftar(StorePendaftarRequest $request)
     {
-        request()->validate([
-            'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'nik' => 'required',
-            'alamat_lengkap' => 'required',
-            'dukuh' => 'nullable',
-            'rt' => 'nullable',
-            'rw' => 'nullable',
-            'desa_kelurahan' => 'nullable',
-            'kecamatan' => 'nullable',
-            'kabupaten_kota' => 'nullable',
-            'provinsi' => 'nullable',
-            'kode_pos' => 'nullable',
-            'pilihan_jurusan' => 'required',
-            'asal_sekolah' => 'required',
-            'tahun_lulus' => 'required',
-            'nisn' => 'nullable',
-            'penerima_kip' => 'nullable',
-            'no_hp' => 'required',
-            'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
-            'peringkat' => 'nullable',
-            'hafidz' => 'nullable',
-            'jenis_lomba' => 'nullable',
-            'juara_ke' => 'nullable',
-            'juara_tingkat' => 'nullable',
-            'rekomendasi_mwc' => 'nullable',
-        ]);
+        $data = $request->validated();
 
-        $no_urut = (new PesertaPPDB)->getNoUrut();
-        $jurusan = Jurusan::findOrFail(request('pilihan_jurusan'));
+        $data['jurusan_id'] = $request->input('pilihan_jurusan');
+        $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
+        $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
+        $data['no_hp_ayah'] = $request->input('no_ayah');
+        $data['no_hp_ibu'] = $request->input('no_ibu');
 
-        $ppdb = new PesertaPPDB;
-        $ppdb->id = Str::uuid();
-        $ppdb->no_urut = $no_urut;
-        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
-        $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
-        $ppdb->nama_lengkap = request('nama_lengkap');
-        $ppdb->jenis_kelamin = request('jenis_kelamin');
-        $ppdb->tempat_lahir = request('tempat_lahir');
-        $ppdb->tanggal_lahir = request('tanggal_lahir');
-        $ppdb->nik = request('nik');
-        $ppdb->alamat_lengkap = request('alamat_lengkap');
-        $ppdb->dukuh = request('dukuh');
-        $ppdb->rt = request('rt');
-        $ppdb->rw = request('rw');
-        $ppdb->desa_kelurahan = request('desa_kelurahan');
-        $ppdb->kecamatan = request('kecamatan');
-        $ppdb->kabupaten_kota = request('kabupaten_kota');
-        $ppdb->provinsi = request('provinsi');
-        $ppdb->kode_pos = request('kode_pos');
-        $ppdb->jurusan_id = request('pilihan_jurusan');
-        $ppdb->asal_sekolah = request('asal_sekolah');
-        $ppdb->tahun_lulus = request('tahun_lulus');
-        $ppdb->nisn = request('nisn');
-        $ppdb->penerima_kip = request()->has('penerima_kip') ? 'y' : 'n';
-        $ppdb->no_kip = request('no_kip');
-        $ppdb->no_hp = request('no_hp');
-        $ppdb->nama_ayah = request('nama_ayah');
-        $ppdb->pekerjaan_ayah = request('pekerjaan_ayah');
-        $ppdb->no_hp_ayah = request('no_ayah');
-        $ppdb->nama_ibu = request('nama_ibu');
-        $ppdb->pekerjaan_ibu = request('pekerjaan_ibu');
-        $ppdb->no_hp_ibu = request('no_ibu');
-        $ppdb->akademik = [
-            'kelas' => explode('/', request('peringkat'))[0] ?? '',
-            'semester' => explode('/', request('peringkat'))[1] ?? '',
-            'peringkat' => explode('/', request('peringkat'))[2] ?? '',
-            'hafidz' => request('hafidz') ?? '',
+        $data['akademik'] = [
+            'kelas' => explode('/', $request->input('peringkat'))[0] ?? '',
+            'semester' => explode('/', $request->input('peringkat'))[1] ?? '',
+            'peringkat' => explode('/', $request->input('peringkat'))[2] ?? '',
+            'hafidz' => $request->input('hafidz') ?? '',
         ];
-        $ppdb->non_akademik = [
-            'jenis_lomba' => request('jenis_lomba') ?? '',
-            'juara_ke' => request('juara_ke') ?? '',
-            'juara_tingkat' => request('juara_tingkat') ?? '',
+
+        $data['non_akademik'] = [
+            'jenis_lomba' => $request->input('jenis_lomba') ?? '',
+            'juara_ke' => $request->input('juara_ke') ?? '',
+            'juara_tingkat' => $request->input('juara_tingkat') ?? '',
         ];
-        $ppdb->rekomendasi_mwc = request()->has('rekomendasi_mwc') ? 1 : 0;
-        $ppdb->saran_dari = request('saran_dari');
-        $ppdb->save();
+
+        PesertaPPDB::create($data);
 
         session()->flash('success', 'peserta ppdb di tambahkan');
 
@@ -152,10 +98,10 @@ class PendaftaranPPDB extends Controller
 
     // show daftar ulang
 
-    public function listDaftarUlang($jurusan = null)
+    public function listDaftarUlang(DocumentFilterRequest $request, $jurusan = null)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->has('kwitansi')
@@ -169,7 +115,7 @@ class PendaftaranPPDB extends Controller
                 });
             })
             ->latest()
-            ->paginate(request('per_page', 10))
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -177,10 +123,10 @@ class PendaftaranPPDB extends Controller
         return inertia('Admin/Ppdb/ListDaftarUlang', compact('pesertappdb', 'tahun', 'years', 'jurusan'));
     }
 
-    public function listBelumDaftarUlang($jurusan = null)
+    public function listBelumDaftarUlang(DocumentFilterRequest $request, $jurusan = null)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
@@ -194,7 +140,7 @@ class PendaftaranPPDB extends Controller
                 });
             })
             ->latest()
-            ->paginate(request('per_page', 10))
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -220,92 +166,40 @@ class PendaftaranPPDB extends Controller
         return inertia('Admin/Ppdb/Edit', compact('peserta', 'jurusan'));
     }
 
-    public function update($id)
+    public function update(UpdatePendaftarRequest $request, $id)
     {
-        request()->validate([
-            'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'nik' => 'required',
-            'alamat_lengkap' => 'required',
-            'dukuh' => 'nullable',
-            'rt' => 'nullable',
-            'rw' => 'nullable',
-            'desa_kelurahan' => 'nullable',
-            'kecamatan' => 'nullable',
-            'kabupaten_kota' => 'nullable',
-            'provinsi' => 'nullable',
-            'kode_pos' => 'nullable',
-            'pilihan_jurusan' => 'required',
-            'asal_sekolah' => 'required',
-            'tahun_lulus' => 'required',
-            'nisn' => 'nullable',
-            'penerima_kip' => 'nullable',
-            'no_hp' => 'required',
-            'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
-            'peringkat' => 'nullable',
-            'hafidz' => 'nullable',
-            'jenis_lomba' => 'nullable',
-            'juara_ke' => 'nullable',
-            'juara_tingkat' => 'nullable',
-            'rekomendasi_mwc' => 'nullable',
-        ]);
-
-        $jurusan = Jurusan::findOrFail(request('pilihan_jurusan'));
+        $data = $request->validated();
 
         $ppdb = PesertaPPDB::findOrFail($id);
+        $jurusan = Jurusan::findOrFail($request->input('pilihan_jurusan'));
 
         // check apakah peserta memgubah jurusan
         if ($ppdb->jurusan_id != $jurusan->id) {
-            $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
-            $ppdb->jurusan_id = $jurusan->id;
+            $data['no_pendaftaran'] = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
+            $data['jurusan_id'] = $jurusan->id;
 
             session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
         }
 
-        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
-        $ppdb->nama_lengkap = request('nama_lengkap');
-        $ppdb->jenis_kelamin = request('jenis_kelamin');
-        $ppdb->tempat_lahir = request('tempat_lahir');
-        $ppdb->tanggal_lahir = request('tanggal_lahir');
-        $ppdb->nik = request('nik');
-        $ppdb->alamat_lengkap = request('alamat_lengkap');
-        $ppdb->dukuh = request('dukuh');
-        $ppdb->rt = request('rt');
-        $ppdb->rw = request('rw');
-        $ppdb->desa_kelurahan = request('desa_kelurahan');
-        $ppdb->kecamatan = request('kecamatan');
-        $ppdb->kabupaten_kota = request('kabupaten_kota');
-        $ppdb->provinsi = request('provinsi');
-        $ppdb->kode_pos = request('kode_pos');
-        $ppdb->asal_sekolah = request('asal_sekolah');
-        $ppdb->tahun_lulus = request('tahun_lulus');
-        $ppdb->nisn = request('nisn');
-        $ppdb->penerima_kip = request()->has('penerima_kip') ? 'y' : 'n';
-        $ppdb->no_kip = request('no_kip');
-        $ppdb->no_hp = request('no_hp');
-        $ppdb->nama_ayah = request('nama_ayah');
-        $ppdb->pekerjaan_ayah = request('pekerjaan_ayah');
-        $ppdb->no_hp_ayah = request('no_ayah');
-        $ppdb->nama_ibu = request('nama_ibu');
-        $ppdb->pekerjaan_ibu = request('pekerjaan_ibu');
-        $ppdb->no_hp_ibu = request('no_ibu');
-        $ppdb->akademik = [
-            'kelas' => explode('/', request('peringkat'))[0] ?? '',
-            'semester' => explode('/', request('peringkat'))[1] ?? '',
-            'peringkat' => explode('/', request('peringkat'))[2] ?? '',
-            'hafidz' => request('hafidz') ?? '',
+        $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
+        $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
+        $data['no_hp_ayah'] = $request->input('no_ayah');
+        $data['no_hp_ibu'] = $request->input('no_ibu');
+
+        $data['akademik'] = [
+            'kelas' => explode('/', $request->input('peringkat'))[0] ?? '',
+            'semester' => explode('/', $request->input('peringkat'))[1] ?? '',
+            'peringkat' => explode('/', $request->input('peringkat'))[2] ?? '',
+            'hafidz' => $request->input('hafidz') ?? '',
         ];
-        $ppdb->non_akademik = [
-            'jenis_lomba' => request('jenis_lomba') ?? '',
-            'juara_ke' => request('juara_ke') ?? '',
-            'juara_tingkat' => request('juara_tingkat') ?? '',
+
+        $data['non_akademik'] = [
+            'jenis_lomba' => $request->input('jenis_lomba') ?? '',
+            'juara_ke' => $request->input('juara_ke') ?? '',
+            'juara_tingkat' => $request->input('juara_tingkat') ?? '',
         ];
-        $ppdb->rekomendasi_mwc = request()->has('rekomendasi_mwc') ? 1 : 0;
-        $ppdb->saran_dari = request('saran_dari');
-        $ppdb->save();
+
+        $ppdb->update($data);
 
         session()->flash('success', 'Data peserta telah di ubah');
 
@@ -313,102 +207,46 @@ class PendaftaranPPDB extends Controller
     }
 
     // formulir section
-    public function mendaftar()
+    public function mendaftar(StorePendaftarRequest $request)
     {
-        request()->validate([
-            'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'nik' => 'required',
-            'alamat_lengkap' => 'required',
-            'dukuh' => 'nullable',
-            'rt' => 'nullable',
-            'rw' => 'nullable',
-            'desa_kelurahan' => 'nullable',
-            'kecamatan' => 'nullable',
-            'kabupaten_kota' => 'nullable',
-            'provinsi' => 'nullable',
-            'kode_pos' => 'nullable',
-            'pilihan_jurusan' => 'required',
-            'asal_sekolah' => 'required',
-            'tahun_lulus' => 'required',
-            'nisn' => 'nullable',
-            'penerima_kip' => 'nullable',
-            'no_hp' => 'required',
-            'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
-            'peringkat' => 'nullable',
-            'hafidz' => 'nullable',
-            'jenis_lomba' => 'nullable',
-            'juara_ke' => 'nullable',
-            'juara_tingkat' => 'nullable',
-            'rekomendasi_mwc' => 'nullable',
-        ]);
+        $data = $request->validated();
 
-        $no_urut = (new PesertaPPDB)->getNoUrut();
-        $jurusan = Jurusan::findOrFail(request('pilihan_jurusan'));
+        $data['jurusan_id'] = $request->input('pilihan_jurusan');
+        $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
+        $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
+        $data['no_hp_ayah'] = $request->input('no_ayah');
+        $data['no_hp_ibu'] = $request->input('no_ibu');
 
-        $ppdb = new PesertaPPDB;
-        $ppdb->id = Str::uuid();
-        $ppdb->no_urut = $no_urut;
-        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
-        $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
-        $ppdb->nama_lengkap = request('nama_lengkap');
-        $ppdb->jenis_kelamin = request('jenis_kelamin');
-        $ppdb->tempat_lahir = request('tempat_lahir');
-        $ppdb->tanggal_lahir = request('tanggal_lahir');
-        $ppdb->nik = request('nik');
-        $ppdb->alamat_lengkap = request('alamat_lengkap');
-        $ppdb->dukuh = request('dukuh');
-        $ppdb->rt = request('rt');
-        $ppdb->rw = request('rw');
-        $ppdb->desa_kelurahan = request('desa_kelurahan');
-        $ppdb->kecamatan = request('kecamatan');
-        $ppdb->kabupaten_kota = request('kabupaten_kota');
-        $ppdb->provinsi = request('provinsi');
-        $ppdb->kode_pos = request('kode_pos');
-        $ppdb->jurusan_id = request('pilihan_jurusan');
-        $ppdb->asal_sekolah = request('asal_sekolah');
-        $ppdb->tahun_lulus = request('tahun_lulus');
-        $ppdb->nisn = request('nisn');
-        $ppdb->penerima_kip = request()->has('penerima_kip') ? 'y' : 'n';
-        $ppdb->no_kip = request('no_kip');
-        $ppdb->no_hp = request('no_hp');
-        $ppdb->nama_ayah = request('nama_ayah');
-        $ppdb->pekerjaan_ayah = request('pekerjaan_ayah');
-        $ppdb->no_hp_ayah = request('no_ayah');
-        $ppdb->nama_ibu = request('nama_ibu');
-        $ppdb->pekerjaan_ibu = request('pekerjaan_ibu');
-        $ppdb->no_hp_ibu = request('no_ibu');
-        $ppdb->akademik = [
-            'kelas' => explode('/', request('peringkat'))[0] ?? '',
-            'semester' => explode('/', request('peringkat'))[1] ?? '',
-            'peringkat' => explode('/', request('peringkat'))[2] ?? '',
-            'hafidz' => request('hafidz') ?? '',
+        $data['akademik'] = [
+            'kelas' => explode('/', $request->input('peringkat'))[0] ?? '',
+            'semester' => explode('/', $request->input('peringkat'))[1] ?? '',
+            'peringkat' => explode('/', $request->input('peringkat'))[2] ?? '',
+            'hafidz' => $request->input('hafidz') ?? '',
         ];
-        $ppdb->non_akademik = [
-            'jenis_lomba' => request('jenis_lomba') ?? '',
-            'juara_ke' => request('juara_ke') ?? '',
-            'juara_tingkat' => request('juara_tingkat') ?? '',
+
+        $data['non_akademik'] = [
+            'jenis_lomba' => $request->input('jenis_lomba') ?? '',
+            'juara_ke' => $request->input('juara_ke') ?? '',
+            'juara_tingkat' => $request->input('juara_tingkat') ?? '',
         ];
-        $ppdb->rekomendasi_mwc = request()->has('rekomendasi_mwc') ? 1 : 0;
-        $ppdb->saran_dari = request('saran_dari');
-        $ppdb->save();
+
+        $ppdb = PesertaPPDB::create($data);
 
         session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
 
         return back();
     }
 
-    public function terimaPeserta($uuid)
+    public function terimaPeserta(UpdatePesertaStatusRequest $request, $uuid)
     {
+        $request->validated();
+
         $peserta = PesertaPPDB::with(['jurusan', 'kwitansi'])->findOrFail($uuid);
 
-        $peserta->diterima = request()->get('status') == 'y' ? 1 : 2;
+        $peserta->diterima = $request->input('status') == 'y' ? 1 : 2;
         $peserta->save();
 
-        $msg = request()->get('status') == 'y' ? 'Peserta Diterima' : 'Peserta Ditolak';
+        $msg = $request->input('status') == 'y' ? 'Peserta Diterima' : 'Peserta Ditolak';
 
         session()->flash('success', $msg);
 
