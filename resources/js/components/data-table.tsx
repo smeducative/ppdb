@@ -1,5 +1,12 @@
 import { Input } from "@/components/ui/input";
 import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import {
 	Table,
 	TableBody,
 	TableCell,
@@ -34,6 +41,7 @@ interface DataTableProps<T> {
 	searchEndpoint?: string;
 	searchPlaceholder?: string;
 	additionalParams?: Record<string, any>;
+	perPageOptions?: number[];
 }
 
 export function DataTable<T extends { id?: number | string }>({
@@ -43,15 +51,22 @@ export function DataTable<T extends { id?: number | string }>({
 	searchEndpoint,
 	searchPlaceholder = "Search...",
 	additionalParams = {},
+	perPageOptions = [10, 20, 50, 100],
 }: DataTableProps<T>) {
 	const [search, setSearch] = useState("");
 	const debouncedSearch = useDebounce(search, 500);
+
+	const initialPerPage =
+		pagination?.meta?.per_page ||
+		new URLSearchParams(window.location.search).get("per_page") ||
+		"10";
+	const [perPage, setPerPage] = useState(String(initialPerPage));
 
 	useEffect(() => {
 		if (searchEndpoint) {
 			router.get(
 				searchEndpoint,
-				{ search: debouncedSearch, ...additionalParams },
+				{ search: debouncedSearch, per_page: perPage, ...additionalParams },
 				{
 					preserveState: true,
 					replace: true,
@@ -59,21 +74,41 @@ export function DataTable<T extends { id?: number | string }>({
 				},
 			);
 		}
-	}, [debouncedSearch]);
+	}, [debouncedSearch, perPage]);
 
 	return (
 		<div className="space-y-4">
-			{searchEndpoint && (
-				<div className="flex items-center space-x-2">
-					<Search className="w-4 h-4 text-muted-foreground" />
-					<Input
-						placeholder={searchPlaceholder}
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-						className="h-8 w-[150px] lg:w-[250px]"
-					/>
+			<div className="flex items-center justify-between gap-4">
+				{searchEndpoint && (
+					<div className="flex items-center space-x-2 flex-1">
+						<Search className="w-4 h-4 text-muted-foreground" />
+						<Input
+							placeholder={searchPlaceholder}
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+							className="h-8 w-[150px] lg:w-[250px]"
+						/>
+					</div>
+				)}
+
+				<div className="flex items-center gap-2">
+					<span className="text-sm text-muted-foreground hidden sm:inline-block">
+						Items per page:
+					</span>
+					<Select value={perPage} onValueChange={setPerPage}>
+						<SelectTrigger className="h-8 w-[70px]">
+							<SelectValue placeholder={perPage} />
+						</SelectTrigger>
+						<SelectContent>
+							{perPageOptions.map((option) => (
+								<SelectItem key={option} value={String(option)}>
+									{option}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
 				</div>
-			)}
+			</div>
 
 			<div className="rounded-md border">
 				<Table>

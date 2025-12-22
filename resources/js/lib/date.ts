@@ -30,3 +30,12 @@ export function formatDateShort(date: string | Date): string {
 	const d = new Date(date);
 	return format(d, "dd-MM-yyyy", { locale: id });
 }
+/**
+ * Format tanggal lengkap dengan hari dalam format Indonesia
+ * Contoh output: "Jumat, 22-Agustus-2025"
+ * @param date - Tanggal dalam format string atau Date object
+ */
+export function formatDateFull(date: string | Date): string {
+	const d = new Date(date);
+	return format(d, "EEEE, dd-MMMM-yyyy", { locale: id });
+}

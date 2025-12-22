@@ -8,7 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { formatDateTime } from "@/lib/date";
+import { formatDate, formatDateTime } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
 
 interface Jurusan {
@@ -68,7 +68,7 @@ export default function ListPendaftar({
 			header: "TTL",
 			cell: ({ row }) => (
 				<span>
-					{row.original.tempat_lahir}, {row.original.tanggal_lahir}
+					{row.original.tempat_lahir}, {formatDate(row.original.tanggal_lahir)}
 				</span>
 			),
 		},

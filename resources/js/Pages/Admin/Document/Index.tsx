@@ -15,8 +15,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { formatDate, formatDateFull } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
-import { format } from "date-fns";
 
 interface Jurusan {
 	id: number;
@@ -105,8 +105,7 @@ export default function Index({
 			id: "ttl",
 			header: "Tempat, Tanggal Lahir",
 			cell: ({ row }) => {
-				const date = new Date(row.original.tanggal_lahir);
-				return `${row.original.tempat_lahir}, ${format(date, "dd-MM-yyyy")}`;
+				return `${row.original.tempat_lahir}, ${formatDate(row.original.tanggal_lahir)}`;
 			},
 		},
 		{
@@ -173,10 +172,7 @@ export default function Index({
 								<div className="font-bold">Batas Akhir PPDB:</div>
 								<div>
 									{settings.batas_akhir_ppdb
-										? format(
-												new Date(settings.batas_akhir_ppdb),
-												"EEEE, d MMMM yyyy",
-											)
+										? formatDateFull(settings.batas_akhir_ppdb)
 										: "-"}
 								</div>
 							</div>

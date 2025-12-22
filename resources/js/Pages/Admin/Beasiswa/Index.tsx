@@ -8,9 +8,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { formatDate } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import type { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 
 interface Jurusan {
 	id: number;
@@ -79,8 +79,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 			id: "ttl",
 			header: "Tempat, Tanggal Lahir",
 			cell: ({ row }) => {
-				const date = new Date(row.original.tanggal_lahir);
-				return `${row.original.tempat_lahir}, ${format(date, "dd-MM-yyyy")}`;
+				return `${row.original.tempat_lahir}, ${formatDate(row.original.tanggal_lahir)}`;
 			},
 		},
 		{

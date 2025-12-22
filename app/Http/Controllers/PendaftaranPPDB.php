@@ -21,7 +21,7 @@ class PendaftaranPPDB extends Controller
                     ->orWhere('asal_sekolah', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -43,7 +43,7 @@ class PendaftaranPPDB extends Controller
                     ->orWhere('asal_sekolah', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -163,7 +163,7 @@ class PendaftaranPPDB extends Controller
                     ->orWhere('asal_sekolah', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -186,7 +186,7 @@ class PendaftaranPPDB extends Controller
                     ->orWhere('asal_sekolah', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);

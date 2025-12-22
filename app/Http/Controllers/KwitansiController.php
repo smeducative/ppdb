@@ -30,7 +30,7 @@ class KwitansiController extends Controller
                     ->orWhere('asal_sekolah', 'like', "%{$search}%");
             })
             ->latest('updated_at')
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
@@ -133,7 +133,7 @@ class KwitansiController extends Controller
             ->with(['pesertaPpdb', 'penerima', 'deletedBy'])
             ->whereYear('created_at', $tahun)
             ->latest()
-            ->paginate(50)
+            ->paginate(request('per_page', 50))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);

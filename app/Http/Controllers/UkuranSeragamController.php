@@ -13,14 +13,14 @@ class UkuranSeragamController extends Controller
         $search = request('search');
 
         $pesertappdb = PesertaPPDB::with(['jurusan', 'ukuranSeragam'])->where('diterima', 1)
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where('nama_lengkap', 'like', "%{$search}%")
                     ->orWhere('no_pendaftaran', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);

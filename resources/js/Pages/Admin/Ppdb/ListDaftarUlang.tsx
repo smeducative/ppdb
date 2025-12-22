@@ -7,8 +7,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { formatDate } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
-import { format } from "date-fns";
 
 interface Jurusan {
 	id: number;
@@ -86,10 +86,10 @@ export default function ListDaftarUlang({
 			accessorKey: "ttl",
 			header: "Tempat, Tanggal Lahir",
 			cell: ({ row }) => {
-				const date = new Date(row.original.tanggal_lahir);
 				return (
 					<div>
-						{row.original.tempat_lahir}, {format(date, "dd-MM-yyyy")}
+						{row.original.tempat_lahir},{" "}
+						{formatDate(row.original.tanggal_lahir)}
 					</div>
 				);
 			},

@@ -20,7 +20,7 @@ class FormulirController extends Controller
                     ->orWhere('no_pendaftaran', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(request('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);

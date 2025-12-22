@@ -20,10 +20,11 @@ class BeasiswaController extends Controller
 
         if ($request->isMethod('post')) {
             $pesertappdb = $query->get();
-            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-rekomendasi-mwc.xlsx');
+
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-rekomendasi-mwc.xlsx');
         }
 
-        $pesertappdb = $query->paginate(10)->withQueryString();
+        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
 
         $years = range(now()->year, now()->year - 5);
 
@@ -41,19 +42,20 @@ class BeasiswaController extends Controller
         // where all column is null
         // where all column is null
         $query = PesertaPPDB::query()->with('jurusan')
-            ->where('akademik->kelas', '!=', "")
-            ->where('akademik->semester', '!=', "")
-            ->where('akademik->peringkat', '!=', "")
+            ->where('akademik->kelas', '!=', '')
+            ->where('akademik->semester', '!=', '')
+            ->where('akademik->peringkat', '!=', '')
             ->whereYear('created_at', $tahun)
             ->latest();
 
         // if request has export and value of export is mwc
         if ($request->isMethod('post')) {
             $pesertappdb = $query->get();
-            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-akademik.xlsx');
+
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-akademik.xlsx');
         }
 
-        $pesertappdb = $query->paginate(10)->withQueryString();
+        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
@@ -70,19 +72,20 @@ class BeasiswaController extends Controller
         // where all column is null / ""
         // where all column is null / ""
         $query = PesertaPPDB::with('jurusan')
-            ->where('non_akademik->jenis_lomba', '!=', "")
-            ->where('non_akademik->juara_ke', '!=', "")
-            ->where('non_akademik->juara_tingkat', '!=', "")
+            ->where('non_akademik->jenis_lomba', '!=', '')
+            ->where('non_akademik->juara_ke', '!=', '')
+            ->where('non_akademik->juara_tingkat', '!=', '')
             ->whereYear('created_at', $tahun)
             ->latest();
 
         // if request has export and value of export is mwc
         if ($request->isMethod('post')) {
             $pesertappdb = $query->get();
-            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-non-akademik.xlsx');
+
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-non-akademik.xlsx');
         }
 
-        $pesertappdb = $query->paginate(10)->withQueryString();
+        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
@@ -106,10 +109,11 @@ class BeasiswaController extends Controller
         // if request has export and value of export is mwc
         if ($request->isMethod('post')) {
             $pesertappdb = $query->get();
-            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-kip.xlsx');
+
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-kip.xlsx');
         }
 
-        $pesertappdb = $query->paginate(10)->withQueryString();
+        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
@@ -126,19 +130,20 @@ class BeasiswaController extends Controller
         // filter where hafidz is not empty
         // filter where hafidz is not empty
         $query = PesertaPPDB::with('jurusan')
-            ->where('akademik->hafidz', '!=', "")
-            ->where('akademik->hafidz', '!=', "-")
-            ->where('akademik->hafidz', '!=', "_")
+            ->where('akademik->hafidz', '!=', '')
+            ->where('akademik->hafidz', '!=', '-')
+            ->where('akademik->hafidz', '!=', '_')
             ->whereYear('created_at', $tahun)
             ->latest();
 
         // if request has export
         if ($request->isMethod('post')) {
             $pesertappdb = $query->get();
-            return Excel::download(new BeasiswaExport($pesertappdb), $tahun . '-beasiswa-tahfidz.xlsx');
+
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-tahfidz.xlsx');
         }
 
-        $pesertappdb = $query->paginate(10)->withQueryString();
+        $pesertappdb = $query->paginate(request('per_page', 10))->withQueryString();
         $years = range(now()->year, now()->year - 5);
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
