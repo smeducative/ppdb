@@ -1,3 +1,4 @@
+import { AlertMessages } from "@/components/alert-messages";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -37,15 +38,7 @@ export default function Profile({ user }: Props) {
 			<Head title="Pengaturan Akun" />
 
 			<div className="max-w-2xl mx-auto space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				<Card>
 					<CardHeader>

@@ -1,3 +1,6 @@
+import { Head, router, useForm, usePage } from "@inertiajs/react";
+import { format } from "date-fns";
+import { AlertMessages } from "@/components/alert-messages";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -22,8 +25,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { Head, router, useForm, usePage } from "@inertiajs/react";
-import { format } from "date-fns";
 
 interface User {
 	id: number;
@@ -94,15 +95,7 @@ export default function Create({ peserta }: Props) {
 			<Head title="Tambah Kwitansi" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				<Card>
 					<CardHeader>
@@ -138,7 +131,7 @@ export default function Create({ peserta }: Props) {
 										required
 									/>
 									{errors.jenis_pembayaran && (
-										<span className="text-red-500 text-sm">
+										<span className="text-destructive text-sm">
 											{errors.jenis_pembayaran}
 										</span>
 									)}
@@ -158,7 +151,7 @@ export default function Create({ peserta }: Props) {
 										*Tanpa titik maupun koma
 									</p>
 									{errors.nominal && (
-										<span className="text-red-500 text-sm">
+										<span className="text-destructive text-sm">
 											{errors.nominal}
 										</span>
 									)}
@@ -210,7 +203,9 @@ export default function Create({ peserta }: Props) {
 									{peserta.kwitansi.map((k) => (
 										<TableRow
 											key={k.id}
-											className={k.deleted_at ? "bg-red-50" : ""}
+											className={
+												k.deleted_at ? "bg-red-500/10 dark:bg-red-900/20" : ""
+											}
 										>
 											<TableCell>{k.jenis_pembayaran}</TableCell>
 											<TableCell>{formatCurrency(k.nominal)}</TableCell>
@@ -219,7 +214,7 @@ export default function Create({ peserta }: Props) {
 											</TableCell>
 											<TableCell>
 												{k.deleted_at ? (
-													<div className="text-red-600">
+													<div className="text-destructive">
 														<strong>Dihapus</strong>
 														<br />
 														<span className="text-xs">
@@ -227,7 +222,7 @@ export default function Create({ peserta }: Props) {
 														</span>
 													</div>
 												) : (
-													<div className="text-green-600">
+													<div className="text-green-600 dark:text-green-400">
 														<strong>Diterima</strong>
 														<br />
 														<span className="text-xs">{k.penerima?.name}</span>
@@ -298,4 +293,5 @@ export default function Create({ peserta }: Props) {
 			</div>
 		</>
 	);
+}
 }

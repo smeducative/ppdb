@@ -1,3 +1,5 @@
+import { Head, router, usePage } from "@inertiajs/react";
+import { format } from "date-fns";
 import { InertiaPagination as Pagination } from "@/components/inertia-pagination";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,8 +18,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { Head, router, usePage } from "@inertiajs/react";
-import { format } from "date-fns";
 
 interface User {
 	id: number;
@@ -109,27 +109,27 @@ export default function Rekap({
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<Card className="bg-orange-100 border-orange-200">
+					<Card className="bg-orange-500/10 border-orange-500/20">
 						<CardHeader>
-							<CardTitle className="text-orange-800 text-lg">
+							<CardTitle className="text-orange-600 dark:text-orange-400 text-lg">
 								Dana Masuk
 							</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div className="text-3xl font-bold text-orange-900">
+							<div className="text-3xl font-bold text-orange-700 dark:text-orange-300">
 								{formatCurrency(danaKelola)}
 							</div>
 						</CardContent>
 					</Card>
-					<Card className="bg-blue-100 border-blue-200">
+					<Card className="bg-blue-500/10 border-blue-500/20">
 						<CardHeader>
-							<CardTitle className="text-blue-800 text-lg">
+							<CardTitle className="text-blue-600 dark:text-blue-400 text-lg">
 								Jumlah Kwitansi
 							</CardTitle>
 						</CardHeader>
 						<CardContent>
 							{/* Note: This is count of not-deleted items */}
-							<div className="text-3xl font-bold text-blue-900">
+							<div className="text-3xl font-bold text-blue-700 dark:text-blue-300">
 								{Object.values(jenisPembayaran).reduce(
 									(sum, item) => sum + item.count,
 									0,
@@ -215,7 +215,9 @@ export default function Rekap({
 										kwitansiesHistory.data.map((k) => (
 											<TableRow
 												key={k.id}
-												className={k.deleted_at ? "bg-red-50" : ""}
+												className={
+													k.deleted_at ? "bg-red-500/10 dark:bg-red-900/20" : ""
+												}
 											>
 												<TableCell>{k.peserta_ppdb?.no_pendaftaran}</TableCell>
 												<TableCell>{k.peserta_ppdb?.nama_lengkap}</TableCell>
@@ -244,7 +246,7 @@ export default function Rekap({
 															</form>
 														</Button>
 													) : (
-														<span className="text-red-600 text-xs">
+														<span className="text-destructive text-xs">
 															dihapus oleh {k.deleted_by?.name}
 														</span>
 													)}
@@ -269,4 +271,5 @@ export default function Rekap({
 			</div>
 		</>
 	);
+}
 }

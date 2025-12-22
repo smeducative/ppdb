@@ -1,3 +1,5 @@
+import { Head, useForm, usePage } from "@inertiajs/react";
+import { AlertMessages } from "@/components/alert-messages";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -9,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Head, useForm, usePage } from "@inertiajs/react";
 
 interface PpdbSetting {
 	id: number;
@@ -59,15 +60,7 @@ export default function Ppdb({ setting }: Props) {
 			<Head title="Pengaturan PPDB" />
 
 			<div className="max-w-2xl mx-auto space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				<Card>
 					<CardHeader>
@@ -111,7 +104,9 @@ export default function Ppdb({ setting }: Props) {
 									required
 								/>
 								{errors.no_surat && (
-									<div className="text-red-500 text-sm">{errors.no_surat}</div>
+									<div className="text-destructive text-sm">
+										{errors.no_surat}
+									</div>
 								)}
 							</div>
 
@@ -161,4 +156,5 @@ export default function Ppdb({ setting }: Props) {
 			</div>
 		</>
 	);
+}
 }

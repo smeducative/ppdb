@@ -1,3 +1,4 @@
+import { AlertMessages } from "@/components/alert-messages";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -172,15 +173,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 			<Head title="Edit Peserta PPDB" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				{/* Stepper Header */}
 				<div className="flex items-center justify-between mb-8">
@@ -268,7 +261,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											required
 										/>
 										{errors.nama_lengkap && (
-											<span className="text-red-500 text-sm">
+											<span className="text-destructive text-sm">
 												{errors.nama_lengkap}
 											</span>
 										)}
@@ -315,7 +308,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											required
 										/>
 										{errors.tanggal_lahir && (
-											<span className="text-red-500 text-sm">
+											<span className="text-destructive text-sm">
 												{errors.tanggal_lahir}
 											</span>
 										)}

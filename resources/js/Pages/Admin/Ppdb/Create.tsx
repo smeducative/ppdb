@@ -1,3 +1,4 @@
+import { AlertMessages } from "@/components/alert-messages";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -98,15 +99,7 @@ export default function Create({ jurusan }: Props) {
 			<Head title="Tambah Peserta PPDB" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				{/* Stepper Header */}
 				<div className="flex items-center justify-between mb-8">
@@ -163,7 +156,7 @@ export default function Create({ jurusan }: Props) {
 											required
 										/>
 										{errors.nama_lengkap && (
-											<span className="text-red-500 text-sm">
+											<span className="text-destructive text-sm">
 												{errors.nama_lengkap}
 											</span>
 										)}
@@ -209,7 +202,7 @@ export default function Create({ jurusan }: Props) {
 											required
 										/>
 										{errors.tanggal_lahir && (
-											<span className="text-red-500 text-sm">
+											<span className="text-destructive text-sm">
 												{errors.tanggal_lahir}
 											</span>
 										)}

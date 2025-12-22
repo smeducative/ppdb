@@ -1,3 +1,4 @@
+import { AlertMessages } from "@/components/alert-messages";
 import { DataTable } from "@/components/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -114,7 +115,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			header: "No. Pendaftaran",
 			cell: ({ row }) => (
 				<div>
-					<div className="font-medium text-blue-600">
+					<div className="font-medium text-primary">
 						{row.getValue("no_pendaftaran")}
 					</div>
 				</div>
@@ -175,15 +176,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			<Head title="Ukuran Seragam Siswa" />
 
 			<div className="space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				<div className="flex flex-col sm:flex-row justify-between gap-4">
 					<div className="w-full sm:w-1/4">

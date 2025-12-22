@@ -77,7 +77,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.kwitansi.tambah", { uuid: row.original.id })}
-					className="text-blue-600 hover:underline font-medium"
+					className="text-primary hover:underline font-medium"
 				>
 					{row.getValue("nama_lengkap")}
 				</Link>
@@ -131,7 +131,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 					0,
 				);
 				return (
-					<div className="font-bold text-green-600">
+					<div className="font-bold text-green-600 dark:text-green-400">
 						{formatCurrency(total)}
 					</div>
 				);
@@ -174,7 +174,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 				</div>
 
 				<div className="space-y-4">
-					<div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded text-blue-700 text-sm">
+					<div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded text-blue-700 dark:text-blue-400 text-sm">
 						<p className="font-bold">Info!</p>
 						<p>
 							Peserta yang tampil di halaman ini adalah peserta yang telah
@@ -183,7 +183,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 							pembayaran kwitansi daftar ulang.
 						</p>
 					</div>
-					<div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded text-blue-700 text-sm">
+					<div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded text-blue-700 dark:text-blue-400 text-sm">
 						<p className="font-bold">Tips!</p>
 						<p>Klik nama peserta untuk mengisi kwitansi.</p>
 					</div>

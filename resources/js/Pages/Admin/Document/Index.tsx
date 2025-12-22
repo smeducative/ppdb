@@ -1,3 +1,4 @@
+import { AlertMessages } from "@/components/alert-messages";
 import { type Column, DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
 import {
@@ -82,7 +83,7 @@ export default function Index({
 			header: "No. Pendaftaran",
 			cell: ({ row }) => (
 				<div>
-					<div className="font-medium text-blue-600">
+					<div className="font-medium text-primary">
 						{row.getValue("no_pendaftaran")}
 					</div>
 				</div>
@@ -156,15 +157,7 @@ export default function Index({
 			<Head title={title} />
 
 			<div className="space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				{showSettings && settings && (
 					<Card>
@@ -196,7 +189,7 @@ export default function Index({
 					</Card>
 				)}
 
-				<div className="card bg-white p-4 shadow rounded">
+				<Card className="p-4">
 					<div className="flex justify-between items-center mb-4">
 						<h3 className="text-lg font-bold">{title}</h3>
 						<div className="flex items-center gap-2">
@@ -242,7 +235,7 @@ export default function Index({
 						searchPlaceholder="Cari nama, no pend..."
 						additionalParams={{ jurusan }}
 					/>
-				</div>
+				</Card>
 			</div>
 		</>
 	);

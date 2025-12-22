@@ -8,6 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { formatDateTime } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
 
 interface Jurusan {
@@ -57,7 +58,7 @@ export default function ListPendaftar({
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.show.peserta", row.original.id)}
-					className="text-blue-600 hover:underline"
+					className="text-primary hover:underline font-medium"
 				>
 					{row.original.nama_lengkap}
 				</Link>
@@ -78,7 +79,7 @@ export default function ListPendaftar({
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="text-green-600 hover:underline"
+					className="text-green-600 dark:text-green-400 hover:underline font-medium"
 				>
 					{row.original.no_hp}
 				</a>
@@ -108,7 +109,7 @@ export default function ListPendaftar({
 						return (
 							<Badge
 								variant="secondary"
-								className="bg-yellow-500 hover:bg-yellow-600 text-white"
+								className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20 dark:text-yellow-400"
 							>
 								Proses Seleksi
 							</Badge>

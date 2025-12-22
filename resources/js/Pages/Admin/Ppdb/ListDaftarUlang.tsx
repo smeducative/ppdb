@@ -62,7 +62,7 @@ export default function ListDaftarUlang({
 					<div className="font-medium">
 						<Link
 							href={route("ppdb.show.peserta", row.original.id)}
-							className="text-blue-600 hover:underline"
+							className="text-primary hover:underline font-medium"
 						>
 							{row.getValue("no_pendaftaran")}
 						</Link>
@@ -102,7 +102,7 @@ export default function ListDaftarUlang({
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="text-blue-600 hover:underline"
+					className="text-green-600 dark:text-green-400 hover:underline font-medium"
 				>
 					{row.getValue("no_hp")}
 				</a>
@@ -158,7 +158,7 @@ export default function ListDaftarUlang({
 					</div>
 				</div>
 
-				<div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded text-blue-700 text-sm">
+				<div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded text-blue-700 dark:text-blue-400 text-sm">
 					<p className="font-bold">Info!</p>
 					<p>
 						Peserta yang telah melakukan pembayaran daftar ulang akan tampil

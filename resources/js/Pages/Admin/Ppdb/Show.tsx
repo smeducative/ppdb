@@ -1,3 +1,4 @@
+import { AlertMessages } from "@/components/alert-messages";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -19,6 +20,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { formatDate } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 
 interface Jurusan {
@@ -95,7 +97,7 @@ export default function Show({ peserta }: Props) {
 				return (
 					<Badge
 						variant="secondary"
-						className="bg-yellow-500 hover:bg-yellow-600 text-white"
+						className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20 dark:text-yellow-400"
 					>
 						Proses Seleksi
 					</Badge>
@@ -121,24 +123,7 @@ export default function Show({ peserta }: Props) {
 			<Head title={peserta.nama_lengkap} />
 
 			<div className="max-w-4xl mx-auto space-y-6">
-				{flash.success && (
-					<div
-						className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Success! </strong>
-						<span className="block sm:inline">{flash.success}</span>
-					</div>
-				)}
-				{flash.warning && (
-					<div
-						className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative"
-						role="alert"
-					>
-						<strong className="font-bold">Warning! </strong>
-						<span className="block sm:inline">{flash.warning}</span>
-					</div>
-				)}
+				<AlertMessages flash={flash} />
 
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between">
@@ -209,7 +194,9 @@ export default function Show({ peserta }: Props) {
 
 						<div>
 							<h3 className="text-lg font-semibold mb-3"># Jenis Beasiswa</h3>
-							<h4 className="font-medium text-gray-700 mt-2 mb-1">Akademik</h4>
+							<h4 className="font-medium text-muted-foreground mt-2 mb-1">
+								Akademik
+							</h4>
 							<InfoRow label="Kelas" value={peserta.akademik?.kelas} />
 							<InfoRow label="Semester" value={peserta.akademik?.semester} />
 							<InfoRow label="Peringkat" value={peserta.akademik?.peringkat} />
@@ -218,7 +205,7 @@ export default function Show({ peserta }: Props) {
 								value={peserta.akademik?.hafidz}
 							/>
 
-							<h4 className="font-medium text-gray-700 mt-4 mb-1">
+							<h4 className="font-medium text-muted-foreground mt-4 mb-1">
 								Non Akademik
 							</h4>
 							<InfoRow
@@ -234,7 +221,7 @@ export default function Show({ peserta }: Props) {
 								value={peserta.non_akademik?.juara_tingkat}
 							/>
 
-							<h4 className="font-medium text-gray-700 mt-4 mb-1">
+							<h4 className="font-medium text-muted-foreground mt-4 mb-1">
 								Rekomendasi
 							</h4>
 							<InfoRow
@@ -262,7 +249,7 @@ export default function Show({ peserta }: Props) {
 						<div className="flex gap-2">
 							<AlertDialog>
 								<AlertDialogTrigger asChild>
-									<Button className="bg-green-600 hover:bg-green-700">
+									<Button className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800">
 										Terima
 									</Button>
 								</AlertDialogTrigger>
@@ -277,7 +264,7 @@ export default function Show({ peserta }: Props) {
 										<AlertDialogCancel>Batal</AlertDialogCancel>
 										<AlertDialogAction
 											onClick={() => handleStatusChange("y")}
-											className="bg-green-600 hover:bg-green-700"
+											className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800"
 										>
 											Terima
 										</AlertDialogAction>

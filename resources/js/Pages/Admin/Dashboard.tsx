@@ -142,25 +142,25 @@ export default function Dashboard({
 						title="Total Pendaftar"
 						value={count.all}
 						icon={Users}
-						className="bg-yellow-100 dark:bg-yellow-900"
+						className="bg-primary/10 border-primary/20"
 					/>
 					<StatsCard
 						title="Total Daftar Ulang"
 						value={du.all}
 						icon={UserCheck}
-						className="bg-yellow-100 dark:bg-yellow-900"
+						className="bg-primary/10 border-primary/20"
 					/>
 					<StatsCard
 						title="Diterima"
 						value={penerimaan.diterima}
 						icon={UserCheck}
-						className="bg-green-100 dark:bg-green-900"
+						className="bg-green-500/10 border-green-500/20"
 					/>
 					<StatsCard
 						title="Ditolak"
 						value={penerimaan.ditolak}
 						icon={UserX}
-						className="bg-red-100 dark:bg-red-900"
+						className="bg-destructive/10 border-destructive/20"
 					/>
 				</div>
 
@@ -170,31 +170,31 @@ export default function Dashboard({
 						title="AT"
 						value={count.atph}
 						icon={Leaf}
-						className="bg-green-100"
+						className="bg-green-500/10 border-green-500/20"
 					/>
 					<StatsCard
 						title="TSM"
 						value={count.tsm}
 						icon={Settings}
-						className="bg-blue-100"
+						className="bg-blue-500/10 border-blue-500/20"
 					/>
 					<StatsCard
 						title="TKR"
 						value={count.tkr}
 						icon={Settings}
-						className="bg-blue-100"
+						className="bg-blue-500/10 border-blue-500/20"
 					/>
 					<StatsCard
 						title="TKJ"
 						value={count.tkj}
 						icon={Wifi}
-						className="bg-red-100"
+						className="bg-red-500/10 border-red-500/20"
 					/>
 					<StatsCard
 						title="BDP"
 						value={count.bdp}
 						icon={Film}
-						className="bg-orange-100"
+						className="bg-orange-500/10 border-orange-500/20"
 					/>
 				</div>
 
@@ -337,23 +337,28 @@ export default function Dashboard({
 							<CardTitle>Jumlah Pendaftar Per Sekolah (Top 10)</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div className="overflow-x-auto">
+							<div className="overflow-x-auto rounded-md border">
 								<table className="w-full text-sm text-left">
-									<thead className="bg-gray-50 text-gray-700 text-xs uppercase">
+									<thead className="bg-muted text-muted-foreground text-xs uppercase">
 										<tr>
 											<th className="px-6 py-3">Nama Sekolah</th>
-											<th className="px-6 py-3">Jumlah</th>
+											<th className="px-6 py-3 text-right">Jumlah</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody className="divide-y divide-border">
 										{pendaftarPerSekolahCount
 											.slice(0, 10)
 											.map((sekolah, idx) => (
-												<tr key={idx} className="bg-white border-b">
-													<td className="px-6 py-4 font-medium text-gray-900">
+												<tr
+													key={idx}
+													className="bg-card hover:bg-muted/50 transition-colors"
+												>
+													<td className="px-6 py-4 font-medium text-foreground">
 														{sekolah.asal_sekolah}
 													</td>
-													<td className="px-6 py-4">{sekolah.as_count}</td>
+													<td className="px-6 py-4 text-right font-semibold">
+														{sekolah.as_count}
+													</td>
 												</tr>
 											))}
 									</tbody>
@@ -367,23 +372,28 @@ export default function Dashboard({
 							<CardTitle>Jumlah Daftar Ulang Per Sekolah (Top 10)</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div className="overflow-x-auto">
+							<div className="overflow-x-auto rounded-md border">
 								<table className="w-full text-sm text-left">
-									<thead className="bg-gray-50 text-gray-700 text-xs uppercase">
+									<thead className="bg-muted text-muted-foreground text-xs uppercase">
 										<tr>
 											<th className="px-6 py-3">Nama Sekolah</th>
-											<th className="px-6 py-3">Jumlah</th>
+											<th className="px-6 py-3 text-right">Jumlah</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody className="divide-y divide-border">
 										{daftarUlangPerSekolahCount
 											.slice(0, 10)
 											.map((sekolah, idx) => (
-												<tr key={idx} className="bg-white border-b">
-													<td className="px-6 py-4 font-medium text-gray-900">
+												<tr
+													key={idx}
+													className="bg-card hover:bg-muted/50 transition-colors"
+												>
+													<td className="px-6 py-4 font-medium text-foreground">
 														{sekolah.asal_sekolah}
 													</td>
-													<td className="px-6 py-4">{sekolah.as_count}</td>
+													<td className="px-6 py-4 text-right font-semibold">
+														{sekolah.as_count}
+													</td>
 												</tr>
 											))}
 									</tbody>
