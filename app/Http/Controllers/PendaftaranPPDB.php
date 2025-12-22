@@ -101,8 +101,8 @@ class PendaftaranPPDB extends Controller
         $ppdb = new PesertaPPDB;
         $ppdb->id = Str::uuid();
         $ppdb->no_urut = $no_urut;
-        $ppdb->semester = now()->year.'/'.now()->addYear()->year;
-        $ppdb->no_pendaftaran = $jurusan->abbreviation.'-'.Str::padLeft($no_urut, 3, 0).'-'.now()->format('m-y');
+        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
+        $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
         $ppdb->nama_lengkap = request('nama_lengkap');
         $ppdb->jenis_kelamin = request('jenis_kelamin');
         $ppdb->tempat_lahir = request('tempat_lahir');
@@ -159,7 +159,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->has('kwitansi')
-            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -184,7 +184,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
-            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -259,13 +259,13 @@ class PendaftaranPPDB extends Controller
 
         // check apakah peserta memgubah jurusan
         if ($ppdb->jurusan_id != $jurusan->id) {
-            $ppdb->no_pendaftaran = $jurusan->abbreviation.'-'.Str::padLeft($ppdb->no_urut, 3, 0).'-'.now()->format('m-y');
+            $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
             $ppdb->jurusan_id = $jurusan->id;
 
             session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
         }
 
-        $ppdb->semester = now()->year.'/'.now()->addYear()->year;
+        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
         $ppdb->nama_lengkap = request('nama_lengkap');
         $ppdb->jenis_kelamin = request('jenis_kelamin');
         $ppdb->tempat_lahir = request('tempat_lahir');
@@ -352,8 +352,8 @@ class PendaftaranPPDB extends Controller
         $ppdb = new PesertaPPDB;
         $ppdb->id = Str::uuid();
         $ppdb->no_urut = $no_urut;
-        $ppdb->semester = now()->year.'/'.now()->addYear()->year;
-        $ppdb->no_pendaftaran = $jurusan->abbreviation.'-'.Str::padLeft($no_urut, 3, 0).'-'.now()->format('m-y');
+        $ppdb->semester = now()->year . '/' . now()->addYear()->year;
+        $ppdb->no_pendaftaran = $jurusan->abbreviation . '-' . Str::padLeft($no_urut, 3, 0) . '-' . now()->format('m-y');
         $ppdb->nama_lengkap = request('nama_lengkap');
         $ppdb->jenis_kelamin = request('jenis_kelamin');
         $ppdb->tempat_lahir = request('tempat_lahir');
@@ -396,7 +396,7 @@ class PendaftaranPPDB extends Controller
         $ppdb->saran_dari = request('saran_dari');
         $ppdb->save();
 
-        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran '.$ppdb->no_pendaftaran);
+        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
 
         return back();
     }
