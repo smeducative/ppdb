@@ -12,10 +12,18 @@ class BeasiswaController extends Controller
     public function rekomendasiMwc(Request $request)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
         $title = 'Beasiswa Rekomendasi MWC';
 
         $query = PesertaPPDB::with('jurusan')->whereRekomendasiMwc(1)
             ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
+            })
             ->latest();
 
         if ($request->isMethod('post')) {
@@ -35,6 +43,7 @@ class BeasiswaController extends Controller
     public function beasiswaAkademik(Request $request)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
         $title = 'Beasiswa Akademik';
 
         // column akademik is json
@@ -46,6 +55,13 @@ class BeasiswaController extends Controller
             ->where('akademik->semester', '!=', '')
             ->where('akademik->peringkat', '!=', '')
             ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
+            })
             ->latest();
 
         // if request has export and value of export is mwc
@@ -65,6 +81,7 @@ class BeasiswaController extends Controller
     public function beasiswaNonAkademik(Request $request)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
         $title = 'Beasiswa Non Akademik';
 
         // column non akademik is json
@@ -76,6 +93,13 @@ class BeasiswaController extends Controller
             ->where('non_akademik->juara_ke', '!=', '')
             ->where('non_akademik->juara_tingkat', '!=', '')
             ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
+            })
             ->latest();
 
         // if request has export and value of export is mwc
@@ -95,6 +119,7 @@ class BeasiswaController extends Controller
     public function beasiswaKIP(Request $request)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
         $title = 'Beasiswa KIP';
 
         // column akademik is json
@@ -104,6 +129,13 @@ class BeasiswaController extends Controller
         $query = PesertaPPDB::with('jurusan')
             ->where('penerima_kip', 'y')
             ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
+            })
             ->latest();
 
         // if request has export and value of export is mwc
@@ -123,6 +155,7 @@ class BeasiswaController extends Controller
     public function beasiswaTahfidz(Request $request)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
         $title = 'Beasiswa Akademik [Tahfidz]';
 
         // column akademik is json
@@ -134,6 +167,13 @@ class BeasiswaController extends Controller
             ->where('akademik->hafidz', '!=', '-')
             ->where('akademik->hafidz', '!=', '_')
             ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
+            })
             ->latest();
 
         // if request has export

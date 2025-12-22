@@ -23,7 +23,7 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import get from "lodash/get";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { InertiaPagination } from "./inertia-pagination";
 
@@ -51,6 +51,7 @@ interface DataTableProps<T> {
 	searchPlaceholder?: string;
 	additionalParams?: Record<string, any>;
 	perPageOptions?: number[];
+	showSearch?: boolean;
 }
 
 export function DataTable<T extends { id?: number | string }>({
@@ -58,11 +59,11 @@ export function DataTable<T extends { id?: number | string }>({
 	data,
 	pagination,
 	searchEndpoint,
-	searchPlaceholder = "Search...",
+	searchPlaceholder = "Cari data...",
 	additionalParams = {},
 	perPageOptions = [10, 20, 50, 100],
+	showSearch = true,
 }: DataTableProps<T>) {
-	// Initialize search from URL if present
 	const [search, setSearch] = useState(
 		new URLSearchParams(window.location.search).get("search") || "",
 	);
@@ -73,6 +74,29 @@ export function DataTable<T extends { id?: number | string }>({
 		new URLSearchParams(window.location.search).get("per_page") ||
 		"10";
 	const [perPage, setPerPage] = useState(String(initialPerPage));
+	const [isProcessing, setIsProcessing] = useState(false);
+
+	useEffect(() => {
+		const unbindStart = router.on("start", (event) => {
+			// Only show loading if the request is to the current page or search endpoint
+			const url = new URL(event.detail.visit.url);
+			if (
+				url.pathname === window.location.pathname ||
+				(searchEndpoint && url.pathname === searchEndpoint)
+			) {
+				setIsProcessing(true);
+			}
+		});
+
+		const unbindFinish = router.on("finish", () => {
+			setIsProcessing(false);
+		});
+
+		return () => {
+			unbindStart();
+			unbindFinish();
+		};
+	}, [searchEndpoint]);
 
 	useEffect(() => {
 		const endpoint = searchEndpoint || window.location.pathname;
@@ -80,17 +104,21 @@ export function DataTable<T extends { id?: number | string }>({
 		const currentSearch = params.get("search") || "";
 		const currentPerPage = params.get("per_page") || "10";
 
-		// Only trigger navigation if search or perPage changed from URL values
-		// OR if searchEndpoint is explicitly provided and different from current path
 		const shouldNavigate =
 			debouncedSearch !== currentSearch ||
 			perPage !== currentPerPage ||
 			(searchEndpoint && searchEndpoint !== window.location.pathname);
 
 		if (shouldNavigate) {
+			const queryParams = Object.fromEntries(params.entries());
 			router.get(
 				endpoint,
-				{ search: debouncedSearch, per_page: perPage, ...additionalParams },
+				{
+					...queryParams,
+					search: debouncedSearch,
+					per_page: perPage,
+					...additionalParams,
+				},
 				{
 					preserveState: true,
 					replace: true,
@@ -98,9 +126,8 @@ export function DataTable<T extends { id?: number | string }>({
 				},
 			);
 		}
-	}, [debouncedSearch, perPage]);
+	}, [debouncedSearch, perPage, additionalParams]);
 
-	// Map custom columns to TanStack ColumnDef
 	const tanStackColumns = useMemo<ColumnDef<T, any>[]>(
 		() =>
 			columns.map((col, index) => ({
@@ -138,7 +165,7 @@ export function DataTable<T extends { id?: number | string }>({
 	return (
 		<div className="space-y-4 w-full overflow-hidden">
 			<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-				{searchEndpoint && (
+				{showSearch && (
 					<div className="flex items-center space-x-2 flex-1 w-full">
 						<div className="relative w-full lg:max-w-sm">
 							<Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -148,12 +175,17 @@ export function DataTable<T extends { id?: number | string }>({
 								onChange={(e) => setSearch(e.target.value)}
 								className="pl-8 h-10 w-full"
 							/>
+							{isProcessing && (
+								<div className="absolute right-2.5 top-2.5">
+									<Loader2 className="h-4 w-4 animate-spin text-primary" />
+								</div>
+							)}
 						</div>
 					</div>
 				)}
 
 				<div className="flex items-center gap-2 self-end">
-					<span className="text-sm text-muted-foreground">Rows:</span>
+					<span className="text-sm text-muted-foreground">Baris:</span>
 					<Select value={perPage} onValueChange={setPerPage}>
 						<SelectTrigger className="h-9 w-[70px]">
 							<SelectValue placeholder={perPage} />
@@ -169,7 +201,18 @@ export function DataTable<T extends { id?: number | string }>({
 				</div>
 			</div>
 
-			<div className="rounded-xl border shadow-sm overflow-hidden bg-card">
+			<div className="relative rounded-xl border shadow-sm overflow-hidden bg-card">
+				{isProcessing && (
+					<div className="absolute inset-0 z-10 bg-background/50 backdrop-blur-[1px] flex items-center justify-center">
+						<div className="flex flex-col items-center gap-2">
+							<Loader2 className="h-8 w-8 animate-spin text-primary" />
+							<span className="text-sm font-medium animate-pulse">
+								Memuat data...
+							</span>
+						</div>
+					</div>
+				)}
+
 				<div className="overflow-x-auto scrollbar-thin scrollbar-thumb-muted">
 					<Table>
 						<TableHeader className="bg-muted/50">
@@ -222,7 +265,7 @@ export function DataTable<T extends { id?: number | string }>({
 										colSpan={columns.length}
 										className="h-32 text-center text-muted-foreground"
 									>
-										No results found.
+										{isProcessing ? "Memperbarui..." : "Data tidak ditemukan."}
 									</TableCell>
 								</TableRow>
 							)}
@@ -234,7 +277,7 @@ export function DataTable<T extends { id?: number | string }>({
 			{pagination && (
 				<div className="flex items-center justify-between gap-4 py-2">
 					<div className="text-sm text-muted-foreground">
-						Showing {data.length} results
+						Menampilkan {data.length} hasil
 					</div>
 					<InertiaPagination links={pagination.links} />
 				</div>
