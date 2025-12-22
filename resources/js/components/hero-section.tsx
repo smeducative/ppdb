@@ -81,12 +81,12 @@ export function HeroSection() {
 			{/* Gradient overlay */}
 			<div
 				ref={overlayRef}
-				className="absolute inset-0 bg-linear-to-b from-black/60 via-black/50 to-black/70 -z-10"
+				className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 -z-10"
 			/>
 
 			{/* Decorative elements */}
-			<div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-primary/20 to-transparent -z-10" />
-			<div className="absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-background to-transparent z-10" />
+			<div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary/20 to-transparent -z-10" />
+			<div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-background to-transparent z-10" />
 
 			<div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-36 pb-32 relative z-20">
 				<h1

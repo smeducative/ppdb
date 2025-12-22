@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
+class PesertaPPDBExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping
 {
     public $jurusan;
 
@@ -32,13 +32,13 @@ class PesertaPPDBExport implements FromCollection, WithHeadings, WithMapping, Sh
     public function collection()
     {
         if ($this->all) {
-            return PesertaPPDB::when($this->jurusan != null, function ($query) {
+            return PesertaPPDB::when(! empty($this->jurusan), function ($query) {
                 $query->where('jurusan_id', $this->jurusan);
             })
                 ->whereYear('created_at', $this->tahun)->get();
         }
 
-        return PesertaPPDB::when($this->jurusan != null, function ($query) {
+        return PesertaPPDB::when(! empty($this->jurusan), function ($query) {
             $query->where('jurusan_id', $this->jurusan);
         })->when($this->diterima, function ($query) {
             $query->has('kwitansi')->whereDiterima(1);

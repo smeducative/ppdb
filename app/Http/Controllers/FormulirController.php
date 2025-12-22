@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentFilterRequest;
 use App\Models\PesertaPPDB;
 
 class FormulirController extends Controller
 {
-    public function showJurusanPeserta($jurusan)
+    public function showJurusanPeserta(DocumentFilterRequest $request, $jurusan)
     {
-        $tahun = request('tahun', now()->year);
-        $search = request('search');
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->whereJurusanId($jurusan)
@@ -20,7 +21,7 @@ class FormulirController extends Controller
                     ->orWhere('no_pendaftaran', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(request('per_page', 10))
+            ->paginate($request->input('per_page', 10))
             ->withQueryString();
 
         $years = range(now()->year, now()->year - 5);

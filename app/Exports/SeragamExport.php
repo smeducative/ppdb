@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class SeragamExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
+class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping
 {
     public $jurusan;
 
@@ -26,7 +26,7 @@ class SeragamExport implements FromCollection, WithHeadings, WithMapping, Should
     public function collection()
     {
         return PesertaPPDB::with('ukuranSeragam')
-            ->when($this->jurusan != null, function ($query) {
+            ->when(! empty($this->jurusan), function ($query) {
                 return $query->where('jurusan_id', $this->jurusan);
             })
             ->whereDiterima(1)

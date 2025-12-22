@@ -1,5 +1,3 @@
-import { Head, router, usePage } from "@inertiajs/react";
-import { format } from "date-fns";
 import { InertiaPagination as Pagination } from "@/components/inertia-pagination";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +16,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { Head, router, usePage } from "@inertiajs/react";
+import { format } from "date-fns";
 
 interface User {
 	id: number;
@@ -108,7 +108,7 @@ export default function Rekap({
 					</Select>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div className="gap-4 grid grid-cols-1 md:grid-cols-2">
 					<Card className="bg-orange-500/10 border-orange-500/20">
 						<CardHeader>
 							<CardTitle className="text-orange-600 dark:text-orange-400 text-lg">
@@ -116,7 +116,7 @@ export default function Rekap({
 							</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div className="text-3xl font-bold text-orange-700 dark:text-orange-300">
+							<div className="font-bold text-orange-700 dark:text-orange-300 text-3xl">
 								{formatCurrency(danaKelola)}
 							</div>
 						</CardContent>
@@ -129,7 +129,7 @@ export default function Rekap({
 						</CardHeader>
 						<CardContent>
 							{/* Note: This is count of not-deleted items */}
-							<div className="text-3xl font-bold text-blue-700 dark:text-blue-300">
+							<div className="font-bold text-blue-700 dark:text-blue-300 text-3xl">
 								{Object.values(jenisPembayaran).reduce(
 									(sum, item) => sum + item.count,
 									0,
@@ -139,19 +139,17 @@ export default function Rekap({
 					</Card>
 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
 					<Card>
-						<CardHeader className="flex flex-row items-center justify-between">
+						<CardHeader className="flex flex-row justify-between items-center">
 							<CardTitle>Jenis Dana Kelola</CardTitle>
 							<Button asChild variant="outline" size="sm">
-								<form
-									action={`${route("ppdb.rekap.kwitansi-dana")}?tahun=${tahun}`}
-									method="post"
+								<a
+									href={`${route("ppdb.rekap.kwitansi-dana")}?tahun=${tahun}`}
 									target="_blank"
 								>
-									<input type="hidden" name="_token" value={csrf_token} />
-									<button type="submit">Export .xlsx</button>
-								</form>
+									Export .xlsx
+								</a>
 							</Button>
 						</CardHeader>
 						<CardContent>
@@ -185,17 +183,15 @@ export default function Rekap({
 					</Card>
 
 					<Card>
-						<CardHeader className="flex flex-row items-center justify-between">
+						<CardHeader className="flex flex-row justify-between items-center">
 							<CardTitle>Riwayat Kwitansi Terakhir</CardTitle>
 							<Button asChild variant="outline" size="sm">
-								<form
-									action={`${route("ppdb.rekap.kwitansi-riwayat")}?tahun=${tahun}`}
-									method="post"
+								<a
+									href={`${route("ppdb.rekap.kwitansi-riwayat")}?tahun=${tahun}`}
 									target="_blank"
 								>
-									<input type="hidden" name="_token" value={csrf_token} />
-									<button type="submit">Export .xlsx</button>
-								</form>
+									Export .xlsx
+								</a>
 							</Button>
 						</CardHeader>
 						<CardContent>
@@ -271,5 +267,4 @@ export default function Rekap({
 			</div>
 		</>
 	);
-}
 }

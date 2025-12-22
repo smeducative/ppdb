@@ -61,7 +61,7 @@ export default function ListBelumDaftarUlang({
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.show.peserta", row.original.id)}
-					className="text-primary hover:underline font-medium"
+					className="font-medium text-primary hover:underline"
 				>
 					{row.getValue("no_pendaftaran")}
 				</Link>
@@ -77,7 +77,7 @@ export default function ListBelumDaftarUlang({
 		{
 			header: "Jurusan",
 			cell: ({ row }) => (
-				<div className="text-sm font-medium">
+				<div className="font-medium text-sm">
 					{row.original.jurusan?.abbreviation ||
 						row.original.jurusan?.nama ||
 						"-"}
@@ -89,7 +89,7 @@ export default function ListBelumDaftarUlang({
 			header: "Asal Sekolah",
 			cell: ({ row }) => (
 				<div
-					className="text-sm text-muted-foreground truncate max-w-[200px]"
+					className="max-w-[200px] text-muted-foreground text-sm truncate"
 					title={row.original.asal_sekolah}
 				>
 					{row.original.asal_sekolah}
@@ -104,7 +104,7 @@ export default function ListBelumDaftarUlang({
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="text-green-600 dark:text-green-400 hover:underline font-medium"
+					className="font-medium text-green-600 dark:text-green-400 hover:underline"
 				>
 					{row.getValue("no_hp")}
 				</a>
@@ -125,7 +125,7 @@ export default function ListBelumDaftarUlang({
 					return (
 						<Badge
 							variant="secondary"
-							className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20 dark:text-yellow-400"
+							className="bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/20 text-yellow-600 dark:text-yellow-400"
 						>
 							Belum Diverifikasi
 						</Badge>
@@ -157,7 +157,7 @@ export default function ListBelumDaftarUlang({
 			<Head title="List Peserta Belum Daftar Ulang" />
 
 			<div className="space-y-6">
-				<div className="flex flex-col sm:flex-row justify-between gap-4">
+				<div className="flex sm:flex-row flex-col justify-between gap-4">
 					<div className="w-full sm:w-1/4">
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
 							<SelectTrigger>
@@ -176,7 +176,10 @@ export default function ListBelumDaftarUlang({
 					<div className="flex items-center gap-2">
 						<Button asChild>
 							<a
-								href={`${route("export.belum.daftar.ulang")}?tahun=${tahun}${jurusan ? `&jurusan=${jurusan}` : ""}`}
+								href={route("export.belum.daftar.ulang", {
+									tahun: tahun,
+									jurusan: jurusan || "",
+								})}
 							>
 								Export Excel
 							</a>
@@ -184,7 +187,7 @@ export default function ListBelumDaftarUlang({
 					</div>
 				</div>
 
-				<div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded text-blue-700 dark:text-blue-400 text-sm">
+				<div className="bg-blue-500/10 p-4 border-blue-500 border-l-4 rounded text-blue-700 dark:text-blue-400 text-sm">
 					<p className="font-bold">Info!</p>
 					<p>
 						Peserta yang belum melakukan pembayaran daftar ulang akan tampil

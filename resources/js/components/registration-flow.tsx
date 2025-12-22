@@ -96,9 +96,9 @@ export function RegistrationFlow() {
 		<section
 			ref={sectionRef}
 			id="alur"
-			className="py-24 md:py-32 bg-white relative overflow-hidden"
+			className="py-24 md:py-32 bg-background relative overflow-hidden"
 		>
-			<div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-background to-transparent" />
+			<div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent" />
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div ref={titleRef} className="text-center mb-20">
@@ -117,7 +117,7 @@ export function RegistrationFlow() {
 				<div className="relative">
 					<div
 						ref={lineRef}
-						className="hidden md:block absolute top-10 left-[10%] right-[10%] h-1 bg-linear-to-r from-primary/20 via-primary to-primary/20 rounded-full origin-left"
+						className="hidden md:block absolute top-10 left-[10%] right-[10%] h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 rounded-full origin-left"
 					/>
 
 					<div className="grid md:grid-cols-4 gap-8 md:gap-6">
@@ -129,7 +129,7 @@ export function RegistrationFlow() {
 								}}
 								className="relative flex flex-col items-center text-center group"
 							>
-								<div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary z-20 shadow-lg">
+								<div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary z-20 shadow-lg">
 									{index + 1}
 								</div>
 

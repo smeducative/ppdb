@@ -141,7 +141,7 @@ export function ExtracurricularSection() {
 							ref={(el) => {
 								cardsRef.current[index] = el;
 							}}
-							className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-default border border-transparent hover:border-primary/20"
+							className="bg-card p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-default border border-border hover:border-primary/50"
 						>
 							<div
 								className={`w-14 h-14 ${ekskul.color} rounded-2xl flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}

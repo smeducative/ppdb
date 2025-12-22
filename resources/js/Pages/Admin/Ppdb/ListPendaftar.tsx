@@ -53,16 +53,16 @@ export default function ListPendaftar({
 			className: "min-w-[200px]",
 			cell: ({ row }) => (
 				<div className="flex flex-col">
-					<span className="text-xs text-muted-foreground font-mono">
+					<span className="font-mono text-muted-foreground text-xs">
 						{row.original.no_pendaftaran}
 					</span>
 					<Link
 						href={route("ppdb.show.peserta", row.original.id)}
-						className="text-primary hover:underline font-bold"
+						className="font-bold text-primary hover:underline"
 					>
 						{row.original.nama_lengkap}
 					</Link>
-					<span className="text-xs sm:hidden text-muted-foreground mt-1">
+					<span className="sm:hidden mt-1 text-muted-foreground text-xs">
 						{row.original.jurusan?.nama || "-"}
 					</span>
 				</div>
@@ -82,7 +82,7 @@ export default function ListPendaftar({
 					</div>
 					<div className="flex items-center gap-1">
 						<span className="text-muted-foreground">Asal:</span>
-						<span className="truncate max-w-[150px]">
+						<span className="max-w-[150px] truncate">
 							{row.original.asal_sekolah}
 						</span>
 					</div>
@@ -97,7 +97,7 @@ export default function ListPendaftar({
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="text-green-600 dark:text-green-400 hover:underline font-medium text-sm flex items-center gap-1"
+					className="flex items-center gap-1 font-medium text-green-600 dark:text-green-400 text-sm hover:underline"
 				>
 					{row.original.no_hp}
 				</a>
@@ -107,7 +107,7 @@ export default function ListPendaftar({
 			header: "Jurusan",
 			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
-				<div className="text-sm font-medium">
+				<div className="font-medium text-sm">
 					{row.original.jurusan?.abbreviation ||
 						row.original.jurusan?.nama ||
 						"-"}
@@ -130,7 +130,7 @@ export default function ListPendaftar({
 						return (
 							<Badge
 								variant="secondary"
-								className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20 dark:text-yellow-400"
+								className="bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/20 text-yellow-600 dark:text-yellow-400"
 							>
 								Proses
 							</Badge>
@@ -142,7 +142,7 @@ export default function ListPendaftar({
 			header: "Terdaftar",
 			className: "hidden lg:table-cell",
 			cell: ({ row }) => (
-				<span className="text-xs text-muted-foreground">
+				<span className="text-muted-foreground text-xs">
 					{formatDateTime(row.original.created_at)}
 				</span>
 			),
@@ -162,7 +162,7 @@ export default function ListPendaftar({
 			<Head title="List Peserta PPDB" />
 
 			<div className="space-y-6">
-				<div className="flex flex-col sm:flex-row justify-between gap-4">
+				<div className="flex sm:flex-row flex-col justify-between gap-4">
 					<div className="w-full sm:w-1/4">
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
 							<SelectTrigger>
@@ -177,21 +177,20 @@ export default function ListPendaftar({
 							</SelectContent>
 						</Select>
 					</div>
-
 					<div className="flex items-center gap-2">
 						<Button asChild>
-							{/* Using Link with method post for export */}
-							<Link
-								href={`${route("export.peserta.ppdb")}?tahun=${tahun}&all=1&jurusan=${jurusan || ""}`}
-								method="post"
-								as="button"
+							<a
+								href={route("export.peserta.ppdb", {
+									tahun: tahun,
+									all: 1,
+									jurusan: jurusan || "",
+								})}
 							>
 								Export Excel
-							</Link>
+							</a>
 						</Button>
 					</div>
 				</div>
-
 				<DataTable
 					columns={columns}
 					data={pesertappdb.data}

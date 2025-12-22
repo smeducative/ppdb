@@ -9,7 +9,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { formatDate } from "@/lib/date";
-import { Head, Link, router, usePage } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 
 interface Jurusan {
 	id: number;
@@ -56,16 +56,16 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 			className: "min-w-[200px]",
 			cell: ({ row }) => (
 				<div className="flex flex-col">
-					<span className="text-xs text-muted-foreground font-mono">
+					<span className="font-mono text-muted-foreground text-xs">
 						{row.original.no_pendaftaran}
 					</span>
 					<Link
 						href={route("ppdb.show.peserta", row.original.id)}
-						className="text-primary hover:underline font-bold"
+						className="font-bold text-primary hover:underline"
 					>
 						{row.original.nama_lengkap}
 					</Link>
-					<span className="text-xs sm:hidden text-muted-foreground mt-1 text-blue-600 dark:text-blue-400">
+					<span className="sm:hidden mt-1 text-blue-600 text-muted-foreground dark:text-blue-400 text-xs">
 						{row.original.jurusan?.nama || "-"}
 					</span>
 				</div>
@@ -85,7 +85,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					</div>
 					<div className="flex items-center gap-1">
 						<span className="text-muted-foreground">Asal:</span>
-						<span className="truncate max-w-[150px]">
+						<span className="max-w-[150px] truncate">
 							{row.original.asal_sekolah}
 						</span>
 					</div>
@@ -100,7 +100,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="text-green-600 dark:text-green-400 hover:underline font-medium text-sm flex items-center gap-1"
+					className="flex items-center gap-1 font-medium text-green-600 dark:text-green-400 text-sm hover:underline"
 				>
 					{row.original.no_hp}
 				</a>
@@ -110,7 +110,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 			header: "Jurusan",
 			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
-				<div className="text-sm font-medium">
+				<div className="font-medium text-sm">
 					{row.original.jurusan?.abbreviation ||
 						row.original.jurusan?.nama ||
 						"-"}
@@ -126,16 +126,6 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 		});
 	};
 
-	const handleExport = () => {
-		router.post(
-			window.location.pathname,
-			{ tahun },
-			{
-				responseType: "blob",
-			},
-		);
-	};
-
 	return (
 		<>
 			<Head title={title} />
@@ -144,7 +134,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 				<AlertMessages flash={flash} />
 
 				<div
-					className="bg-blue-500/10 border-l-4 border-blue-500 text-blue-700 dark:text-blue-400 p-4 rounded"
+					className="bg-blue-500/10 p-4 border-blue-500 border-l-4 rounded text-blue-700 dark:text-blue-400"
 					role="alert"
 				>
 					<p className="font-bold">Info!</p>
@@ -153,7 +143,7 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					</p>
 				</div>
 
-				<div className="flex flex-col sm:flex-row justify-between gap-4">
+				<div className="flex sm:flex-row flex-col justify-between gap-4">
 					<div className="w-full sm:w-1/4">
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
 							<SelectTrigger>
@@ -170,7 +160,16 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					</div>
 
 					<div className="flex items-center gap-2">
-						<Button onClick={handleExport}>Export Excel</Button>
+						<Button asChild>
+							<a
+								href={route(route().current() as string, {
+									tahun: tahun,
+									export: 1,
+								})}
+							>
+								Export Excel
+							</a>
+						</Button>
 					</div>
 				</div>
 

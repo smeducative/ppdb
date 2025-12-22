@@ -31,6 +31,13 @@ class PesertaPPDB extends Model
         parent::boot();
 
         static::creating(function ($model) {
+            $model->id = \Illuminate\Support\Str::uuid();
+            $model->no_urut = $model->getNoUrut($model->jurusan_id);
+            $model->semester = now()->year . '/' . now()->addYear()->year;
+
+            $jurusan = Jurusan::find($model->jurusan_id);
+            $model->no_pendaftaran = $jurusan->abbreviation . '-' . \Illuminate\Support\Str::padLeft($model->no_urut, 3, 0) . '-' . now()->format('m-y');
+
             $model->attributes['nama_lengkap'] = str($model->attributes['nama_lengkap'])->title();
             $model->attributes['tempat_lahir'] = str($model->attributes['tempat_lahir'])->title();
         });
@@ -46,10 +53,10 @@ class PesertaPPDB extends Model
         return $this->belongsTo(Jurusan::class)->withTrashed();
     }
 
-    public function getNoUrut()
+    public function getNoUrut($jurusanId)
     {
         return $this->whereYear('created_at', now()->year)
-            ->whereJurusanId(request('pilihan_jurusan'))
+            ->whereJurusanId($jurusanId)
             ->withTrashed()
             ->max('no_urut') + 1;
     }
@@ -66,7 +73,9 @@ class PesertaPPDB extends Model
 
     public function toWhatsapp($no)
     {
-        if (! $no) return $no;
+        if (! $no) {
+            return $no;
+        }
 
         $no = preg_replace('/^0/', '62', $no);
         $no = preg_replace('/^8/', '628', $no);

@@ -38,16 +38,30 @@ export function Footer() {
 
 	useEffect(() => {
 		const ctx = gsap.context(() => {
-			gsap.fromTo(
-				contentRef.current,
-				{ opacity: 0, y: 40 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 0.8,
-					scrollTrigger: { trigger: footerRef.current, start: "top 90%" },
-				},
-			);
+			// Check if footer is already in viewport (for short pages like success state)
+			const footerRect = footerRef.current?.getBoundingClientRect();
+			const isAlreadyVisible =
+				footerRect && footerRect.top < window.innerHeight;
+
+			if (isAlreadyVisible) {
+				// Footer is already visible, just show it immediately
+				gsap.set(contentRef.current, { opacity: 1, y: 0 });
+			} else {
+				// Footer not yet visible, animate on scroll
+				gsap.fromTo(
+					contentRef.current,
+					{ opacity: 0, y: 40 },
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.8,
+						scrollTrigger: {
+							trigger: footerRef.current,
+							start: "top 90%",
+						},
+					},
+				);
+			}
 		}, footerRef);
 
 		return () => ctx.revert();

@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { Link, usePage } from "@inertiajs/react";
 import gsap from "gsap";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
 	{ href: "/#beranda", label: "Beranda" },
@@ -54,7 +55,7 @@ export function Navbar() {
 
 	const navBackground =
 		scrolled || isRegistrationPage
-			? "bg-white/90 backdrop-blur-xl shadow-lg py-2"
+			? "bg-background/90 backdrop-blur-xl shadow-lg py-2 border-b border-border"
 			: "bg-transparent py-4";
 
 	const textColor =
@@ -63,7 +64,9 @@ export function Navbar() {
 			: "text-white/80 hover:text-white";
 
 	const logoTextColor =
-		scrolled || isRegistrationPage ? "text-foreground" : "text-white";
+		scrolled || isRegistrationPage
+			? "text-foreground"
+			: "text-white drop-shadow-lg";
 
 	return (
 		<nav
@@ -91,7 +94,7 @@ export function Navbar() {
 								SMK Diponegoro Karanganyar
 							</p>
 							<p
-								className={`text-xs font-medium transition-colors ${scrolled || isRegistrationPage ? "text-muted-foreground" : "text-white/70"}`}
+								className={`text-xs font-medium transition-colors ${scrolled || isRegistrationPage ? "text-muted-foreground" : "text-white/70 drop-shadow-md"}`}
 							>
 								Kab. Pekalongan
 							</p>
@@ -111,7 +114,8 @@ export function Navbar() {
 						))}
 					</div>
 
-					<div ref={buttonRef} className="hidden md:block">
+					<div ref={buttonRef} className="hidden md:flex items-center gap-3">
+						<ModeToggle />
 						<Button
 							size="lg"
 							className="rounded-full px-6 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-105 transition-all duration-300"
@@ -143,7 +147,7 @@ export function Navbar() {
 			<div
 				className={`md:hidden overflow-hidden transition-all duration-500 ${isOpen ? "max-h-96" : "max-h-0"}`}
 			>
-				<div className="px-4 py-6 space-y-2 bg-white/95 backdrop-blur-xl border-t border-border/50">
+				<div className="px-4 py-6 space-y-2 bg-background/95 backdrop-blur-xl border-t border-border">
 					{navLinks.map((link, index) => (
 						<Link
 							key={link.href}
