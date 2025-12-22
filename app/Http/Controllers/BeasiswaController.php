@@ -26,7 +26,7 @@ class BeasiswaController extends Controller
             })
             ->latest();
 
-        if ($request->isMethod('post')) {
+        if ($request->has('export')) {
             $pesertappdb = $query->get();
 
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-rekomendasi-mwc.xlsx');
@@ -65,7 +65,7 @@ class BeasiswaController extends Controller
             ->latest();
 
         // if request has export and value of export is mwc
-        if ($request->isMethod('post')) {
+        if ($request->has('export')) {
             $pesertappdb = $query->get();
 
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-akademik.xlsx');
@@ -103,7 +103,7 @@ class BeasiswaController extends Controller
             ->latest();
 
         // if request has export and value of export is mwc
-        if ($request->isMethod('post')) {
+        if ($request->has('export')) {
             $pesertappdb = $query->get();
 
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-non-akademik.xlsx');
@@ -139,7 +139,7 @@ class BeasiswaController extends Controller
             ->latest();
 
         // if request has export and value of export is mwc
-        if ($request->isMethod('post')) {
+        if ($request->has('export')) {
             $pesertappdb = $query->get();
 
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-kip.xlsx');
@@ -177,7 +177,7 @@ class BeasiswaController extends Controller
             ->latest();
 
         // if request has export
-        if ($request->isMethod('post')) {
+        if ($request->has('export')) {
             $pesertappdb = $query->get();
 
             return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-tahfidz.xlsx');

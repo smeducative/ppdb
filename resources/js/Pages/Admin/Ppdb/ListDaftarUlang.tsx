@@ -153,19 +153,16 @@ export default function ListDaftarUlang({
 
 					<div className="flex items-center gap-2">
 						<Button asChild>
-							<Link
-								href={route("export.peserta.ppdb")}
-								method="post"
-								data={{
+							<a
+								href={route("export.peserta.ppdb", {
 									tahun: tahun,
 									diterima: 1,
 									all: 0,
 									jurusan: jurusan || "",
-								}}
-								as="button"
+								})}
 							>
 								Export Excel
-							</Link>
+							</a>
 						</Button>
 					</div>
 				</div>

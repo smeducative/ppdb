@@ -17,27 +17,27 @@ class ExportController extends Controller
 {
     public function exportPesertaPpdb(ExportPesertaRequest $request)
     {
-        $jurusan = $request->input('jurusan');
+        $jurusan = $request->filled('jurusan') ? $request->input('jurusan') : null;
         $diterima = $request->input('diterima', 0);
         $tahun = $request->input('tahun', now()->year);
         $all = $request->input('all', 0);
 
-        $abb = Jurusan::find($jurusan);
+        $abb = $jurusan ? Jurusan::find($jurusan) : null;
 
         $acc = $diterima == 1 ? 'data_peserta_ppdb_diterima_' : 'peserta_ppdb_';
-        $filename = $acc.optional($abb)->abbreviation.'-'.$tahun.'.xlsx';
+        $filename = $acc . ($abb ? $abb->abbreviation : 'Semua') . '-' . $tahun . '.xlsx';
 
         return Excel::download(new PesertaPPDBExport($jurusan, $tahun, $diterima, $all), $filename);
     }
 
     public function exportSeragam(ExportSeragamRequest $request)
     {
-        $jurusan = $request->input('jurusan');
+        $jurusan = $request->filled('jurusan') ? $request->input('jurusan') : null;
         $tahun = $request->input('tahun', now()->year);
 
-        $abb = Jurusan::find($jurusan);
+        $abb = $jurusan ? Jurusan::find($jurusan) : null;
 
-        $filename = 'Ukuran-seragam-'.optional($abb)->abbreviation.'-'.$tahun.'.xlsx';
+        $filename = 'Ukuran-seragam-' . ($abb ? $abb->abbreviation : 'Semua') . '-' . $tahun . '.xlsx';
 
         return Excel::download(new SeragamExport($jurusan, $tahun), $filename);
     }
@@ -49,17 +49,17 @@ class ExportController extends Controller
         // perbandingan per jumlah sekolah pendaftar
         $pendaftarPerSekolah = PesertaPPDB::select(DB::raw('asal_sekolah, count(asal_sekolah) as as_count'))->whereYear('created_at', $tahun)->groupBy('asal_sekolah')->orderByDesc('as_count')->get();
 
-        return Excel::download(new RekapSekolahExport($tahun, $pendaftarPerSekolah), 'Rekap-sekolah-'.$tahun.'.xlsx');
+        return Excel::download(new RekapSekolahExport($tahun, $pendaftarPerSekolah), 'Rekap-sekolah-' . $tahun . '.xlsx');
     }
 
     public function exportBelumDaftarUlang(ExportPesertaRequest $request)
     {
-        $jurusan = $request->input('jurusan');
+        $jurusan = $request->filled('jurusan') ? $request->input('jurusan') : null;
         $tahun = $request->input('tahun', now()->year);
 
-        $abb = Jurusan::find($jurusan);
+        $abb = $jurusan ? Jurusan::find($jurusan) : null;
 
-        $filename = 'peserta_ppdb_belum_daftar_ulang_'.optional($abb)->abbreviation.'-'.$tahun.'.xlsx';
+        $filename = 'peserta_ppdb_belum_daftar_ulang_' . ($abb ? $abb->abbreviation : 'Semua') . '-' . $tahun . '.xlsx';
 
         return Excel::download(new PesertaPPDBExport($jurusan, $tahun, 0), $filename);
     }

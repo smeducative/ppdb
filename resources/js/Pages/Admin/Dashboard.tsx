@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Head } from "@inertiajs/react";
 import {
@@ -333,11 +334,16 @@ export default function Dashboard({
 
 				<div className="gap-4 grid md:grid-cols-2">
 					<Card>
-						<CardHeader>
+						<CardHeader className="flex flex-row justify-between items-center">
 							<CardTitle>Jumlah Pendaftar Per Sekolah (Top 10)</CardTitle>
+							<Button asChild variant="outline" size="sm">
+								<a href={route("export.rekap-sekolah", { tahun })}>
+									Export .xlsx
+								</a>
+							</Button>
 						</CardHeader>
 						<CardContent>
-							<div className="overflow-x-auto rounded-md border">
+							<div className="border rounded-md overflow-x-auto">
 								<table className="w-full text-sm text-left">
 									<thead className="bg-muted text-muted-foreground text-xs uppercase">
 										<tr>
@@ -356,7 +362,7 @@ export default function Dashboard({
 													<td className="px-6 py-4 font-medium text-foreground">
 														{sekolah.asal_sekolah}
 													</td>
-													<td className="px-6 py-4 text-right font-semibold">
+													<td className="px-6 py-4 font-semibold text-right">
 														{sekolah.as_count}
 													</td>
 												</tr>
@@ -372,7 +378,7 @@ export default function Dashboard({
 							<CardTitle>Jumlah Daftar Ulang Per Sekolah (Top 10)</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div className="overflow-x-auto rounded-md border">
+							<div className="border rounded-md overflow-x-auto">
 								<table className="w-full text-sm text-left">
 									<thead className="bg-muted text-muted-foreground text-xs uppercase">
 										<tr>
@@ -391,7 +397,7 @@ export default function Dashboard({
 													<td className="px-6 py-4 font-medium text-foreground">
 														{sekolah.asal_sekolah}
 													</td>
-													<td className="px-6 py-4 text-right font-semibold">
+													<td className="px-6 py-4 font-semibold text-right">
 														{sekolah.as_count}
 													</td>
 												</tr>

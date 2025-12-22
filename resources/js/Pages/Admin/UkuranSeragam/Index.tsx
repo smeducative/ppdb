@@ -126,7 +126,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.show.peserta", row.original.id)}
-					className="hover:underline font-medium"
+					className="font-medium hover:underline"
 				>
 					{row.getValue("nama_lengkap")}
 				</Link>
@@ -177,7 +177,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			<div className="space-y-6">
 				<AlertMessages flash={flash} />
 
-				<div className="flex flex-col sm:flex-row justify-between gap-4">
+				<div className="flex sm:flex-row flex-col justify-between gap-4">
 					<div className="w-full sm:w-1/4">
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
 							<SelectTrigger>
@@ -195,17 +195,14 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 
 					<div className="flex items-center gap-2">
 						<Button asChild>
-							<Link
-								href={route("export.seragam")}
-								method="post"
-								data={{
+							<a
+								href={route("export.seragam", {
 									tahun: tahun,
 									jurusan: jurusan || "",
-								}}
-								as="button"
+								})}
 							>
 								Export Excel
-							</Link>
+							</a>
 						</Button>
 					</div>
 				</div>
@@ -227,7 +224,7 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 							</DialogDescription>
 						</DialogHeader>
 						<form onSubmit={submit} className="space-y-4">
-							<div className="grid grid-cols-2 gap-4">
+							<div className="gap-4 grid grid-cols-2">
 								<div className="space-y-2">
 									<Label htmlFor="baju">Ukuran Baju</Label>
 									<Input

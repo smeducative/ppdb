@@ -28,10 +28,10 @@ Route::get('/', function () {
 });
 Route::get('/register', function () {
     return inertia('Pendaftaran', [
-        'jurusan' => \App\Models\Jurusan::all()->map(fn($j) => [
+        'jurusan' => \App\Models\Jurusan::all()->map(fn ($j) => [
             'value' => $j->id,
-            'label' => $j->nama
-        ])
+            'label' => $j->nama,
+        ]),
     ]);
 })->name('ppdb.register');
 
@@ -62,7 +62,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::post('/ppdb/tambah-pendaftar', [PendaftaranPPDB::class, 'submitPendaftar'])->name('ppdb.tambah.pendaftar');
 
-    //-- lihat identias pendaftar
+    // -- lihat identias pendaftar
 
     Route::get('/ppdb/show/{id}', [PendaftaranPPDB::class, 'showPeserta'])->name('ppdb.show.peserta');
 
@@ -93,8 +93,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         // rekap kwitansi
         Route::get('/rekap', [KwitansiController::class, 'rekapKwitansi'])->name('ppdb.rekap.kwitansi');
-        Route::post('/rekap/cetak-dana', [KwitansiController::class, 'cetakRekapDanaKwitansi'])->name('ppdb.rekap.kwitansi-dana');
-        Route::post('/rekap/cetak-riwayat', [KwitansiController::class, 'cetakRekapRiwayatKwitansi'])->name('ppdb.rekap.kwitansi-riwayat');
+        Route::get('/rekap/cetak-dana', [KwitansiController::class, 'cetakRekapDanaKwitansi'])->name('ppdb.rekap.kwitansi-dana');
+        Route::get('/rekap/cetak-riwayat', [KwitansiController::class, 'cetakRekapRiwayatKwitansi'])->name('ppdb.rekap.kwitansi-riwayat');
     });
 
     Route::prefix('ukuran-seragam')->group(function () {
@@ -126,16 +126,16 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::prefix('export')->group(function () {
         // peserta ppdb
-        Route::post('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
+        Route::get('peserta-ppdb', [ExportController::class, 'exportPesertaPpdb'])->name('export.peserta.ppdb');
 
         // ukuran seragam
-        Route::post('ukuran-seragam', [ExportController::class, 'exportSeragam'])->name('export.seragam');
+        Route::get('ukuran-seragam', [ExportController::class, 'exportSeragam'])->name('export.seragam');
 
         // export rekap sekolah
-        Route::post('rekap-sekolah', [ExportController::class, 'exportRekapSekolah'])->name('export.rekap-sekolah');
+        Route::get('rekap-sekolah', [ExportController::class, 'exportRekapSekolah'])->name('export.rekap-sekolah');
 
         // export belum daftar ulang
-        Route::post('belum-daftar-ulang', [ExportController::class, 'exportBelumDaftarUlang'])->name('export.belum.daftar.ulang');
+        Route::get('belum-daftar-ulang', [ExportController::class, 'exportBelumDaftarUlang'])->name('export.belum.daftar.ulang');
     });
 
     // beasiswa route
@@ -143,14 +143,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         // route berdasarkan jenis beasiswa
         // beasiswa rekomendasi mwc, akademik, non akademik, kip
         Route::get('rekomendasi-mwc', [BeasiswaController::class, 'rekomendasiMwc'])->name('ppdb.beasiswa.mwc');
-        Route::post('rekomendasi-mwc', [BeasiswaController::class, 'rekomendasiMwc'])->name('ppdb.beasiswa.mwc.export');
         Route::get('akademik', [BeasiswaController::class, 'beasiswaAkademik'])->name('ppdb.beasiswa.akademik');
-        Route::post('akademik', [BeasiswaController::class, 'beasiswaAkademik'])->name('ppdb.beasiswa.akademik.export');
         Route::get('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik');
-        Route::post('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik.export');
         Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
-        Route::post('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip.export');
         Route::get('tahfidz', [BeasiswaController::class, 'beasiswaTahfidz'])->name('ppdb.beasiswa.tahfidz');
-        Route::post('tahfidz', [BeasiswaController::class, 'beasiswaTahfidz'])->name('ppdb.beasiswa.tahfidz.export');
     });
 });
