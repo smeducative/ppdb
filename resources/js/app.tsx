@@ -2,6 +2,7 @@ import "../css/app.css";
 import "./bootstrap";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { createInertiaApp } from "@inertiajs/react";
 import type { ReactNode } from "react";
@@ -42,6 +43,7 @@ createInertiaApp({
 				disableTransitionOnChange
 			>
 				<App {...props} />
+				<Toaster />
 			</ThemeProvider>,
 		);
 	},

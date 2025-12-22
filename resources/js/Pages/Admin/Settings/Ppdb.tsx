@@ -1,4 +1,3 @@
-import { Head, useForm, usePage } from "@inertiajs/react";
 import { AlertMessages } from "@/components/alert-messages";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Head, useForm, usePage } from "@inertiajs/react";
 
 interface PpdbSetting {
 	id: number;
@@ -156,5 +156,4 @@ export default function Ppdb({ setting }: Props) {
 			</div>
 		</>
 	);
-}
 }

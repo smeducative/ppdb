@@ -166,10 +166,10 @@ export function ProgramsSection() {
 							ref={(el) => {
 								cardsRef.current[index] = el;
 							}}
-							className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+							className="group bg-card rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-border"
 							style={{ perspective: "1000px" }}
 						>
-							<div className={`h-2 bg-linear-to-r ${program.gradient}`} />
+							<div className={`h-2 bg-gradient-to-r ${program.gradient}`} />
 
 							<div className="p-6">
 								<div className="flex items-start justify-between mb-4">
@@ -179,7 +179,7 @@ export function ProgramsSection() {
 										<program.icon className="w-7 h-7 text-white" />
 									</div>
 									{program.badge && (
-										<span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">
+										<span className="px-3 py-1 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 text-xs font-bold rounded-full">
 											{program.badge}
 										</span>
 									)}

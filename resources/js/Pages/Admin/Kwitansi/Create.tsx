@@ -1,5 +1,3 @@
-import { Head, router, useForm, usePage } from "@inertiajs/react";
-import { format } from "date-fns";
 import { AlertMessages } from "@/components/alert-messages";
 import {
 	AlertDialog,
@@ -25,6 +23,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { Head, router, useForm, usePage } from "@inertiajs/react";
+import { format } from "date-fns";
 
 interface User {
 	id: number;
@@ -293,5 +293,4 @@ export default function Create({ peserta }: Props) {
 			</div>
 		</>
 	);
-}
 }

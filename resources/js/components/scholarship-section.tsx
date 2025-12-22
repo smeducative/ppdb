@@ -123,14 +123,14 @@ export function ScholarshipSection() {
 		<section
 			ref={sectionRef}
 			id="beasiswa"
-			className="py-24 md:py-32 bg-gradient-to-b from-white to-secondary/30 relative overflow-hidden"
+			className="py-24 md:py-32 bg-gradient-to-b from-background to-secondary/30 relative overflow-hidden"
 		>
 			<div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 			<div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl" />
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 				<div ref={titleRef} className="text-center mb-16">
-					<span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 text-sm font-semibold rounded-full mb-4">
+					<span className="inline-block px-4 py-2 bg-amber-100 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 text-sm font-semibold rounded-full mb-4">
 						Kesempatan Emas
 					</span>
 					<h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -149,7 +149,7 @@ export function ScholarshipSection() {
 							ref={(el) => {
 								cardsRef.current[index] = el;
 							}}
-							className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+							className="bg-card rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group border border-border"
 						>
 							<div className={`h-2 bg-gradient-to-r ${scholarship.color}`} />
 							<div className="p-6">

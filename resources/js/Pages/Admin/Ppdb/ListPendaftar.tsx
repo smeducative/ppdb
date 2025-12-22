@@ -180,25 +180,29 @@ export default function ListPendaftar({
 
 					<div className="flex items-center gap-2">
 						<Button asChild>
-							{/* Using Link with method post for export */}
 							<Link
-								href={`${route("export.peserta.ppdb")}?tahun=${tahun}&all=1&jurusan=${jurusan || ""}`}
+								href={route("export.peserta.ppdb")}
 								method="post"
+								data={{
+									tahun: tahun,
+									all: 1,
+									jurusan: jurusan || "",
+								}}
 								as="button"
 							>
 								Export Excel
 							</Link>
 						</Button>
 					</div>
-				</div>
 
-				<DataTable
-					columns={columns}
-					data={pesertappdb.data}
-					pagination={{ links: pesertappdb.links }}
-					searchPlaceholder="Cari nama, no pend, asal sekolah..."
-					additionalParams={{ jurusan }}
-				/>
+					<DataTable
+						columns={columns}
+						data={pesertappdb.data}
+						pagination={{ links: pesertappdb.links }}
+						searchPlaceholder="Cari nama, no pend, asal sekolah..."
+						additionalParams={{ jurusan }}
+					/>
+				</div>
 			</div>
 		</>
 	);

@@ -195,9 +195,17 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 
 					<div className="flex items-center gap-2">
 						<Button asChild>
-							<a href={`${route("export.seragam")}?jurusan=${jurusan || ""}`}>
+							<Link
+								href={route("export.seragam")}
+								method="post"
+								data={{
+									tahun: tahun,
+									jurusan: jurusan || "",
+								}}
+								as="button"
+							>
 								Export Excel
-							</a>
+							</Link>
 						</Button>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ export default function PendaftaranPage({ jurusan }: PendaftaranPageProps) {
 		<>
 			<Head title="Formulir Pendaftaran | SPMB SMK Diponegoro Karanganyar" />
 			<Navbar />
-			<main className="min-h-screen bg-linear-to-b from-secondary via-background to-accent pt-24 pb-16">
+			<main className="min-h-screen bg-gradient-to-b from-secondary via-background to-accent pt-24 pb-16">
 				<RegistrationForm jurusanOptions={jurusan} />
 			</main>
 			<Footer />

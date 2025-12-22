@@ -175,11 +175,17 @@ export default function ListBelumDaftarUlang({
 
 					<div className="flex items-center gap-2">
 						<Button asChild>
-							<a
-								href={`${route("export.belum.daftar.ulang")}?tahun=${tahun}${jurusan ? `&jurusan=${jurusan}` : ""}`}
+							<Link
+								href={route("export.belum.daftar.ulang")}
+								method="post"
+								data={{
+									tahun: tahun,
+									jurusan: jurusan || "",
+								}}
+								as="button"
 							>
 								Export Excel
-							</a>
+							</Link>
 						</Button>
 					</div>
 				</div>

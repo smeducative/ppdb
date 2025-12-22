@@ -152,7 +152,7 @@ export function FacilitiesSection() {
 		<section
 			ref={sectionRef}
 			id="fasilitas"
-			className="py-24 md:py-32 bg-white relative overflow-hidden"
+			className="py-24 md:py-32 bg-background relative overflow-hidden"
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div ref={titleRef} className="text-center mb-16">
@@ -209,7 +209,7 @@ export function FacilitiesSection() {
 									key={index}
 									className="flex items-start gap-3 p-4 bg-accent/30 rounded-2xl hover:bg-accent hover:shadow-lg transition-all duration-300 group"
 								>
-									<div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shrink-0 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
+									<div className="w-10 h-10 bg-card rounded-xl flex items-center justify-center shrink-0 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300 border border-border">
 										<facility.icon className="w-5 h-5 text-primary" />
 									</div>
 									<div>
@@ -233,9 +233,9 @@ export function FacilitiesSection() {
 					<img
 						src="/img/facilities/modern-computer-lab.png"
 						alt="Fasilitas SMK Diponegoro Karanganyar"
-						className="w-full h-72 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
+						className="w-full h-72 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700 object-bottom"
 					/>
-					<div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+					<div className="absolute inset-0 bg-linear-gradient-to-t from-black/10 via-black/20 to-transparent" />
 					<div className="absolute bottom-0 left-0 right-0 p-8">
 						<p className="text-white font-bold text-2xl mb-2">
 							Laboratorium Komputer Modern

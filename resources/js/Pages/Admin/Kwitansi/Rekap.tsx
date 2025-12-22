@@ -1,5 +1,3 @@
-import { Head, router, usePage } from "@inertiajs/react";
-import { format } from "date-fns";
 import { InertiaPagination as Pagination } from "@/components/inertia-pagination";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +16,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { Head, router, usePage } from "@inertiajs/react";
+import { format } from "date-fns";
 
 interface User {
 	id: number;
@@ -271,5 +271,4 @@ export default function Rekap({
 			</div>
 		</>
 	);
-}
 }

@@ -9,7 +9,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { formatDate } from "@/lib/date";
-import { Head, Link, router, usePage } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 
 interface Jurusan {
 	id: number;
@@ -126,16 +126,6 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 		});
 	};
 
-	const handleExport = () => {
-		router.post(
-			window.location.pathname,
-			{ tahun },
-			{
-				responseType: "blob",
-			},
-		);
-	};
-
 	return (
 		<>
 			<Head title={title} />
@@ -170,7 +160,18 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					</div>
 
 					<div className="flex items-center gap-2">
-						<Button onClick={handleExport}>Export Excel</Button>
+						<Button asChild>
+							<Link
+								href={route(route().current() as string)}
+								method="post"
+								data={{
+									tahun: tahun,
+								}}
+								as="button"
+							>
+								Export Excel
+							</Link>
+						</Button>
 					</div>
 				</div>
 

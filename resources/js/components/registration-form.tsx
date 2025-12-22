@@ -31,6 +31,7 @@ import {
 	Users,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 interface RegistrationFormProps {
 	jurusanOptions?: { value: number | string; label: string }[];
@@ -141,8 +142,54 @@ export function RegistrationForm({
 		);
 	}, [currentStep, formRef]);
 
-	const nextStep = () => {
-		if (currentStep < 4) setCurrentStep(currentStep + 1);
+	const validateStep = (step: number) => {
+		if (step === 1) {
+			const requiredFields = [
+				{ key: "nama_lengkap", label: "Nama Lengkap" },
+				{ key: "jenis_kelamin", label: "Jenis Kelamin" },
+				{ key: "tempat_lahir", label: "Tempat Lahir" },
+				{ key: "tanggal_lahir", label: "Tanggal Lahir" },
+				{ key: "nik", label: "NIK" },
+				{ key: "alamat_lengkap", label: "Alamat Lengkap" },
+				{ key: "pilihan_jurusan", label: "Pilihan Jurusan" },
+				{ key: "asal_sekolah", label: "Asal Sekolah" },
+				{ key: "tahun_lulus", label: "Tahun Lulus" },
+				{ key: "no_hp", label: "No. HP" },
+			];
+
+			for (const field of requiredFields) {
+				// @ts-ignore
+				if (!data[field.key]) {
+					toast.error(`Mohon lengkapi ${field.label}`);
+					return false;
+				}
+			}
+
+			if (data.nik.length !== 16) {
+				toast.error("NIK harus terdiri dari 16 digit");
+				return false;
+			}
+		}
+
+		if (step === 2) {
+			if (!data.nama_ayah) {
+				toast.error("Mohon lengkapi Nama Ayah");
+				return false;
+			}
+			if (!data.nama_ibu) {
+				toast.error("Mohon lengkapi Nama Ibu");
+				return false;
+			}
+		}
+
+		return true;
+	};
+
+	const nextStep = (e?: React.MouseEvent) => {
+		if (e) e.preventDefault();
+		if (validateStep(currentStep)) {
+			if (currentStep < 4) setCurrentStep(currentStep + 1);
+		}
 	};
 
 	const prevStep = () => {
@@ -222,7 +269,7 @@ export function RegistrationForm({
 				ref={cardRef}
 				className="border-0 shadow-2xl shadow-primary/5 rounded-3xl overflow-hidden"
 			>
-				<CardHeader className="bg-linear-to-r from-primary/5 to-accent/50 border-b">
+				<CardHeader className="bg-linear-gradient-to-r from-primary/5 to-accent/50 border-b">
 					<CardTitle className="flex items-center gap-3 text-xl">
 						{(() => {
 							const StepIcon = steps[currentStep - 1].icon;
@@ -251,7 +298,6 @@ export function RegistrationForm({
 												onChange={(e) =>
 													setData("nama_lengkap", e.target.value)
 												}
-												className="mt-2 h-12 rounded-xl"
 												required
 											/>
 											{errors.nama_lengkap && (
@@ -917,6 +963,7 @@ export function RegistrationForm({
 
 							{currentStep < 4 ? (
 								<Button
+									key="next-step-btn"
 									type="button"
 									onClick={nextStep}
 									className="rounded-xl px-6"
@@ -926,6 +973,7 @@ export function RegistrationForm({
 								</Button>
 							) : (
 								<Button
+									key="submit-btn"
 									type="submit"
 									disabled={processing}
 									className="rounded-xl px-8 bg-primary hover:bg-primary/90"
