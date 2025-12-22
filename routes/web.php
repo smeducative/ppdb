@@ -23,11 +23,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
-Route::view('/formulir', 'formulir');
-Route::post('/formulir', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.mendaftar');
-Route::redirect('/daftar-peserta-diterima', '/alur-dan-persyaratan');
-Route::view('/alur-dan-persyaratan', 'peserta-diterima')->name('daftar.peserta.diterima');
+Route::get('/', function () {
+    return inertia('Landing');
+});
+Route::get('/register', function () {
+    return inertia('Pendaftaran', [
+        'jurusan' => \App\Models\Jurusan::all()->map(fn($j) => [
+            'value' => $j->id,
+            'label' => $j->nama
+        ])
+    ]);
+})->name('ppdb.register');
+
+Route::post('/register', [PendaftaranPPDB::class, 'mendaftar'])->name('ppdb.register.submit');
+
+Route::view('/formulir-old', 'formulir'); // Keeping old just in case
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     // setting profile
@@ -35,7 +45,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::put('setting/profile', [AdminController::class, 'setAkun'])->name('setting.profile');
 
     // ppdb setting
-    Route::view('/setting/ppdb', 'admin.pengaturan-ppdb')->name('ppdb.set.batas.akhir');
+    Route::get('/setting/ppdb', [PpdbSettingController::class, 'index'])->name('ppdb.set.batas.akhir');
     Route::put('/setting/ppdb', [PpdbSettingController::class, 'setBatasAkhir'])->name('ppdb.set.batas.akhir');
 
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');

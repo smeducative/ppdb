@@ -1,0 +1,20 @@
+{
+	"mcpServers": {
+		"shadcn": {
+			"command": "bunx",
+			"args": ["shadcn@latest", "mcp"]
+		},
+		"laravel-boost": {
+			"command": "wsl.exe",
+			"args": [
+				"/usr/bin/php8.4",
+				"/home/salju/Workspace/ppdb/artisan",
+				"boost:mcp"
+			]
+		},
+		"playwright": {
+			"command": "bunx",
+			"args": ["@playwright/mcp"]
+		}
+	}
+}

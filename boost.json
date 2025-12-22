@@ -1,0 +1,17 @@
+{
+    "agents": [
+        "claude_code",
+        "copilot",
+        "gemini",
+        "opencode"
+    ],
+    "editors": [
+        "claude_code",
+        "gemini",
+        "opencode",
+        "vscode"
+    ],
+    "guidelines": [
+        "laravel/fortify"
+    ]
+}

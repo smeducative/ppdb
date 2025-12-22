@@ -10,12 +10,22 @@ class UkuranSeragamController extends Controller
     public function showJurusanPeserta($jurusan = null)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
 
         $pesertappdb = PesertaPPDB::with(['jurusan', 'ukuranSeragam'])->where('diterima', 1)
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
-            ->whereYear('created_at', $tahun)->latest()->get();
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
+            ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('no_pendaftaran', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(request('per_page', 10))
+            ->withQueryString();
 
-        return view('ppdb.ukuran-seragam', compact('pesertappdb'));
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/UkuranSeragam/Index', compact('pesertappdb', 'tahun', 'years', 'jurusan'));
     }
 
     public function ubahUkuranSeragam()

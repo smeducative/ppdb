@@ -9,14 +9,32 @@ class KartuPendaftaranController extends Controller
     public function showJurusanPeserta($jurusan)
     {
         $tahun = request('tahun', now()->year);
+        $search = request('search');
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->whereJurusanId($jurusan)
             // ->whereDiterima(1)
             ->whereYear('created_at', $tahun)
-            ->latest()->get();
+            ->when($search, function ($query, $search) {
+                $query->where('nama_lengkap', 'like', "%{$search}%")
+                    ->orWhere('no_pendaftaran', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(request('per_page', 10))
+            ->withQueryString();
 
-        return view('pdf.kartu-ppdb', compact('pesertappdb', 'jurusan'));
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Document/Index', [
+            'pesertappdb' => $pesertappdb,
+            'tahun' => $tahun,
+            'years' => $years,
+            'jurusan' => $jurusan,
+            'title' => 'Kartu Pendaftaran Peserta PPDB',
+            'printSingleRoute' => 'ppdb.cetak.kartu',
+            'printAllRoute' => 'ppdb.cetak.kartu.semua',
+            'showSettings' => false,
+        ]);
     }
 
     public function cetakKartu($jurusan)

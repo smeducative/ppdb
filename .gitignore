@@ -2,7 +2,9 @@
 /public/hot
 /public/storage
 /public/ppdb
+/public/build
 /storage/*.key
+/storage/framework/laravel-excel
 /vendor
 .env
 .env.backup
