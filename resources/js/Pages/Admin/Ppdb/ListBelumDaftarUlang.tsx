@@ -1,4 +1,3 @@
-import { Head, Link, router } from "@inertiajs/react";
 import { type Column, DataTable } from "@/components/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Head, Link, router } from "@inertiajs/react";
 
 interface Jurusan {
 	id: number;
@@ -197,14 +197,9 @@ export default function ListBelumDaftarUlang({
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.belum.daftar.ulang.list")}
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
 					additionalParams={{ jurusan }}
 				/>
-			</div>
-		</>
-	);
-}
 			</div>
 		</>
 	);

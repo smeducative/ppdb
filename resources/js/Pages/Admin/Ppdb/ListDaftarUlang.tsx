@@ -175,7 +175,6 @@ export default function ListDaftarUlang({
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.daftar.ulang.list")}
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
 					additionalParams={{ jurusan }}
 				/>

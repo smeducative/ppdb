@@ -62,7 +62,10 @@ export function DataTable<T extends { id?: number | string }>({
 	additionalParams = {},
 	perPageOptions = [10, 20, 50, 100],
 }: DataTableProps<T>) {
-	const [search, setSearch] = useState("");
+	// Initialize search from URL if present
+	const [search, setSearch] = useState(
+		new URLSearchParams(window.location.search).get("search") || "",
+	);
 	const debouncedSearch = useDebounce(search, 500);
 
 	const initialPerPage =
@@ -72,9 +75,21 @@ export function DataTable<T extends { id?: number | string }>({
 	const [perPage, setPerPage] = useState(String(initialPerPage));
 
 	useEffect(() => {
-		if (searchEndpoint) {
+		const endpoint = searchEndpoint || window.location.pathname;
+		const params = new URLSearchParams(window.location.search);
+		const currentSearch = params.get("search") || "";
+		const currentPerPage = params.get("per_page") || "10";
+
+		// Only trigger navigation if search or perPage changed from URL values
+		// OR if searchEndpoint is explicitly provided and different from current path
+		const shouldNavigate =
+			debouncedSearch !== currentSearch ||
+			perPage !== currentPerPage ||
+			(searchEndpoint && searchEndpoint !== window.location.pathname);
+
+		if (shouldNavigate) {
 			router.get(
-				searchEndpoint,
+				endpoint,
 				{ search: debouncedSearch, per_page: perPage, ...additionalParams },
 				{
 					preserveState: true,

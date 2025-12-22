@@ -206,7 +206,6 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.seragam.show.jurusan")}
 					searchPlaceholder="Cari nama, no pend..."
 					additionalParams={{ jurusan }}
 				/>

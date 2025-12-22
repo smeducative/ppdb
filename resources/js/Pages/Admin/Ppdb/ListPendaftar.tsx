@@ -196,8 +196,8 @@ export default function ListPendaftar({
 					columns={columns}
 					data={pesertappdb.data}
 					pagination={{ links: pesertappdb.links }}
-					searchEndpoint={route("ppdb.list.pendaftar")}
 					searchPlaceholder="Cari nama, no pend, asal sekolah..."
+					additionalParams={{ jurusan }}
 				/>
 			</div>
 		</>

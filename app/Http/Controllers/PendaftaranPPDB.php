@@ -16,9 +16,11 @@ class PendaftaranPPDB extends Controller
         $pesertappdb = PesertaPPDB::whereYear('created_at', $tahun)
             ->with(['jurusan']) // Eager load relationships
             ->when($search, function ($query, $search) {
-                $query->where('nama_lengkap', 'like', "%{$search}%")
-                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
-                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
             })
             ->latest()
             ->paginate(request('per_page', 10))
@@ -38,9 +40,11 @@ class PendaftaranPPDB extends Controller
             ->with(['jurusan'])
             ->whereJurusanId($jurusan)
             ->when($search, function ($query, $search) {
-                $query->where('nama_lengkap', 'like', "%{$search}%")
-                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
-                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
             })
             ->latest()
             ->paginate(request('per_page', 10))
@@ -158,9 +162,11 @@ class PendaftaranPPDB extends Controller
             ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
-                $query->where('nama_lengkap', 'like', "%{$search}%")
-                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
-                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
             })
             ->latest()
             ->paginate(request('per_page', 10))
@@ -181,9 +187,11 @@ class PendaftaranPPDB extends Controller
             ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
-                $query->where('nama_lengkap', 'like', "%{$search}%")
-                    ->orWhere('no_pendaftaran', 'like', "%{$search}%")
-                    ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
             })
             ->latest()
             ->paginate(request('per_page', 10))
