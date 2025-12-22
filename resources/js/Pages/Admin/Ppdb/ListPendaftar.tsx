@@ -37,9 +37,15 @@ interface Props {
 	};
 	tahun: number;
 	years: number[];
+	jurusan?: string | number;
 }
 
-export default function ListPendaftar({ pesertappdb, tahun, years }: Props) {
+export default function ListPendaftar({
+	pesertappdb,
+	tahun,
+	years,
+	jurusan,
+}: Props) {
 	const columns: Column<Peserta>[] = [
 		{
 			header: "No. Pendaftaran",
@@ -153,7 +159,7 @@ export default function ListPendaftar({ pesertappdb, tahun, years }: Props) {
 						<Button asChild>
 							{/* Using Link with method post for export */}
 							<Link
-								href={`${route("export.peserta.ppdb")}?tahun=${tahun}&all=1&jurusan=${row.original.jurusan?.id || ""}`}
+								href={`${route("export.peserta.ppdb")}?tahun=${tahun}&all=1&jurusan=${jurusan || ""}`}
 								method="post"
 								as="button"
 							>
