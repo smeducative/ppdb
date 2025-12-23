@@ -231,6 +231,8 @@ class PendaftaranPPDB extends Controller
             'juara_tingkat' => $request->input('juara_tingkat') ?? '',
         ];
 
+        unset($data['peringkat'], $data['hafidz'], $data['jenis_lomba'], $data['juara_ke'], $data['juara_tingkat'], $data['no_ayah'], $data['no_ibu']);
+
         $ppdb = PesertaPPDB::create($data);
 
         session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
