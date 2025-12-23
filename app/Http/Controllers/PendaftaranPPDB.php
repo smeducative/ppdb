@@ -105,7 +105,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->has('kwitansi')
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -130,7 +130,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -175,7 +175,7 @@ class PendaftaranPPDB extends Controller
 
         // check apakah peserta memgubah jurusan
         if ($ppdb->jurusan_id != $jurusan->id) {
-            $data['no_pendaftaran'] = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
+            $data['no_pendaftaran'] = $jurusan->abbreviation.'-'.Str::padLeft($ppdb->no_urut, 3, 0).'-'.now()->format('m-y');
             $data['jurusan_id'] = $jurusan->id;
 
             session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
@@ -235,9 +235,9 @@ class PendaftaranPPDB extends Controller
 
         $ppdb = PesertaPPDB::create($data);
 
-        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
+        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran '.$ppdb->no_pendaftaran);
 
-        return back();
+        return redirect()->route('ppdb.register');
     }
 
     public function terimaPeserta(UpdatePesertaStatusRequest $request, $uuid)
