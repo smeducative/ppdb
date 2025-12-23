@@ -212,6 +212,7 @@ class PendaftaranPPDB extends Controller
         $data = $request->validated();
 
         $data['jurusan_id'] = $request->input('pilihan_jurusan');
+        unset($data['pilihan_jurusan']);
         $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
