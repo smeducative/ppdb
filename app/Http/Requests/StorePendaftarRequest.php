@@ -25,7 +25,7 @@ class StorePendaftarRequest extends FormRequest
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'tanggal_lahir' => 'required|date_format:Y-m-d',
             'nik' => 'required',
             'alamat_lengkap' => 'required',
             'dukuh' => 'nullable',
