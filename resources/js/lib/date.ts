@@ -6,8 +6,10 @@ import { id } from "date-fns/locale";
  * Contoh output: "22-Agustus-2025 22:00"
  * @param date - Tanggal dalam format string atau Date object
  */
-export function formatDateTime(date: string | Date): string {
+export function formatDateTime(date: string | Date | null | undefined): string {
+	if (!date) return "-";
 	const d = new Date(date);
+	if (isNaN(d.getTime())) return "-";
 	return format(d, "dd-MMMM-yyyy HH:mm", { locale: id });
 }
 
@@ -16,8 +18,10 @@ export function formatDateTime(date: string | Date): string {
  * Contoh output: "22-Agustus-2025"
  * @param date - Tanggal dalam format string atau Date object
  */
-export function formatDate(date: string | Date): string {
+export function formatDate(date: string | Date | null | undefined): string {
+	if (!date) return "-";
 	const d = new Date(date);
+	if (isNaN(d.getTime())) return "-";
 	return format(d, "dd-MMMM-yyyy", { locale: id });
 }
 
@@ -26,8 +30,12 @@ export function formatDate(date: string | Date): string {
  * Contoh output: "22-08-2025"
  * @param date - Tanggal dalam format string atau Date object
  */
-export function formatDateShort(date: string | Date): string {
+export function formatDateShort(
+	date: string | Date | null | undefined,
+): string {
+	if (!date) return "-";
 	const d = new Date(date);
+	if (isNaN(d.getTime())) return "-";
 	return format(d, "dd-MM-yyyy", { locale: id });
 }
 /**
@@ -35,7 +43,9 @@ export function formatDateShort(date: string | Date): string {
  * Contoh output: "Jumat, 22-Agustus-2025"
  * @param date - Tanggal dalam format string atau Date object
  */
-export function formatDateFull(date: string | Date): string {
+export function formatDateFull(date: string | Date | null | undefined): string {
+	if (!date) return "-";
 	const d = new Date(date);
+	if (isNaN(d.getTime())) return "-";
 	return format(d, "EEEE, dd-MMMM-yyyy", { locale: id });
 }
