@@ -13,6 +13,7 @@ import {
 	ArrowRight,
 	Film,
 	Leaf,
+	Laptop,
 	Settings,
 	UserCheck,
 	Users,
@@ -57,8 +58,8 @@ interface DashboardProps {
 	oldestYear: number;
 }
 
-const COLORS = ["#f56954", "#00c0ef", "#00a65a", "#f39c12", "#3c8dbc"];
-const JURUSAN_LABELS = ["TKJ", "AT", "BDP", "TSM", "TKR"];
+const COLORS = ["#f56954", "#00c0ef", "#00a65a", "#f39c12", "#3c8dbc", "#6f42c1"];
+const JURUSAN_LABELS = ["TKJ", "AT", "BDP", "TSM", "TKR", "ACP"];
 
 export default function Dashboard({
 	count,
@@ -99,6 +100,7 @@ export default function Dashboard({
 		{ name: "BDP", value: count.bdp },
 		{ name: "TSM", value: count.tsm },
 		{ name: "TKR", value: count.tkr },
+		{ name: "ACP", value: count.acp },
 	];
 
 	const pieDuData = [
@@ -107,6 +109,7 @@ export default function Dashboard({
 		{ name: "BDP", value: du.bdp },
 		{ name: "TSM", value: du.tsm },
 		{ name: "TKR", value: du.tkr },
+		{ name: "ACP", value: du.acp },
 	];
 
 	const genderData = JURUSAN_LABELS.map((label, index) => ({
@@ -244,7 +247,7 @@ export default function Dashboard({
 
 				{/* Info Pendaftar Section */}
 				<h3 className="font-medium text-lg">Info Pendaftar</h3>
-				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-5">
+				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6">
 					<StatsCardWithLink
 						title="AT"
 						value={count.atph}
@@ -280,11 +283,18 @@ export default function Dashboard({
 						className="bg-orange-500/10 border-orange-500/20"
 						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 4 })}
 					/>
+					<StatsCardWithLink
+						title="ACP"
+						value={count.acp}
+						icon={Laptop}
+						className="bg-purple-500/10 border-purple-500/20"
+						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 8 })}
+					/>
 				</div>
 
 				{/* Info Daftar Ulang Section */}
 				<h3 className="font-medium text-lg">Info Daftar Ulang</h3>
-				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-5">
+				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6">
 					<StatsCardWithLink
 						title="AT"
 						value={du.atph}
@@ -319,6 +329,13 @@ export default function Dashboard({
 						icon={Film}
 						className="bg-orange-500/10 border-orange-500/20"
 						href={route("ppdb.daftar.ulang.list", { jurusan: 4 })}
+					/>
+					<StatsCardWithLink
+						title="ACP"
+						value={du.acp}
+						icon={Laptop}
+						className="bg-purple-500/10 border-purple-500/20"
+						href={route("ppdb.daftar.ulang.list", { jurusan: 8 })}
 					/>
 				</div>
 

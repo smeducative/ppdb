@@ -54,6 +54,7 @@ const jurusanItems = [
 	{ id: 4, name: "BDP" },
 	{ id: 6, name: "TSM" },
 	{ id: 7, name: "TKR" },
+	{ id: 8, name: "ACP" },
 ];
 
 export function AppSidebar() {

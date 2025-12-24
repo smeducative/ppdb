@@ -183,6 +183,22 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="bg-purple small-box" style="background-color: #6f42c1;">
+                            <div class="inner">
+                                <h3>{{ $count['acp'] }}</h3>
+
+                                <p>ACP</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-laptop"></i>
+                            </div>
+                            <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 8]) }}"
+                                class="small-box-footer">More info <i class="fa-arrow-circle-right fas"></i></a>
+                        </div>
+                    </div>
+
                     <!-- ./col -->
                 </div>
                 <!-- /.row -->
@@ -268,6 +284,22 @@
                                 <i class="ion ion-film-marker"></i>
                             </div>
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 4]) }}"
+                                class="small-box-footer">More info <i class="fa-arrow-circle-right fas"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="bg-purple small-box" style="background-color: #6f42c1;">
+                            <div class="inner">
+                                <h3>{{ $du['acp'] }}</h3>
+
+                                <p>ACP</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-laptop"></i>
+                            </div>
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 8]) }}"
                                 class="small-box-footer">More info <i class="fa-arrow-circle-right fas"></i></a>
                         </div>
                     </div>
@@ -522,7 +554,7 @@
 
             // pendaftar
             var areaChartData = {
-                labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR'],
+                labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
                 datasets: [{
                         label: 'Laki-laki',
                         backgroundColor: 'rgba(60,141,188,0.9)',
@@ -575,7 +607,7 @@
 
             // daftar ulang
             var areaDuChartData = {
-                labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR'],
+                labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
                 datasets: [{
                         label: 'Laki-laki',
                         backgroundColor: 'rgba(60,141,188,0.9)',
@@ -747,10 +779,10 @@
             var pieChartElem = $('#pieChart').get(0);
             if (pieChartElem) {
                 var donutData = {
-                    labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR'],
+                    labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
                     datasets: [{
                         data: {!! collect($count)->except(['all', 'to'])->values() !!},
-                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc'],
+                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc', '#6f42c1'],
                     }]
                 }
 
@@ -771,10 +803,10 @@
             var pieDuChartElem = $('#pieDuChart').get(0);
             if (pieDuChartElem) {
                 var donutDuData = {
-                    labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR'],
+                    labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
                     datasets: [{
                         data: {!! collect($du)->except(['all', 'to'])->values() !!},
-                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc'],
+                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc', '#6f42c1'],
                     }]
                 }
 

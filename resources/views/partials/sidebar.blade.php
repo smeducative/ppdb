@@ -103,6 +103,13 @@
                                 <p>TKR</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list-pendaftar/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ACP</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li
@@ -165,6 +172,13 @@
                                 class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/7') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DU TKR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>DU ACP</p>
                             </a>
                         </li>
                     </ul>
@@ -231,6 +245,13 @@
                                 <p>BDU TKR</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>BDU ACP</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li
@@ -295,6 +316,13 @@
                                 <p>TKR</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ACP</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-header">CETAK DOKUMEN</li>
@@ -351,6 +379,13 @@
                                 class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/7') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kartu TKR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kartu ACP</p>
                             </a>
                         </li>
                     </ul>
@@ -410,6 +445,13 @@
                                 <p>Form TKR</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/formulir/show/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Form ACP</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li
@@ -465,6 +507,13 @@
                                 class="nav-link {{ request()->is('dashboard/surat/show/7') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Surat TKR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/surat/show/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Surat ACP</p>
                             </a>
                         </li>
                     </ul>
@@ -529,6 +578,13 @@
                                 class="nav-link {{ request()->is('dashboard/kwitansi/show/7') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kwitansi TKR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 8]) }}"
+                                class="nav-link {{ request()->is('dashboard/kwitansi/show/8') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kwitansi ACP</p>
                             </a>
                         </li>
                         <li class="nav-item">
