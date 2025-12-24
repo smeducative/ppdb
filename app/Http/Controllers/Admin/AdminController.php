@@ -7,6 +7,7 @@ use App\Http\Requests\DocumentFilterRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Jurusan;
 use App\Models\PesertaPPDB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -197,12 +198,19 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get();
 
-        return inertia('Admin/Dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount', 'daftarUlangPerSekolah', 'daftarUlangPerSekolahCount'));
+        // Get oldest year for the year filter dropdown
+        $oldestYear = Cache::remember('oldest_year', 60 * 24 * 28, function () {
+            $oldest = PesertaPPDB::oldest('created_at')->first();
+
+            return $oldest ? $oldest->created_at->year : date('Y');
+        });
+
+        return inertia('Admin/Dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount', 'daftarUlangPerSekolah', 'daftarUlangPerSekolahCount', 'oldestYear'));
     }
 
     public function pengaturanAkun()
     {
-        $user = auth()->user();
+        $user = request()->user();
 
         return inertia('Admin/Profile', compact('user'));
     }
@@ -211,7 +219,7 @@ class AdminController extends Controller
     {
         $request->validated();
 
-        auth()->user()->update([
+        request()->user()->update([
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
         ]);
