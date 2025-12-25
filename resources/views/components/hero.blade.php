@@ -10,7 +10,7 @@
                 Penerimaan Peserta Didik Baru
             </h1>
             <p class="text-lg mt-4 text-white max-w-xl">
-                Telah dibuka penerimaan peserta didik baru. Tahun Ajaran 2025/2026.
+                Telah dibuka penerimaan peserta didik baru. Tahun Ajaran 2026/2027.
             </p>
             <p class="text-xl font-bold underline">
                 SMK Diponegoro Karanganyar

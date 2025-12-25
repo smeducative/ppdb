@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
-@section('title', 'Penerimaan Peserta Didik Baru 2025/2026')
-@section('description', 'Telah dibuka penerimaan peserta didik baru. Tahun Ajaran 2025/2026')
+@section('title', 'Penerimaan Peserta Didik Baru 2026/2027')
+@section('description', 'Telah dibuka penerimaan peserta didik baru. Tahun Ajaran 2026/2027')
 
 @inject('jurusan', 'App\Models\Jurusan')
 

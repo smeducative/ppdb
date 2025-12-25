@@ -12,7 +12,7 @@ import { Head } from "@inertiajs/react";
 export default function Home() {
 	return (
 		<main className="min-h-screen">
-			<Head title="SPMB SMK Diponegoro Karanganyar | Pendaftaran Siswa Baru 2025/2026" />
+			<Head title="SPMB SMK Diponegoro Karanganyar | Pendaftaran Siswa Baru 2026/2027" />
 			<Navbar />
 			<HeroSection />
 			<RegistrationFlow />

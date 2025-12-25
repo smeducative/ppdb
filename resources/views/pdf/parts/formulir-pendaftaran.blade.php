@@ -222,7 +222,7 @@
         </div>
     </div>
 
-    <div class="col-4 text-center"> Panitia PPDB</div>
+    <div class="col-4 text-center"> Panitia SPMB</div>
     <div class="col-4 text-center float-right">
         <div
             style="border: 1px solid black;width:2.79cm;height:3.8cm; flex: content ;justify-content: end; align-items: center; float: right;">

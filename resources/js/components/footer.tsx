@@ -211,7 +211,7 @@ export function Footer() {
 							Cipta Dilindungi.
 						</p>
 						<p className="text-sm text-background/60">
-							SPMB Tahun Ajaran 2025/2026
+							SPMB Tahun Ajaran 2026/2027
 						</p>
 					</div>
 				</div>

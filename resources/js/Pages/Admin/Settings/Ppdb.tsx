@@ -57,14 +57,14 @@ export default function Ppdb({ setting }: Props) {
 
 	return (
 		<>
-			<Head title="Pengaturan PPDB" />
+			<Head title="Pengaturan SPMB" />
 
 			<div className="space-y-6 mx-auto max-w-7xl">
 				<AlertMessages flash={flash} />
 
 				<Card className="lg:min-w-3xl">
 					<CardHeader>
-						<CardTitle>Pengaturan PPDB</CardTitle>
+						<CardTitle>Pengaturan SPMB</CardTitle>
 						<CardDescription>
 							Atur batas akhir pendaftaran, nomor surat, dan tanggal pengumuman.
 						</CardDescription>
@@ -80,7 +80,7 @@ export default function Ppdb({ setting }: Props) {
 								</div>
 								<div>
 									<strong className="block font-medium text-sm">
-										Batas Akhir PPDB
+								Batas Akhir SPMB
 									</strong>
 									<span className="text-sm">
 										{data.batas_akhir_ppdb || "-"}
@@ -112,7 +112,7 @@ export default function Ppdb({ setting }: Props) {
 
 							<div className="space-y-2">
 								<Label htmlFor="batas_akhir_ppdb">
-									Batas Akhir PPDB (dd-mm-yyyy)
+									Batas Akhir SPMB (dd-mm-yyyy)
 								</Label>
 								<Input
 									id="batas_akhir_ppdb"

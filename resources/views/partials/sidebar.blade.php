@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
         <img src="/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="font-weight-light brand-text">PPDB | Admin</span>
+        <span class="font-weight-light brand-text">SPMB | Admin</span>
     </a>
 
     <!-- Sidebar -->
@@ -36,7 +36,7 @@
                         class="nav-link {{ request()->routeIs('ppdb.tambah.pendaftar') || request()->routeIs('ppdb.list.pendaftar') || request()->routeIs('ppdb.list.pendaftar.jurusan') || request()->routeIs('ppdb.show.peserta') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
-                            Pendaftaran PPDB
+                            Pendaftaran SPMB
                             <i class="right fa-angle-left fas"></i>
                         </p>
                     </a>
@@ -45,7 +45,7 @@
                             <a href="{{ route('ppdb.tambah.pendaftar') }}"
                                 class="nav-link {{ request()->routeIs('ppdb.tambah.pendaftar') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tambah Peserta PPDB</p>
+                                <p>Tambah Peserta SPMB</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -661,7 +661,7 @@
                         class="nav-link {{ request()->routeIs('ppdb.set.batas.akhir') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
-                            Pengaturan PPDB
+                            Pengaturan SPMB
                         </p>
                     </a>
                 </li>

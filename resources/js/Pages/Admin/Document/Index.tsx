@@ -179,7 +179,7 @@ export default function Index({
 								<div>{settings.no_surat}</div>
 							</div>
 							<div>
-								<div className="font-bold">Batas Akhir PPDB:</div>
+								<div className="font-bold">Batas Akhir SPMB:</div>
 								<div>
 									{settings.batas_akhir_ppdb
 										? formatDateFull(settings.batas_akhir_ppdb)

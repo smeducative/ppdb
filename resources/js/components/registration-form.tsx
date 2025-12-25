@@ -461,7 +461,7 @@ export function RegistrationForm({
 								<div className="flex items-start gap-3 text-left">
 									<CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 shrink-0" />
 									<p className="text-muted-foreground">
-										Tim PPDB akan menghubungi Anda melalui No. HP yang terdaftar
+										Tim SPMB akan menghubungi Anda melalui No. HP yang terdaftar
 									</p>
 								</div>
 							</div>
@@ -487,7 +487,7 @@ export function RegistrationForm({
 							Formulir Pendaftaran
 						</h1>
 						<p className="text-muted-foreground">
-							PPDB SMK Diponegoro Karanganyar Tahun Ajaran 2025/2026
+							SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar Tahun Ajaran 2026/2027
 						</p>
 					</div>
 

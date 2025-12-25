@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Formulir Pendaftaran Peserta PPDB')
+@section('title', 'Formulir Pendaftaran Peserta SPMB')
 
 @section('content')
 
@@ -16,7 +16,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Formulir Peserta PPDB</li>
+                            <li class="breadcrumb-item active">Formulir Peserta SPMB</li>
                         </ol>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Formulir Pendaftaran Peserta PPDB </h3>
+                                <h3 class="card-title">Formulir Pendaftaran Peserta SPMB </h3>
 
                                 <div class="card-tools">
 

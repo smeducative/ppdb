@@ -9,13 +9,13 @@
                 <ol>
                     <li class="mb-3 py-2 bg-red-100 border-l-4 rounded border-red-400 pl-3"> Calon Peserta Didik baru
                         dapat mendaftar secara
-                        mandiri melalui website PPDB Online Smedip dan mengisi formulir pendaftaran sesuai data diri
+                        mandiri melalui website SPMB, Sistem Penerimaan Murid Baru Online Smedip dan mengisi formulir pendaftaran sesuai data diri
                         peserta.</li>
                     <li class="mb-3 py-2 bg-red-100 border-l-4 rounded border-red-400 pl-3"> Calon Peserta Didik baru
                         dapat langsung datang ke
                         SMK Diponegoro Karanganyar dengan membawa berkas persyaratan yang dibutuhkan.</li>
                     <li class="mb-3 py-2 bg-red-100 border-l-4 rounded border-red-400 pl-3"> Setelah dinyatakan
-                        diterima, peserta PPDB membayar
+                        diterima, peserta SPMB membayar
                         biaya daftar ulang Sebesar Rp. 250.000,-</li>
                     <li class="mb-3 py-2 bg-red-100 border-l-4 rounded border-red-400 pl-3"> Berkas Pendaftaran dan
                         Biaya Daftar Ulang

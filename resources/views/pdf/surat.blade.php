@@ -2,7 +2,7 @@
 
 @inject('carbon', 'Carbon\Carbon')
 
-@section('title', 'Surat Diterima Peserta PPDB')
+@section('title', 'Surat Diterima Peserta SPMB')
 
 @section('content')
 
@@ -18,7 +18,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Surat Diterima Peserta PPDB</li>
+                            <li class="breadcrumb-item active">Surat Diterima Peserta SPMB</li>
                         </ol>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <strong> Batas Akhir PPDB: </strong> <br>
+                                    <strong> Batas Akhir SPMB: </strong> <br>
                                     <span>
                                         {{ $carbon->parse(optional((new App\Models\PpdbSetting())->latest()->first()->body)['batas_akhir_ppdb'])->translatedFormat('l, d F Y') }}
                                     </span>
@@ -78,7 +78,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Surat Diterima Peserta PPDB </h3>
+                                <h3 class="card-title">Surat Diterima Peserta SPMB </h3>
 
                                 <div class="card-tools">
 

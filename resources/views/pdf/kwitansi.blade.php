@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'List Peserta PPDB')
+@section('title', 'List Peserta SPMB')
 
 @section('content')
 
@@ -61,7 +61,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3>Peserta PPDB </h3>
+                                <h3>Peserta SPMB </h3>
                             </div>
                             <div class="card-body p-0 py-2 table-responsive text-nowrap">
                                 @if (!$pesertappdb->isEmpty())

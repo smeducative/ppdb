@@ -96,7 +96,7 @@ export default function Create({ jurusan }: Props) {
 
 	return (
 		<>
-			<Head title="Tambah Peserta PPDB" />
+			<Head title="Tambah Peserta SPMB" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
 				<AlertMessages flash={flash} />

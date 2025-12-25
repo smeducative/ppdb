@@ -2,7 +2,7 @@
 
 @inject('carbon', 'Carbon\Carbon')
 
-@section('title', 'Pengaturan PPDB')
+@section('title', 'Pengaturan SPMB')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Pengaturan PPDB</h1>
+                        <h1>Pengaturan SPMB</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Pengaturan PPDB
+                            <li class="breadcrumb-item active">Pengaturan SPMB
 
                             </li>
                         </ol>
@@ -46,7 +46,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Pengaturan PPDB
+                                    Pengaturan SPMB
                                 </h3>
                             </div>
                             <form action="{{ route('ppdb.set.batas.akhir') }}" method="post">
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <strong> Batas Akhir PPDB: </strong> <br>
+                                        <strong> Batas Akhir SPMB: </strong> <br>
                                         <span>
                                             {{ $carbon->parse(optional((new App\Models\PpdbSetting())->latest()->first()->body)['batas_akhir_ppdb'])->translatedFormat('l, d F Y') }}
                                         </span>

@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - PPDB SMK Diponegoro Karanganyar</title>
+    <title>@yield('title') - SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar</title>
     {{-- description --}}
     <meta name="description" content="@yield('description')">
     {{-- meta open graph --}}
-    <meta property="og:title" content="@yield('title') - PPDB SMK Diponegoro Karanganyar" />
+    <meta property="og:title" content="@yield('title') - SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar" />
     <meta property="og:description" content="@yield('description')" />
     <meta property="og:image" content="{{ url('/img/smedip2022-large.jpg') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="PPDB SMK Diponegoro Karanganyar" />
+    <meta property="og:site_name" content="SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar" />
     <meta property="og:locale" content="id_ID" />
     <link rel="shortcut icon" href="/img/logo.png" type="image/png">
 

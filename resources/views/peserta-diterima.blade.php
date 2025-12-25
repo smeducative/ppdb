@@ -12,7 +12,7 @@
 <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
   <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
     <div class="p-4 flex flex-row items-center justify-between">
-      <a href="/" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">PPDB Smedip</a>
+      <a href="/" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">SPMB Smedip</a>
       <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
         <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
           <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
@@ -42,13 +42,13 @@
         <div class="bg-white p-5 border-t-2 border-green-500 shadow-md rounded-md mt-3">
             <ul class="text-xs md:text-sm space-y-2">
                 <li>
-                    - Calon Peserta Didik baru dapat mendaftar secara mandiri melalui website <a href="//s.id/ppdbsmedip22" target="_blank" class="text-green-500">PPDB Online Smedip</a> dan mengisi formulir pendaftaran sesuai data diri peserta.
+                    - Calon Peserta Didik baru dapat mendaftar secara mandiri melalui website <a href="//s.id/ppdbsmedip22" target="_blank" class="text-green-500">SPMB, Sistem Penerimaan Murid Baru Online Smedip</a> dan mengisi formulir pendaftaran sesuai data diri peserta.
                 </li>
                 <li>
                     - Calon Peserta Didik baru dapat langsung datang ke <strong>SMK Diponegoro Karanganyar</strong> dengan membawa berkas persyaratan yang dibutuhkan.
                 </li>
                 <li>
-                    - Setelah dinyatakan diterima, peserta PPDB membayar biaya daftar ulang Sebesar Rp. 150.000,-
+                    - Setelah dinyatakan diterima, peserta SPMB membayar biaya daftar ulang Sebesar Rp. 150.000,-
                 </li>
                 <li>
                     - Berkas Pendaftaran dan Biaya Daftar Ulang diserahkan langsung ke <strong>SMK Diponegoro Karanganyar</strong>.
@@ -100,7 +100,7 @@
     </div>
     {{-- <div class="container items-center max-w-6xl px-4 mx-auto sm:px-20 md:px-32 lg:px-16">
 
-        <h2 class="text-xl font-bold">Hasil Seleksi PPDB</h2>
+        <h2 class="text-xl font-bold">Hasil Seleksi SPMB</h2>
         @if (now()->gt($carbon->parse($setting->latest()->first()?->body['hasil_seleksi'] ?? now()->addDays(1))))
 
 
