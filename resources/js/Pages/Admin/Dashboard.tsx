@@ -12,8 +12,8 @@ import { Head, Link, router } from "@inertiajs/react";
 import {
 	ArrowRight,
 	Film,
-	Leaf,
 	Laptop,
+	Leaf,
 	Settings,
 	UserCheck,
 	Users,
@@ -58,7 +58,14 @@ interface DashboardProps {
 	oldestYear: number;
 }
 
-const COLORS = ["#f56954", "#00c0ef", "#00a65a", "#f39c12", "#3c8dbc", "#6f42c1"];
+const COLORS = [
+	"#f56954",
+	"#00c0ef",
+	"#00a65a",
+	"#f39c12",
+	"#3c8dbc",
+	"#6f42c1",
+];
 const JURUSAN_LABELS = ["TKJ", "AT", "BDP", "TSM", "TKR", "ACP"];
 
 export default function Dashboard({
@@ -188,6 +195,15 @@ export default function Dashboard({
 		jumlah: item.as_count,
 	}));
 
+	const topSchoolsPendaftarCount = (pendaftarPerSekolahCount || []).slice(
+		0,
+		10,
+	);
+	const topSchoolsDaftarUlangCount = (daftarUlangPerSekolahCount || []).slice(
+		0,
+		10,
+	);
+
 	return (
 		<>
 			<Head title="Dashboard" />
@@ -198,10 +214,7 @@ export default function Dashboard({
 					<h1 className="font-bold text-2xl">Dashboard</h1>
 					<div className="flex items-center gap-2">
 						<Label htmlFor="year-filter">Data Tahun:</Label>
-						<Select
-							value={tahun.toString()}
-							onValueChange={handleYearChange}
-						>
+						<Select value={tahun.toString()} onValueChange={handleYearChange}>
 							<SelectTrigger className="w-[120px]" id="year-filter">
 								<SelectValue placeholder="Pilih Tahun" />
 							</SelectTrigger>
@@ -216,455 +229,449 @@ export default function Dashboard({
 					</div>
 				</div>
 
-				{/* Total Stats Cards */}
-				<h3 className="font-medium text-lg">Jumlah Total</h3>
-				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-4">
-					<StatsCard
-						title="Total Pendaftar"
-						value={count.all}
-						icon={Users}
-						className="bg-amber-500/10 border-amber-500/20"
-					/>
-					<StatsCard
-						title="Total Daftar Ulang"
-						value={du.all}
-						icon={UserCheck}
-						className="bg-amber-500/10 border-amber-500/20"
-					/>
-					<StatsCard
-						title="Total Peserta Diterima"
-						value={penerimaan.diterima}
-						icon={UserCheck}
-						className="bg-amber-500/10 border-amber-500/20"
-					/>
-					<StatsCard
-						title="Total Peserta Ditolak"
-						value={penerimaan.ditolak}
-						icon={UserX}
-						className="bg-amber-500/10 border-amber-500/20"
-					/>
-				</div>
+				{/* Ringkasan Utama */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">Ringkasan Utama</h3>
+					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-4">
+						<StatsCard
+							title="Total Pendaftar"
+							value={count.all}
+							icon={Users}
+							className="bg-amber-500/10 border-amber-500/20"
+						/>
+						<StatsCard
+							title="Total Daftar Ulang"
+							value={du.all}
+							icon={UserCheck}
+							className="bg-amber-500/10 border-amber-500/20"
+						/>
+						<StatsCard
+							title="Total Peserta Diterima"
+							value={penerimaan.diterima}
+							icon={UserCheck}
+							className="bg-amber-500/10 border-amber-500/20"
+						/>
+						<StatsCard
+							title="Total Peserta Ditolak"
+							value={penerimaan.ditolak}
+							icon={UserX}
+							className="bg-amber-500/10 border-amber-500/20"
+						/>
+					</div>
+				</section>
 
-				{/* Info Pendaftar Section */}
-				<h3 className="font-medium text-lg">Info Pendaftar</h3>
-				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6">
-					<StatsCardWithLink
-						title="AT"
-						value={count.atph}
-						icon={Leaf}
-						className="bg-green-500/10 border-green-500/20"
-						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 3 })}
-					/>
-					<StatsCardWithLink
-						title="TSM"
-						value={count.tsm}
-						icon={Settings}
-						className="bg-blue-500/10 border-blue-500/20"
-						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 6 })}
-					/>
-					<StatsCardWithLink
-						title="TKR"
-						value={count.tkr}
-						icon={Settings}
-						className="bg-blue-500/10 border-blue-500/20"
-						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 7 })}
-					/>
-					<StatsCardWithLink
-						title="TKJ"
-						value={count.tkj}
-						icon={Wifi}
-						className="bg-red-500/10 border-red-500/20"
-						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 1 })}
-					/>
-					<StatsCardWithLink
-						title="BDP"
-						value={count.bdp}
-						icon={Film}
-						className="bg-orange-500/10 border-orange-500/20"
-						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 4 })}
-					/>
-					<StatsCardWithLink
-						title="ACP"
-						value={count.acp}
-						icon={Laptop}
-						className="bg-purple-500/10 border-purple-500/20"
-						href={route("ppdb.list.pendaftar.jurusan", { jurusan: 8 })}
-					/>
-				</div>
+				{/* Statistik per Jurusan */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">
+						Statistik per Jurusan - Pendaftar
+					</h3>
+					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6 mb-6">
+						<StatsCardWithLink
+							title="AT"
+							value={count.atph}
+							icon={Leaf}
+							className="bg-green-500/10 border-green-500/20"
+							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 3 })}
+						/>
+						<StatsCardWithLink
+							title="TSM"
+							value={count.tsm}
+							icon={Settings}
+							className="bg-blue-500/10 border-blue-500/20"
+							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 6 })}
+						/>
+						<StatsCardWithLink
+							title="TKR"
+							value={count.tkr}
+							icon={Settings}
+							className="bg-blue-500/10 border-blue-500/20"
+							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 7 })}
+						/>
+						<StatsCardWithLink
+							title="TKJ"
+							value={count.tkj}
+							icon={Wifi}
+							className="bg-red-500/10 border-red-500/20"
+							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 1 })}
+						/>
+						<StatsCardWithLink
+							title="BDP"
+							value={count.bdp}
+							icon={Film}
+							className="bg-orange-500/10 border-orange-500/20"
+							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 4 })}
+						/>
+						<StatsCardWithLink
+							title="ACP"
+							value={count.acp}
+							icon={Laptop}
+							className="bg-purple-500/10 border-purple-500/20"
+							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 8 })}
+						/>
+					</div>
 
-				{/* Info Daftar Ulang Section */}
-				<h3 className="font-medium text-lg">Info Daftar Ulang</h3>
-				<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6">
-					<StatsCardWithLink
-						title="AT"
-						value={du.atph}
-						icon={Leaf}
-						className="bg-green-500/10 border-green-500/20"
-						href={route("ppdb.daftar.ulang.list", { jurusan: 3 })}
-					/>
-					<StatsCardWithLink
-						title="TSM"
-						value={du.tsm}
-						icon={Settings}
-						className="bg-blue-500/10 border-blue-500/20"
-						href={route("ppdb.daftar.ulang.list", { jurusan: 6 })}
-					/>
-					<StatsCardWithLink
-						title="TKR"
-						value={du.tkr}
-						icon={Settings}
-						className="bg-blue-500/10 border-blue-500/20"
-						href={route("ppdb.daftar.ulang.list", { jurusan: 7 })}
-					/>
-					<StatsCardWithLink
-						title="TKJ"
-						value={du.tkj}
-						icon={Wifi}
-						className="bg-red-500/10 border-red-500/20"
-						href={route("ppdb.daftar.ulang.list", { jurusan: 1 })}
-					/>
-					<StatsCardWithLink
-						title="BDP"
-						value={du.bdp}
-						icon={Film}
-						className="bg-orange-500/10 border-orange-500/20"
-						href={route("ppdb.daftar.ulang.list", { jurusan: 4 })}
-					/>
-					<StatsCardWithLink
-						title="ACP"
-						value={du.acp}
-						icon={Laptop}
-						className="bg-purple-500/10 border-purple-500/20"
-						href={route("ppdb.daftar.ulang.list", { jurusan: 8 })}
-					/>
-				</div>
+					<h3 className="mb-4 font-medium text-lg">
+						Statistik per Jurusan - Daftar Ulang
+					</h3>
+					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6">
+						<StatsCardWithLink
+							title="AT"
+							value={du.atph}
+							icon={Leaf}
+							className="bg-green-500/10 border-green-500/20"
+							href={route("ppdb.daftar.ulang.list", { jurusan: 3 })}
+						/>
+						<StatsCardWithLink
+							title="TSM"
+							value={du.tsm}
+							icon={Settings}
+							className="bg-blue-500/10 border-blue-500/20"
+							href={route("ppdb.daftar.ulang.list", { jurusan: 6 })}
+						/>
+						<StatsCardWithLink
+							title="TKR"
+							value={du.tkr}
+							icon={Settings}
+							className="bg-blue-500/10 border-blue-500/20"
+							href={route("ppdb.daftar.ulang.list", { jurusan: 7 })}
+						/>
+						<StatsCardWithLink
+							title="TKJ"
+							value={du.tkj}
+							icon={Wifi}
+							className="bg-red-500/10 border-red-500/20"
+							href={route("ppdb.daftar.ulang.list", { jurusan: 1 })}
+						/>
+						<StatsCardWithLink
+							title="BDP"
+							value={du.bdp}
+							icon={Film}
+							className="bg-orange-500/10 border-orange-500/20"
+							href={route("ppdb.daftar.ulang.list", { jurusan: 4 })}
+						/>
+						<StatsCardWithLink
+							title="ACP"
+							value={du.acp}
+							icon={Laptop}
+							className="bg-purple-500/10 border-purple-500/20"
+							href={route("ppdb.daftar.ulang.list", { jurusan: 8 })}
+						/>
+					</div>
+				</section>
 
-				{/* Charts Section */}
-				<h3 className="font-medium text-lg">Graphic Chart</h3>
+				{/* Analisis per Jurusan - Grafik */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">
+						Analisis per Jurusan - Grafik
+					</h3>
+					<div className="gap-4 grid md:grid-cols-2">
+						{/* Gender comparison - Pendaftar */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Perbandingan Jenis Kelamin Pendaftar</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<BarChart data={genderData}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="name" />
+										<YAxis />
+										<Tooltip />
+										<Legend />
+										<Bar dataKey="Perempuan" fill="#d2d6de" />
+										<Bar dataKey="Laki" fill="#3b8bba" />
+									</BarChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
 
-				<div className="gap-4 grid md:grid-cols-2">
-					{/* Gender comparison - Pendaftar */}
-					<Card>
-						<CardHeader>
-							<CardTitle>Perbandingan Jenis Kelamin Pendaftar</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ResponsiveContainer width="100%" height={300}>
-								<BarChart data={genderData}>
-									<CartesianGrid strokeDasharray="3 3" />
-									<XAxis dataKey="name" />
-									<YAxis />
-									<Tooltip />
-									<Legend />
-									<Bar dataKey="Perempuan" fill="#d2d6de" />
-									<Bar dataKey="Laki" fill="#3b8bba" />
-								</BarChart>
-							</ResponsiveContainer>
-						</CardContent>
-					</Card>
+						{/* Gender comparison - Daftar Ulang */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Perbandingan Jenis Kelamin Daftar Ulang</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<BarChart data={genderDuData}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="name" />
+										<YAxis />
+										<Tooltip />
+										<Legend />
+										<Bar dataKey="Perempuan" fill="#d2d6de" />
+										<Bar dataKey="Laki" fill="#3b8bba" />
+									</BarChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
 
-					{/* Gender comparison - Daftar Ulang */}
-					<Card>
-						<CardHeader>
-							<CardTitle>Perbandingan Jenis Kelamin Daftar Ulang</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ResponsiveContainer width="100%" height={300}>
-								<BarChart data={genderDuData}>
-									<CartesianGrid strokeDasharray="3 3" />
-									<XAxis dataKey="name" />
-									<YAxis />
-									<Tooltip />
-									<Legend />
-									<Bar dataKey="Perempuan" fill="#d2d6de" />
-									<Bar dataKey="Laki" fill="#3b8bba" />
-								</BarChart>
-							</ResponsiveContainer>
-						</CardContent>
-					</Card>
+						{/* Pie Chart - Pendaftar per Jurusan */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Perbandingan Pendaftar Tiap Jurusan</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<PieChart>
+										<Pie
+											data={pieData}
+											cx="50%"
+											cy="50%"
+											labelLine={false}
+											label={({ name, percent }) =>
+												`${name} ${(percent * 100).toFixed(0)}%`
+											}
+											outerRadius={80}
+											fill="#8884d8"
+											dataKey="value"
+										>
+											{pieData.map((entry, index) => (
+												<Cell
+													key={`cell-${entry.name}`}
+													fill={COLORS[index % COLORS.length]}
+												/>
+											))}
+										</Pie>
+										<Tooltip />
+									</PieChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
 
-					{/* Pie Chart - Pendaftar per Jurusan */}
-					<Card>
-						<CardHeader>
-							<CardTitle>Perbandingan Pendaftar Tiap Jurusan</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ResponsiveContainer width="100%" height={300}>
-								<PieChart>
-									<Pie
-										data={pieData}
-										cx="50%"
-										cy="50%"
-										labelLine={false}
-										label={({ name, percent }) =>
-											`${name} ${(percent * 100).toFixed(0)}%`
-										}
-										outerRadius={80}
-										fill="#8884d8"
-										dataKey="value"
-									>
-										{pieData.map((entry, index) => (
-											<Cell
-												key={`cell-${entry.name}`}
-												fill={COLORS[index % COLORS.length]}
-											/>
-										))}
-									</Pie>
-									<Tooltip />
-								</PieChart>
-							</ResponsiveContainer>
-						</CardContent>
-					</Card>
+						{/* Pie Chart - Daftar Ulang per Jurusan */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Perbandingan Daftar Ulang Tiap Jurusan</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<PieChart>
+										<Pie
+											data={pieDuData}
+											cx="50%"
+											cy="50%"
+											labelLine={false}
+											label={({ name, percent }) =>
+												`${name} ${(percent * 100).toFixed(0)}%`
+											}
+											outerRadius={80}
+											fill="#8884d8"
+											dataKey="value"
+										>
+											{pieDuData.map((entry, index) => (
+												<Cell
+													key={`cell-du-${entry.name}`}
+													fill={COLORS[index % COLORS.length]}
+												/>
+											))}
+										</Pie>
+										<Tooltip />
+									</PieChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
+					</div>
+				</section>
 
-					{/* Pie Chart - Daftar Ulang per Jurusan */}
-					<Card>
-						<CardHeader>
-							<CardTitle>Perbandingan Daftar Ulang Tiap Jurusan</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ResponsiveContainer width="100%" height={300}>
-								<PieChart>
-									<Pie
-										data={pieDuData}
-										cx="50%"
-										cy="50%"
-										labelLine={false}
-										label={({ name, percent }) =>
-											`${name} ${(percent * 100).toFixed(0)}%`
-										}
-										outerRadius={80}
-										fill="#8884d8"
-										dataKey="value"
-									>
-										{pieDuData.map((entry, index) => (
-											<Cell
-												key={`cell-du-${entry.name}`}
-												fill={COLORS[index % COLORS.length]}
-											/>
-										))}
-									</Pie>
-									<Tooltip />
-								</PieChart>
-							</ResponsiveContainer>
-						</CardContent>
-					</Card>
-				</div>
+				{/* Analisis Tren Waktu */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">Analisis Tren Waktu</h3>
+					<div className="gap-4 grid md:grid-cols-2">
+						{/* Year Comparison - Pendaftar */}
+						<Card>
+							<CardHeader>
+								<CardTitle>
+									Perbandingan Pendaftar Perbulan dengan Tahun Sebelumnya
+								</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<BarChart data={yearDiffData}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="name" />
+										<YAxis />
+										<Tooltip />
+										<Legend />
+										<Bar
+											dataKey={tahun.toString()}
+											fill="rgba(54, 162, 235, 0.7)"
+											name={`Tahun ${tahun}`}
+										/>
+										<Bar
+											dataKey={lastYear}
+											fill="rgba(255, 99, 132, 0.7)"
+											name={`Tahun ${lastYear}`}
+										/>
+									</BarChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
 
-				{/* Year Comparison - Pendaftar */}
-				<Card>
-					<CardHeader>
-						<CardTitle>
-							Perbandingan Pendaftar Perbulan dengan Tahun Sebelumnya
-						</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ResponsiveContainer width="100%" height={300}>
-							<BarChart data={yearDiffData}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="name" />
-								<YAxis />
-								<Tooltip />
-								<Legend />
-								<Bar
-									dataKey={tahun.toString()}
-									fill="rgba(54, 162, 235, 0.7)"
-									name={`Tahun ${tahun}`}
-								/>
-								<Bar
-									dataKey={lastYear}
-									fill="rgba(255, 99, 132, 0.7)"
-									name={`Tahun ${lastYear}`}
-								/>
-							</BarChart>
-						</ResponsiveContainer>
-					</CardContent>
-				</Card>
+						{/* Year Comparison - Daftar Ulang */}
+						<Card>
+							<CardHeader>
+								<CardTitle>
+									Perbandingan Daftar Ulang Perbulan dengan Tahun Sebelumnya
+								</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<BarChart data={yearDiffDuData}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="name" />
+										<YAxis />
+										<Tooltip />
+										<Legend />
+										<Bar
+											dataKey={tahun.toString()}
+											fill="rgba(54, 162, 235, 0.7)"
+											name={`Tahun ${tahun}`}
+										/>
+										<Bar
+											dataKey={lastYear}
+											fill="rgba(255, 99, 132, 0.7)"
+											name={`Tahun ${lastYear}`}
+										/>
+									</BarChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
+					</div>
+				</section>
 
-				{/* Year Comparison - Daftar Ulang */}
-				<Card>
-					<CardHeader>
-						<CardTitle>
-							Perbandingan Daftar Ulang Perbulan dengan Tahun Sebelumnya
-						</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ResponsiveContainer width="100%" height={300}>
-							<BarChart data={yearDiffDuData}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="name" />
-								<YAxis />
-								<Tooltip />
-								<Legend />
-								<Bar
-									dataKey={tahun.toString()}
-									fill="rgba(54, 162, 235, 0.7)"
-									name={`Tahun ${tahun}`}
-								/>
-								<Bar
-									dataKey={lastYear}
-									fill="rgba(255, 99, 132, 0.7)"
-									name={`Tahun ${lastYear}`}
-								/>
-							</BarChart>
-						</ResponsiveContainer>
-					</CardContent>
-				</Card>
+				{/* Analisis Sekolah */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">Analisis Sekolah</h3>
+					<div className="gap-4 grid md:grid-cols-2">
+						{/* Top 10 Schools - Pendaftar Bar Chart */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Top 10 Sekolah Pendaftar</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<BarChart data={topSchoolsData} layout="vertical">
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis type="number" />
+										<YAxis
+											dataKey="name"
+											type="category"
+											width={150}
+											tick={{ fontSize: 12 }}
+										/>
+										<Tooltip />
+										<Bar dataKey="jumlah" fill="rgba(255, 159, 64, 0.9)" />
+									</BarChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
 
-				{/* Top 10 Schools - Pendaftar Bar Chart */}
-				<Card>
-					<CardHeader>
-						<CardTitle>Top 10 Sekolah Pendaftar</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ResponsiveContainer width="100%" height={300}>
-							<BarChart data={topSchoolsData} layout="vertical">
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis type="number" />
-								<YAxis
-									dataKey="name"
-									type="category"
-									width={150}
-									tick={{ fontSize: 12 }}
-								/>
-								<Tooltip />
-								<Bar dataKey="jumlah" fill="rgba(255, 159, 64, 0.9)" />
-							</BarChart>
-						</ResponsiveContainer>
-					</CardContent>
-				</Card>
+						{/* Top 10 Schools - Daftar Ulang Bar Chart */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Top 10 Sekolah Daftar Ulang</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ResponsiveContainer width="100%" height={300}>
+									<BarChart data={topSchoolsDuData} layout="vertical">
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis type="number" />
+										<YAxis
+											dataKey="name"
+											type="category"
+											width={150}
+											tick={{ fontSize: 12 }}
+										/>
+										<Tooltip />
+										<Bar dataKey="jumlah" fill="rgba(255, 159, 64, 0.9)" />
+									</BarChart>
+								</ResponsiveContainer>
+							</CardContent>
+						</Card>
+						{/* Pendaftar Per Sekolah Table */}
+						<Card>
+							<CardHeader className="flex flex-row justify-between items-center">
+								<CardTitle>Top 10 Jumlah Pendaftar Per Sekolah</CardTitle>
+								<Button asChild variant="outline" size="sm">
+									<a href={route("export.rekap-sekolah", { tahun })}>
+										Export .xlsx
+									</a>
+								</Button>
+							</CardHeader>
+							<CardContent>
+								{topSchoolsPendaftarCount &&
+								topSchoolsPendaftarCount.length > 0 ? (
+									<div className="border rounded-md overflow-x-auto">
+										<table className="w-full text-sm text-left">
+											<thead className="bg-muted text-muted-foreground text-xs uppercase">
+												<tr>
+													<th className="px-6 py-3">Nama Sekolah</th>
+													<th className="px-6 py-3 text-right">Jumlah</th>
+												</tr>
+											</thead>
+											<tbody className="divide-y divide-border">
+												{topSchoolsPendaftarCount.map((sekolah) => (
+													<tr
+														key={sekolah.asal_sekolah}
+														className="bg-card hover:bg-muted/50 transition-colors"
+													>
+														<td className="px-6 py-4 font-medium text-foreground">
+															{sekolah.asal_sekolah}
+														</td>
+														<td className="px-6 py-4 font-semibold text-right">
+															{sekolah.as_count}
+														</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+								) : (
+									<p className="text-muted-foreground">Belum ada peserta</p>
+								)}
+							</CardContent>
+						</Card>
 
-				{/* Gender Distribution Over Time - Stacked Bar Chart */}
-				<Card>
-					<CardHeader>
-						<CardTitle>Distribusi Jenis Kelamin Pendaftar per Bulan</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ResponsiveContainer width="100%" height={300}>
-							<BarChart data={genderOverTimeData}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="name" />
-								<YAxis />
-								<Tooltip />
-								<Legend />
-								<Bar
-									dataKey="Laki"
-									stackId="gender"
-									fill="rgba(54, 162, 235, 0.9)"
-								/>
-								<Bar
-									dataKey="Perempuan"
-									stackId="gender"
-									fill="rgba(255, 99, 132, 0.9)"
-								/>
-							</BarChart>
-						</ResponsiveContainer>
-					</CardContent>
-				</Card>
-
-				{/* Pendaftar Per Sekolah Table */}
-				<Card>
-					<CardHeader className="flex flex-row justify-between items-center">
-						<CardTitle>Jumlah Pendaftar Per Sekolah</CardTitle>
-						<Button asChild variant="outline" size="sm">
-							<a href={route("export.rekap-sekolah", { tahun })}>
-								Export .xlsx
-							</a>
-						</Button>
-					</CardHeader>
-					<CardContent>
-						{pendaftarPerSekolahCount && pendaftarPerSekolahCount.length > 0 ? (
-							<div className="border rounded-md overflow-x-auto">
-								<table className="w-full text-sm text-left">
-									<thead className="bg-muted text-muted-foreground text-xs uppercase">
-										<tr>
-											<th className="px-6 py-3">Nama Sekolah</th>
-											<th className="px-6 py-3 text-right">Jumlah</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-border">
-										{pendaftarPerSekolahCount.map((sekolah) => (
-											<tr
-												key={sekolah.asal_sekolah}
-												className="bg-card hover:bg-muted/50 transition-colors"
-											>
-												<td className="px-6 py-4 font-medium text-foreground">
-													{sekolah.asal_sekolah}
-												</td>
-												<td className="px-6 py-4 font-semibold text-right">
-													{sekolah.as_count}
-												</td>
-											</tr>
-										))}
-									</tbody>
-								</table>
-							</div>
-						) : (
-							<p className="text-muted-foreground">Belum ada peserta</p>
-						)}
-					</CardContent>
-				</Card>
-
-				{/* Top 10 Schools - Daftar Ulang Bar Chart */}
-				<Card>
-					<CardHeader>
-						<CardTitle>Top 10 Sekolah Daftar Ulang</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<ResponsiveContainer width="100%" height={300}>
-							<BarChart data={topSchoolsDuData} layout="vertical">
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis type="number" />
-								<YAxis
-									dataKey="name"
-									type="category"
-									width={150}
-									tick={{ fontSize: 12 }}
-								/>
-								<Tooltip />
-								<Bar dataKey="jumlah" fill="rgba(255, 159, 64, 0.9)" />
-							</BarChart>
-						</ResponsiveContainer>
-					</CardContent>
-				</Card>
-
-				{/* Daftar Ulang Per Sekolah Table */}
-				<Card>
-					<CardHeader>
-						<CardTitle>Jumlah Daftar Ulang Per Sekolah</CardTitle>
-					</CardHeader>
-					<CardContent>
-						{daftarUlangPerSekolahCount &&
-						daftarUlangPerSekolahCount.length > 0 ? (
-							<div className="border rounded-md overflow-x-auto">
-								<table className="w-full text-sm text-left">
-									<thead className="bg-muted text-muted-foreground text-xs uppercase">
-										<tr>
-											<th className="px-6 py-3">Nama Sekolah</th>
-											<th className="px-6 py-3 text-right">Jumlah</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y divide-border">
-										{daftarUlangPerSekolahCount.map((sekolah) => (
-											<tr
-												key={sekolah.asal_sekolah}
-												className="bg-card hover:bg-muted/50 transition-colors"
-											>
-												<td className="px-6 py-4 font-medium text-foreground">
-													{sekolah.asal_sekolah}
-												</td>
-												<td className="px-6 py-4 font-semibold text-right">
-													{sekolah.as_count}
-												</td>
-											</tr>
-										))}
-									</tbody>
-								</table>
-							</div>
-						) : (
-							<p className="text-muted-foreground">Belum ada peserta</p>
-						)}
-					</CardContent>
-				</Card>
+						{/* Daftar Ulang Per Sekolah Table */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Top 10 Jumlah Daftar Ulang Per Sekolah</CardTitle>
+							</CardHeader>
+							<CardContent>
+								{topSchoolsDaftarUlangCount &&
+								topSchoolsDaftarUlangCount.length > 0 ? (
+									<div className="border rounded-md overflow-x-auto">
+										<table className="w-full text-sm text-left">
+											<thead className="bg-muted text-muted-foreground text-xs uppercase">
+												<tr>
+													<th className="px-6 py-3">Nama Sekolah</th>
+													<th className="px-6 py-3 text-right">Jumlah</th>
+												</tr>
+											</thead>
+											<tbody className="divide-y divide-border">
+												{topSchoolsDaftarUlangCount.map((sekolah) => (
+													<tr
+														key={sekolah.asal_sekolah}
+														className="bg-card hover:bg-muted/50 transition-colors"
+													>
+														<td className="px-6 py-4 font-medium text-foreground">
+															{sekolah.asal_sekolah}
+														</td>
+														<td className="px-6 py-4 font-semibold text-right">
+															{sekolah.as_count}
+														</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+								) : (
+									<p className="text-muted-foreground">Belum ada peserta</p>
+								)}
+							</CardContent>
+						</Card>
+					</div>
+				</section>
 			</div>
 		</>
 	);
