@@ -170,7 +170,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 
 	return (
 		<>
-			<Head title="Edit Peserta PPDB" />
+			<Head title="Edit Peserta SPMB" />
 
 			<div className="max-w-4xl mx-auto space-y-6">
 				<AlertMessages flash={flash} />
@@ -228,7 +228,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 								<AlertDialogHeader>
 									<AlertDialogTitle>Hapus Peserta?</AlertDialogTitle>
 									<AlertDialogDescription>
-										Peserta akan dihapus dari pendaftar PPDB. Tindakan ini tidak
+										Peserta akan dihapus dari pendaftar SPMB. Tindakan ini tidak
 										dapat dibatalkan.
 									</AlertDialogDescription>
 								</AlertDialogHeader>

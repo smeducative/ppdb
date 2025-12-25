@@ -37,10 +37,10 @@ export default function Profile({ user }: Props) {
 		<>
 			<Head title="Pengaturan Akun" />
 
-			<div className="max-w-2xl mx-auto space-y-6">
+			<div className="space-y-6 mx-auto max-w-7xl">
 				<AlertMessages flash={flash} />
 
-				<Card>
+				<Card className="lg:min-w-3xl">
 					<CardHeader>
 						<CardTitle>Profile Information</CardTitle>
 						<CardDescription>

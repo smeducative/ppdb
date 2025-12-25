@@ -21,7 +21,7 @@
 
 <!-- heading -->
 <div class="text-center">
-    <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN PPDB TA
+    <strong style="font-weight: 900; font-size: 20px;">KARTU PENDAFTARAN SPMB TA
         {{ $peserta->created_at->format('Y') . '/' . $peserta->created_at->addYear()->format('Y') }}</strong>
 </div>
 

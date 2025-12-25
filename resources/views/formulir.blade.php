@@ -14,7 +14,7 @@
             class="mx-auto flex max-w-screen-xl flex-col px-4 md:flex-row md:items-center md:justify-between md:px-6 lg:px-8">
             <div class="flex flex-row items-center justify-between p-4">
                 <a href="/"
-                    class="dark-mode:text-white focus:shadow-outline rounded-lg text-lg font-semibold uppercase tracking-widest text-gray-900 focus:outline-none">PPDB
+                    class="dark-mode:text-white focus:shadow-outline rounded-lg text-lg font-semibold uppercase tracking-widest text-gray-900 focus:outline-none">SPMB, Sistem Penerimaan Murid Baru
                     Smedip</a>
                 <button class="focus:shadow-outline rounded-lg focus:outline-none md:hidden" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="h-6 w-6">
@@ -52,7 +52,7 @@
             </div>
         @endif
 
-        <h2 class="text-2xl font-bold">Formulir PPDB</h2>
+        <h2 class="text-2xl font-bold">Formulir SPMB</h2>
         <p class="text-base">Isi formulir di bawah sesuai dengan data dirimu</p>
     </section>
 

@@ -21,7 +21,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand brand" href="#"><img class="logo" src="img/logo.png" />PPDB ONLINE</a>
+        <a class="navbar-brand brand" href="#"><img class="logo" src="img/logo.png" />SPMB ONLINE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,7 +44,7 @@
     <section id="banner" class="d-flex align-items-center" style="background-image: url(/img/img.jpg);">
         <div class="container position-relative">
             <img class="logo-banner" src="/img/logo.png" />
-            <h1>PPDB ONLINE</h1>
+            <h1>SPMB ONLINE</h1>
             <h1>Smk Diponegoro Karanganyar</h1>
             <a href="Daftar.html" role="button" class="btn btn-primary btn-sm button">Daftar Gratis</a>
         </div>

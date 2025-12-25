@@ -28,6 +28,10 @@ class JurusanSeeder extends Seeder
                 'id' => 3,
                 'nama' => 'Agribisnis Tanaman Pangan dan Holtikultura',
                 'abbreviation' => 'ATPH',
+            ], [
+                'id' => 8,
+                'nama' => 'Axioo Class Program',
+                'abbreviation' => 'ACP',
             ],
         ];
 

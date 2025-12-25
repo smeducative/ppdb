@@ -47,7 +47,7 @@
 
                 <div class="col-md-12">
                     <h2>
-                        Dana Kelola PPDB
+                        Dana Kelola SPMB
                     </h2>
                 </div>
 

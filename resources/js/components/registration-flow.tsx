@@ -10,7 +10,7 @@ const steps = [
 		icon: ClipboardList,
 		title: "Daftar Online / Offline",
 		description:
-			"Calon Peserta Didik baru dapat mendaftar secara mandiri melalui website PPDB Online atau datang langsung ke SMK Diponegoro Karanganyar.",
+			"Calon Peserta Didik baru dapat mendaftar secara mandiri melalui website SPMB Online atau datang langsung ke SMK Diponegoro Karanganyar.",
 	},
 	{
 		icon: FileText,
@@ -22,7 +22,7 @@ const steps = [
 		icon: CreditCard,
 		title: "Daftar Ulang",
 		description:
-			"Setelah dinyatakan diterima, peserta PPDB membayar biaya daftar ulang sebesar Rp. 250.000,-",
+			"Setelah dinyatakan diterima, peserta SPMB membayar biaya daftar ulang sebesar Rp. 250.000,-",
 	},
 	{
 		icon: Building,

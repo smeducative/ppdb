@@ -2,7 +2,7 @@
 
 @inject('jurusan', 'App\Models\Jurusan')
 
-@section('title', 'Tambah Peserta PPDB')
+@section('title', 'Tambah Peserta SPMB')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->

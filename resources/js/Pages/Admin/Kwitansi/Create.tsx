@@ -69,7 +69,7 @@ export default function Create({ peserta }: Props) {
 
 	const submit = (e: React.FormEvent) => {
 		e.preventDefault();
-		post(route("ppdb.kwitansi.store", { uuid: peserta.id }), {
+		post(route("ppdb.kwitansi.tambah", { uuid: peserta.id }), {
 			onSuccess: () => reset(),
 		});
 	};
@@ -94,16 +94,16 @@ export default function Create({ peserta }: Props) {
 		<>
 			<Head title="Tambah Kwitansi" />
 
-			<div className="max-w-4xl mx-auto space-y-6">
+			<div className="space-y-6 mx-auto max-w-7xl">
 				<AlertMessages flash={flash} />
 
-				<Card>
+				<Card className="lg:min-w-3xl">
 					<CardHeader>
 						<CardTitle>Kwitansi Peserta</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<form onSubmit={submit} className="space-y-4">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div className="gap-4 grid grid-cols-1 md:grid-cols-2">
 								<div className="space-y-2">
 									<Label>No. Pendaftaran</Label>
 									<div className="font-bold text-lg">
@@ -118,7 +118,7 @@ export default function Create({ peserta }: Props) {
 
 							<Separator />
 
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div className="gap-4 grid grid-cols-1 md:grid-cols-2">
 								<div className="space-y-2">
 									<Label htmlFor="jenis_pembayaran">Jenis Pembayaran</Label>
 									<Input
@@ -147,7 +147,7 @@ export default function Create({ peserta }: Props) {
 										placeholder="Contoh: 150000"
 										required
 									/>
-									<p className="text-xs text-muted-foreground">
+									<p className="text-muted-foreground text-xs">
 										*Tanpa titik maupun koma
 									</p>
 									{errors.nominal && (
@@ -165,13 +165,13 @@ export default function Create({ peserta }: Props) {
 					</CardContent>
 				</Card>
 
-				<Card>
-					<CardHeader className="flex flex-row items-center justify-between">
+				<Card className="lg:min-w-3xl">
+					<CardHeader className="flex flex-row justify-between items-center">
 						<CardTitle>Riwayat Pembayaran</CardTitle>
 						<div className="flex gap-2">
 							<Button
 								variant="outline"
-								className="cursor-default hover:bg-background"
+								className="hover:bg-background cursor-default"
 							>
 								Total: {formatCurrency(totalTerbayar)}
 							</Button>
@@ -284,7 +284,7 @@ export default function Create({ peserta }: Props) {
 								</TableBody>
 							</Table>
 						) : (
-							<div className="text-center py-4 text-muted-foreground">
+							<div className="py-4 text-muted-foreground text-center">
 								Belum ada kwitansi.
 							</div>
 						)}

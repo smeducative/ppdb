@@ -6,23 +6,36 @@
 The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to enhance the user's satisfaction building Laravel applications.
 
 ## Foundational Context
-This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
+This application is a Laravel PPDB (Penerimaan Peserta Didik Baru - New Student Admission) system and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.4.15
+- php - 8.4
 - inertiajs/inertia-laravel (INERTIA) - v2
 - laravel/fortify (FORTIFY) - v1
 - laravel/framework (LARAVEL) - v12
 - laravel/mcp (MCP) - v0
-- laravel/prompts (PROMPTS) - v0
 - laravel/pint (PINT) - v1
-- laravel/sail (SAIL) - v1
 - laravel/telescope (TELESCOPE) - v5
 - phpunit/phpunit (PHPUNIT) - v11
+- maatwebsite/excel - v3.1 (Excel exports)
+- barryvdh/laravel-dompdf - v3.0 (PDF generation)
+
+## Project Overview
+This is a PPDB (New Student Admission) management system for schools. Key features include:
+- Student registration and management (PesertaPPDB)
+- Receipt/invoice management (Kwitansi)
+- Major/department management (Jurusan)
+- Scholarship management (Beasiswa)
+- Student uniform size tracking (UkuranSeragam)
+- PDF certificate generation
+- Excel data export functionality
+- Registration card printing
+- Form printing
 
 ## Conventions
-- You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, naming.
+- You must follow all existing code conventions used in this application. When creating or editing files, check sibling files for the correct structure, approach, naming.
 - Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
 - Check for existing components to reuse before writing a new one.
+- Model UUIDs: Use string UUIDs for primary keys (see PesertaPPDB model)
 
 ## Verification Scripts
 - Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
@@ -31,8 +44,12 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Stick to existing directory structure - don't create new base folders without approval.
 - Do not change the application's dependencies without approval.
 
-## Frontend Bundling
-- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `pnpm run build`, `pnpm run dev`, or `composer run dev`. Ask them.
+## Frontend Bundling with Bun
+- This project uses **Bun** as the JavaScript package manager, NOT npm or pnpm
+- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `bun run build`, `bun run dev`, or `composer run dev`. Ask them.
+- Install dependencies: `bun install`
+- Development server: `bun run dev`
+- Production build: `bun run build`
 
 ## Replies
 - Be concise in your explanations - focus on what's important rather than explaining obvious details.
@@ -165,6 +182,7 @@ Route::get('/users', function () {
 
 ### Model Creation
 - When creating new models, create useful factories and seeders for them too. Ask the user if they need any other things, using `list-artisan-commands` to check the available options to `php artisan make:model`.
+- For PPDB models, consider using UUIDs as primary keys (see PesertaPPDB model for reference)
 
 ### APIs & Eloquent Resources
 - For APIs, default to using Eloquent API Resources and API versioning unless existing API routes do not, then you should follow existing application convention.
@@ -191,7 +209,7 @@ Route::get('/users', function () {
 - When creating tests, make use of `php artisan make:test [options] {name}` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
 
 ### Vite Error
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `pnpm run build` or ask the user to run `pnpm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `bun run build` or ask the user to run `bun run dev` or `composer run dev`.
 
 
 === laravel/v12 rules ===
@@ -282,4 +300,102 @@ Fortify is a headless authentication backend that provides authentication routes
 - `Features::updateProfileInformation()` to let users update their profile.
 - `Features::updatePasswords()` to let users change their passwords.
 - `Features::resetPasswords()` for password reset via email.
+
+
+=== react/typescript rules ===
+
+## React with TypeScript
+
+- This project uses React 19 with TypeScript for frontend development
+- Components are located in `resources/js/` directory
+- Use Vite as the bundler with the `@vitejs/plugin-react` plugin
+- Path alias `@` is configured to point to `resources/js`
+
+### Component Structure
+- Follow existing component patterns in the codebase
+- Use Radix UI components for UI primitives
+- Use Tailwind CSS v4 for styling
+- Use react-hook-form with Zod for form validation
+- Use Sonner for toast notifications
+
+### State Management
+- Use Inertia's `useForm` hook for form submissions
+- Use React hooks (useState, useEffect, useMemo, useCallback) for local state
+
+
+=== tailwindcss/v4 rules ===
+
+## Tailwind CSS v4
+
+- This project uses Tailwind CSS v4 with the new `@tailwindcss/vite` plugin
+- Tailwind is configured in `vite.config.js`
+- Use `@tailwindcss/postcss` for PostCSS integration
+- The `@tailwindcss/forms` plugin is available for form styling
+
+
+=== excel/maatwebsite rules ===
+
+## Excel Exports (Maatwebsite Excel)
+
+- This project uses `maatwebsite/excel` v3.1 for Excel export functionality
+- Exports are located in `app/Exports/` directory
+- Create new exports using: `php artisan make:export ClassName`
+- Existing exports include:
+  - PesertaPPDBExport - Export student data
+  - KwitansiExport - Export receipt data
+  - BeasiswaExport - Export scholarship data
+  - RekapDanaKwitansiExport - Export payment summary
+  - BelumDaftarUlangExport - Export students who haven't re-registered
+
+### Usage Pattern
+- Implement the `FromCollection`, `WithHeadings`, and optionally `WithMapping` interfaces
+- Use array-based heading definitions
+- Map data appropriately for export columns
+
+
+=== pdf/dompdf rules ===
+
+## PDF Generation (Laravel DOMPDF)
+
+- This project uses `barryvdh/laravel-dompdf` v3.0 for PDF generation
+- PDF generation is handled in controllers like KartuPendaftaranController, SuratController
+- Use Laravel's view system to create PDF templates
+- Load PDF views from the standard `resources/views/` directory
+
+### Usage Pattern
+- Create a Blade view for the PDF template
+- Use the `PDF::loadView()` or `PDF::loadHTML()` methods
+- Return with appropriate headers for download or inline display
+- Ensure all CSS and assets are properly embedded or use absolute URLs
+
+
+=== ppdb/project-specific rules ===
+
+## PPDB Project Specific Guidelines
+
+### Data Models
+- **PesertaPPDB**: Student registration records with UUID primary keys
+- **Kwitansi**: Payment receipts linked to students
+- **Jurusan**: Academic majors/departments
+- **Beasiswa**: Scholarship information
+- **UkuranSeragam**: Student uniform sizes
+- **PpdbSetting**: Application settings for PPDB
+
+### Key Patterns
+- UUIDs are used for student registration IDs (no auto-increment)
+- Registration numbers are auto-generated with format: `{JURUSAN_CODE}-{SEQUENCE}-{MM-YY}`
+- WhatsApp numbers are automatically formatted with Indonesian country code
+- Soft deletes are used for data preservation
+
+### Registration Flow
+1. Student fills registration form (data stored in PesertaPPDB)
+2. Payment is recorded in Kwitansi model
+3. Uniform sizes are tracked in UkuranSeragam model
+4. Registration card and forms can be generated as PDF
+5. Data can be exported to Excel for reporting
+
+### Validation
+- Student names and birthplaces are automatically title-cased
+- Academic and non-academic scores are stored as JSON
+- Registration year/semester is auto-generated
 </laravel-boost-guidelines>

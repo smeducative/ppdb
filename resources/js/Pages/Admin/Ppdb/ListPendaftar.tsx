@@ -159,7 +159,7 @@ export default function ListPendaftar({
 
 	return (
 		<>
-			<Head title="List Peserta PPDB" />
+			<Head title="List Peserta SPMB" />
 
 			<div className="space-y-6">
 				<div className="flex sm:flex-row flex-col justify-between gap-4">

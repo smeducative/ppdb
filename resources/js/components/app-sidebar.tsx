@@ -54,6 +54,7 @@ const jurusanItems = [
 	{ id: 4, name: "BDP" },
 	{ id: 6, name: "TSM" },
 	{ id: 7, name: "TKR" },
+	{ id: 8, name: "ACP" },
 ];
 
 export function AppSidebar() {
@@ -85,7 +86,7 @@ export function AppSidebar() {
 									/>
 								</div>
 								<div className="flex flex-col gap-0.5 leading-none">
-									<span className="font-semibold">PPDB</span>
+									<span className="font-semibold">SPMB</span>
 									<span className="text-xs">Admin Panel</span>
 								</div>
 							</Link>
@@ -111,10 +112,10 @@ export function AppSidebar() {
 								</SidebarMenuButton>
 							</SidebarMenuItem>
 
-							{/* Pendaftaran PPDB */}
+							{/* Pendaftaran SPMB */}
 							<CollapsibleMenuItem
 								icon={<UserPlus className="size-4" />}
-								title="Pendaftaran PPDB"
+								title="Pendaftaran SPMB"
 								defaultOpen={isActive("/dashboard/ppdb")}
 							>
 								<SidebarMenuSubItem>
@@ -123,7 +124,7 @@ export function AppSidebar() {
 										isActive={url.includes("/ppdb/tambah-pendaftar")}
 									>
 										<Link href={route("ppdb.tambah.pendaftar")}>
-											Tambah Peserta PPDB
+											Tambah Peserta SPMB
 										</Link>
 									</SidebarMenuSubButton>
 								</SidebarMenuSubItem>
@@ -498,7 +499,7 @@ export function AppSidebar() {
 								>
 									<Link href={route("ppdb.set.batas.akhir")}>
 										<Settings className="size-4" />
-										<span>Pengaturan PPDB</span>
+										<span>Pengaturan SPMB</span>
 									</Link>
 								</SidebarMenuButton>
 							</SidebarMenuItem>

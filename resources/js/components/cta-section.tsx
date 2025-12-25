@@ -44,42 +44,42 @@ export function CTASection() {
 		<section
 			ref={sectionRef}
 			id="daftar"
-			className="py-24 md:py-32 bg-primary dark:bg-primary/90 relative overflow-hidden"
+			className="relative bg-primary dark:bg-primary/90 py-24 md:py-32 overflow-hidden"
 		>
 			<div className="absolute inset-0">
-				<div className="cta-float absolute top-10 left-10 w-32 h-32 bg-primary-foreground/10 dark:bg-primary-foreground/5 rounded-full blur-2xl" />
-				<div className="cta-float absolute bottom-10 right-10 w-48 h-48 bg-primary-foreground/10 dark:bg-primary-foreground/5 rounded-full blur-3xl" />
-				<div className="cta-float absolute top-1/2 right-1/4 w-24 h-24 bg-primary-foreground/5 dark:bg-primary-foreground/3 rounded-full blur-xl" />
+				<div className="top-10 left-10 cta-float absolute bg-primary-foreground/10 dark:bg-primary-foreground/5 blur-2xl rounded-full w-32 h-32" />
+				<div className="right-10 bottom-10 cta-float absolute bg-primary-foreground/10 dark:bg-primary-foreground/5 blur-3xl rounded-full w-48 h-48" />
+				<div className="top-1/2 right-1/4 cta-float absolute bg-primary-foreground/5 dark:bg-primary-foreground/3 blur-xl rounded-full w-24 h-24" />
 			</div>
 
-			<div className="absolute top-20 right-20 w-4 h-4 bg-primary-foreground/30 dark:bg-primary-foreground/20 rounded-full" />
-			<div className="absolute bottom-32 left-20 w-3 h-3 bg-primary-foreground/20 dark:bg-primary-foreground/15 rounded-full" />
-			<div className="absolute top-40 left-1/3 w-2 h-2 bg-primary-foreground/40 dark:bg-primary-foreground/25 rounded-full" />
+			<div className="top-20 right-20 absolute bg-primary-foreground/30 dark:bg-primary-foreground/20 rounded-full w-4 h-4" />
+			<div className="bottom-32 left-20 absolute bg-primary-foreground/20 dark:bg-primary-foreground/15 rounded-full w-3 h-3" />
+			<div className="top-40 left-1/3 absolute bg-primary-foreground/40 dark:bg-primary-foreground/25 rounded-full w-2 h-2" />
 
 			<div
 				ref={contentRef}
-				className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+				className="z-10 relative mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center"
 			>
-				<div className="inline-flex items-center gap-2 bg-primary-foreground/20 dark:bg-primary-foreground/15 backdrop-blur-sm text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold mb-8">
+				<div className="inline-flex items-center gap-2 bg-primary-foreground/20 dark:bg-primary-foreground/15 backdrop-blur-sm mb-8 px-5 py-2.5 rounded-full font-semibold text-primary-foreground text-sm">
 					<Sparkles className="w-4 h-4" />
 					Kuota Terbatas!
 				</div>
 
-				<h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
+				<h2 className="mb-6 font-bold text-primary-foreground text-4xl md:text-5xl lg:text-6xl leading-tight">
 					Siap Memulai Perjalanan Pendidikanmu?
 				</h2>
 
-				<p className="text-primary-foreground/90 dark:text-primary-foreground/85 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+				<p className="mx-auto mb-10 max-w-2xl text-primary-foreground/90 dark:text-primary-foreground/85 text-lg md:text-xl leading-relaxed">
 					Jangan lewatkan kesempatan untuk menjadi bagian dari keluarga besar
 					SMK Diponegoro Karanganyar. Pendaftaran tahun ajaran 2026/2027 telah
 					dibuka!
 				</p>
 
-				<div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+				<div className="flex sm:flex-row flex-col justify-center gap-4 mb-12">
 					<Button
 						size="lg"
 						variant="secondary"
-						className="rounded-full px-8 h-14 text-base shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+						className="shadow-xl hover:shadow-2xl px-8 rounded-full h-14 text-base hover:scale-105 transition-all duration-300"
 						asChild
 					>
 						<Link href="/register" className="gap-2">
@@ -90,7 +90,7 @@ export function CTASection() {
 					<Button
 						size="lg"
 						variant="outline"
-						className="rounded-full px-8 h-14 text-base bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary dark:hover:bg-primary-foreground/90 dark:hover:text-primary transition-all duration-300"
+						className="bg-transparent hover:bg-primary-foreground dark:hover:bg-primary-foreground/90 px-8 border-2 border-primary-foreground rounded-full h-14 text-primary-foreground hover:text-primary dark:hover:text-primary text-base transition-all duration-300"
 						asChild
 					>
 						<Link href="tel:+62285123456" className="gap-2">
@@ -100,8 +100,8 @@ export function CTASection() {
 					</Button>
 				</div>
 
-				<div className="inline-flex items-center gap-4 bg-primary-foreground/15 dark:bg-primary-foreground/10 backdrop-blur-md rounded-2xl p-6 border border-primary-foreground/20 dark:border-primary-foreground/15">
-					<div className="w-14 h-14 bg-primary-foreground/20 dark:bg-primary-foreground/15 rounded-xl flex items-center justify-center">
+				<div className="inline-flex items-center gap-4 bg-primary-foreground/15 dark:bg-primary-foreground/10 backdrop-blur-md p-6 border border-primary-foreground/20 dark:border-primary-foreground/15 rounded-2xl">
+					<div className="flex justify-center items-center bg-primary-foreground/20 dark:bg-primary-foreground/15 rounded-xl w-14 h-14">
 						<Calendar className="w-7 h-7 text-primary-foreground" />
 					</div>
 					<div className="text-left">

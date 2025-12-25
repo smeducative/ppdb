@@ -71,6 +71,7 @@ class PendaftaranPPDB extends Controller
         $data = $request->validated();
 
         $data['jurusan_id'] = $request->input('pilihan_jurusan');
+        unset($data['pilihan_jurusan']);
         $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
@@ -88,6 +89,8 @@ class PendaftaranPPDB extends Controller
             'juara_ke' => $request->input('juara_ke') ?? '',
             'juara_tingkat' => $request->input('juara_tingkat') ?? '',
         ];
+
+        unset($data['peringkat'], $data['hafidz'], $data['jenis_lomba'], $data['juara_ke'], $data['juara_tingkat'], $data['no_ayah'], $data['no_ibu']);
 
         PesertaPPDB::create($data);
 
@@ -176,10 +179,12 @@ class PendaftaranPPDB extends Controller
         // check apakah peserta memgubah jurusan
         if ($ppdb->jurusan_id != $jurusan->id) {
             $data['no_pendaftaran'] = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
-            $data['jurusan_id'] = $jurusan->id;
 
             session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
         }
+
+        $data['jurusan_id'] = $jurusan->id;
+        unset($data['pilihan_jurusan']);
 
         $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
@@ -198,6 +203,8 @@ class PendaftaranPPDB extends Controller
             'juara_ke' => $request->input('juara_ke') ?? '',
             'juara_tingkat' => $request->input('juara_tingkat') ?? '',
         ];
+
+        unset($data['peringkat'], $data['hafidz'], $data['jenis_lomba'], $data['juara_ke'], $data['juara_tingkat'], $data['no_ayah'], $data['no_ibu']);
 
         $ppdb->update($data);
 
