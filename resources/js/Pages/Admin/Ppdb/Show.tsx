@@ -97,7 +97,7 @@ export default function Show({ peserta }: Props) {
 				return (
 					<Badge
 						variant="secondary"
-						className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20 dark:text-yellow-400"
+						className="bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/20 text-yellow-600 dark:text-yellow-400"
 					>
 						Proses Seleksi
 					</Badge>
@@ -112,7 +112,7 @@ export default function Show({ peserta }: Props) {
 		label: string;
 		value: React.ReactNode;
 	}) => (
-		<div className="grid grid-cols-1 md:grid-cols-3 py-2 border-b last:border-0">
+		<div className="grid grid-cols-1 md:grid-cols-3 py-2 last:border-0 border-b">
 			<div className="font-medium text-muted-foreground">{label}</div>
 			<div className="md:col-span-2">{value || "-"}</div>
 		</div>
@@ -122,11 +122,11 @@ export default function Show({ peserta }: Props) {
 		<>
 			<Head title={peserta.nama_lengkap} />
 
-			<div className="max-w-4xl mx-auto space-y-6">
+			<div className="space-y-6 mx-auto max-w-7xl">
 				<AlertMessages flash={flash} />
 
-				<Card>
-					<CardHeader className="flex flex-row items-center justify-between">
+				<Card className="lg:min-w-3xl">
+					<CardHeader className="flex flex-row justify-between items-center">
 						<CardTitle>Data Diri Peserta</CardTitle>
 						<Button asChild>
 							<Link href={route("ppdb.edit.peserta", peserta.id)}>Edit</Link>
@@ -134,7 +134,7 @@ export default function Show({ peserta }: Props) {
 					</CardHeader>
 					<CardContent className="space-y-6">
 						<div>
-							<h3 className="text-lg font-semibold mb-3"># Identitas Diri</h3>
+							<h3 className="mb-3 font-semibold text-lg"># Identitas Diri</h3>
 							<InfoRow
 								label="No. Pendaftaran"
 								value={<strong>{peserta.no_pendaftaran}</strong>}
@@ -179,7 +179,7 @@ export default function Show({ peserta }: Props) {
 						<Separator />
 
 						<div>
-							<h3 className="text-lg font-semibold mb-3">
+							<h3 className="mb-3 font-semibold text-lg">
 								# Identitas Orang Tua
 							</h3>
 							<InfoRow label="Nama Ayah" value={peserta.nama_ayah} />
@@ -193,8 +193,8 @@ export default function Show({ peserta }: Props) {
 						<Separator />
 
 						<div>
-							<h3 className="text-lg font-semibold mb-3"># Jenis Beasiswa</h3>
-							<h4 className="font-medium text-muted-foreground mt-2 mb-1">
+							<h3 className="mb-3 font-semibold text-lg"># Jenis Beasiswa</h3>
+							<h4 className="mt-2 mb-1 font-medium text-muted-foreground">
 								Akademik
 							</h4>
 							<InfoRow label="Kelas" value={peserta.akademik?.kelas} />
@@ -205,7 +205,7 @@ export default function Show({ peserta }: Props) {
 								value={peserta.akademik?.hafidz}
 							/>
 
-							<h4 className="font-medium text-muted-foreground mt-4 mb-1">
+							<h4 className="mt-4 mb-1 font-medium text-muted-foreground">
 								Non Akademik
 							</h4>
 							<InfoRow
@@ -221,7 +221,7 @@ export default function Show({ peserta }: Props) {
 								value={peserta.non_akademik?.juara_tingkat}
 							/>
 
-							<h4 className="font-medium text-muted-foreground mt-4 mb-1">
+							<h4 className="mt-4 mb-1 font-medium text-muted-foreground">
 								Rekomendasi
 							</h4>
 							<InfoRow
@@ -233,7 +233,7 @@ export default function Show({ peserta }: Props) {
 						<Separator />
 
 						<div>
-							<h3 className="text-lg font-semibold mb-3"># Status</h3>
+							<h3 className="mb-3 font-semibold text-lg"># Status</h3>
 							<InfoRow
 								label="Penerimaan"
 								value={<StatusBadge status={peserta.diterima} />}
@@ -242,14 +242,14 @@ export default function Show({ peserta }: Props) {
 						</div>
 					</CardContent>
 					<CardFooter className="flex flex-col items-start gap-4">
-						<p className="text-sm text-muted-foreground">
+						<p className="text-muted-foreground text-sm">
 							Peserta yang dinyatakan diterima, melakukan daftar ulang di menu
 							kwitansi.
 						</p>
 						<div className="flex gap-2">
 							<AlertDialog>
 								<AlertDialogTrigger asChild>
-									<Button className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800">
+									<Button className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white">
 										Terima
 									</Button>
 								</AlertDialogTrigger>
@@ -264,7 +264,7 @@ export default function Show({ peserta }: Props) {
 										<AlertDialogCancel>Batal</AlertDialogCancel>
 										<AlertDialogAction
 											onClick={() => handleStatusChange("y")}
-											className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-700 dark:hover:bg-green-800"
+											className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white"
 										>
 											Terima
 										</AlertDialogAction>
