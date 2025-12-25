@@ -59,10 +59,10 @@ export default function Ppdb({ setting }: Props) {
 		<>
 			<Head title="Pengaturan PPDB" />
 
-			<div className="max-w-2xl mx-auto space-y-6">
+			<div className="space-y-6 mx-auto max-w-7xl">
 				<AlertMessages flash={flash} />
 
-				<Card>
+				<Card className="lg:min-w-3xl">
 					<CardHeader>
 						<CardTitle>Pengaturan PPDB</CardTitle>
 						<CardDescription>
@@ -71,15 +71,15 @@ export default function Ppdb({ setting }: Props) {
 					</CardHeader>
 					<form onSubmit={submit}>
 						<CardContent className="space-y-4">
-							<div className="grid grid-cols-2 gap-4 mb-4 p-4 bg-muted rounded">
+							<div className="gap-4 grid grid-cols-2 bg-muted mb-4 p-4 rounded">
 								<div>
-									<strong className="block text-sm font-medium">
+									<strong className="block font-medium text-sm">
 										No. Surat
 									</strong>
 									<span className="text-sm">{data.no_surat || "-"}</span>
 								</div>
 								<div>
-									<strong className="block text-sm font-medium">
+									<strong className="block font-medium text-sm">
 										Batas Akhir PPDB
 									</strong>
 									<span className="text-sm">
@@ -87,7 +87,7 @@ export default function Ppdb({ setting }: Props) {
 									</span>
 								</div>
 								<div>
-									<strong className="block text-sm font-medium">
+									<strong className="block font-medium text-sm">
 										Pengumuman Seleksi
 									</strong>
 									<span className="text-sm">{data.hasil_seleksi || "-"}</span>

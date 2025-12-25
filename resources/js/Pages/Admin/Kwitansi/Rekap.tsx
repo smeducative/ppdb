@@ -139,7 +139,7 @@ export default function Rekap({
 					</Card>
 				</div>
 
-				<div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
+				<div className="gap-6 grid grid-cols-1">
 					<Card>
 						<CardHeader className="flex flex-row justify-between items-center">
 							<CardTitle>Jenis Dana Kelola</CardTitle>
