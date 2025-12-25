@@ -1,20 +1,3 @@
-import { router, useForm as useInertiaForm, usePage } from "@inertiajs/react";
-import confetti from "canvas-confetti";
-import gsap from "gsap";
-import {
-	Award,
-	CheckCircle2,
-	ChevronLeft,
-	ChevronRight,
-	GraduationCap,
-	Home,
-	MessageSquare,
-	PartyPopper,
-	User,
-	Users,
-} from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -36,6 +19,23 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { router, useForm as useInertiaForm, usePage } from "@inertiajs/react";
+import confetti from "canvas-confetti";
+import gsap from "gsap";
+import {
+	Award,
+	CheckCircle2,
+	ChevronLeft,
+	ChevronRight,
+	GraduationCap,
+	Home,
+	MessageSquare,
+	PartyPopper,
+	User,
+	Users,
+} from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 interface RegistrationFormProps {
 	jurusanOptions?: { value: number | string; label: string }[];
@@ -58,18 +58,6 @@ const defaultJurusanOptions = [
 	{ value: "tkr", label: "Teknik Kendaraan Ringan" },
 ];
 
-// Occupation options for parent data
-const pekerjaanOptions = [
-	"PNS",
-	"TNI/Polri",
-	"Wiraswasta",
-	"Karyawan Swasta",
-	"Petani",
-	"Buruh",
-	"Pedagang",
-	"Lainnya",
-];
-
 // Competition level options for achievements
 const tingkatOptions = [
 	{ value: "kabupaten", label: "Kabupaten/Kota" },
@@ -83,7 +71,7 @@ const tingkatOptions = [
  */
 function FormError({ error }: { error?: string }) {
 	if (!error) return null;
-	return <p className="text-destructive text-sm mt-1">{error}</p>;
+	return <p className="mt-1 text-destructive text-sm">{error}</p>;
 }
 
 /**
@@ -417,49 +405,49 @@ export function RegistrationForm({
 	};
 
 	return (
-		<div className="max-w-4xl mx-auto px-4">
+		<div className="mx-auto px-4 max-w-4xl">
 			{/* Success State with Confetti */}
 			{isSuccess ? (
-				<div className="text-center py-16">
-					<div className="inline-flex items-center justify-center w-24 h-24 bg-green-100 dark:bg-green-900/30 rounded-full mb-6 animate-bounce">
+				<div className="py-16 text-center">
+					<div className="inline-flex justify-center items-center bg-green-100 dark:bg-green-900/30 mb-6 rounded-full w-24 h-24 animate-bounce">
 						<PartyPopper className="w-12 h-12 text-green-600 dark:text-green-400" />
 					</div>
-					<h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+					<h1 className="mb-4 font-bold text-foreground text-4xl md:text-5xl">
 						Selamat! 🎉
 					</h1>
-					<p className="text-xl text-muted-foreground mb-6">
+					<p className="mb-6 text-muted-foreground text-xl">
 						Pendaftaran Anda berhasil disubmit
 					</p>
 
 					{registrationNumber && (
-						<div className="bg-primary/10 border border-primary/20 rounded-2xl p-6 mb-8 inline-block">
-							<p className="text-sm text-muted-foreground mb-2">
+						<div className="inline-block bg-primary/10 mb-8 p-6 border border-primary/20 rounded-2xl">
+							<p className="mb-2 text-muted-foreground text-sm">
 								Nomor Pendaftaran Anda
 							</p>
-							<p className="text-3xl font-bold text-primary tracking-wider">
+							<p className="font-bold text-primary text-3xl tracking-wider">
 								{registrationNumber}
 							</p>
 						</div>
 					)}
 
-					<Card className="max-w-lg mx-auto border-0 shadow-xl rounded-3xl overflow-hidden">
+					<Card className="shadow-xl mx-auto border-0 rounded-3xl max-w-lg overflow-hidden">
 						<CardContent className="p-8">
 							<div className="space-y-4">
 								<div className="flex items-start gap-3 text-left">
-									<CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 shrink-0" />
+									<CheckCircle2 className="mt-0.5 w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
 									<p className="text-muted-foreground">
 										Simpan nomor pendaftaran Anda untuk keperluan daftar ulang
 									</p>
 								</div>
 								<div className="flex items-start gap-3 text-left">
-									<CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 shrink-0" />
+									<CheckCircle2 className="mt-0.5 w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
 									<p className="text-muted-foreground">
 										Siapkan berkas-berkas yang diperlukan untuk proses
 										selanjutnya
 									</p>
 								</div>
 								<div className="flex items-start gap-3 text-left">
-									<CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 shrink-0" />
+									<CheckCircle2 className="mt-0.5 w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
 									<p className="text-muted-foreground">
 										Tim SPMB akan menghubungi Anda melalui No. HP yang terdaftar
 									</p>
@@ -467,10 +455,10 @@ export function RegistrationForm({
 							</div>
 
 							<Button
-								className="w-full mt-8 h-12 rounded-xl text-base"
+								className="mt-8 rounded-xl w-full h-12 text-base"
 								onClick={() => router.visit("/")}
 							>
-								<Home className="w-4 h-4 mr-2" />
+								<Home className="mr-2 w-4 h-4" />
 								Kembali ke Beranda
 							</Button>
 						</CardContent>
@@ -479,24 +467,25 @@ export function RegistrationForm({
 			) : (
 				<>
 					{/* Header */}
-					<div className="text-center mb-10">
-						<div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-3xl mb-4">
+					<div className="mb-10 text-center">
+						<div className="inline-flex justify-center items-center bg-primary/10 mb-4 rounded-3xl w-20 h-20">
 							<GraduationCap className="w-10 h-10 text-primary" />
 						</div>
-						<h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+						<h1 className="mb-2 font-bold text-foreground text-3xl md:text-4xl">
 							Formulir Pendaftaran
 						</h1>
 						<p className="text-muted-foreground">
-							SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar Tahun Ajaran 2026/2027
+							SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar
+							Tahun Ajaran 2026/2027
 						</p>
 					</div>
 
 					{/* Progress Steps */}
 					<div className="mb-8">
-						<div className="flex items-center justify-between relative">
-							<div className="absolute top-6 left-0 right-0 h-1 bg-border rounded-full mx-12">
+						<div className="relative flex justify-between items-center">
+							<div className="top-6 right-0 left-0 absolute mx-12 bg-border rounded-full h-1">
 								<div
-									className="h-full bg-primary rounded-full transition-all duration-500"
+									className="bg-primary rounded-full h-full transition-all duration-500"
 									style={{ width: `${((currentStep - 1) / 3) * 100}%` }}
 								/>
 							</div>
@@ -504,7 +493,7 @@ export function RegistrationForm({
 							{steps.map((step) => (
 								<div
 									key={step.id}
-									className="relative z-10 flex flex-col items-center gap-2"
+									className="z-10 relative flex flex-col items-center gap-2"
 								>
 									<div
 										className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ${
@@ -538,7 +527,7 @@ export function RegistrationForm({
 					{/* Form Card */}
 					<Card
 						ref={cardRef}
-						className="border-0 shadow-2xl shadow-primary/5 rounded-3xl overflow-hidden"
+						className="shadow-2xl shadow-primary/5 border-0 rounded-3xl overflow-hidden"
 					>
 						<CardHeader className="bg-linear-gradient-to-r from-primary/5 to-accent/50 border-b">
 							<CardTitle className="flex items-center gap-3 text-xl">
@@ -559,7 +548,7 @@ export function RegistrationForm({
 									{/* Step 1: Identitas Diri (Personal Identity) */}
 									{currentStep === 1 && (
 										<div className="space-y-6">
-											<div className="grid md:grid-cols-2 gap-6">
+											<div className="gap-6 grid md:grid-cols-2">
 												{/* Nama Lengkap */}
 												<FormField
 													id="nama_lengkap"
@@ -577,7 +566,7 @@ export function RegistrationForm({
 															clearError("nama_lengkap");
 														}}
 														aria-invalid={hasError("nama_lengkap")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -633,7 +622,7 @@ export function RegistrationForm({
 															clearError("tempat_lahir");
 														}}
 														aria-invalid={hasError("tempat_lahir")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -653,7 +642,7 @@ export function RegistrationForm({
 															clearError("tanggal_lahir");
 														}}
 														aria-invalid={hasError("tanggal_lahir")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -673,7 +662,7 @@ export function RegistrationForm({
 															clearError("nik");
 														}}
 														aria-invalid={hasError("nik")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 														maxLength={16}
 													/>
 												</FormField>
@@ -690,7 +679,7 @@ export function RegistrationForm({
 														value={data.nisn}
 														onChange={(e) => setData("nisn", e.target.value)}
 														aria-invalid={hasError("nisn")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -722,19 +711,19 @@ export function RegistrationForm({
 														placeholder="Dukuh"
 														value={data.dukuh}
 														onChange={(e) => setData("dukuh", e.target.value)}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
 												{/* RT/RW */}
-												<div className="grid grid-cols-2 gap-4">
+												<div className="gap-4 grid grid-cols-2">
 													<FormField id="rt" label="RT">
 														<Input
 															id="rt"
 															placeholder="RT"
 															value={data.rt}
 															onChange={(e) => setData("rt", e.target.value)}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 													<FormField id="rw" label="RW">
@@ -743,7 +732,7 @@ export function RegistrationForm({
 															placeholder="RW"
 															value={data.rw}
 															onChange={(e) => setData("rw", e.target.value)}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 												</div>
@@ -757,7 +746,7 @@ export function RegistrationForm({
 														onChange={(e) =>
 															setData("desa_kelurahan", e.target.value)
 														}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -770,7 +759,7 @@ export function RegistrationForm({
 														onChange={(e) =>
 															setData("kecamatan", e.target.value)
 														}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -783,7 +772,7 @@ export function RegistrationForm({
 														onChange={(e) =>
 															setData("kabupaten_kota", e.target.value)
 														}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -796,7 +785,7 @@ export function RegistrationForm({
 														onChange={(e) =>
 															setData("provinsi", e.target.value)
 														}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -809,7 +798,7 @@ export function RegistrationForm({
 														onChange={(e) =>
 															setData("kode_pos", e.target.value)
 														}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -829,7 +818,7 @@ export function RegistrationForm({
 													>
 														<SelectTrigger
 															className={cn(
-																"h-12 rounded-xl",
+																"rounded-xl h-12",
 																hasError("pilihan_jurusan") &&
 																	"border-destructive ring-destructive/20 ring-[3px]",
 															)}
@@ -866,7 +855,7 @@ export function RegistrationForm({
 															clearError("asal_sekolah");
 														}}
 														aria-invalid={hasError("asal_sekolah")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 
@@ -886,7 +875,7 @@ export function RegistrationForm({
 													>
 														<SelectTrigger
 															className={cn(
-																"h-12 rounded-xl",
+																"rounded-xl h-12",
 																hasError("tahun_lulus") &&
 																	"border-destructive ring-destructive/20 ring-[3px]",
 															)}
@@ -933,7 +922,7 @@ export function RegistrationForm({
 															onChange={(e) =>
 																setData("no_kip", e.target.value)
 															}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 												)}
@@ -955,7 +944,7 @@ export function RegistrationForm({
 															clearError("no_hp");
 														}}
 														aria-invalid={hasError("no_hp")}
-														className="h-12 rounded-xl"
+														className="rounded-xl h-12"
 													/>
 												</FormField>
 											</div>
@@ -967,13 +956,13 @@ export function RegistrationForm({
 										<div className="space-y-8">
 											{/* Father Data Section */}
 											<div>
-												<h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-													<span className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-sm text-primary font-bold">
+												<h3 className="flex items-center gap-2 mb-4 font-semibold text-lg">
+													<span className="flex justify-center items-center bg-primary/10 rounded-lg w-8 h-8 font-bold text-primary text-sm">
 														A
 													</span>
 													Data Ayah
 												</h3>
-												<div className="grid md:grid-cols-2 gap-6 pl-10">
+												<div className="gap-6 grid md:grid-cols-2 pl-10">
 													{/* Nama Ayah */}
 													<FormField
 														id="nama_ayah"
@@ -991,7 +980,7 @@ export function RegistrationForm({
 																clearError("nama_ayah");
 															}}
 															aria-invalid={hasError("nama_ayah")}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 
@@ -1005,42 +994,34 @@ export function RegistrationForm({
 															onChange={(e) =>
 																setData("no_ayah", e.target.value)
 															}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 
 													{/* Pekerjaan Ayah */}
 													<FormField id="pekerjaan_ayah" label="Pekerjaan Ayah">
-														<Select
+														<Input
+															id="pekerjaan_ayah"
+															placeholder="Tuliskan pekerjaan ayah"
 															value={data.pekerjaan_ayah}
-															onValueChange={(value) =>
-																setData("pekerjaan_ayah", value)
+															onChange={(e) =>
+																setData("pekerjaan_ayah", e.target.value)
 															}
-														>
-															<SelectTrigger className="h-12 rounded-xl">
-																<SelectValue placeholder="Pilih Pekerjaan" />
-															</SelectTrigger>
-															<SelectContent>
-																{pekerjaanOptions.map((p) => (
-																	<SelectItem key={p} value={p}>
-																		{p}
-																	</SelectItem>
-																))}
-															</SelectContent>
-														</Select>
+															className="rounded-xl h-12"
+														/>
 													</FormField>
 												</div>
 											</div>
 
 											{/* Mother Data Section */}
 											<div>
-												<h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-													<span className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-sm text-primary font-bold">
+												<h3 className="flex items-center gap-2 mb-4 font-semibold text-lg">
+													<span className="flex justify-center items-center bg-primary/10 rounded-lg w-8 h-8 font-bold text-primary text-sm">
 														I
 													</span>
 													Data Ibu
 												</h3>
-												<div className="grid md:grid-cols-2 gap-6 pl-10">
+												<div className="gap-6 grid md:grid-cols-2 pl-10">
 													{/* Nama Ibu */}
 													<FormField
 														id="nama_ibu"
@@ -1058,7 +1039,7 @@ export function RegistrationForm({
 																clearError("nama_ibu");
 															}}
 															aria-invalid={hasError("nama_ibu")}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 
@@ -1072,29 +1053,21 @@ export function RegistrationForm({
 															onChange={(e) =>
 																setData("no_ibu", e.target.value)
 															}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 
 													{/* Pekerjaan Ibu */}
 													<FormField id="pekerjaan_ibu" label="Pekerjaan Ibu">
-														<Select
+														<Input
+															id="pekerjaan_ibu"
+															placeholder="Tuliskan pekerjaan ibu"
 															value={data.pekerjaan_ibu}
-															onValueChange={(value) =>
-																setData("pekerjaan_ibu", value)
+															onChange={(e) =>
+																setData("pekerjaan_ibu", e.target.value)
 															}
-														>
-															<SelectTrigger className="h-12 rounded-xl">
-																<SelectValue placeholder="Pilih Pekerjaan" />
-															</SelectTrigger>
-															<SelectContent>
-																{pekerjaanOptions.map((p) => (
-																	<SelectItem key={p} value={p}>
-																		{p}
-																	</SelectItem>
-																))}
-															</SelectContent>
-														</Select>
+															className="rounded-xl h-12"
+														/>
 													</FormField>
 												</div>
 											</div>
@@ -1104,20 +1077,20 @@ export function RegistrationForm({
 									{/* Step 3: Prestasi (Achievements) */}
 									{currentStep === 3 && (
 										<div className="space-y-8">
-											<p className="text-sm text-muted-foreground bg-amber-50 dark:bg-amber-950/30 p-4 rounded-xl border border-amber-200 dark:border-amber-800">
+											<p className="bg-amber-50 dark:bg-amber-950/30 p-4 border border-amber-200 dark:border-amber-800 rounded-xl text-muted-foreground text-sm">
 												Jenis beasiswa peserta. Diisi jika peserta memiliki
 												beasiswa atau prestasi.
 											</p>
 
 											{/* Academic Achievements Section */}
 											<div>
-												<h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-													<span className="w-8 h-8 bg-blue-100 dark:bg-blue-950/50 rounded-lg flex items-center justify-center text-sm text-blue-600 dark:text-blue-400 font-bold">
+												<h3 className="flex items-center gap-2 mb-4 font-semibold text-lg">
+													<span className="flex justify-center items-center bg-blue-100 dark:bg-blue-950/50 rounded-lg w-8 h-8 font-bold text-blue-600 dark:text-blue-400 text-sm">
 														A
 													</span>
 													Akademik
 												</h3>
-												<div className="grid md:grid-cols-2 gap-6 pl-10">
+												<div className="gap-6 grid md:grid-cols-2 pl-10">
 													{/* Peringkat Kelas */}
 													<FormField
 														id="peringkat"
@@ -1131,9 +1104,9 @@ export function RegistrationForm({
 															onChange={(e) =>
 																setData("peringkat", e.target.value)
 															}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
-														<p className="text-xs text-muted-foreground">
+														<p className="text-muted-foreground text-xs">
 															Apabila pernah mendapatkan peringkat 1, 2 atau 3
 														</p>
 													</FormField>
@@ -1151,7 +1124,7 @@ export function RegistrationForm({
 															onChange={(e) =>
 																setData("hafidz", e.target.value)
 															}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 												</div>
@@ -1159,13 +1132,13 @@ export function RegistrationForm({
 
 											{/* Non-Academic Achievements Section */}
 											<div>
-												<h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-													<span className="w-8 h-8 bg-amber-100 dark:bg-amber-950/50 rounded-lg flex items-center justify-center text-sm text-amber-600 dark:text-amber-400 font-bold">
+												<h3 className="flex items-center gap-2 mb-4 font-semibold text-lg">
+													<span className="flex justify-center items-center bg-amber-100 dark:bg-amber-950/50 rounded-lg w-8 h-8 font-bold text-amber-600 dark:text-amber-400 text-sm">
 														N
 													</span>
 													Non Akademik
 												</h3>
-												<div className="grid md:grid-cols-2 gap-6 pl-10">
+												<div className="gap-6 grid md:grid-cols-2 pl-10">
 													{/* Jenis Lomba */}
 													<FormField
 														id="jenis_lomba"
@@ -1179,7 +1152,7 @@ export function RegistrationForm({
 															onChange={(e) =>
 																setData("jenis_lomba", e.target.value)
 															}
-															className="h-12 rounded-xl"
+															className="rounded-xl h-12"
 														/>
 													</FormField>
 
@@ -1191,7 +1164,7 @@ export function RegistrationForm({
 																setData("juara_ke", value)
 															}
 														>
-															<SelectTrigger className="h-12 rounded-xl">
+															<SelectTrigger className="rounded-xl h-12">
 																<SelectValue placeholder="Pilih Juara" />
 															</SelectTrigger>
 															<SelectContent>
@@ -1210,7 +1183,7 @@ export function RegistrationForm({
 																setData("juara_tingkat", value)
 															}
 														>
-															<SelectTrigger className="h-12 rounded-xl">
+															<SelectTrigger className="rounded-xl h-12">
 																<SelectValue placeholder="Pilih Tingkat" />
 															</SelectTrigger>
 															<SelectContent>
@@ -1221,7 +1194,7 @@ export function RegistrationForm({
 																))}
 															</SelectContent>
 														</Select>
-														<p className="text-xs text-muted-foreground">
+														<p className="text-muted-foreground text-xs">
 															Kejuaraan minimal tingkat Kabupaten/Kota
 														</p>
 													</FormField>
@@ -1235,7 +1208,7 @@ export function RegistrationForm({
 										<div className="space-y-6">
 											{/* MWC Recommendation Checkbox */}
 											<div className="md:col-span-2">
-												<div className="flex items-center space-x-2 p-4 bg-secondary/50 rounded-xl">
+												<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
 													<Checkbox
 														id="rekomendasi_mwc"
 														checked={data.rekomendasi_mwc}
@@ -1251,7 +1224,7 @@ export function RegistrationForm({
 														Cabang NU Karanganyar)
 													</Label>
 												</div>
-												<p className="text-xs text-muted-foreground mt-2 pl-2">
+												<p className="mt-2 pl-2 text-muted-foreground text-xs">
 													Beasiswa ini diberikan kepada anak di setiap daerah
 													Ranting dari hasil rekomendasi/usulan Pengurus Ranting
 													NU Se-MWC Karanganyar.
@@ -1267,39 +1240,39 @@ export function RegistrationForm({
 													onChange={(e) =>
 														setData("saran_dari", e.target.value)
 													}
-													className="h-12 rounded-xl"
+													className="rounded-xl h-12"
 												/>
 											</FormField>
 
 											{/* Registration Requirements Info */}
-											<div className="bg-primary/5 p-6 rounded-2xl border border-primary/20 mt-8">
-												<h4 className="font-semibold text-foreground mb-3">
+											<div className="bg-primary/5 mt-8 p-6 border border-primary/20 rounded-2xl">
+												<h4 className="mb-3 font-semibold text-foreground">
 													Persyaratan Pendaftaran:
 												</h4>
-												<ul className="space-y-2 text-sm text-muted-foreground">
+												<ul className="space-y-2 text-muted-foreground text-sm">
 													<li className="flex items-start gap-2">
-														<CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+														<CheckCircle2 className="mt-0.5 w-4 h-4 text-primary shrink-0" />
 														Foto Diri Berwarna Ukuran 3x4 sebanyak 2 lembar
 													</li>
 													<li className="flex items-start gap-2">
-														<CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+														<CheckCircle2 className="mt-0.5 w-4 h-4 text-primary shrink-0" />
 														Fotokopi Kartu Keluarga/KK sebanyak 2 lembar
 													</li>
 													<li className="flex items-start gap-2">
-														<CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+														<CheckCircle2 className="mt-0.5 w-4 h-4 text-primary shrink-0" />
 														Fotokopi Akte Kelahiran sebanyak 2 lembar
 													</li>
 													<li className="flex items-start gap-2">
-														<CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+														<CheckCircle2 className="mt-0.5 w-4 h-4 text-primary shrink-0" />
 														Fotokopi KIP sebanyak 2 lembar (bagi yang punya)
 													</li>
 													<li className="flex items-start gap-2">
-														<CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+														<CheckCircle2 className="mt-0.5 w-4 h-4 text-primary shrink-0" />
 														Fotokopi Ijazah sebanyak 2 lembar (jika sudah
 														ada/menyusul)
 													</li>
 													<li className="flex items-start gap-2">
-														<CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+														<CheckCircle2 className="mt-0.5 w-4 h-4 text-primary shrink-0" />
 														Fotokopi Raport/Piagam/Sertifikat bagi yang
 														berprestasi
 													</li>
@@ -1316,9 +1289,9 @@ export function RegistrationForm({
 										variant="outline"
 										onClick={prevStep}
 										disabled={currentStep === 1}
-										className="rounded-xl px-6 bg-transparent"
+										className="bg-transparent px-6 rounded-xl"
 									>
-										<ChevronLeft className="w-4 h-4 mr-2" />
+										<ChevronLeft className="mr-2 w-4 h-4" />
 										Sebelumnya
 									</Button>
 
@@ -1327,19 +1300,19 @@ export function RegistrationForm({
 											key="next-step-btn"
 											type="button"
 											onClick={nextStep}
-											className="rounded-xl px-6"
+											className="px-6 rounded-xl"
 										>
 											Selanjutnya
-											<ChevronRight className="w-4 h-4 ml-2" />
+											<ChevronRight className="ml-2 w-4 h-4" />
 										</Button>
 									) : (
 										<Button
 											key="submit-btn"
 											type="submit"
 											disabled={processing}
-											className="rounded-xl px-8 bg-primary hover:bg-primary/90"
+											className="bg-primary hover:bg-primary/90 px-8 rounded-xl"
 										>
-											<CheckCircle2 className="w-4 h-4 mr-2" />
+											<CheckCircle2 className="mr-2 w-4 h-4" />
 											{processing ? "Mengirim..." : "Kirim Pendaftaran"}
 										</Button>
 									)}
