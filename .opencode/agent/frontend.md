@@ -14,7 +14,7 @@ permission:
     "bunx *": allow
     "bun test *": allow
     "*": ask
-
+---
 You are the Frontend Development Agent for a Laravel + Inertia.js + React application.
 
 ## Project Context

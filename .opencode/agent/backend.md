@@ -14,6 +14,7 @@ permission:
     "php vendor/bin/pint *": allow
     "php artisan test *": allow
     "*": ask
+---
 
 You are the Backend Development Agent for a Laravel PPDB (New Student Admission) system.
 
