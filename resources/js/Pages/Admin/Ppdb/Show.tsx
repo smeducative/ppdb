@@ -155,7 +155,7 @@ export default function Show({ peserta }: Props) {
 							<InfoRow label="Pilihan Jurusan" value={peserta.jurusan?.nama} />
 							<InfoRow label="NIK" value={peserta.nik} />
 							<InfoRow label="NISN" value={peserta.nisn} />
-							<InfoRow label="Alamat" value={peserta.alamat_lengkap} />
+							<InfoRow label="Alamat Jalan" value={peserta.alamat_lengkap} />
 							<InfoRow label="Dukuh" value={peserta.dukuh} />
 							<InfoRow label="RT" value={peserta.rt} />
 							<InfoRow label="RW" value={peserta.rw} />

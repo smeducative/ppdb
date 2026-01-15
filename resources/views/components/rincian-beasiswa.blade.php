@@ -100,7 +100,7 @@
                     Beasiswa ini diberikan kepada anak disetiap daerah Ranting masing masing, dari hasil
                     rekomendasi/usulan Pengurus Ranting Nahdhatul Ulama Se MWC Karanganyar. Masing masing
                     Ranting mendapatkan kesempatan untuk mengusulkan 1 anak, selanjutnya bisa berkoordinasi
-                    dengan Pengurus Inti MWC. Beasiswa ini berlaku untuk kejuruan TO, TJKT, dan BDP. Besaran
+                    dengan Pengurus Inti MWC. Beasiswa ini berlaku untuk kejuruan TO, TJKT, dan BCF. Besaran
                     beasiswa yang akan diperoleh dari beasiswa ini adalah 1,5 Tahun.
                 </p>
             </div>

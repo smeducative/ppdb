@@ -1,16 +1,16 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/mode-toggle";
 import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbList,
-	BreadcrumbPage,
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbList,
+    BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-	SidebarInset,
-	SidebarProvider,
-	SidebarTrigger,
+    SidebarInset,
+    SidebarProvider,
+    SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { usePage } from "@inertiajs/react";
@@ -41,7 +41,7 @@ export default function AuthenticatedLayout({
 			<AppSidebar />
 
 			<SidebarInset>
-				<header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+				<header className="flex h-16 shrink-0 items-center gap-2 border-b px-2 md:px-4">
 					<SidebarTrigger className="-ml-1" />
 					<Separator orientation="vertical" className="mr-2 h-4" />
 					<Breadcrumb>
@@ -56,7 +56,7 @@ export default function AuthenticatedLayout({
 						<ModeToggle />
 					</div>
 				</header>
-				<div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
+				<div className="flex flex-1 flex-col gap-4 p-4 md:p-4">{children}</div>
 
 				<Toaster />
 			</SidebarInset>

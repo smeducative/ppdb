@@ -20,7 +20,7 @@
                 ['nama' => 'Teknik Kendaraan Ringan', 'abbreviation' => 'TKR'],
                 ['nama' => 'Teknik Sepeda Motor', 'abbreviation' => 'TSM'],
                 // broadcasting dan perfilman
-                ['nama' => 'Broadcasting dan Perfilman', 'abbreviation' => 'BDP'],
+                ['nama' => 'Broadcasting dan Perfilman', 'abbreviation' => 'BCF'],
                 ['nama' => 'Agribisnis Tanaman (Smart Farming)', 'abbreviation' => 'AT'],
                 ['nama' => 'Teknik Jaringan Komputer dan Telekomunikasi', 'abbreviation' => 'TJKT'],
             ]) as $j)

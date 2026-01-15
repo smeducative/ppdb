@@ -77,6 +77,21 @@ class PendaftaranPPDB extends Controller
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
+        // Gabungkan alamat jika alamat_lengkap tidak diisi
+        if (empty($data['alamat_lengkap'])) {
+            $alamatParts = array_filter([
+                $data['dukuh'] ? "Dk. {$data['dukuh']}" : '',
+                $data['rt'] || $data['rw'] ? "RT {$data['rt']} / RW {$data['rw']}" : '',
+                $data['desa_kelurahan'],
+                $data['kecamatan'],
+                $data['kabupaten_kota'],
+                $data['provinsi'],
+                $data['kode_pos'] ? "Kode Pos {$data['kode_pos']}" : '',
+            ]);
+
+            $data['alamat_lengkap'] = implode(', ', $alamatParts);
+        }
+
         $data['akademik'] = [
             'kelas' => explode('/', $request->input('peringkat'))[0] ?? '',
             'semester' => explode('/', $request->input('peringkat'))[1] ?? '',
@@ -108,7 +123,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->has('kwitansi')
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -133,7 +148,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -178,7 +193,7 @@ class PendaftaranPPDB extends Controller
 
         // check apakah peserta memgubah jurusan
         if ($ppdb->jurusan_id != $jurusan->id) {
-            $data['no_pendaftaran'] = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
+            $data['no_pendaftaran'] = $jurusan->abbreviation.'-'.Str::padLeft($ppdb->no_urut, 3, 0).'-'.now()->format('m-y');
 
             session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
         }
@@ -190,6 +205,21 @@ class PendaftaranPPDB extends Controller
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
+
+        // Gabungkan alamat jika alamat_lengkap tidak diisi
+        if (empty($data['alamat_lengkap'])) {
+            $alamatParts = array_filter([
+                $data['dukuh'] ? "Dk. {$data['dukuh']}" : '',
+                $data['rt'] || $data['rw'] ? "RT {$data['rt']} / RW {$data['rw']}" : '',
+                $data['desa_kelurahan'],
+                $data['kecamatan'],
+                $data['kabupaten_kota'],
+                $data['provinsi'],
+                $data['kode_pos'] ? "Kode Pos {$data['kode_pos']}" : '',
+            ]);
+
+            $data['alamat_lengkap'] = implode(', ', $alamatParts);
+        }
 
         $data['akademik'] = [
             'kelas' => explode('/', $request->input('peringkat'))[0] ?? '',
@@ -225,6 +255,21 @@ class PendaftaranPPDB extends Controller
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
+        // Gabungkan alamat jika alamat_lengkap tidak diisi
+        if (empty($data['alamat_lengkap'])) {
+            $alamatParts = array_filter([
+                $data['dukuh'] ? "Dk. {$data['dukuh']}" : '',
+                $data['rt'] || $data['rw'] ? "RT {$data['rt']} / RW {$data['rw']}" : '',
+                $data['desa_kelurahan'],
+                $data['kecamatan'],
+                $data['kabupaten_kota'],
+                $data['provinsi'],
+                $data['kode_pos'] ? "Kode Pos {$data['kode_pos']}" : '',
+            ]);
+
+            $data['alamat_lengkap'] = implode(', ', $alamatParts);
+        }
+
         $data['akademik'] = [
             'kelas' => explode('/', $request->input('peringkat'))[0] ?? '',
             'semester' => explode('/', $request->input('peringkat'))[1] ?? '',
@@ -242,7 +287,7 @@ class PendaftaranPPDB extends Controller
 
         $ppdb = PesertaPPDB::create($data);
 
-        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
+        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran '.$ppdb->no_pendaftaran);
 
         return redirect()->route('ppdb.register');
     }

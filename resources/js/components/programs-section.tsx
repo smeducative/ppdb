@@ -64,7 +64,7 @@ const programs = [
 	{
 		icon: Film,
 		title: "Broadcasting dan Perfilman",
-		shortName: "BDP",
+		shortName: "BCF",
 		description:
 			"Program keahlian yang mempelajari teknik penyiaran, produksi video, dan perfilman dengan peralatan modern.",
 		skills: [

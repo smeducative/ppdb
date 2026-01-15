@@ -286,7 +286,6 @@ export function RegistrationForm({
 				{ key: "tempat_lahir", label: "Tempat Lahir" },
 				{ key: "tanggal_lahir", label: "Tanggal Lahir" },
 				{ key: "nik", label: "NIK" },
-				{ key: "alamat_lengkap", label: "Alamat Lengkap" },
 				{ key: "pilihan_jurusan", label: "Pilihan Jurusan" },
 				{ key: "asal_sekolah", label: "Asal Sekolah" },
 				{ key: "tahun_lulus", label: "Tahun Lulus" },
@@ -683,17 +682,16 @@ export function RegistrationForm({
 													/>
 												</FormField>
 
-												{/* Alamat Lengkap */}
+												{/* Alamat Jalan */}
 												<FormField
 													id="alamat_lengkap"
-													label="Alamat Lengkap"
-													required
+													label="Alamat Jalan"
 													error={getError("alamat_lengkap")}
 													className="md:col-span-2"
 												>
 													<Textarea
 														id="alamat_lengkap"
-														placeholder="Alamat Lengkap Peserta, lihat di KK"
+														placeholder="Contoh: Jl. Kutilang No. 12 atau Jl. Diponegoro No. 25"
 														value={data.alamat_lengkap}
 														onChange={(e) => {
 															setData("alamat_lengkap", e.target.value);
@@ -702,6 +700,9 @@ export function RegistrationForm({
 														aria-invalid={hasError("alamat_lengkap")}
 														className="rounded-xl min-h-[80px]"
 													/>
+													<p className="text-muted-foreground text-xs">
+														Isi nama jalan/gang saja. Jika tidak diisi, akan otomatis digabungkan dari Dukuh, RT/RW, Desa, Kecamatan, Kabupaten, dan Provinsi.
+													</p>
 												</FormField>
 
 												{/* Dukuh */}

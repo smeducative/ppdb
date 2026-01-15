@@ -86,7 +86,7 @@
                             <a href="{{ route('ppdb.list.pendaftar.jurusan', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/ppdb/list-pendaftar/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>BDP</p>
+                                <p>BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -157,7 +157,7 @@
                             <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/ppdb/list/terdaftar-ulang/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>DU BDP</p>
+                                <p>DU BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -228,7 +228,7 @@
                             <a href="{{ route('ppdb.belum.daftar.ulang.list', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/ppdb/list/belum-daftar-ulang/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>BDU BDP</p>
+                                <p>BDU BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -299,7 +299,7 @@
                             <a href="{{ route('ppdb.seragam.show.jurusan', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/ukuran-seragam/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>BDP</p>
+                                <p>BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -364,7 +364,7 @@
                             <a href="{{ route('ppdb.kartu.show.jurusan', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/kartu-pendaftaran/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kartu BDP</p>
+                                <p>Kartu BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -428,7 +428,7 @@
                             <a href="{{ route('ppdb.formulir.show.jurusan', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/formulir/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Form BDP</p>
+                                <p>Form BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -492,7 +492,7 @@
                             <a href="{{ route('ppdb.surat.show.jurusan', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/surat/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Surat BDP</p>
+                                <p>Surat BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -563,7 +563,7 @@
                             <a href="{{ route('ppdb.kwitansi.show.jurusan', ['jurusan' => 4]) }}"
                                 class="nav-link {{ request()->is('dashboard/kwitansi/show/4') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kwitansi BDP</p>
+                                <p>Kwitansi BCF</p>
                             </a>
                         </li>
                         <li class="nav-item">

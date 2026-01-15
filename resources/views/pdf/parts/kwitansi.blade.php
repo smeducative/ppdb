@@ -16,7 +16,50 @@
         <div style="display: flex;align-items: center;justify-content: center;">
 
             <strong class="d-inline mr-2">No.</strong>
-            <div class="px-3 py-1 d-inline" style="border: 5px solid black;">{{ $kwitansi->pesertaPpdb->no_pendaftaran }}</div>
+            @php
+                $jurusanAbbr = $kwitansi->pesertaPpdb->jurusan->abbreviation ?? '';
+                $bgColor = '#FFFFFF';
+                $borderColor = '#000000';
+                $textColor = '#000000';
+                
+                switch ($jurusanAbbr) {
+                    case 'TBSM':
+                    case 'TSM':
+                        $bgColor = '#87CEFA'; 
+                        $borderColor = '#00689e';
+                        $textColor = '#000000';
+                        break;
+                    case 'TKR':
+                    case 'TKRO':
+                        $bgColor = '#00008B'; 
+                        $borderColor = '#000000';
+                        $textColor = '#FFFFFF';
+                        break;
+                    case 'TKJ':
+                    case 'TJKT':
+                        $bgColor = '#FF69B4'; 
+                        $borderColor = '#C71585';
+                        $textColor = '#FFFFFF';
+                        break;
+                    case 'ACP':
+                        $bgColor = '#800000'; 
+                        $borderColor = '#000000';
+                        $textColor = '#FFFFFF';
+                        break;
+                    case 'AT':
+                    case 'ATPH':
+                        $bgColor = '#008000'; 
+                        $borderColor = '#004d00';
+                        $textColor = '#FFFFFF';
+                        break;
+                    case 'BCF':
+                        $bgColor = '#FFD700'; 
+                        $borderColor = '#B8860B';
+                        $textColor = '#000000';
+                        break;
+                }
+            @endphp
+            <div class="px-3 py-1 d-inline" style="background-color: {{ $bgColor }}; border: 5px solid {{ $borderColor }}; border-radius: 5px; color: {{ $textColor }}; font-weight: bold; -webkit-print-color-adjust: exact; print-color-adjust: exact;">{{ $kwitansi->pesertaPpdb->no_pendaftaran }}</div>
         </div>
     </div>
 </div>

@@ -27,7 +27,7 @@ class UpdatePendaftarRequest extends FormRequest
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'nik' => 'required',
-            'alamat_lengkap' => 'required',
+            'alamat_lengkap' => 'nullable',
             'dukuh' => 'nullable',
             'rt' => 'nullable',
             'rw' => 'nullable',

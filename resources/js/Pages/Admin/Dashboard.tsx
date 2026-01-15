@@ -2,36 +2,36 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select";
-import { Head, Link, router } from "@inertiajs/react";
+import { cn } from "@/lib/utils";
+import { Head, router } from "@inertiajs/react";
 import {
-	ArrowRight,
-	Film,
-	Laptop,
-	Leaf,
-	Settings,
-	UserCheck,
-	Users,
-	UserX,
-	Wifi,
+    Film,
+    Laptop,
+    Leaf,
+    Settings,
+    UserCheck,
+    Users,
+    UserX,
+    Wifi,
 } from "lucide-react";
 import {
-	Bar,
-	BarChart,
-	CartesianGrid,
-	Cell,
-	Legend,
-	Pie,
-	PieChart,
-	ResponsiveContainer,
-	Tooltip,
-	XAxis,
-	YAxis,
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Cell,
+    Legend,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
 } from "recharts";
 
 interface DashboardProps {
@@ -66,7 +66,7 @@ const COLORS = [
 	"#3c8dbc",
 	"#6f42c1",
 ];
-const JURUSAN_LABELS = ["TKJ", "AT", "BDP", "TSM", "TKR", "ACP"];
+const JURUSAN_LABELS = ["TKJ", "AT", "BCF", "TSM", "TKR", "ACP"];
 
 export default function Dashboard({
 	count,
@@ -104,7 +104,7 @@ export default function Dashboard({
 	const pieData = [
 		{ name: "TKJ", value: count.tkj },
 		{ name: "AT", value: count.atph },
-		{ name: "BDP", value: count.bdp },
+		{ name: "BCF", value: count.bdp },
 		{ name: "TSM", value: count.tsm },
 		{ name: "TKR", value: count.tkr },
 		{ name: "ACP", value: count.acp },
@@ -113,7 +113,7 @@ export default function Dashboard({
 	const pieDuData = [
 		{ name: "TKJ", value: du.tkj },
 		{ name: "AT", value: du.atph },
-		{ name: "BDP", value: du.bdp },
+		{ name: "BCF", value: du.bdp },
 		{ name: "TSM", value: du.tsm },
 		{ name: "TKR", value: du.tkr },
 		{ name: "ACP", value: du.acp },
@@ -231,130 +231,118 @@ export default function Dashboard({
 
 				{/* Ringkasan Utama */}
 				<section>
-					<h3 className="mb-4 font-medium text-lg">Ringkasan Utama</h3>
+					<h3 className="mb-4 font-semibold text-xl">Ringkasan Utama</h3>
 					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-4">
 						<StatsCard
 							title="Total Pendaftar"
 							value={count.all}
 							icon={Users}
-							className="bg-amber-500/10 border-amber-500/20"
+							iconClassName="bg-amber-500"
 						/>
 						<StatsCard
 							title="Total Daftar Ulang"
 							value={du.all}
 							icon={UserCheck}
-							className="bg-amber-500/10 border-amber-500/20"
+							iconClassName="bg-sky-500"
 						/>
 						<StatsCard
 							title="Total Peserta Diterima"
 							value={penerimaan.diterima}
 							icon={UserCheck}
-							className="bg-amber-500/10 border-amber-500/20"
+							iconClassName="bg-emerald-500"
 						/>
 						<StatsCard
 							title="Total Peserta Ditolak"
 							value={penerimaan.ditolak}
 							icon={UserX}
-							className="bg-amber-500/10 border-amber-500/20"
+							iconClassName="bg-red-500"
 						/>
 					</div>
 				</section>
 
 				{/* Statistik per Jurusan */}
 				<section>
-					<h3 className="mb-4 font-medium text-lg">
+					<h3 className="mb-4 font-semibold text-xl">
 						Statistik per Jurusan - Pendaftar
 					</h3>
 					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6 mb-6">
-						<StatsCardWithLink
+						<StatsCard
 							title="AT"
 							value={count.atph}
 							icon={Leaf}
-							className="bg-green-500/10 border-green-500/20"
-							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 3 })}
+							iconClassName="bg-green-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="TSM"
 							value={count.tsm}
 							icon={Settings}
-							className="bg-blue-500/10 border-blue-500/20"
-							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 6 })}
+							iconClassName="bg-blue-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="TKR"
 							value={count.tkr}
 							icon={Settings}
-							className="bg-blue-500/10 border-blue-500/20"
-							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 7 })}
+							iconClassName="bg-cyan-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="TKJ"
 							value={count.tkj}
 							icon={Wifi}
-							className="bg-red-500/10 border-red-500/20"
-							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 1 })}
+							iconClassName="bg-rose-500"
 						/>
-						<StatsCardWithLink
-							title="BDP"
+						<StatsCard
+							title="BCF"
 							value={count.bdp}
 							icon={Film}
-							className="bg-orange-500/10 border-orange-500/20"
-							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 4 })}
+							iconClassName="bg-orange-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="ACP"
 							value={count.acp}
 							icon={Laptop}
-							className="bg-purple-500/10 border-purple-500/20"
-							href={route("ppdb.list.pendaftar.jurusan", { jurusan: 8 })}
+							iconClassName="bg-purple-500"
 						/>
 					</div>
 
-					<h3 className="mb-4 font-medium text-lg">
+					<h3 className="mb-4 font-semibold text-xl">
 						Statistik per Jurusan - Daftar Ulang
 					</h3>
 					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-6">
-						<StatsCardWithLink
+						<StatsCard
 							title="AT"
 							value={du.atph}
 							icon={Leaf}
-							className="bg-green-500/10 border-green-500/20"
-							href={route("ppdb.daftar.ulang.list", { jurusan: 3 })}
+							iconClassName="bg-green-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="TSM"
 							value={du.tsm}
 							icon={Settings}
-							className="bg-blue-500/10 border-blue-500/20"
-							href={route("ppdb.daftar.ulang.list", { jurusan: 6 })}
+							iconClassName="bg-blue-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="TKR"
 							value={du.tkr}
 							icon={Settings}
-							className="bg-blue-500/10 border-blue-500/20"
-							href={route("ppdb.daftar.ulang.list", { jurusan: 7 })}
+							iconClassName="bg-cyan-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="TKJ"
 							value={du.tkj}
 							icon={Wifi}
-							className="bg-red-500/10 border-red-500/20"
-							href={route("ppdb.daftar.ulang.list", { jurusan: 1 })}
+							iconClassName="bg-rose-500"
 						/>
-						<StatsCardWithLink
-							title="BDP"
+						<StatsCard
+							title="BCF"
 							value={du.bdp}
 							icon={Film}
-							className="bg-orange-500/10 border-orange-500/20"
-							href={route("ppdb.daftar.ulang.list", { jurusan: 4 })}
+							iconClassName="bg-orange-500"
 						/>
-						<StatsCardWithLink
+						<StatsCard
 							title="ACP"
 							value={du.acp}
 							icon={Laptop}
-							className="bg-purple-500/10 border-purple-500/20"
-							href={route("ppdb.daftar.ulang.list", { jurusan: 8 })}
+							iconClassName="bg-purple-500"
 						/>
 					</div>
 				</section>
@@ -370,7 +358,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Perbandingan Jenis Kelamin Pendaftar</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={genderData}>
 										<CartesianGrid strokeDasharray="3 3" />
@@ -390,7 +378,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Perbandingan Jenis Kelamin Daftar Ulang</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={genderDuData}>
 										<CartesianGrid strokeDasharray="3 3" />
@@ -410,7 +398,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Perbandingan Pendaftar Tiap Jurusan</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<PieChart>
 										<Pie
@@ -443,7 +431,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Perbandingan Daftar Ulang Tiap Jurusan</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<PieChart>
 										<Pie
@@ -484,7 +472,7 @@ export default function Dashboard({
 									Perbandingan Pendaftar Perbulan dengan Tahun Sebelumnya
 								</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={yearDiffData}>
 										<CartesianGrid strokeDasharray="3 3" />
@@ -514,7 +502,7 @@ export default function Dashboard({
 									Perbandingan Daftar Ulang Perbulan dengan Tahun Sebelumnya
 								</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={yearDiffDuData}>
 										<CartesianGrid strokeDasharray="3 3" />
@@ -548,7 +536,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Top 10 Sekolah Pendaftar</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={topSchoolsData} layout="vertical">
 										<CartesianGrid strokeDasharray="3 3" />
@@ -571,7 +559,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Top 10 Sekolah Daftar Ulang</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								<ResponsiveContainer width="100%" height={300}>
 									<BarChart data={topSchoolsDuData} layout="vertical">
 										<CartesianGrid strokeDasharray="3 3" />
@@ -598,7 +586,7 @@ export default function Dashboard({
 									</a>
 								</Button>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								{topSchoolsPendaftarCount &&
 								topSchoolsPendaftarCount.length > 0 ? (
 									<div className="border rounded-md overflow-x-auto">
@@ -637,7 +625,7 @@ export default function Dashboard({
 							<CardHeader>
 								<CardTitle>Top 10 Jumlah Daftar Ulang Per Sekolah</CardTitle>
 							</CardHeader>
-							<CardContent>
+							<CardContent className="px-1">
 								{topSchoolsDaftarUlangCount &&
 								topSchoolsDaftarUlangCount.length > 0 ? (
 									<div className="border rounded-md overflow-x-auto">
@@ -681,54 +669,26 @@ function StatsCard({
 	title,
 	value,
 	icon: Icon,
-	className,
+	iconClassName,
 }: {
 	title: string;
 	value: number;
 	icon: React.ComponentType<{ className?: string }>;
-	className?: string;
+	iconClassName?: string;
 }) {
 	return (
-		<Card className={className}>
-			<CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
-				<CardTitle className="font-medium text-sm">{title}</CardTitle>
-				<Icon className="w-4 h-4 text-muted-foreground" />
-			</CardHeader>
-			<CardContent>
-				<div className="font-bold text-2xl">{value}</div>
-			</CardContent>
-		</Card>
-	);
-}
-
-function StatsCardWithLink({
-	title,
-	value,
-	icon: Icon,
-	className,
-	href,
-}: {
-	title: string;
-	value: number;
-	icon: React.ComponentType<{ className?: string }>;
-	className?: string;
-	href: string;
-}) {
-	return (
-		<Card className={className}>
-			<CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
-				<CardTitle className="font-medium text-sm">{title}</CardTitle>
-				<Icon className="w-4 h-4 text-muted-foreground" />
-			</CardHeader>
-			<CardContent>
-				<div className="font-bold text-2xl">{value}</div>
-			</CardContent>
-			<Link
-				href={href}
-				className="flex justify-center items-center gap-1 bg-black/10 dark:bg-white/10 px-3 py-2 rounded-b-lg w-full text-sm hover:underline"
-			>
-				More info <ArrowRight className="w-3 h-3" />
-			</Link>
+		<Card className="py-4">
+			<div className="flex items-center px-4 gap-4">
+				<div className={cn("p-3 rounded-lg shrink-0", iconClassName)}>
+					<Icon className="w-6 h-6 text-white" />
+				</div>
+				<div>
+					<div className="text-2xl font-bold leading-none">{value}</div>
+					<div className="text-sm font-medium text-muted-foreground mt-1">
+						{title}
+					</div>
+				</div>
+			</div>
 		</Card>
 	);
 }
