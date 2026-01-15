@@ -61,7 +61,7 @@
             <td>{{ $peserta->nik }}</td>
         </tr>
         <tr>
-            <td width="29.6%">6. &ensp; Alamat Lengkap</td>
+            <td width="29.6%">6. &ensp; Alamat Jalan</td>
             <td width="1%">:</td>
             <td>
                 {{ $peserta->alamat_lengkap }},

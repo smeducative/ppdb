@@ -23,6 +23,7 @@ import {
 	SidebarMenuSub,
 	SidebarMenuSubButton,
 	SidebarMenuSubItem,
+	useSidebar,
 } from "@/components/ui/sidebar";
 import { Link, usePage } from "@inertiajs/react";
 import {
@@ -46,6 +47,7 @@ import {
 	UserPlus,
 	UserX,
 } from "lucide-react";
+import { useEffect } from "react";
 
 const jurusanItems = [
 	{ id: 3, name: "AT" },
@@ -59,8 +61,16 @@ const jurusanItems = [
 
 export function AppSidebar() {
 	const { url, props } = usePage<any>();
+	const { isMobile, setOpenMobile } = useSidebar();
 	const user = props.auth?.user;
 	const tahun = props.tahun || new Date().getFullYear();
+
+	// Close sidebar on mobile when navigating
+	useEffect(() => {
+		if (isMobile) {
+			setOpenMobile(false);
+		}
+	}, [url, isMobile, setOpenMobile]);
 
 	const isActive = (path: string) => url.startsWith(path);
 

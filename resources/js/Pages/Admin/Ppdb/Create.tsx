@@ -231,13 +231,16 @@ export default function Create({ jurusan }: Props) {
 								</div>
 
 								<div className="space-y-2">
-									<Label htmlFor="alamat_lengkap">Alamat Lengkap *</Label>
+									<Label htmlFor="alamat_lengkap">Alamat Jalan</Label>
 									<Textarea
 										id="alamat_lengkap"
+										placeholder="Contoh: Jl. Kutilang No. 12 atau Jl. Diponegoro No. 25"
 										value={data.alamat_lengkap}
 										onChange={(e) => setData("alamat_lengkap", e.target.value)}
-										required
 									/>
+									<p className="text-muted-foreground text-xs">
+										Isi nama jalan/gang saja. Jika tidak diisi, akan otomatis digabungkan dari Dukuh, RT/RW, Desa, Kecamatan, Kabupaten, dan Provinsi.
+									</p>
 								</div>
 
 								<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
