@@ -605,6 +605,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 												type="number"
 												value={data.juara_ke}
 												onChange={(e) => setData("juara_ke", e.target.value)}
+												placeholder="Contoh: 1, 2, 3"
 											/>
 										</div>
 										<div className="space-y-2">

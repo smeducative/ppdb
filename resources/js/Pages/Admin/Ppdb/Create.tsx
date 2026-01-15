@@ -153,6 +153,7 @@ export default function Create({ jurusan }: Props) {
 											id="nama_lengkap"
 											value={data.nama_lengkap}
 											onChange={(e) => setData("nama_lengkap", e.target.value)}
+											placeholder="Masukkan nama lengkap sesuai ijazah"
 											required
 										/>
 										{errors.nama_lengkap && (
@@ -186,6 +187,7 @@ export default function Create({ jurusan }: Props) {
 											id="tempat_lahir"
 											value={data.tempat_lahir}
 											onChange={(e) => setData("tempat_lahir", e.target.value)}
+											placeholder="Contoh: Karanganyar"
 											required
 										/>
 									</div>
@@ -214,6 +216,7 @@ export default function Create({ jurusan }: Props) {
 											id="nik"
 											value={data.nik}
 											onChange={(e) => setData("nik", e.target.value)}
+											placeholder="Masukkan 16 digit NIK"
 											required
 										/>
 									</div>
@@ -225,6 +228,7 @@ export default function Create({ jurusan }: Props) {
 											type="number"
 											value={data.no_hp}
 											onChange={(e) => setData("no_hp", e.target.value)}
+											placeholder="Contoh: 08xxxxxxxxxx"
 											required
 										/>
 									</div>
@@ -317,6 +321,7 @@ export default function Create({ jurusan }: Props) {
 											id="asal_sekolah"
 											value={data.asal_sekolah}
 											onChange={(e) => setData("asal_sekolah", e.target.value)}
+											placeholder="Contoh: SMP N 1 Karanganyar"
 											required
 										/>
 									</div>
@@ -349,6 +354,7 @@ export default function Create({ jurusan }: Props) {
 											id="nisn"
 											value={data.nisn}
 											onChange={(e) => setData("nisn", e.target.value)}
+											placeholder="Masukkan 10 digit NISN"
 										/>
 									</div>
 
@@ -381,6 +387,7 @@ export default function Create({ jurusan }: Props) {
 											id="nama_ayah"
 											value={data.nama_ayah}
 											onChange={(e) => setData("nama_ayah", e.target.value)}
+											placeholder="Nama lengkap ayah"
 											required
 										/>
 									</div>
@@ -390,6 +397,7 @@ export default function Create({ jurusan }: Props) {
 											id="no_ayah"
 											value={data.no_ayah}
 											onChange={(e) => setData("no_ayah", e.target.value)}
+											placeholder="Contoh: 08xxxxxxxxxx"
 										/>
 									</div>
 									<div className="space-y-2">
@@ -400,6 +408,7 @@ export default function Create({ jurusan }: Props) {
 											onChange={(e) =>
 												setData("pekerjaan_ayah", e.target.value)
 											}
+											placeholder="Contoh: Wiraswasta, Petani, PNS"
 										/>
 									</div>
 
@@ -411,6 +420,7 @@ export default function Create({ jurusan }: Props) {
 											id="nama_ibu"
 											value={data.nama_ibu}
 											onChange={(e) => setData("nama_ibu", e.target.value)}
+											placeholder="Nama lengkap ibu kandung"
 											required
 										/>
 									</div>
@@ -420,6 +430,7 @@ export default function Create({ jurusan }: Props) {
 											id="no_ibu"
 											value={data.no_ibu}
 											onChange={(e) => setData("no_ibu", e.target.value)}
+											placeholder="Contoh: 08xxxxxxxxxx"
 										/>
 									</div>
 									<div className="space-y-2">
@@ -428,6 +439,7 @@ export default function Create({ jurusan }: Props) {
 											id="pekerjaan_ibu"
 											value={data.pekerjaan_ibu}
 											onChange={(e) => setData("pekerjaan_ibu", e.target.value)}
+											placeholder="Contoh: Ibu rumah tangga, Guru"
 										/>
 									</div>
 								</div>
@@ -480,6 +492,7 @@ export default function Create({ jurusan }: Props) {
 												type="number"
 												value={data.juara_ke}
 												onChange={(e) => setData("juara_ke", e.target.value)}
+												placeholder="Contoh: 1, 2, 3"
 											/>
 										</div>
 										<div className="space-y-2">
