@@ -28,11 +28,70 @@
 
 <!-- table  -->
 
+@php
+    $jurusanAbbr = $peserta->jurusan->abbreviation ?? '';
+    $bgColor = '#FFFFFF';
+    $borderColor = '#000000';
+    $textColor = '#000000';
+    
+    // Mapping warna background, border, dan text berdasarkan jurusan
+    // TSM & TKR: BIRU MUDA DAN BIRU TUA
+    // TJKT & ACP: PINK DAN MAROON
+    // AT: HIJAU
+    // BCF: KUNING
+    switch ($jurusanAbbr) {
+        case 'TBSM':
+        case 'TSM':
+            // Biru Muda (Light Sky Blue)
+            $bgColor = '#87CEFA'; 
+            $borderColor = '#00689e'; // Darker version of bg
+            $textColor = '#000000';
+            break;
+        case 'TKR':
+        case 'TKRO':
+            // Biru Tua (Dark Blue)
+            $bgColor = '#00008B'; 
+            $borderColor = '#000000'; // Black border for contrast
+            $textColor = '#FFFFFF';
+            break;
+        case 'TKJ':
+        case 'TJKT':
+            // Pink (Hot Pink)
+            $bgColor = '#FF69B4'; 
+            $borderColor = '#C71585'; // Medium Violet Red
+            $textColor = '#FFFFFF';
+            break;
+        case 'ACP':
+            // Maroon
+            $bgColor = '#800000'; 
+            $borderColor = '#000000';
+            $textColor = '#FFFFFF';
+            break;
+        case 'AT':
+        case 'ATPH':
+            // Hijau (Green)
+            $bgColor = '#008000'; 
+            $borderColor = '#004d00'; // Darker Green
+            $textColor = '#FFFFFF';
+            break;
+        case 'BCF':
+            // Kuning (Gold)
+            $bgColor = '#FFD700'; 
+            $borderColor = '#B8860B'; // Dark Golden Rod
+            $textColor = '#000000';
+            break;
+    }
+@endphp
+
 <table class="m-2" style="font-size: 16px;">
     <tr>
         <td class="p-1" width="37%">No. Pendaftaran</td>
         <td class="p-1" width="5%">:</td>
-        <td class="">{{ $peserta->no_pendaftaran }}</td>
+        <td class="">
+            <span style="background-color: {{ $bgColor }}; color: {{ $textColor }}; border: 2px solid {{ $borderColor }}; border-radius: 5px; padding: 2px 5px; font-weight: bold; display: inline-block; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
+                {{ $peserta->no_pendaftaran }}
+            </span>
+        </td>
     </tr>
     <tr>
         <td class="p-1" width="37%">Nama Lengkap</td>

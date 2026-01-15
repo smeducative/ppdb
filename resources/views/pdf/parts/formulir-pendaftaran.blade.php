@@ -27,7 +27,50 @@
 
 <!-- isi -->
 <div class="float-right">
-    <strong style="font-size: 20px;">{{ $peserta->no_pendaftaran }}</strong>
+    @php
+        $jurusanAbbr = $peserta->jurusan->abbreviation ?? '';
+        $bgColor = '#FFFFFF';
+        $borderColor = '#000000';
+        $textColor = '#000000';
+        
+        switch ($jurusanAbbr) {
+            case 'TBSM':
+            case 'TSM':
+                $bgColor = '#87CEFA'; 
+                $borderColor = '#00689e';
+                $textColor = '#000000';
+                break;
+            case 'TKR':
+            case 'TKRO':
+                $bgColor = '#00008B'; 
+                $borderColor = '#000000';
+                $textColor = '#FFFFFF';
+                break;
+            case 'TKJ':
+            case 'TJKT':
+                $bgColor = '#FF69B4'; 
+                $borderColor = '#C71585';
+                $textColor = '#FFFFFF';
+                break;
+            case 'ACP':
+                $bgColor = '#800000'; 
+                $borderColor = '#000000';
+                $textColor = '#FFFFFF';
+                break;
+            case 'AT':
+            case 'ATPH':
+                $bgColor = '#008000'; 
+                $borderColor = '#004d00';
+                $textColor = '#FFFFFF';
+                break;
+            case 'BCF':
+                $bgColor = '#FFD700'; 
+                $borderColor = '#B8860B';
+                $textColor = '#000000';
+                break;
+        }
+    @endphp
+    <strong style="font-size: 20px; background-color: {{ $bgColor }}; color: {{ $textColor }}; border: 2px solid {{ $borderColor }}; border-radius: 5px; padding: 2px 5px; display: inline-block; -webkit-print-color-adjust: exact; print-color-adjust: exact;">{{ $peserta->no_pendaftaran }}</strong>
 </div>
 
 <div class="" style="font-size: 19px; margin-left: 22px">
