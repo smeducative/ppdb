@@ -173,7 +173,7 @@
                             <div class="inner">
                                 <h3>{{ $count['bdp'] }}</h3>
 
-                                <p>BDP</p>
+                                <p>BCF</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-film-marker"></i>
@@ -278,7 +278,7 @@
                             <div class="inner">
                                 <h3>{{ $du['bdp'] }}</h3>
 
-                                <p>BDP</p>
+                                <p>BCF</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-film-marker"></i>
@@ -554,7 +554,7 @@
 
             // pendaftar
             var areaChartData = {
-                labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
+                labels: ['TKJ', 'AT', 'BCF', 'TSM', 'TKR', 'ACP'],
                 datasets: [{
                         label: 'Laki-laki',
                         backgroundColor: 'rgba(60,141,188,0.9)',
@@ -607,7 +607,7 @@
 
             // daftar ulang
             var areaDuChartData = {
-                labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
+                labels: ['TKJ', 'AT', 'BCF', 'TSM', 'TKR', 'ACP'],
                 datasets: [{
                         label: 'Laki-laki',
                         backgroundColor: 'rgba(60,141,188,0.9)',
@@ -779,7 +779,7 @@
             var pieChartElem = $('#pieChart').get(0);
             if (pieChartElem) {
                 var donutData = {
-                    labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
+                    labels: ['TKJ', 'AT', 'BCF', 'TSM', 'TKR', 'ACP'],
                     datasets: [{
                         data: {!! collect($count)->except(['all', 'to'])->values() !!},
                         backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc', '#6f42c1'],
@@ -803,7 +803,7 @@
             var pieDuChartElem = $('#pieDuChart').get(0);
             if (pieDuChartElem) {
                 var donutDuData = {
-                    labels: ['TKJ', 'AT', 'BDP', 'TSM', 'TKR', 'ACP'],
+                    labels: ['TKJ', 'AT', 'BCF', 'TSM', 'TKR', 'ACP'],
                     datasets: [{
                         data: {!! collect($du)->except(['all', 'to'])->values() !!},
                         backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc', '#6f42c1'],

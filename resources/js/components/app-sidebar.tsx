@@ -53,7 +53,7 @@ const jurusanItems = [
 	{ id: 3, name: "AT" },
 	{ id: 2, name: "TO" },
 	{ id: 1, name: "TKJ" },
-	{ id: 4, name: "BDP" },
+	{ id: 4, name: "BCF" },
 	{ id: 6, name: "TSM" },
 	{ id: 7, name: "TKR" },
 	{ id: 8, name: "ACP" },

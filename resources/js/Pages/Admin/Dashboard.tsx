@@ -66,7 +66,7 @@ const COLORS = [
 	"#3c8dbc",
 	"#6f42c1",
 ];
-const JURUSAN_LABELS = ["TKJ", "AT", "BDP", "TSM", "TKR", "ACP"];
+const JURUSAN_LABELS = ["TKJ", "AT", "BCF", "TSM", "TKR", "ACP"];
 
 export default function Dashboard({
 	count,
@@ -104,7 +104,7 @@ export default function Dashboard({
 	const pieData = [
 		{ name: "TKJ", value: count.tkj },
 		{ name: "AT", value: count.atph },
-		{ name: "BDP", value: count.bdp },
+		{ name: "BCF", value: count.bdp },
 		{ name: "TSM", value: count.tsm },
 		{ name: "TKR", value: count.tkr },
 		{ name: "ACP", value: count.acp },
@@ -113,7 +113,7 @@ export default function Dashboard({
 	const pieDuData = [
 		{ name: "TKJ", value: du.tkj },
 		{ name: "AT", value: du.atph },
-		{ name: "BDP", value: du.bdp },
+		{ name: "BCF", value: du.bdp },
 		{ name: "TSM", value: du.tsm },
 		{ name: "TKR", value: du.tkr },
 		{ name: "ACP", value: du.acp },
@@ -291,7 +291,7 @@ export default function Dashboard({
 							className="bg-rose-100 border-rose-300 dark:bg-rose-900/40 dark:border-rose-700"
 						/>
 						<StatsCard
-							title="BDP"
+							title="BCF"
 							value={count.bdp}
 							icon={Film}
 							className="bg-orange-100 border-orange-300 dark:bg-orange-900/40 dark:border-orange-700"
@@ -333,7 +333,7 @@ export default function Dashboard({
 							className="bg-rose-100 border-rose-300 dark:bg-rose-900/40 dark:border-rose-700"
 						/>
 						<StatsCard
-							title="BDP"
+							title="BCF"
 							value={du.bdp}
 							icon={Film}
 							className="bg-orange-100 border-orange-300 dark:bg-orange-900/40 dark:border-orange-700"

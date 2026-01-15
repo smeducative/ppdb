@@ -54,7 +54,7 @@ const scholarships = [
 		description: "Usulan dari Pengurus Ranting NU Se-MWC Karanganyar",
 		benefits: [{ rank: "Rekomendasi MWC", reward: "Bebas SPP 1,5 Tahun" }],
 		color: "from-teal-500 to-cyan-600",
-		requirement: "Berlaku untuk jurusan TKR, TJKT, dan BDP",
+		requirement: "Berlaku untuk jurusan TKR, TJKT, dan BCF",
 	},
 	{
 		icon: Leaf,
