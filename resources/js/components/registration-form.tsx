@@ -7,8 +7,21 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
 	Select,
@@ -18,15 +31,18 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { SCHOOLS } from "@/data/schools";
 import { cn } from "@/lib/utils";
 import { router, useForm as useInertiaForm, usePage } from "@inertiajs/react";
 import confetti from "canvas-confetti";
 import gsap from "gsap";
 import {
 	Award,
+	Check,
 	CheckCircle2,
 	ChevronLeft,
 	ChevronRight,
+	ChevronsUpDown,
 	GraduationCap,
 	Home,
 	MessageSquare,
@@ -112,6 +128,9 @@ export function RegistrationForm({
 	const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [registrationNumber, setRegistrationNumber] = useState<string>("");
+
+	const [openSchool, setOpenSchool] = useState(false);
+	const [schoolSearch, setSchoolSearch] = useState("");
 
 	// Get flash messages from the page props
 	const { flash } = usePage<{ flash: { success?: string } }>().props;
@@ -635,6 +654,7 @@ export function RegistrationForm({
 													<Input
 														id="tanggal_lahir"
 														type="date"
+														placeholder="Pilih tanggal lahir"
 														value={data.tanggal_lahir}
 														onChange={(e) => {
 															setData("tanggal_lahir", e.target.value);
@@ -847,17 +867,86 @@ export function RegistrationForm({
 													required
 													error={getError("asal_sekolah")}
 												>
-													<Input
-														id="asal_sekolah"
-														placeholder="Asal Sekolah Peserta"
-														value={data.asal_sekolah}
-														onChange={(e) => {
-															setData("asal_sekolah", e.target.value);
-															clearError("asal_sekolah");
-														}}
-														aria-invalid={hasError("asal_sekolah")}
-														className="rounded-xl h-12"
-													/>
+													<Popover open={openSchool} onOpenChange={setOpenSchool}>
+														<PopoverTrigger asChild>
+															<Button
+																variant="outline"
+																role="combobox"
+																aria-expanded={openSchool}
+																className={cn(
+																	"justify-between w-full rounded-xl h-12 text-left font-normal",
+																	!data.asal_sekolah && "text-muted-foreground",
+																	hasError("asal_sekolah") &&
+																		"border-destructive ring-destructive/20 ring-[3px]",
+																)}
+															>
+																{data.asal_sekolah
+																	? data.asal_sekolah
+																	: "Pilih sekolah..."}
+																<ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
+															</Button>
+														</PopoverTrigger>
+														<PopoverContent className="p-0 w-[--radix-popover-trigger-width]">
+															<Command>
+																<CommandInput
+																	placeholder="Cari sekolah..."
+																	value={schoolSearch}
+																	onValueChange={setSchoolSearch}
+																/>
+																<CommandList>
+																	<CommandEmpty>
+																		<div className="p-2 text-center">
+																			<p className="text-muted-foreground text-sm">
+																				Sekolah tidak ditemukan.
+																			</p>
+																			<Button
+																				variant="outline"
+																				className="mt-2 w-full h-8 text-xs"
+																				onClick={() => {
+																					setData(
+																						"asal_sekolah",
+																						schoolSearch.toUpperCase(),
+																					);
+																					clearError("asal_sekolah");
+																					setOpenSchool(false);
+																				}}
+																			>
+																				Gunakan "{schoolSearch.toUpperCase()}"
+																			</Button>
+																		</div>
+																	</CommandEmpty>
+																	<CommandGroup>
+																		{SCHOOLS.map((school) => (
+																			<CommandItem
+																				key={school}
+																				value={school}
+																				onSelect={(currentValue) => {
+																					// We use the original school name to preserve case (though SCHOOLS are uppercase)
+																					setData("asal_sekolah", school);
+																					clearError("asal_sekolah");
+																					setOpenSchool(false);
+																				}}
+																			>
+																				<Check
+																					className={cn(
+																						"mr-2 h-4 w-4",
+																						data.asal_sekolah === school
+																							? "opacity-100"
+																							: "opacity-0",
+																					)}
+																				/>
+																				{school}
+																			</CommandItem>
+																		))}
+																	</CommandGroup>
+																</CommandList>
+															</Command>
+														</PopoverContent>
+													</Popover>
+													<p className="text-muted-foreground text-xs">
+														Jika sekolah tidak ditemukan, ketik nama sekolah lengkap
+														dan pilih opsi 'Gunakan ...' untuk menambahkan.
+													</p>
 												</FormField>
 
 												{/* Tahun Lulus */}
