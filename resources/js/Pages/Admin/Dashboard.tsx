@@ -237,25 +237,25 @@ export default function Dashboard({
 							title="Total Pendaftar"
 							value={count.all}
 							icon={Users}
-							className="bg-amber-100 border-amber-300 dark:bg-amber-900/40 dark:border-amber-700"
+							iconClassName="bg-amber-500"
 						/>
 						<StatsCard
 							title="Total Daftar Ulang"
 							value={du.all}
 							icon={UserCheck}
-							className="bg-sky-100 border-sky-300 dark:bg-sky-900/40 dark:border-sky-700"
+							iconClassName="bg-sky-500"
 						/>
 						<StatsCard
 							title="Total Peserta Diterima"
 							value={penerimaan.diterima}
 							icon={UserCheck}
-							className="bg-emerald-100 border-emerald-300 dark:bg-emerald-900/40 dark:border-emerald-700"
+							iconClassName="bg-emerald-500"
 						/>
 						<StatsCard
 							title="Total Peserta Ditolak"
 							value={penerimaan.ditolak}
 							icon={UserX}
-							className="bg-red-100 border-red-300 dark:bg-red-900/40 dark:border-red-700"
+							iconClassName="bg-red-500"
 						/>
 					</div>
 				</section>
@@ -270,37 +270,37 @@ export default function Dashboard({
 							title="AT"
 							value={count.atph}
 							icon={Leaf}
-							className="bg-green-100 border-green-300 dark:bg-green-900/40 dark:border-green-700"
+							iconClassName="bg-green-500"
 						/>
 						<StatsCard
 							title="TSM"
 							value={count.tsm}
 							icon={Settings}
-							className="bg-blue-100 border-blue-300 dark:bg-blue-900/40 dark:border-blue-700"
+							iconClassName="bg-blue-500"
 						/>
 						<StatsCard
 							title="TKR"
 							value={count.tkr}
 							icon={Settings}
-							className="bg-cyan-100 border-cyan-300 dark:bg-cyan-900/40 dark:border-cyan-700"
+							iconClassName="bg-cyan-500"
 						/>
 						<StatsCard
 							title="TKJ"
 							value={count.tkj}
 							icon={Wifi}
-							className="bg-rose-100 border-rose-300 dark:bg-rose-900/40 dark:border-rose-700"
+							iconClassName="bg-rose-500"
 						/>
 						<StatsCard
 							title="BCF"
 							value={count.bdp}
 							icon={Film}
-							className="bg-orange-100 border-orange-300 dark:bg-orange-900/40 dark:border-orange-700"
+							iconClassName="bg-orange-500"
 						/>
 						<StatsCard
 							title="ACP"
 							value={count.acp}
 							icon={Laptop}
-							className="bg-purple-100 border-purple-300 dark:bg-purple-900/40 dark:border-purple-700"
+							iconClassName="bg-purple-500"
 						/>
 					</div>
 
@@ -312,37 +312,37 @@ export default function Dashboard({
 							title="AT"
 							value={du.atph}
 							icon={Leaf}
-							className="bg-green-100 border-green-300 dark:bg-green-900/40 dark:border-green-700"
+							iconClassName="bg-green-500"
 						/>
 						<StatsCard
 							title="TSM"
 							value={du.tsm}
 							icon={Settings}
-							className="bg-blue-100 border-blue-300 dark:bg-blue-900/40 dark:border-blue-700"
+							iconClassName="bg-blue-500"
 						/>
 						<StatsCard
 							title="TKR"
 							value={du.tkr}
 							icon={Settings}
-							className="bg-cyan-100 border-cyan-300 dark:bg-cyan-900/40 dark:border-cyan-700"
+							iconClassName="bg-cyan-500"
 						/>
 						<StatsCard
 							title="TKJ"
 							value={du.tkj}
 							icon={Wifi}
-							className="bg-rose-100 border-rose-300 dark:bg-rose-900/40 dark:border-rose-700"
+							iconClassName="bg-rose-500"
 						/>
 						<StatsCard
 							title="BCF"
 							value={du.bdp}
 							icon={Film}
-							className="bg-orange-100 border-orange-300 dark:bg-orange-900/40 dark:border-orange-700"
+							iconClassName="bg-orange-500"
 						/>
 						<StatsCard
 							title="ACP"
 							value={du.acp}
 							icon={Laptop}
-							className="bg-purple-100 border-purple-300 dark:bg-purple-900/40 dark:border-purple-700"
+							iconClassName="bg-purple-500"
 						/>
 					</div>
 				</section>
@@ -669,22 +669,26 @@ function StatsCard({
 	title,
 	value,
 	icon: Icon,
-	className,
+	iconClassName,
 }: {
 	title: string;
 	value: number;
 	icon: React.ComponentType<{ className?: string }>;
-	className?: string;
+	iconClassName?: string;
 }) {
 	return (
-		<Card className={cn("py-4", className)}>
-			<CardHeader className="flex flex-row justify-between items-center space-y-0 px-4">
-				<CardTitle className="font-semibold text-base">{title}</CardTitle>
-				<Icon className="w-5 h-5 text-muted-foreground/70" />
-			</CardHeader>
-			<CardContent className="px-4">
-				<div className="font-bold text-3xl">{value}</div>
-			</CardContent>
+		<Card className="py-4">
+			<div className="flex items-center px-4 gap-4">
+				<div className={cn("p-3 rounded-lg shrink-0", iconClassName)}>
+					<Icon className="w-6 h-6 text-white" />
+				</div>
+				<div>
+					<div className="text-2xl font-bold leading-none">{value}</div>
+					<div className="text-sm font-medium text-muted-foreground mt-1">
+						{title}
+					</div>
+				</div>
+			</div>
 		</Card>
 	);
 }
