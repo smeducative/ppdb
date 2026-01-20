@@ -2,6 +2,7 @@ import { AlertMessages } from "@/components/alert-messages";
 import { type Column, DataTable } from "@/components/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Dialog,
 	DialogContent,
@@ -34,6 +35,13 @@ interface UkuranSeragam {
 	jas: string | null;
 	sepatu: string | null;
 	peci: string | null;
+	seragam_praktik: boolean;
+	baju_batik: boolean;
+	seragam_olahraga: boolean;
+	jas_almamater: boolean;
+	kaos_bintalsik: boolean;
+	atribut: boolean;
+	kegiatan_bintalsik: boolean;
 }
 
 interface Peserta {
@@ -84,6 +92,13 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 		jas: "",
 		sepatu: "",
 		peci: "",
+		seragam_praktik: false,
+		baju_batik: false,
+		seragam_olahraga: false,
+		jas_almamater: false,
+		kaos_bintalsik: false,
+		atribut: false,
+		kegiatan_bintalsik: false,
 	});
 
 	const handleEdit = (peserta: Peserta) => {
@@ -94,6 +109,13 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			jas: peserta.ukuran_seragam?.jas || "",
 			sepatu: peserta.ukuran_seragam?.sepatu || "",
 			peci: peserta.ukuran_seragam?.peci || "",
+			seragam_praktik: peserta.ukuran_seragam?.seragam_praktik || false,
+			baju_batik: peserta.ukuran_seragam?.baju_batik || false,
+			seragam_olahraga: peserta.ukuran_seragam?.seragam_olahraga || false,
+			jas_almamater: peserta.ukuran_seragam?.jas_almamater || false,
+			kaos_bintalsik: peserta.ukuran_seragam?.kaos_bintalsik || false,
+			atribut: peserta.ukuran_seragam?.atribut || false,
+			kegiatan_bintalsik: peserta.ukuran_seragam?.kegiatan_bintalsik || false,
 		});
 		setOpen(true);
 	};
@@ -216,14 +238,14 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 				/>
 
 				<Dialog open={open} onOpenChange={setOpen}>
-					<DialogContent className="sm:max-w-[425px]">
+					<DialogContent className="sm:max-w-[600px]">
 						<DialogHeader>
 							<DialogTitle>Ubah Ukuran Seragam</DialogTitle>
 							<DialogDescription>
 								{selectedPeserta?.nama_lengkap}
 							</DialogDescription>
 						</DialogHeader>
-						<form onSubmit={submit} className="space-y-4">
+						<form onSubmit={submit} className="space-y-6">
 							<div className="gap-4 grid grid-cols-2">
 								<div className="space-y-2">
 									<Label htmlFor="baju">Ukuran Baju</Label>
@@ -241,8 +263,84 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 										onChange={(e) => setData("jas", e.target.value)}
 									/>
 								</div>
-								{/* Sepatu & Peci logic commented out in original blade, keeping it consistent or uncomment if needed */}
 							</div>
+
+							<div className="space-y-4">
+								<Label className="text-base font-semibold">Ceklist Kelengkapan</Label>
+								<div className="gap-4 grid grid-cols-2">
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="seragam_praktik"
+											checked={formData.seragam_praktik}
+											onCheckedChange={(checked) =>
+												setData("seragam_praktik", !!checked)
+											}
+										/>
+										<Label htmlFor="seragam_praktik">Seragam Praktik</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="baju_batik"
+											checked={formData.baju_batik}
+											onCheckedChange={(checked) =>
+												setData("baju_batik", !!checked)
+											}
+										/>
+										<Label htmlFor="baju_batik">Baju Batik</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="seragam_olahraga"
+											checked={formData.seragam_olahraga}
+											onCheckedChange={(checked) =>
+												setData("seragam_olahraga", !!checked)
+											}
+										/>
+										<Label htmlFor="seragam_olahraga">Seragam Olahraga</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="jas_almamater"
+											checked={formData.jas_almamater}
+											onCheckedChange={(checked) =>
+												setData("jas_almamater", !!checked)
+											}
+										/>
+										<Label htmlFor="jas_almamater">Jas Almamater</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="kaos_bintalsik"
+											checked={formData.kaos_bintalsik}
+											onCheckedChange={(checked) =>
+												setData("kaos_bintalsik", !!checked)
+											}
+										/>
+										<Label htmlFor="kaos_bintalsik">Kaos Bintalsik</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="atribut"
+											checked={formData.atribut}
+											onCheckedChange={(checked) =>
+												setData("atribut", !!checked)
+											}
+										/>
+										<Label htmlFor="atribut">Atribut</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<Checkbox
+											id="kegiatan_bintalsik"
+											checked={formData.kegiatan_bintalsik}
+											onCheckedChange={(checked) =>
+												setData("kegiatan_bintalsik", !!checked)
+											}
+										/>
+										<Label htmlFor="kegiatan_bintalsik">Kegiatan Bintalsik</Label>
+									</div>
+								</div>
+							</div>
+
 							<DialogFooter>
 								<Button type="submit" disabled={processing}>
 									Simpan Perubahan
