@@ -46,6 +46,13 @@ class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, Wit
             'Jas',
             'Sepatu',
             'Peci',
+            'Seragam Praktik',
+            'Baju Batik',
+            'Seragam Olahraga',
+            'Jas Almamater',
+            'Kaos Bintalsik',
+            'Atribut',
+            'Kegiatan Bintalsik',
         ];
     }
 
@@ -57,10 +64,17 @@ class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, Wit
             $row->jenis_kelamin === 'p' ? 'Perempuan' : 'Laki-laki',
             $row->tempat_lahir,
             $row->tanggal_lahir?->format('d-m-Y'),
-            $row->ukuranSeragam->baju ?? '-',
-            $row->ukuranSeragam->jas ?? '-',
-            $row->ukuranSeragam->sepatu ?? '-',
-            $row->ukuranSeragam->peci ?? '-',
+            $row->ukuranSeragam?->baju ?? '-',
+            $row->ukuranSeragam?->jas ?? '-',
+            $row->ukuranSeragam?->sepatu ?? '-',
+            $row->ukuranSeragam?->peci ?? '-',
+            ($row->ukuranSeragam?->seragam_praktik ?? false) ? 'Ya' : 'Tidak',
+            ($row->ukuranSeragam?->baju_batik ?? false) ? 'Ya' : 'Tidak',
+            ($row->ukuranSeragam?->seragam_olahraga ?? false) ? 'Ya' : 'Tidak',
+            ($row->ukuranSeragam?->jas_almamater ?? false) ? 'Ya' : 'Tidak',
+            ($row->ukuranSeragam?->kaos_bintalsik ?? false) ? 'Ya' : 'Tidak',
+            ($row->ukuranSeragam?->atribut ?? false) ? 'Ya' : 'Tidak',
+            ($row->ukuranSeragam?->kegiatan_bintalsik ?? false) ? 'Ya' : 'Tidak',
         ];
     }
 }

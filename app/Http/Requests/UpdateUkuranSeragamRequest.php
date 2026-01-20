@@ -27,6 +27,13 @@ class UpdateUkuranSeragamRequest extends FormRequest
             'jas' => ['nullable'],
             'sepatu' => ['nullable'],
             'peci' => ['nullable'],
+            'seragam_praktik' => ['boolean'],
+            'baju_batik' => ['boolean'],
+            'seragam_olahraga' => ['boolean'],
+            'jas_almamater' => ['boolean'],
+            'kaos_bintalsik' => ['boolean'],
+            'atribut' => ['boolean'],
+            'kegiatan_bintalsik' => ['boolean'],
         ];
     }
 }

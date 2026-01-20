@@ -13,6 +13,19 @@ class UkuranSeragam extends Model
 
     protected $guarded = [];
 
+    protected function casts(): array
+    {
+        return [
+            'seragam_praktik' => 'boolean',
+            'baju_batik' => 'boolean',
+            'seragam_olahraga' => 'boolean',
+            'jas_almamater' => 'boolean',
+            'kaos_bintalsik' => 'boolean',
+            'atribut' => 'boolean',
+            'kegiatan_bintalsik' => 'boolean',
+        ];
+    }
+
     public function pesertaPpdb()
     {
         return $this->belongsTo(PesertaPPDB::class, 'peserta_ppdb_id');

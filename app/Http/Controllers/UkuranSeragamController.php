@@ -41,6 +41,13 @@ class UkuranSeragamController extends Controller
                 'jas' => $request->input('jas'),
                 'sepatu' => $request->input('sepatu'),
                 'peci' => $request->input('peci'),
+                'seragam_praktik' => $request->boolean('seragam_praktik'),
+                'baju_batik' => $request->boolean('baju_batik'),
+                'seragam_olahraga' => $request->boolean('seragam_olahraga'),
+                'jas_almamater' => $request->boolean('jas_almamater'),
+                'kaos_bintalsik' => $request->boolean('kaos_bintalsik'),
+                'atribut' => $request->boolean('atribut'),
+                'kegiatan_bintalsik' => $request->boolean('kegiatan_bintalsik'),
             ]
         );
 
