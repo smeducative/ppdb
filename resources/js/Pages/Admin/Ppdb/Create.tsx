@@ -51,7 +51,7 @@ export default function Create({ jurusan }: Props) {
 		kode_pos: "",
 		pilihan_jurusan: "",
 		asal_sekolah: "",
-		tahun_lulus: new Date().getFullYear().toString(),
+		tahun_lulus: "",
 		nisn: "",
 		penerima_kip: false,
 		no_kip: "",
@@ -193,14 +193,12 @@ export default function Create({ jurusan }: Props) {
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="tanggal_lahir">
-											Tanggal Lahir (dd-mm-yyyy) *
-										</Label>
+										<Label htmlFor="tanggal_lahir">Tanggal Lahir *</Label>
 										<Input
 											id="tanggal_lahir"
+											type="date"
 											value={data.tanggal_lahir}
 											onChange={(e) => setData("tanggal_lahir", e.target.value)}
-											placeholder="01-01-2007"
 											required
 										/>
 										{errors.tanggal_lahir && (
@@ -217,6 +215,9 @@ export default function Create({ jurusan }: Props) {
 											value={data.nik}
 											onChange={(e) => setData("nik", e.target.value)}
 											placeholder="Masukkan 16 digit NIK"
+											minLength={16}
+											maxLength={16}
+											pattern="[0-9]{16}"
 											required
 										/>
 									</div>
@@ -337,7 +338,7 @@ export default function Create({ jurusan }: Props) {
 											</SelectTrigger>
 											<SelectContent>
 												{Array.from(
-													{ length: 10 },
+													{ length: 8 },
 													(_, i) => new Date().getFullYear() - i,
 												).map((y) => (
 													<SelectItem key={y} value={String(y)}>

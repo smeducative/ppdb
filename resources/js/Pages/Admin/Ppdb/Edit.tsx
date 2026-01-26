@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
 import { AlertMessages } from "@/components/alert-messages";
 import {
 	AlertDialog,
@@ -102,7 +104,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 		jenis_kelamin: peserta.jenis_kelamin || "l",
 		tempat_lahir: peserta.tempat_lahir || "",
 		tanggal_lahir: peserta.tanggal_lahir
-			? formatDateShort(peserta.tanggal_lahir)
+			? format(new Date(peserta.tanggal_lahir), "yyyy-MM-dd")
 			: "",
 		nik: peserta.nik || "",
 		alamat_lengkap: peserta.alamat_lengkap || "",
@@ -297,14 +299,12 @@ export default function Edit({ jurusan, peserta }: Props) {
 									</div>
 
 									<div className="space-y-2">
-										<Label htmlFor="tanggal_lahir">
-											Tanggal Lahir (dd-mm-yyyy) *
-										</Label>
+										<Label htmlFor="tanggal_lahir">Tanggal Lahir *</Label>
 										<Input
 											id="tanggal_lahir"
+											type="date"
 											value={data.tanggal_lahir}
 											onChange={(e) => setData("tanggal_lahir", e.target.value)}
-											placeholder="01-01-2007"
 											required
 										/>
 										{errors.tanggal_lahir && (
@@ -446,7 +446,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 											</SelectTrigger>
 											<SelectContent>
 												{Array.from(
-													{ length: 10 },
+													{ length: 8 },
 													(_, i) => new Date().getFullYear() - i,
 												).map((y) => (
 													<SelectItem key={y} value={String(y)}>
