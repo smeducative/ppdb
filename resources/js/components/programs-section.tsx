@@ -96,7 +96,7 @@ const programs = [
 	},
 	{
 		icon: Cpu,
-		title: "Axioo Class Program",
+		title: "Axioo Class Program (TJKT)",
 		shortName: "ACP",
 		description:
 			"Program kelas industri yang bekerjasama dengan Axioo untuk mencetak tenaga ahli di bidang teknologi informasi dan komputer.",

@@ -23,12 +23,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// redirect /pendaftaran to /register
+Route::redirect('/pendaftaran', '/register');
+
 Route::get('/', function () {
     return inertia('Landing');
 });
 Route::get('/register', function () {
     return inertia('Pendaftaran', [
-        'jurusan' => \App\Models\Jurusan::all()->map(fn ($j) => [
+        'jurusan' => \App\Models\Jurusan::all()->map(fn($j) => [
             'value' => $j->id,
             'label' => $j->nama,
         ]),

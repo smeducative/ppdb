@@ -189,7 +189,7 @@
                             <div class="inner">
                                 <h3>{{ $count['acp'] }}</h3>
 
-                                <p>ACP</p>
+                                <p>ACP (TJKT)</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-laptop"></i>
@@ -217,7 +217,8 @@
                             <div class="icon">
                                 <i class="ion ion-leaf"></i>
                             </div>
-                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}" class="small-box-footer">More
+                            <a href="{{ route('ppdb.daftar.ulang.list', ['jurusan' => 3]) }}"
+                                class="small-box-footer">More
                                 info <i class="fa-arrow-circle-right fas"></i></a>
                         </div>
                     </div>
@@ -294,7 +295,7 @@
                             <div class="inner">
                                 <h3>{{ $du['acp'] }}</h3>
 
-                                <p>ACP</p>
+                                <p>ACP (TJKT)</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-laptop"></i>
@@ -782,7 +783,9 @@
                     labels: ['TKJ', 'AT', 'BCF', 'TSM', 'TKR', 'ACP'],
                     datasets: [{
                         data: {!! collect($count)->except(['all', 'to'])->values() !!},
-                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc', '#6f42c1'],
+                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc',
+                            '#6f42c1'
+                        ],
                     }]
                 }
 
@@ -806,7 +809,9 @@
                     labels: ['TKJ', 'AT', 'BCF', 'TSM', 'TKR', 'ACP'],
                     datasets: [{
                         data: {!! collect($du)->except(['all', 'to'])->values() !!},
-                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc', '#6f42c1'],
+                        backgroundColor: ['#f56954', '#00c0ef', '#00a65a', '#f39c12', '#3c8dbc',
+                            '#6f42c1'
+                        ],
                     }]
                 }
 

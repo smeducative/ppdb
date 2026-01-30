@@ -4,14 +4,14 @@ import { Link } from "@inertiajs/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-	ArrowUp,
-	Clock,
-	Facebook,
-	Instagram,
-	Mail,
-	MapPin,
-	Phone,
-	Youtube,
+    ArrowUp,
+    Clock,
+    Facebook,
+    Instagram,
+    Mail,
+    MapPin,
+    Phone,
+    Youtube,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
 
@@ -30,6 +30,9 @@ const programs = [
 	{ label: "Teknik Otomotif", href: "#jurusan" },
 	{ label: "Agribisnis Tanaman / Smart Farming", href: "#jurusan" },
 	{ label: "Broadcasting dan Perfilman", href: "#jurusan" },
+    { label: "Axioo Class Program (TJKT)", href: "#jurusan" },
+    { label: "Teknik Kendaraan Ringan", href: "#jurusan" },
+    { label: "Teknik Sepeda Motor", href: "#jurusan" },
 ];
 
 export function Footer() {
@@ -72,11 +75,11 @@ export function Footer() {
 	};
 
 	return (
-		<footer ref={footerRef} className="bg-foreground text-background relative">
+		<footer ref={footerRef} className="relative bg-foreground text-background">
 			<button
 				type="button"
 				onClick={scrollToTop}
-				className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300"
+				className="-top-6 left-1/2 absolute flex justify-center items-center bg-primary shadow-lg hover:shadow-xl rounded-full w-12 h-12 hover:scale-110 transition-all -translate-x-1/2 duration-300"
 				aria-label="Scroll to top"
 			>
 				<ArrowUp className="w-5 h-5 text-primary-foreground" />
@@ -84,12 +87,12 @@ export function Footer() {
 
 			<div
 				ref={contentRef}
-				className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+				className="mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-7xl"
 			>
-				<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+				<div className="gap-10 grid md:grid-cols-2 lg:grid-cols-4">
 					<div className="space-y-6">
-						<Link href="/" className="flex flex-col items-start gap-3 group">
-							<div className="w-12 h-12 rounded-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+						<Link href="/" className="group flex flex-col items-start gap-3">
+							<div className="rounded-2xl w-12 h-12 overflow-hidden group-hover:scale-110 transition-transform duration-300">
 								<img
 									src="/img/logo.png"
 									alt="SMK Diponegoro Karanganyar Logo"
@@ -100,12 +103,12 @@ export function Footer() {
 								<p className="font-bold text-background text-lg leading-tight">
 									SMK Diponegoro Karanganyar
 								</p>
-								<p className="text-xs text-background/70 font-medium">
+								<p className="font-medium text-background/70 text-xs">
 									Kab. Pekalongan
 								</p>
 							</div>
 						</Link>
-						<p className="text-sm text-background/70 leading-relaxed">
+						<p className="text-background/70 text-sm leading-relaxed">
 							Terwujudnya Sekolah Sebagai Pusat Pendidikan dan Pelatihan
 							Kejuruan dengan Layanan Pendidikan yang Modern yang Menghasilkan
 							SDM Unggul dalam Prestasi dan Berakhlak Islami (MAU: Modern,
@@ -134,7 +137,7 @@ export function Footer() {
 									href={social.href}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="w-10 h-10 bg-background/10 rounded-xl flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
+									className="flex justify-center items-center bg-background/10 hover:bg-primary rounded-xl w-10 h-10 hover:scale-110 transition-all duration-300"
 									aria-label={social.name}
 								>
 									<social.icon className="w-5 h-5" />
@@ -144,7 +147,7 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h4 className="font-bold text-background text-lg mb-6">
+						<h4 className="mb-6 font-bold text-background text-lg">
 							Link Cepat
 						</h4>
 						<ul className="space-y-3">
@@ -152,7 +155,7 @@ export function Footer() {
 								<li key={link.href}>
 									<Link
 										href={link.href}
-										className="text-sm text-background/70 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block"
+										className="inline-block text-background/70 hover:text-primary text-sm transition-all hover:translate-x-1 duration-300"
 									>
 										{link.label}
 									</Link>
@@ -162,7 +165,7 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h4 className="font-bold text-background text-lg mb-6">
+						<h4 className="mb-6 font-bold text-background text-lg">
 							Program Keahlian
 						</h4>
 						<ul className="space-y-3">
@@ -170,7 +173,7 @@ export function Footer() {
 								<li key={program.label}>
 									<Link
 										href={program.href}
-										className="text-sm text-background/70 hover:text-primary hover:translate-x-1 transition-all duration-300 inline-block"
+										className="inline-block text-background/70 hover:text-primary text-sm transition-all hover:translate-x-1 duration-300"
 									>
 										{program.label}
 									</Link>
@@ -180,7 +183,7 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h4 className="font-bold text-background text-lg mb-6">Kontak</h4>
+						<h4 className="mb-6 font-bold text-background text-lg">Kontak</h4>
 						<ul className="space-y-4">
 							{[
 								{
@@ -191,11 +194,11 @@ export function Footer() {
 								{ icon: Mail, text: "smkdipo.pekalongan@gmail.com" },
 								{ icon: Clock, text: "Senin - Sabtu: 07:00 - 15:00" },
 							].map((item) => (
-								<li key={item.text} className="flex items-start gap-3 group">
-									<div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+								<li key={item.text} className="group flex items-start gap-3">
+									<div className="flex justify-center items-center bg-primary/20 group-hover:bg-primary rounded-lg w-8 h-8 group-hover:scale-110 transition-all duration-300 shrink-0">
 										<item.icon className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
 									</div>
-									<span className="text-sm text-background/70">
+									<span className="text-background/70 text-sm">
 										{item.text}
 									</span>
 								</li>
@@ -204,14 +207,14 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="border-t border-background/10 mt-12 pt-8">
-					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
-						<p className="text-sm text-background/60">
+				<div className="mt-12 pt-8 border-background/10 border-t">
+					<div className="flex md:flex-row flex-col justify-between items-center gap-4">
+						<p className="text-background/60 text-sm">
 							&copy; {new Date().getFullYear()} SMK Diponegoro Karanganyar. Hak
 							Cipta Dilindungi.
 						</p>
-						<p className="text-sm text-background/60">
-							SPMB Tahun Ajaran 2026/2027
+						<p className="text-background/60 text-sm">
+							SPMB Tahun Ajaran {new Date().getFullYear()}/{new Date().getFullYear() + 1}
 						</p>
 					</div>
 				</div>
