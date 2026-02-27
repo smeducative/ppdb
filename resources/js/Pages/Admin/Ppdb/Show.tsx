@@ -52,6 +52,8 @@ interface Peserta {
 	penerima_kip: string; // 'y' or 'n' or null
 	no_kip: string;
 	no_hp: string;
+	bertindik: boolean;
+	bertato: boolean;
 	nama_ayah: string;
 	no_hp_ayah: string;
 	pekerjaan_ayah: string;
@@ -165,6 +167,14 @@ export default function Show({ peserta }: Props) {
 							<InfoRow label="Provinsi" value={peserta.provinsi} />
 							<InfoRow label="Kode Pos" value={peserta.kode_pos} />
 							<InfoRow label="No. HP" value={peserta.no_hp} />
+							<InfoRow
+								label="Bertindik"
+								value={peserta.bertindik ? "Ya" : "Tidak"}
+							/>
+							<InfoRow
+								label="Bertato"
+								value={peserta.bertato ? "Ya" : "Tidak"}
+							/>
 							<InfoRow
 								label="Penerima KIP"
 								value={

@@ -56,6 +56,8 @@ export default function Create({ jurusan }: Props) {
 		penerima_kip: false,
 		no_kip: "",
 		no_hp: "",
+		bertindik: false,
+		bertato: false,
 
 		// Orang Tua
 		nama_ayah: "",
@@ -375,6 +377,27 @@ export default function Create({ jurusan }: Props) {
 												onChange={(e) => setData("no_kip", e.target.value)}
 											/>
 										)}
+									</div>
+
+									<div className="space-y-2 md:col-span-2">
+										<div className="flex flex-wrap items-center gap-6">
+											<div className="flex items-center space-x-2">
+												<Checkbox
+													id="bertindik"
+													checked={data.bertindik}
+													onCheckedChange={(c) => setData("bertindik", !!c)}
+												/>
+												<Label htmlFor="bertindik">Bertindik</Label>
+											</div>
+											<div className="flex items-center space-x-2">
+												<Checkbox
+													id="bertato"
+													checked={data.bertato}
+													onCheckedChange={(c) => setData("bertato", !!c)}
+												/>
+												<Label htmlFor="bertato">Bertato</Label>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

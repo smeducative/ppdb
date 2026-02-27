@@ -22,10 +22,13 @@ class PesertaPPDBFactory extends Factory
      */
     public function definition()
     {
+        $jurusanId = rand(1, 3);
+        $noUrut = (new PesertaPPDB)->getNoUrut($jurusanId);
+
         return [
             'id' => $this->faker->uuid(),
-            'no_urut' => (new PesertaPPDB)->getNoUrut(),
-            'no_pendaftaran' => 'TEST-'.(new PesertaPPDB)->getNoUrut().now()->format('m-y'),
+            'no_urut' => $noUrut,
+            'no_pendaftaran' => 'TEST-'.$noUrut.now()->format('m-y'),
             'semester' => now()->year.'/'.now()->addYear()->year,
             'nama_lengkap' => $this->faker->name(),
             'jenis_kelamin' => rand(0, 1) ? 'l' : 'p',
@@ -35,11 +38,13 @@ class PesertaPPDBFactory extends Factory
             'nisn' => $this->faker->randomDigit(),
             'asal_sekolah' => $this->faker->word(),
             'tahun_lulus' => $this->faker->year(),
-            'jurusan_id' => rand(1, 3),
+            'jurusan_id' => $jurusanId,
             'alamat_lengkap' => $this->faker->streetAddress(),
             'penerima_kip' => rand(0, 1) ? 'y' : 'n',
             'no_kip' => 'TEST12',
             'no_hp' => $this->faker->phoneNumber(),
+            'bertindik' => rand(0, 1),
+            'bertato' => rand(0, 1),
             'nama_ayah' => $this->faker->name('male'),
             'nama_ibu' => $this->faker->name('female'),
             'pekerjaan_ayah' => 'wirausaha',
