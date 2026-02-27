@@ -39,6 +39,8 @@ class PendaftaranAlamatTest extends TestCase
             'asal_sekolah' => 'SMP Negeri 1',
             'tahun_lulus' => 2025,
             'no_hp' => '08123456789',
+            'bertindik' => true,
+            'bertato' => true,
             'nama_ayah' => 'Ayah Doe',
             'nama_ibu' => 'Ibu Doe',
             'dukuh' => 'Dukuh A',
@@ -55,6 +57,8 @@ class PendaftaranAlamatTest extends TestCase
         $this->assertDatabaseHas('peserta_ppdb', [
             'nama_lengkap' => 'John Doe',
             'nik' => '1234567890123456',
+            'bertindik' => 1,
+            'bertato' => 1,
         ]);
     }
 
@@ -89,6 +93,8 @@ class PendaftaranAlamatTest extends TestCase
         // Check that alamat_lengkap was merged from address components
         $peserta = PesertaPPDB::where('nik', '9876543210987654')->first();
         $this->assertNotNull($peserta);
+        $this->assertFalse((bool) $peserta->bertindik);
+        $this->assertFalse((bool) $peserta->bertato);
 
         // Verify the merged address contains expected parts
         $this->assertStringContainsString('Dk. Dukuh B', $peserta->alamat_lengkap);

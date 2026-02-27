@@ -65,6 +65,8 @@ interface Peserta {
 	penerima_kip: string; // 'y' or 'n' or null
 	no_kip: string;
 	no_hp: string;
+	bertindik: boolean;
+	bertato: boolean;
 	nama_ayah: string;
 	no_hp_ayah: string;
 	pekerjaan_ayah: string;
@@ -123,6 +125,8 @@ export default function Edit({ jurusan, peserta }: Props) {
 		penerima_kip: peserta.penerima_kip === "y",
 		no_kip: peserta.no_kip || "",
 		no_hp: peserta.no_hp || "",
+		bertindik: !!peserta.bertindik,
+		bertato: !!peserta.bertato,
 
 		// Orang Tua
 		nama_ayah: peserta.nama_ayah || "",
@@ -485,6 +489,27 @@ export default function Edit({ jurusan, peserta }: Props) {
 												onChange={(e) => setData("no_kip", e.target.value)}
 											/>
 										)}
+									</div>
+
+									<div className="space-y-2 md:col-span-2">
+										<div className="flex flex-wrap items-center gap-6">
+											<div className="flex items-center space-x-2">
+												<Checkbox
+													id="bertindik"
+													checked={data.bertindik}
+													onCheckedChange={(c) => setData("bertindik", !!c)}
+												/>
+												<Label htmlFor="bertindik">Bertindik</Label>
+											</div>
+											<div className="flex items-center space-x-2">
+												<Checkbox
+													id="bertato"
+													checked={data.bertato}
+													onCheckedChange={(c) => setData("bertato", !!c)}
+												/>
+												<Label htmlFor="bertato">Bertato</Label>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

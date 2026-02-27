@@ -74,6 +74,8 @@ class PendaftaranPPDB extends Controller
         unset($data['pilihan_jurusan']);
         $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
+        $data['bertindik'] = $request->has('bertindik') ? 1 : 0;
+        $data['bertato'] = $request->has('bertato') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -203,6 +205,8 @@ class PendaftaranPPDB extends Controller
 
         $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
+        $data['bertindik'] = $request->has('bertindik') ? 1 : 0;
+        $data['bertato'] = $request->has('bertato') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -252,6 +256,8 @@ class PendaftaranPPDB extends Controller
         unset($data['pilihan_jurusan']);
         $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
         $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
+        $data['bertindik'] = $request->has('bertindik') ? 1 : 0;
+        $data['bertato'] = $request->has('bertato') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 

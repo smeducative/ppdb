@@ -42,6 +42,8 @@ class StorePendaftarRequest extends FormRequest
             'nisn' => 'nullable',
             'penerima_kip' => 'nullable',
             'no_hp' => 'required',
+            'bertindik' => 'nullable|boolean',
+            'bertato' => 'nullable|boolean',
             'nama_ayah' => 'required',
             'nama_ibu' => 'required',
             'peringkat' => 'nullable',

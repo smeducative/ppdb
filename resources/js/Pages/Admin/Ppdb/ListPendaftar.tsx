@@ -24,6 +24,8 @@ interface Peserta {
 	tempat_lahir: string;
 	tanggal_lahir: string;
 	no_hp: string;
+	bertindik: boolean;
+	bertato: boolean;
 	asal_sekolah: string;
 	jurusan: Jurusan;
 	diterima: number; // 0: proses, 1: diterima, 2: ditolak
@@ -85,6 +87,14 @@ export default function ListPendaftar({
 						<span className="max-w-[150px] truncate">
 							{row.original.asal_sekolah}
 						</span>
+					</div>
+					<div className="flex items-center gap-2 mt-1">
+						<Badge variant={row.original.bertindik ? "default" : "outline"}>
+							Bertindik: {row.original.bertindik ? "Ya" : "Tidak"}
+						</Badge>
+						<Badge variant={row.original.bertato ? "default" : "outline"}>
+							Bertato: {row.original.bertato ? "Ya" : "Tidak"}
+						</Badge>
 					</div>
 				</div>
 			),

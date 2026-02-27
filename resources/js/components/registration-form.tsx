@@ -133,7 +133,7 @@ export function RegistrationForm({
 	const [schoolSearch, setSchoolSearch] = useState("");
 
 	// Get flash messages from the page props
-	const { flash } = usePage<{ flash: { success?: string } }>().props;
+	const { flash } = usePage<any>().props;
 
 	// Check for flash success message on mount (handles page reload after submission)
 	useEffect(() => {
@@ -228,6 +228,8 @@ export function RegistrationForm({
 		penerima_kip: false,
 		no_kip: "",
 		no_hp: "",
+		bertindik: false,
+		bertato: false,
 
 		// Data Orang Tua (Parent Data)
 		nama_ayah: "",
@@ -287,12 +289,13 @@ export function RegistrationForm({
 
 	// GSAP animation for step transitions
 	useEffect(() => {
+		void currentStep;
 		gsap.fromTo(
 			formRef.current,
 			{ opacity: 0, x: 20 },
 			{ opacity: 1, x: 0, duration: 0.4, ease: "power2.out" },
 		);
-	}, [currentStep, formRef]);
+	}, [currentStep]);
 
 	// Validates form fields for the current step
 	const validateStep = (step: number) => {
@@ -1008,9 +1011,9 @@ export function RegistrationForm({
 													</div>
 												</div>
 
-												{/* No. KIP (conditional) */}
-												{data.penerima_kip && (
-													<FormField id="no_kip" label="No. KIP">
+											{/* No. KIP (conditional) */}
+											{data.penerima_kip && (
+												<FormField id="no_kip" label="No. KIP">
 														<Input
 															id="no_kip"
 															placeholder="Nomor KIP"
@@ -1020,10 +1023,39 @@ export function RegistrationForm({
 															}
 															className="rounded-xl h-12"
 														/>
-													</FormField>
-												)}
+												</FormField>
+											)}
 
-												{/* No. HP */}
+											<div className="md:col-span-2">
+												<div className="flex flex-wrap items-center gap-6">
+													<div className="flex items-center space-x-2">
+														<Checkbox
+															id="bertindik"
+															checked={data.bertindik}
+															onCheckedChange={(checked) =>
+																setData("bertindik", checked as boolean)
+															}
+														/>
+														<Label htmlFor="bertindik" className="font-normal cursor-pointer">
+															Bertindik
+														</Label>
+													</div>
+													<div className="flex items-center space-x-2">
+														<Checkbox
+															id="bertato"
+															checked={data.bertato}
+															onCheckedChange={(checked) =>
+																setData("bertato", checked as boolean)
+															}
+														/>
+														<Label htmlFor="bertato" className="font-normal cursor-pointer">
+															Bertato
+														</Label>
+													</div>
+												</div>
+											</div>
+
+											{/* No. HP */}
 												<FormField
 													id="no_hp"
 													label="No. HP"
