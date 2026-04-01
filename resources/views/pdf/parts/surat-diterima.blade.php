@@ -78,7 +78,21 @@
         <tr>
             <td width="30%">Alamat</td>
             <td>:</td>
-            <td> &nbsp; {{ $peserta->alamat_lengkap }}</td>
+            <td> &nbsp;
+                @php
+                    $alamatParts = array_filter([
+                        $peserta->alamat_lengkap,
+                        $peserta->dukuh ? "Dk. {$peserta->dukuh}" : null,
+                        $peserta->rt || $peserta->rw ? "RT {$peserta->rt} / RW {$peserta->rw}" : null,
+                        $peserta->desa_kelurahan,
+                        $peserta->kecamatan,
+                        $peserta->kabupaten_kota,
+                        $peserta->provinsi,
+                        $peserta->kode_pos ?: null,
+                    ]);
+                @endphp
+                {{ implode(', ', $alamatParts) }}
+            </td>
         </tr>
         <tr>
             <td width="30%">Asal Sekolah</td>

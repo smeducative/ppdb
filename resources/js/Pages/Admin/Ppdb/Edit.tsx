@@ -1,40 +1,38 @@
-import { format } from "date-fns";
-import { id } from "date-fns/locale";
 import { AlertMessages } from "@/components/alert-messages";
 import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle,
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { formatDateShort } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
+import { format } from "date-fns";
 import { useState } from "react";
 
 interface Jurusan {
@@ -510,6 +508,9 @@ export default function Edit({ jurusan, peserta }: Props) {
 												<Label htmlFor="bertato">Bertato</Label>
 											</div>
 										</div>
+										<p className="text-muted-foreground text-xs">
+											Centang jika peserta memiliki tindik (bekas atau aktif di bagian tubuh manapun) atau tato (permanen maupun semi-permanen). Data ini digunakan sebagai informasi tambahan dalam seleksi penerimaan peserta didik baru.
+										</p>
 									</div>
 								</div>
 							</div>
