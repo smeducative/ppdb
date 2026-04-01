@@ -1,34 +1,34 @@
 import { Button } from "@/components/ui/button";
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
 } from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { SCHOOLS } from "@/data/schools";
@@ -37,18 +37,18 @@ import { router, useForm as useInertiaForm, usePage } from "@inertiajs/react";
 import confetti from "canvas-confetti";
 import gsap from "gsap";
 import {
-	Award,
-	Check,
-	CheckCircle2,
-	ChevronLeft,
-	ChevronRight,
-	ChevronsUpDown,
-	GraduationCap,
-	Home,
-	MessageSquare,
-	PartyPopper,
-	User,
-	Users,
+    Award,
+    Check,
+    CheckCircle2,
+    ChevronLeft,
+    ChevronRight,
+    ChevronsUpDown,
+    GraduationCap,
+    Home,
+    MessageSquare,
+    PartyPopper,
+    User,
+    Users,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -1053,6 +1053,9 @@ export function RegistrationForm({
 														</Label>
 													</div>
 												</div>
+												<p className="text-muted-foreground text-xs mt-1">
+													Centang jika peserta memiliki tindik (bekas atau aktif di bagian tubuh manapun) atau tato (permanen maupun semi-permanen). Data ini digunakan sebagai informasi tambahan dalam seleksi penerimaan peserta didik baru.
+												</p>
 											</div>
 
 											{/* No. HP */}

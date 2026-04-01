@@ -6,11 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
@@ -398,6 +398,9 @@ export default function Create({ jurusan }: Props) {
 												<Label htmlFor="bertato">Bertato</Label>
 											</div>
 										</div>
+										<p className="text-muted-foreground text-xs">
+											Centang jika peserta memiliki tindik (bekas atau aktif di bagian tubuh manapun) atau tato (permanen maupun semi-permanen). Data ini digunakan sebagai informasi tambahan dalam seleksi penerimaan peserta didik baru.
+										</p>
 									</div>
 								</div>
 							</div>

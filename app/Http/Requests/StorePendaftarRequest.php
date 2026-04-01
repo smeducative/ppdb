@@ -41,17 +41,23 @@ class StorePendaftarRequest extends FormRequest
             'tahun_lulus' => 'required',
             'nisn' => 'nullable',
             'penerima_kip' => 'nullable',
+            'no_kip' => 'nullable',
             'no_hp' => 'required',
             'bertindik' => 'nullable|boolean',
             'bertato' => 'nullable|boolean',
             'nama_ayah' => 'required',
+            'no_ayah' => 'nullable',
+            'pekerjaan_ayah' => 'nullable',
             'nama_ibu' => 'required',
+            'no_ibu' => 'nullable',
+            'pekerjaan_ibu' => 'nullable',
             'peringkat' => 'nullable',
             'hafidz' => 'nullable',
             'jenis_lomba' => 'nullable',
             'juara_ke' => 'nullable',
             'juara_tingkat' => 'nullable',
             'rekomendasi_mwc' => 'nullable',
+            'saran_dari' => 'nullable',
         ];
     }
 }
