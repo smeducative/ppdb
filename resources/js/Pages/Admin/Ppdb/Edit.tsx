@@ -32,6 +32,7 @@ interface Peserta {
 	no_hp: string;
 	bertindik: boolean;
 	bertato: boolean;
+	yatim_piatu: boolean;
 	nama_ayah: string;
 	no_hp_ayah: string;
 	pekerjaan_ayah: string;
@@ -90,6 +91,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 		no_hp: peserta.no_hp || "",
 		bertindik: !!peserta.bertindik,
 		bertato: !!peserta.bertato,
+		yatim_piatu: !!peserta.yatim_piatu,
 
 		// Data Orang Tua
 		nama_ayah: peserta.nama_ayah || "",

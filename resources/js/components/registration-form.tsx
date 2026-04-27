@@ -273,6 +273,7 @@ export function RegistrationForm({
 		no_hp: initialData?.no_hp || "",
 		bertindik: !!initialData?.bertindik,
 		bertato: !!initialData?.bertato,
+		yatim_piatu: !!initialData?.yatim_piatu,
 
 		// Data Orang Tua (Parent Data)
 		nama_ayah: initialData?.nama_ayah || "",
@@ -485,7 +486,7 @@ export function RegistrationForm({
 	};
 
 	return (
-		<div className={cn("mx-auto px-4", isAdmin ? "max-w-5xl" : "max-w-4xl")}>
+		<div className={cn("mx-auto px-4 w-full", isAdmin ? "max-w-5xl" : "max-w-4xl")}>
 			{/* Success State with Confetti (Only for landing page) */}
 			{isSuccess && !isAdmin ? (
 				<div className="py-16 text-center">
@@ -610,7 +611,7 @@ export function RegistrationForm({
 					<Card
 						ref={cardRef}
 						className={cn(
-							"shadow-2xl shadow-primary/5 border-0 rounded-3xl overflow-hidden",
+							"shadow-2xl shadow-primary/5 border-0 rounded-3xl overflow-hidden w-full",
 							isAdmin && "border shadow-none",
 						)}
 					>
@@ -1443,26 +1444,44 @@ export function RegistrationForm({
 										<div className="space-y-6">
 											{/* MWC Recommendation Checkbox */}
 											<div className="md:col-span-2">
-												<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
-													<Checkbox
-														id="rekomendasi_mwc"
-														checked={data.rekomendasi_mwc}
-														onCheckedChange={(checked) =>
-															setData("rekomendasi_mwc", checked as boolean)
-														}
-													/>
-													<Label
-														htmlFor="rekomendasi_mwc"
-														className="font-normal cursor-pointer"
-													>
-														Merupakan peserta rekomendasi MWC (Majelis Wakil
-														Cabang NU Karanganyar)
-													</Label>
+												<div className="flex flex-col gap-4">
+													<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
+														<Checkbox
+															id="rekomendasi_mwc"
+															checked={data.rekomendasi_mwc}
+															onCheckedChange={(checked) =>
+																setData("rekomendasi_mwc", checked as boolean)
+															}
+														/>
+														<Label
+															htmlFor="rekomendasi_mwc"
+															className="font-normal cursor-pointer"
+														>
+															Merupakan peserta rekomendasi MWC (Majelis Wakil
+															Cabang NU Karanganyar)
+														</Label>
+													</div>
+
+													{isAdmin && (
+														<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
+															<Checkbox
+																id="yatim_piatu"
+																checked={data.yatim_piatu}
+																onCheckedChange={(checked) =>
+																	setData("yatim_piatu", checked as boolean)
+																}
+															/>
+															<Label
+																htmlFor="yatim_piatu"
+																className="font-normal cursor-pointer"
+															>
+																Merupakan peserta Beasiswa Yatim Piatu
+															</Label>
+														</div>
+													)}
 												</div>
 												<p className="mt-2 pl-2 text-muted-foreground text-xs">
-													Beasiswa ini diberikan kepada anak di setiap daerah
-													Ranting dari hasil rekomendasi/usulan Pengurus Ranting
-													NU Se-MWC Karanganyar.
+													Pilih jenis beasiswa/rekomendasi yang sesuai untuk peserta ini.
 												</p>
 											</div>
 
