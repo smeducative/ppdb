@@ -72,10 +72,11 @@ class PendaftaranPPDB extends Controller
 
         $data['jurusan_id'] = $request->input('pilihan_jurusan');
         unset($data['pilihan_jurusan']);
-        $data['penerima_kip'] = $request->has('penerima_kip') ? 'y' : 'n';
-        $data['rekomendasi_mwc'] = $request->has('rekomendasi_mwc') ? 1 : 0;
-        $data['bertindik'] = $request->has('bertindik') ? 1 : 0;
-        $data['bertato'] = $request->has('bertato') ? 1 : 0;
+        $data['penerima_kip'] = $request->boolean('penerima_kip') ? 'y' : 'n';
+        $data['rekomendasi_mwc'] = $request->boolean('rekomendasi_mwc') ? 1 : 0;
+        $data['bertindik'] = $request->boolean('bertindik') ? 1 : 0;
+        $data['bertato'] = $request->boolean('bertato') ? 1 : 0;
+        $data['yatim_piatu'] = $request->boolean('yatim_piatu') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -125,7 +126,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->has('kwitansi')
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -150,7 +151,7 @@ class PendaftaranPPDB extends Controller
 
         $pesertappdb = PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
-            ->when($jurusan, fn($q) => $q->whereJurusanId($jurusan))
+            ->when($jurusan, fn ($q) => $q->whereJurusanId($jurusan))
             ->whereYear('created_at', $tahun)
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -195,7 +196,7 @@ class PendaftaranPPDB extends Controller
 
         // check apakah peserta memgubah jurusan
         if ($ppdb->jurusan_id != $jurusan->id) {
-            $data['no_pendaftaran'] = $jurusan->abbreviation . '-' . Str::padLeft($ppdb->no_urut, 3, 0) . '-' . now()->format('m-y');
+            $data['no_pendaftaran'] = $jurusan->abbreviation.'-'.Str::padLeft($ppdb->no_urut, 3, 0).'-'.now()->format('m-y');
 
             session()->flash('warning', 'Peserta memilih jurusan berbeda. Pastikan untuk mencetak kembali dokumen pendaftaran.');
         }
@@ -207,6 +208,7 @@ class PendaftaranPPDB extends Controller
         $data['rekomendasi_mwc'] = $request->boolean('rekomendasi_mwc') ? 1 : 0;
         $data['bertindik'] = $request->boolean('bertindik') ? 1 : 0;
         $data['bertato'] = $request->boolean('bertato') ? 1 : 0;
+        $data['yatim_piatu'] = $request->boolean('yatim_piatu') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -258,6 +260,7 @@ class PendaftaranPPDB extends Controller
         $data['rekomendasi_mwc'] = $request->boolean('rekomendasi_mwc') ? 1 : 0;
         $data['bertindik'] = $request->boolean('bertindik') ? 1 : 0;
         $data['bertato'] = $request->boolean('bertato') ? 1 : 0;
+        $data['yatim_piatu'] = $request->boolean('yatim_piatu') ? 1 : 0;
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -293,7 +296,7 @@ class PendaftaranPPDB extends Controller
 
         $ppdb = PesertaPPDB::create($data);
 
-        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran ' . $ppdb->no_pendaftaran);
+        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran '.$ppdb->no_pendaftaran);
 
         return redirect()->route('ppdb.register');
     }

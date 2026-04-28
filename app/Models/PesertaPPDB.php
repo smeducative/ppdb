@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class PesertaPPDB extends Model
 {
@@ -24,6 +25,7 @@ class PesertaPPDB extends Model
         'tanggal_lahir' => 'date',
         'bertindik' => 'boolean',
         'bertato' => 'boolean',
+        'yatim_piatu' => 'boolean',
     ];
 
     protected $with = ['jurusan'];
@@ -33,12 +35,12 @@ class PesertaPPDB extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->id = \Illuminate\Support\Str::uuid();
+            $model->id = Str::uuid();
             $model->no_urut = $model->getNoUrut($model->jurusan_id);
             $model->semester = now()->year.'/'.now()->addYear()->year;
 
             $jurusan = Jurusan::find($model->jurusan_id);
-            $model->no_pendaftaran = $jurusan->abbreviation.'-'.\Illuminate\Support\Str::padLeft($model->no_urut, 3, 0).'-'.now()->format('m-y');
+            $model->no_pendaftaran = $jurusan->abbreviation.'-'.Str::padLeft($model->no_urut, 3, 0).'-'.now()->format('m-y');
 
             $model->attributes['nama_lengkap'] = str($model->attributes['nama_lengkap'])->title();
             $model->attributes['tempat_lahir'] = str($model->attributes['tempat_lahir'])->title();

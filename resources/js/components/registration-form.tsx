@@ -1,34 +1,45 @@
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
 } from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { SCHOOLS } from "@/data/schools";
@@ -37,24 +48,33 @@ import { router, useForm as useInertiaForm, usePage } from "@inertiajs/react";
 import confetti from "canvas-confetti";
 import gsap from "gsap";
 import {
-    Award,
-    Check,
-    CheckCircle2,
-    ChevronLeft,
-    ChevronRight,
-    ChevronsUpDown,
-    GraduationCap,
-    Home,
-    MessageSquare,
-    PartyPopper,
-    User,
-    Users,
+	Award,
+	Check,
+	CheckCircle2,
+	ChevronLeft,
+	ChevronRight,
+	ChevronsUpDown,
+	GraduationCap,
+	Home,
+	MessageSquare,
+	PartyPopper,
+	Trash2,
+	User,
+	Users,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 interface RegistrationFormProps {
 	jurusanOptions?: { value: number | string; label: string }[];
+	initialData?: any;
+	submitUrl?: string;
+	method?: "post" | "put";
+	mode?: "landing" | "admin";
+	showDelete?: boolean;
+	onDelete?: () => void;
+	title?: string;
+	description?: string;
 }
 
 // Step configuration for the multi-step form wizard
@@ -76,10 +96,10 @@ const defaultJurusanOptions = [
 
 // Competition level options for achievements
 const tingkatOptions = [
-	{ value: "kabupaten", label: "Kabupaten/Kota" },
-	{ value: "karesidenan", label: "Karesidenan" },
-	{ value: "provinsi", label: "Provinsi" },
-	{ value: "nasional", label: "Nasional" },
+	{ value: "Kabupaten/Kota", label: "Kabupaten/Kota" },
+	{ value: "Karesidenan", label: "Karesidenan" },
+	{ value: "Provinsi", label: "Provinsi" },
+	{ value: "Nasional", label: "Nasional" },
 ];
 
 /**
@@ -123,6 +143,14 @@ function FormField({
 
 export function RegistrationForm({
 	jurusanOptions = defaultJurusanOptions,
+	initialData,
+	submitUrl = "/register",
+	method = "post",
+	mode = "landing",
+	showDelete = false,
+	onDelete,
+	title,
+	description,
 }: RegistrationFormProps) {
 	const [currentStep, setCurrentStep] = useState(1);
 	const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
@@ -135,9 +163,15 @@ export function RegistrationForm({
 	// Get flash messages from the page props
 	const { flash } = usePage<any>().props;
 
+	const isAdmin = mode === "admin";
+
 	// Check for flash success message on mount (handles page reload after submission)
 	useEffect(() => {
-		if (flash?.success && flash.success.includes("berhasil mendaftar")) {
+		if (
+			!isAdmin &&
+			flash?.success &&
+			flash.success.includes("berhasil mendaftar")
+		) {
 			// Extract registration number from flash message
 			const match = flash.success.match(/([A-Z]{2,}-\d+-\d+-\d+)/);
 			if (match) {
@@ -202,55 +236,65 @@ export function RegistrationForm({
 				}, 150);
 			}, 100);
 		}
-	}, [flash]);
+	}, [flash, isAdmin]);
 
 	// Inertia form hook for handling form state and submission
-	const { data, setData, post, processing, errors } = useInertiaForm({
+	const {
+		data,
+		setData,
+		post,
+		put,
+		processing,
+		errors,
+		reset,
+		clearErrors: clearInertiaErrors,
+	} = useInertiaForm({
 		// Identitas Diri (Personal Identity)
-		nama_lengkap: "",
-		jenis_kelamin: "",
-		tempat_lahir: "",
-		tanggal_lahir: "",
-		nik: "",
-		nisn: "",
-		alamat_lengkap: "",
-		dukuh: "",
-		rt: "",
-		rw: "",
-		desa_kelurahan: "",
-		kecamatan: "",
-		kabupaten_kota: "",
-		provinsi: "",
-		kode_pos: "",
-		pilihan_jurusan: "",
-		asal_sekolah: "",
-		tahun_lulus: "",
-		penerima_kip: false,
-		no_kip: "",
-		no_hp: "",
-		bertindik: false,
-		bertato: false,
+		nama_lengkap: initialData?.nama_lengkap || "",
+		jenis_kelamin: initialData?.jenis_kelamin || "",
+		tempat_lahir: initialData?.tempat_lahir || "",
+		tanggal_lahir: initialData?.tanggal_lahir || "",
+		nik: initialData?.nik || "",
+		nisn: initialData?.nisn || "",
+		alamat_lengkap: initialData?.alamat_lengkap || "",
+		dukuh: initialData?.dukuh || "",
+		rt: initialData?.rt || "",
+		rw: initialData?.rw || "",
+		desa_kelurahan: initialData?.desa_kelurahan || "",
+		kecamatan: initialData?.kecamatan || "",
+		kabupaten_kota: initialData?.kabupaten_kota || "",
+		provinsi: initialData?.provinsi || "",
+		kode_pos: initialData?.kode_pos || "",
+		pilihan_jurusan: initialData?.pilihan_jurusan || "",
+		asal_sekolah: initialData?.asal_sekolah || "",
+		tahun_lulus: initialData?.tahun_lulus || "",
+		penerima_kip: !!initialData?.penerima_kip,
+		no_kip: initialData?.no_kip || "",
+		no_hp: initialData?.no_hp || "",
+		bertindik: !!initialData?.bertindik,
+		bertato: !!initialData?.bertato,
+		yatim_piatu: !!initialData?.yatim_piatu,
 
 		// Data Orang Tua (Parent Data)
-		nama_ayah: "",
-		no_ayah: "",
-		pekerjaan_ayah: "",
-		nama_ibu: "",
-		no_ibu: "",
-		pekerjaan_ibu: "",
+		nama_ayah: initialData?.nama_ayah || "",
+		no_ayah: initialData?.no_ayah || "",
+		pekerjaan_ayah: initialData?.pekerjaan_ayah || "",
+		nama_ibu: initialData?.nama_ibu || "",
+		no_ibu: initialData?.no_ibu || "",
+		pekerjaan_ibu: initialData?.pekerjaan_ibu || "",
 
 		// Prestasi Akademik (Academic Achievements)
-		peringkat: "",
-		hafidz: "",
+		peringkat: initialData?.peringkat || "",
+		hafidz: initialData?.hafidz || "",
 
 		// Prestasi Non Akademik (Non-Academic Achievements)
-		jenis_lomba: "",
-		juara_ke: "",
-		juara_tingkat: "",
+		jenis_lomba: initialData?.jenis_lomba || "",
+		juara_ke: initialData?.juara_ke || "",
+		juara_tingkat: initialData?.juara_tingkat || "",
 
 		// Rekomendasi (Recommendations)
-		rekomendasi_mwc: false,
-		saran_dari: "",
+		rekomendasi_mwc: !!initialData?.rekomendasi_mwc,
+		saran_dari: initialData?.saran_dari || "",
 	});
 
 	const formRef = useRef<HTMLDivElement>(null);
@@ -406,8 +450,24 @@ export function RegistrationForm({
 	// Handle form submission
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		post("/register", {
+		const action = method === "post" ? post : put;
+
+		action(submitUrl, {
 			onSuccess: (page) => {
+				if (isAdmin) {
+					toast.success(
+						method === "post"
+							? "Pendaftar berhasil ditambahkan"
+							: "Data pendaftar berhasil diperbarui",
+					);
+					if (method === "post") {
+						reset();
+						setCurrentStep(1);
+						clearInertiaErrors();
+					}
+					return;
+				}
+
 				// Extract registration number from flash message if available
 				const flashMessage = (page.props as { flash?: { success?: string } })
 					.flash?.success;
@@ -426,9 +486,9 @@ export function RegistrationForm({
 	};
 
 	return (
-		<div className="mx-auto px-4 max-w-4xl">
-			{/* Success State with Confetti */}
-			{isSuccess ? (
+		<div className={cn("mx-auto px-4 w-full", isAdmin ? "max-w-5xl" : "max-w-4xl")}>
+			{/* Success State with Confetti (Only for landing page) */}
+			{isSuccess && !isAdmin ? (
 				<div className="py-16 text-center">
 					<div className="inline-flex justify-center items-center bg-green-100 dark:bg-green-900/30 mb-6 rounded-full w-24 h-24 animate-bounce">
 						<PartyPopper className="w-12 h-12 text-green-600 dark:text-green-400" />
@@ -487,19 +547,21 @@ export function RegistrationForm({
 				</div>
 			) : (
 				<>
-					{/* Header */}
-					<div className="mb-10 text-center">
-						<div className="inline-flex justify-center items-center bg-primary/10 mb-4 rounded-3xl w-20 h-20">
-							<GraduationCap className="w-10 h-10 text-primary" />
+					{/* Header (Different for Landing vs Admin) */}
+					{!isAdmin ? (
+						<div className="mb-10 text-center">
+							<div className="inline-flex justify-center items-center bg-primary/10 mb-4 rounded-3xl w-20 h-20">
+								<GraduationCap className="w-10 h-10 text-primary" />
+							</div>
+							<h1 className="mb-2 font-bold text-foreground text-3xl md:text-4xl">
+								Formulir Pendaftaran
+							</h1>
+							<p className="text-muted-foreground">
+								SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar
+								Tahun Ajaran 2026/2027
+							</p>
 						</div>
-						<h1 className="mb-2 font-bold text-foreground text-3xl md:text-4xl">
-							Formulir Pendaftaran
-						</h1>
-						<p className="text-muted-foreground">
-							SPMB, Sistem Penerimaan Murid Baru SMK Diponegoro Karanganyar
-							Tahun Ajaran 2026/2027
-						</p>
-					</div>
+					) : null}
 
 					{/* Progress Steps */}
 					<div className="mb-8">
@@ -548,19 +610,56 @@ export function RegistrationForm({
 					{/* Form Card */}
 					<Card
 						ref={cardRef}
-						className="shadow-2xl shadow-primary/5 border-0 rounded-3xl overflow-hidden"
+						className={cn(
+							"shadow-2xl shadow-primary/5 border-0 rounded-3xl overflow-hidden w-full",
+							isAdmin && "border shadow-none",
+						)}
 					>
 						<CardHeader className="bg-linear-gradient-to-r from-primary/5 to-accent/50 border-b">
-							<CardTitle className="flex items-center gap-3 text-xl">
-								{(() => {
-									const StepIcon = steps[currentStep - 1].icon;
-									return <StepIcon className="w-6 h-6 text-primary" />;
-								})()}
-								{steps[currentStep - 1].title}
-							</CardTitle>
-							<CardDescription>
-								Langkah {currentStep} dari 4 - Isi formulir sesuai data dirimu
-							</CardDescription>
+							<div className="flex justify-between items-center">
+								<div>
+									<CardTitle className="flex items-center gap-3 text-xl">
+										{(() => {
+											const StepIcon = steps[currentStep - 1].icon;
+											return <StepIcon className="w-6 h-6 text-primary" />;
+										})()}
+										{title || steps[currentStep - 1].title}
+									</CardTitle>
+									<CardDescription>
+										{description ||
+											`Langkah ${currentStep} dari 4 - Isi formulir sesuai data dirimu`}
+									</CardDescription>
+								</div>
+
+								{isAdmin && showDelete && (
+									<AlertDialog>
+										<AlertDialogTrigger asChild>
+											<Button variant="destructive" size="sm">
+												<Trash2 className="mr-2 w-4 h-4" />
+												Hapus Peserta
+											</Button>
+										</AlertDialogTrigger>
+										<AlertDialogContent>
+											<AlertDialogHeader>
+												<AlertDialogTitle>Hapus Peserta?</AlertDialogTitle>
+												<AlertDialogDescription>
+													Peserta akan dihapus dari pendaftar SPMB. Tindakan ini
+													tidak dapat dibatalkan.
+												</AlertDialogDescription>
+											</AlertDialogHeader>
+											<AlertDialogFooter>
+												<AlertDialogCancel>Batal</AlertDialogCancel>
+												<AlertDialogAction
+													onClick={onDelete}
+													className="bg-red-600 hover:bg-red-700"
+												>
+													Hapus
+												</AlertDialogAction>
+											</AlertDialogFooter>
+										</AlertDialogContent>
+									</AlertDialog>
+								)}
+							</div>
 						</CardHeader>
 
 						<CardContent className="p-6 md:p-8">
@@ -1011,9 +1110,9 @@ export function RegistrationForm({
 													</div>
 												</div>
 
-											{/* No. KIP (conditional) */}
-											{data.penerima_kip && (
-												<FormField id="no_kip" label="No. KIP">
+												{/* No. KIP (conditional) */}
+												{data.penerima_kip && (
+													<FormField id="no_kip" label="No. KIP">
 														<Input
 															id="no_kip"
 															placeholder="Nomor KIP"
@@ -1023,42 +1122,48 @@ export function RegistrationForm({
 															}
 															className="rounded-xl h-12"
 														/>
-												</FormField>
-											)}
+													</FormField>
+												)}
 
-											<div className="md:col-span-2">
-												<div className="flex flex-wrap items-center gap-6">
-													<div className="flex items-center space-x-2">
-														<Checkbox
-															id="bertindik"
-															checked={data.bertindik}
-															onCheckedChange={(checked) =>
-																setData("bertindik", checked as boolean)
-															}
-														/>
-														<Label htmlFor="bertindik" className="font-normal cursor-pointer">
-															Bertindik
-														</Label>
+												<div className="md:col-span-2">
+													<div className="flex flex-wrap items-center gap-6">
+														<div className="flex items-center space-x-2">
+															<Checkbox
+																id="bertindik"
+																checked={data.bertindik}
+																onCheckedChange={(checked) =>
+																	setData("bertindik", checked as boolean)
+																}
+															/>
+															<Label
+																htmlFor="bertindik"
+																className="font-normal cursor-pointer"
+															>
+																Bertindik
+															</Label>
+														</div>
+														<div className="flex items-center space-x-2">
+															<Checkbox
+																id="bertato"
+																checked={data.bertato}
+																onCheckedChange={(checked) =>
+																	setData("bertato", checked as boolean)
+																}
+															/>
+															<Label
+																htmlFor="bertato"
+																className="font-normal cursor-pointer"
+															>
+																Bertato
+															</Label>
+														</div>
 													</div>
-													<div className="flex items-center space-x-2">
-														<Checkbox
-															id="bertato"
-															checked={data.bertato}
-															onCheckedChange={(checked) =>
-																setData("bertato", checked as boolean)
-															}
-														/>
-														<Label htmlFor="bertato" className="font-normal cursor-pointer">
-															Bertato
-														</Label>
-													</div>
+													<p className="text-muted-foreground text-xs mt-1">
+														Centang jika peserta memiliki tindik (bekas atau aktif di bagian tubuh manapun) atau tato (permanen maupun semi-permanen). Data ini digunakan sebagai informasi tambahan dalam seleksi penerimaan peserta didik baru.
+													</p>
 												</div>
-												<p className="text-muted-foreground text-xs mt-1">
-													Centang jika peserta memiliki tindik (bekas atau aktif di bagian tubuh manapun) atau tato (permanen maupun semi-permanen). Data ini digunakan sebagai informasi tambahan dalam seleksi penerimaan peserta didik baru.
-												</p>
-											</div>
 
-											{/* No. HP */}
+												{/* No. HP */}
 												<FormField
 													id="no_hp"
 													label="No. HP"
@@ -1339,26 +1444,44 @@ export function RegistrationForm({
 										<div className="space-y-6">
 											{/* MWC Recommendation Checkbox */}
 											<div className="md:col-span-2">
-												<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
-													<Checkbox
-														id="rekomendasi_mwc"
-														checked={data.rekomendasi_mwc}
-														onCheckedChange={(checked) =>
-															setData("rekomendasi_mwc", checked as boolean)
-														}
-													/>
-													<Label
-														htmlFor="rekomendasi_mwc"
-														className="font-normal cursor-pointer"
-													>
-														Merupakan peserta rekomendasi MWC (Majelis Wakil
-														Cabang NU Karanganyar)
-													</Label>
+												<div className="flex flex-col gap-4">
+													<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
+														<Checkbox
+															id="rekomendasi_mwc"
+															checked={data.rekomendasi_mwc}
+															onCheckedChange={(checked) =>
+																setData("rekomendasi_mwc", checked as boolean)
+															}
+														/>
+														<Label
+															htmlFor="rekomendasi_mwc"
+															className="font-normal cursor-pointer"
+														>
+															Merupakan peserta rekomendasi MWC (Majelis Wakil
+															Cabang NU Karanganyar)
+														</Label>
+													</div>
+
+													{isAdmin && (
+														<div className="flex items-center space-x-2 bg-secondary/50 p-4 rounded-xl">
+															<Checkbox
+																id="yatim_piatu"
+																checked={data.yatim_piatu}
+																onCheckedChange={(checked) =>
+																	setData("yatim_piatu", checked as boolean)
+																}
+															/>
+															<Label
+																htmlFor="yatim_piatu"
+																className="font-normal cursor-pointer"
+															>
+																Merupakan peserta Beasiswa Yatim Piatu
+															</Label>
+														</div>
+													)}
 												</div>
 												<p className="mt-2 pl-2 text-muted-foreground text-xs">
-													Beasiswa ini diberikan kepada anak di setiap daerah
-													Ranting dari hasil rekomendasi/usulan Pengurus Ranting
-													NU Se-MWC Karanganyar.
+													Pilih jenis beasiswa/rekomendasi yang sesuai untuk peserta ini.
 												</p>
 											</div>
 
@@ -1444,7 +1567,11 @@ export function RegistrationForm({
 											className="bg-primary hover:bg-primary/90 px-8 rounded-xl"
 										>
 											<CheckCircle2 className="mr-2 w-4 h-4" />
-											{processing ? "Mengirim..." : "Kirim Pendaftaran"}
+											{processing
+												? "Mengirim..."
+												: isAdmin && method === "put"
+													? "Simpan Perubahan"
+													: "Kirim Pendaftaran"}
 										</Button>
 									)}
 								</div>
