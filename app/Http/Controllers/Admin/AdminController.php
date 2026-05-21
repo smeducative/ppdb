@@ -200,19 +200,39 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get();
 
-        // Distribusi pendaftar per kecamatan (top 10 untuk chart, lengkap untuk tabel)
-        $pendaftarPerKecamatan = PesertaPPDB::select(DB::raw("COALESCE(NULLIF(kecamatan, ''), '(Tidak diisi)') as kecamatan, count(*) as as_count"))
+        $pendaftarPerDaerah = PesertaPPDB::select(
+            DB::raw("COALESCE(NULLIF(kecamatan, ''), '(Tidak diisi)') as kecamatan"),
+            DB::raw("COALESCE(NULLIF(kabupaten_kota, ''), '(Tidak diisi)') as kabupaten_kota"),
+            DB::raw('count(*) as as_count')
+        )
             ->whereYear('created_at', $tahun)
-            ->groupBy('kecamatan')
+            ->groupBy('kecamatan', 'kabupaten_kota')
             ->orderByDesc('as_count')
             ->get();
 
-        // Distribusi pendaftar per kabupaten/kota
-        $pendaftarPerKota = PesertaPPDB::select(DB::raw("COALESCE(NULLIF(kabupaten_kota, ''), '(Tidak diisi)') as kabupaten_kota, count(*) as as_count"))
+        $umurStatsRaw = PesertaPPDB::select(
+            DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at) as umur')
+        )
             ->whereYear('created_at', $tahun)
-            ->groupBy('kabupaten_kota')
-            ->orderByDesc('as_count')
-            ->get();
+            ->whereNotNull('tanggal_lahir')
+            ->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at)'), [10, 30])
+            ->pluck('umur');
+
+        $umurStats = [
+            'rata_rata' => $umurStatsRaw->isNotEmpty() ? round($umurStatsRaw->avg(), 1) : 0,
+            'minimum' => $umurStatsRaw->isNotEmpty() ? $umurStatsRaw->min() : 0,
+            'maksimum' => $umurStatsRaw->isNotEmpty() ? $umurStatsRaw->max() : 0,
+            'total' => $umurStatsRaw->count(),
+        ];
+
+        $umurDistribusi = $umurStatsRaw
+            ->countBy()
+            ->sortKeys()
+            ->map(fn ($jumlah, $umur) => [
+                'umur' => (int) $umur,
+                'jumlah' => $jumlah,
+            ])
+            ->values();
 
         // Get oldest year for the year filter dropdown
         $oldestYear = Cache::remember('oldest_year', 60 * 24 * 28, function () {
@@ -238,8 +258,9 @@ class AdminController extends Controller
             'pendaftarPerSekolahCount',
             'daftarUlangPerSekolah',
             'daftarUlangPerSekolahCount',
-            'pendaftarPerKecamatan',
-            'pendaftarPerKota',
+            'pendaftarPerDaerah',
+            'umurStats',
+            'umurDistribusi',
             'oldestYear'
         ));
     }

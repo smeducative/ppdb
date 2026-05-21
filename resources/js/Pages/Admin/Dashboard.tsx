@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Head, router } from "@inertiajs/react";
 import {
+    Cake,
     Film,
     Laptop,
     Leaf,
@@ -49,8 +50,18 @@ interface DashboardProps {
 	pendaftarPerSekolahCount: { asal_sekolah: string; as_count: number }[];
 	daftarUlangPerSekolah: { asal_sekolah: string; as_count: number }[];
 	daftarUlangPerSekolahCount: { asal_sekolah: string; as_count: number }[];
-	pendaftarPerKecamatan: { kecamatan: string; as_count: number }[];
-	pendaftarPerKota: { kabupaten_kota: string; as_count: number }[];
+	pendaftarPerDaerah: {
+		kecamatan: string;
+		kabupaten_kota: string;
+		as_count: number;
+	}[];
+	umurStats: {
+		rata_rata: number;
+		minimum: number;
+		maksimum: number;
+		total: number;
+	};
+	umurDistribusi: { umur: number; jumlah: number }[];
 	genderOverTime: Record<
 		number,
 		{ bulan: string; laki: number; perempuan: number }
@@ -82,8 +93,9 @@ export default function Dashboard({
 	pendaftarPerSekolahCount,
 	daftarUlangPerSekolah,
 	daftarUlangPerSekolahCount,
-	pendaftarPerKecamatan,
-	pendaftarPerKota,
+	pendaftarPerDaerah,
+	umurStats,
+	umurDistribusi,
 	genderOverTime,
 	tahun,
 	lastYear,
@@ -208,25 +220,24 @@ export default function Dashboard({
 		10,
 	);
 
-	const topKecamatanChart = (pendaftarPerKecamatan || [])
+	const topDaerahChart = (pendaftarPerDaerah || [])
 		.slice(0, 10)
-		.map((item) => ({ name: item.kecamatan, jumlah: item.as_count }));
+		.map((item) => ({
+			name: `${item.kecamatan}, ${item.kabupaten_kota}`,
+			jumlah: item.as_count,
+		}));
 
-	const topKotaChart = (pendaftarPerKota || [])
-		.slice(0, 10)
-		.map((item) => ({ name: item.kabupaten_kota, jumlah: item.as_count }));
-
-	const totalPendaftarKecamatan = (pendaftarPerKecamatan || []).reduce(
-		(sum, item) => sum + item.as_count,
-		0,
-	);
-	const totalPendaftarKota = (pendaftarPerKota || []).reduce(
+	const totalPendaftarDaerah = (pendaftarPerDaerah || []).reduce(
 		(sum, item) => sum + item.as_count,
 		0,
 	);
 
-	const topKecamatanTable = (pendaftarPerKecamatan || []).slice(0, 15);
-	const topKotaTable = (pendaftarPerKota || []).slice(0, 15);
+	const topDaerahTable = (pendaftarPerDaerah || []).slice(0, 20);
+
+	const umurChartData = (umurDistribusi || []).map((item) => ({
+		name: `${item.umur} th`,
+		jumlah: item.jumlah,
+	}));
 
 	const formatPercent = (value: number, total: number): string => {
 		if (!total) {
@@ -699,19 +710,19 @@ export default function Dashboard({
 					<div className="gap-4 grid md:grid-cols-2">
 						<Card>
 							<CardHeader>
-								<CardTitle>Top 10 Pendaftar Per Kecamatan</CardTitle>
+								<CardTitle>Top 10 Asal Daerah Pendaftar</CardTitle>
 							</CardHeader>
 							<CardContent className="px-1">
-								{topKecamatanChart.length > 0 ? (
-									<ResponsiveContainer width="100%" height={300}>
-										<BarChart data={topKecamatanChart} layout="vertical">
+								{topDaerahChart.length > 0 ? (
+									<ResponsiveContainer width="100%" height={320}>
+										<BarChart data={topDaerahChart} layout="vertical">
 											<CartesianGrid strokeDasharray="3 3" />
 											<XAxis type="number" />
 											<YAxis
 												dataKey="name"
 												type="category"
-												width={150}
-												tick={{ fontSize: 12 }}
+												width={200}
+												tick={{ fontSize: 11 }}
 											/>
 											<Tooltip />
 											<Bar dataKey="jumlah" fill="rgba(99, 102, 241, 0.85)" />
@@ -725,100 +736,37 @@ export default function Dashboard({
 
 						<Card>
 							<CardHeader>
-								<CardTitle>Top 10 Pendaftar Per Kabupaten/Kota</CardTitle>
+								<CardTitle>Distribusi Asal Daerah Pendaftar</CardTitle>
 							</CardHeader>
 							<CardContent className="px-1">
-								{topKotaChart.length > 0 ? (
-									<ResponsiveContainer width="100%" height={300}>
-										<BarChart data={topKotaChart} layout="vertical">
-											<CartesianGrid strokeDasharray="3 3" />
-											<XAxis type="number" />
-											<YAxis
-												dataKey="name"
-												type="category"
-												width={150}
-												tick={{ fontSize: 12 }}
-											/>
-											<Tooltip />
-											<Bar dataKey="jumlah" fill="rgba(20, 184, 166, 0.85)" />
-										</BarChart>
-									</ResponsiveContainer>
-								) : (
-									<p className="text-muted-foreground">Belum ada data</p>
-								)}
-							</CardContent>
-						</Card>
-
-						<Card>
-							<CardHeader>
-								<CardTitle>Distribusi Pendaftar Per Kecamatan</CardTitle>
-							</CardHeader>
-							<CardContent className="px-1">
-								{topKecamatanTable.length > 0 ? (
+								{topDaerahTable.length > 0 ? (
 									<div className="border rounded-md overflow-x-auto">
 										<table className="w-full text-sm text-left">
 											<thead className="bg-muted text-muted-foreground text-xs uppercase">
 												<tr>
 													<th className="px-6 py-3">Kecamatan</th>
-													<th className="px-6 py-3 text-right">Jumlah</th>
-													<th className="px-6 py-3 text-right">Persentase</th>
-												</tr>
-											</thead>
-											<tbody className="divide-y divide-border">
-												{topKecamatanTable.map((row) => (
-													<tr
-														key={row.kecamatan}
-														className="bg-card hover:bg-muted/50 transition-colors"
-													>
-														<td className="px-6 py-4 font-medium text-foreground">
-															{row.kecamatan}
-														</td>
-														<td className="px-6 py-4 font-semibold text-right">
-															{row.as_count}
-														</td>
-														<td className="px-6 py-4 text-muted-foreground text-right">
-															{formatPercent(row.as_count, totalPendaftarKecamatan)}
-														</td>
-													</tr>
-												))}
-											</tbody>
-										</table>
-									</div>
-								) : (
-									<p className="text-muted-foreground">Belum ada data</p>
-								)}
-							</CardContent>
-						</Card>
-
-						<Card>
-							<CardHeader>
-								<CardTitle>Distribusi Pendaftar Per Kabupaten/Kota</CardTitle>
-							</CardHeader>
-							<CardContent className="px-1">
-								{topKotaTable.length > 0 ? (
-									<div className="border rounded-md overflow-x-auto">
-										<table className="w-full text-sm text-left">
-											<thead className="bg-muted text-muted-foreground text-xs uppercase">
-												<tr>
 													<th className="px-6 py-3">Kabupaten/Kota</th>
 													<th className="px-6 py-3 text-right">Jumlah</th>
 													<th className="px-6 py-3 text-right">Persentase</th>
 												</tr>
 											</thead>
 											<tbody className="divide-y divide-border">
-												{topKotaTable.map((row) => (
+												{topDaerahTable.map((row) => (
 													<tr
-														key={row.kabupaten_kota}
+														key={`${row.kecamatan}-${row.kabupaten_kota}`}
 														className="bg-card hover:bg-muted/50 transition-colors"
 													>
 														<td className="px-6 py-4 font-medium text-foreground">
+															{row.kecamatan}
+														</td>
+														<td className="px-6 py-4 text-muted-foreground">
 															{row.kabupaten_kota}
 														</td>
 														<td className="px-6 py-4 font-semibold text-right">
 															{row.as_count}
 														</td>
 														<td className="px-6 py-4 text-muted-foreground text-right">
-															{formatPercent(row.as_count, totalPendaftarKota)}
+															{formatPercent(row.as_count, totalPendaftarDaerah)}
 														</td>
 													</tr>
 												))}
@@ -831,6 +779,57 @@ export default function Dashboard({
 							</CardContent>
 						</Card>
 					</div>
+				</section>
+
+				{/* Analisis Umur Pendaftar */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">Analisis Umur Pendaftar</h3>
+					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-4 mb-4">
+						<StatsCard
+							title="Rata-rata Umur"
+							value={umurStats?.rata_rata ?? 0}
+							icon={Cake}
+							iconClassName="bg-violet-500"
+						/>
+						<StatsCard
+							title="Umur Termuda"
+							value={umurStats?.minimum ?? 0}
+							icon={Cake}
+							iconClassName="bg-pink-500"
+						/>
+						<StatsCard
+							title="Umur Tertua"
+							value={umurStats?.maksimum ?? 0}
+							icon={Cake}
+							iconClassName="bg-indigo-500"
+						/>
+						<StatsCard
+							title="Total Data Umur"
+							value={umurStats?.total ?? 0}
+							icon={Users}
+							iconClassName="bg-slate-500"
+						/>
+					</div>
+					<Card>
+						<CardHeader>
+							<CardTitle>Distribusi Umur Pendaftar</CardTitle>
+						</CardHeader>
+						<CardContent className="px-1">
+							{umurChartData.length > 0 ? (
+								<ResponsiveContainer width="100%" height={320}>
+									<BarChart data={umurChartData}>
+										<CartesianGrid strokeDasharray="3 3" />
+										<XAxis dataKey="name" />
+										<YAxis allowDecimals={false} />
+										<Tooltip />
+										<Bar dataKey="jumlah" fill="rgba(168, 85, 247, 0.85)" />
+									</BarChart>
+								</ResponsiveContainer>
+							) : (
+								<p className="text-muted-foreground">Belum ada data</p>
+							)}
+						</CardContent>
+					</Card>
 				</section>
 			</div>
 		</>
