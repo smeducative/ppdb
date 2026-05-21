@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 
 class PendaftaranPPDB extends Controller
 {
+    private const int STATUS_DITOLAK = 2;
+
     public function listPendaftar(DocumentFilterRequest $request)
     {
         $tahun = $request->input('tahun', now()->year);
@@ -77,6 +79,7 @@ class PendaftaranPPDB extends Controller
         $data['bertindik'] = $request->boolean('bertindik') ? 1 : 0;
         $data['bertato'] = $request->boolean('bertato') ? 1 : 0;
         $data['yatim_piatu'] = $request->boolean('yatim_piatu') ? 1 : 0;
+        $data['diterima'] = $request->boolean('bertato') ? self::STATUS_DITOLAK : ($data['diterima'] ?? 0);
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -261,6 +264,7 @@ class PendaftaranPPDB extends Controller
         $data['bertindik'] = $request->boolean('bertindik') ? 1 : 0;
         $data['bertato'] = $request->boolean('bertato') ? 1 : 0;
         $data['yatim_piatu'] = $request->boolean('yatim_piatu') ? 1 : 0;
+        $data['diterima'] = $request->boolean('bertato') ? self::STATUS_DITOLAK : ($data['diterima'] ?? 0);
         $data['no_hp_ayah'] = $request->input('no_ayah');
         $data['no_hp_ibu'] = $request->input('no_ibu');
 
@@ -296,7 +300,11 @@ class PendaftaranPPDB extends Controller
 
         $ppdb = PesertaPPDB::create($data);
 
-        session()->flash('success', 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran '.$ppdb->no_pendaftaran);
+        $message = $request->boolean('bertato')
+            ? 'Pendaftaran tercatat dengan nomor '.$ppdb->no_pendaftaran.'. Mohon maaf, berdasarkan ketentuan sekolah peserta bertato tidak dapat diterima.'
+            : 'Terima kasih, anda berhasil mendaftar dengan nomor pendaftaran '.$ppdb->no_pendaftaran;
+
+        session()->flash($request->boolean('bertato') ? 'warning' : 'success', $message);
 
         return redirect()->route('ppdb.register');
     }
