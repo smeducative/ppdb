@@ -15,6 +15,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { usePrintRoute } from "@/hooks/use-print-route";
 import { formatDate, formatDateFull } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 
@@ -29,7 +30,7 @@ interface Peserta {
 	no_pendaftaran: string;
 	nama_lengkap: string;
 	tempat_lahir: string;
-	tanggal_lahir: string; // ISO date string
+	tanggal_lahir: string;
 	no_hp: string;
 	asal_sekolah: string;
 	jurusan: Jurusan;
@@ -58,11 +59,13 @@ interface Props {
 	years: number[];
 	jurusan: string;
 	title: string;
-	printSingleRoute: string; // Route name, e.g. 'ppdb.cetak.surat'
-	printAllRoute: string; // Route name, e.g. 'ppdb.cetak.surat.semua'
+	printSingleRoute: string;
+	printAllRoute: string;
 	showSettings: boolean;
 	settings?: Settings;
 }
+
+const PRINT_ALL_ID = "all";
 
 export default function Index({
 	pesertappdb,
@@ -75,7 +78,9 @@ export default function Index({
 	showSettings,
 	settings,
 }: Props) {
-	const { flash, csrf_token } = usePage<any>().props;
+	const { flash } = usePage().props;
+	const { printFromRoute, printingDocumentId, isPrinting, PrintFrame } =
+		usePrintRoute();
 
 	const columns: Column<Peserta>[] = [
 		{
@@ -134,12 +139,19 @@ export default function Index({
 			id: "actions",
 			header: "Aksi",
 			cell: ({ row }) => (
-				<form action={route(printSingleRoute, row.original.id)} method="POST">
-					<input type="hidden" name="_token" value={csrf_token} />
-					<Button type="submit" size="sm">
-						Cetak
-					</Button>
-				</form>
+				<Button
+					type="button"
+					size="sm"
+					disabled={isPrinting}
+					onClick={() =>
+						printFromRoute(
+							route(printSingleRoute, row.original.id),
+							row.original.id,
+						)
+					}
+				>
+					{printingDocumentId === row.original.id ? "Memuat..." : "Cetak"}
+				</Button>
 			),
 		},
 	];
@@ -150,15 +162,6 @@ export default function Index({
 			{ tahun: value },
 			{ preserveState: true },
 		);
-	};
-
-	const handlePrintAll = (e: React.FormEvent) => {
-		// Since we need to submit a POST request to open in new tab (maybe?), strict HTML form is better for this than Inertia router which expects JSON/XHR usually unless we use window.open
-		// In the original blade:
-		// <form action="{{ route('ppdb.cetak.surat.semua', ['jurusan' => $jurusan]) }}" method="POST">
-		// So we should replicate that behavior using a real form or helper.
-		// We can render a real form hidden or just use the onSubmit to create one.
-		// Or actually just put a form around the button.
 	};
 
 	return (
@@ -199,20 +202,22 @@ export default function Index({
 					<div className="flex justify-between items-center mb-4">
 						<h3 className="text-lg font-bold">{title}</h3>
 						<div className="flex items-center gap-2">
-							<form
-								action={route(printAllRoute, { jurusan })}
-								method="POST"
-								target="_blank"
+							<Button
+								type="button"
+								disabled={isPrinting}
+								onClick={() =>
+									printFromRoute(
+										route(printAllRoute, { jurusan }),
+										PRINT_ALL_ID,
+									)
+								}
 							>
-								<input
-									type="hidden"
-									name="_token"
-									value={(usePage().props as any).csrf_token}
-								/>
-								<Button type="submit">
-									<span className="mr-2">Cetak Semua</span>
-								</Button>
-							</form>
+								<span className="mr-2">
+									{printingDocumentId === PRINT_ALL_ID
+										? "Memuat..."
+										: "Cetak Semua"}
+								</span>
+							</Button>
 						</div>
 					</div>
 
@@ -243,6 +248,8 @@ export default function Index({
 					/>
 				</Card>
 			</div>
+
+			<PrintFrame />
 		</>
 	);
 }
