@@ -23,6 +23,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { usePrintRoute } from "@/hooks/use-print-route";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { format } from "date-fns";
 
@@ -65,7 +66,9 @@ export default function Create({ peserta }: Props) {
 		nominal: "",
 	});
 
-	const { flash, csrf_token } = usePage<any>().props;
+	const { flash } = usePage<any>().props;
+	const { printFromRoute, printingDocumentId, isPrinting, PrintFrame } =
+		usePrintRoute();
 
 	const submit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -175,15 +178,19 @@ export default function Create({ peserta }: Props) {
 							>
 								Total: {formatCurrency(totalTerbayar)}
 							</Button>
-							<Button asChild>
-								<form
-									action={route("ppdb.cetak.kwitansi", { uuid: peserta.id })}
-									method="post"
-									target="_blank"
-								>
-									<input type="hidden" name="_token" value={csrf_token} />
-									<button type="submit">Cetak Semua</button>
-								</form>
+							<Button
+								type="button"
+								disabled={isPrinting}
+								onClick={() =>
+									printFromRoute(
+										route("ppdb.cetak.kwitansi", { uuid: peserta.id }),
+										`all-${peserta.id}`,
+									)
+								}
+							>
+								{printingDocumentId === `all-${peserta.id}`
+									? "Memuat..."
+									: "Cetak Semua"}
 							</Button>
 						</div>
 					</CardHeader>
@@ -232,22 +239,24 @@ export default function Create({ peserta }: Props) {
 											<TableCell className="flex gap-2">
 												{!k.deleted_at && (
 													<>
-														<Button asChild size="sm" variant="secondary">
-															<form
-																action={route("ppdb.cetak.kwitansi.single", {
-																	uuid: peserta.id,
-																	id: k.id,
-																})}
-																method="post"
-																target="_blank"
-															>
-																<input
-																	type="hidden"
-																	name="_token"
-																	value={csrf_token}
-																/>
-																<button type="submit">Cetak</button>
-															</form>
+														<Button
+															type="button"
+															size="sm"
+															variant="secondary"
+															disabled={isPrinting}
+															onClick={() =>
+																printFromRoute(
+																	route("ppdb.cetak.kwitansi.single", {
+																		uuid: peserta.id,
+																		id: k.id,
+																	}),
+																	`kwitansi-${k.id}`,
+																)
+															}
+														>
+															{printingDocumentId === `kwitansi-${k.id}`
+																? "Memuat..."
+																: "Cetak"}
 														</Button>
 
 														<AlertDialog>
@@ -291,6 +300,8 @@ export default function Create({ peserta }: Props) {
 					</CardContent>
 				</Card>
 			</div>
+
+			<PrintFrame />
 		</>
 	);
 }

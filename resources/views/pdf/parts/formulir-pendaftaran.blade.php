@@ -1,3 +1,56 @@
+<style>
+    .registration-number {
+        border-radius: 5px;
+        display: inline-block;
+        font-size: 20px;
+        padding: 2px 5px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .registration-number-default {
+        background-color: #ffffff;
+        border: 2px solid #000000;
+        color: #000000;
+    }
+
+    .registration-number-tbsm {
+        background-color: #87cefa;
+        border: 2px solid #00689e;
+        color: #000000;
+    }
+
+    .registration-number-tkr {
+        background-color: #00008b;
+        border: 2px solid #000000;
+        color: #ffffff;
+    }
+
+    .registration-number-tkj {
+        background-color: #ff69b4;
+        border: 2px solid #c71585;
+        color: #ffffff;
+    }
+
+    .registration-number-acp {
+        background-color: #800000;
+        border: 2px solid #000000;
+        color: #ffffff;
+    }
+
+    .registration-number-at {
+        background-color: #008000;
+        border: 2px solid #004d00;
+        color: #ffffff;
+    }
+
+    .registration-number-bcf {
+        background-color: #ffd700;
+        border: 2px solid #b8860b;
+        color: #000000;
+    }
+</style>
+
 <!-- header -->
 <div class="row">
     <div class="col-2 p-0">
@@ -29,48 +82,23 @@
 <div class="float-right">
     @php
         $jurusanAbbr = $peserta->jurusan->abbreviation ?? '';
-        $bgColor = '#FFFFFF';
-        $borderColor = '#000000';
-        $textColor = '#000000';
-        
-        switch ($jurusanAbbr) {
-            case 'TBSM':
-            case 'TSM':
-                $bgColor = '#87CEFA'; 
-                $borderColor = '#00689e';
-                $textColor = '#000000';
-                break;
-            case 'TKR':
-            case 'TKRO':
-                $bgColor = '#00008B'; 
-                $borderColor = '#000000';
-                $textColor = '#FFFFFF';
-                break;
-            case 'TKJ':
-            case 'TJKT':
-                $bgColor = '#FF69B4'; 
-                $borderColor = '#C71585';
-                $textColor = '#FFFFFF';
-                break;
-            case 'ACP':
-                $bgColor = '#800000'; 
-                $borderColor = '#000000';
-                $textColor = '#FFFFFF';
-                break;
-            case 'AT':
-            case 'ATPH':
-                $bgColor = '#008000'; 
-                $borderColor = '#004d00';
-                $textColor = '#FFFFFF';
-                break;
-            case 'BCF':
-                $bgColor = '#FFD700'; 
-                $borderColor = '#B8860B';
-                $textColor = '#000000';
-                break;
+        $registrationNumberClass = 'registration-number-default';
+
+        if (in_array($jurusanAbbr, ['TBSM', 'TSM'], true)) {
+            $registrationNumberClass = 'registration-number-tbsm';
+        } elseif (in_array($jurusanAbbr, ['TKR', 'TKRO'], true)) {
+            $registrationNumberClass = 'registration-number-tkr';
+        } elseif (in_array($jurusanAbbr, ['TKJ', 'TJKT'], true)) {
+            $registrationNumberClass = 'registration-number-tkj';
+        } elseif ($jurusanAbbr === 'ACP') {
+            $registrationNumberClass = 'registration-number-acp';
+        } elseif (in_array($jurusanAbbr, ['AT', 'ATPH'], true)) {
+            $registrationNumberClass = 'registration-number-at';
+        } elseif ($jurusanAbbr === 'BCF') {
+            $registrationNumberClass = 'registration-number-bcf';
         }
     @endphp
-    <strong style="font-size: 20px; background-color: {{ $bgColor }}; color: {{ $textColor }}; border: 2px solid {{ $borderColor }}; border-radius: 5px; padding: 2px 5px; display: inline-block; -webkit-print-color-adjust: exact; print-color-adjust: exact;">{{ $peserta->no_pendaftaran }}</strong>
+    <strong class="registration-number {{ $registrationNumberClass }}">{{ $peserta->no_pendaftaran }}</strong>
 </div>
 
 <div class="" style="font-size: 19px; margin-left: 22px">
@@ -149,6 +177,16 @@
             <td width="29.6%">13. &ensp; No. Telepon</td>
             <td width="1%">:</td>
             <td>{{ $peserta->no_hp }}</td>
+        </tr>
+        <tr>
+            <td width="29.6%">14. &ensp; Bertindik</td>
+            <td width="1%">:</td>
+            <td>{{ $peserta->bertindik ? 'Ya' : 'Tidak' }}</td>
+        </tr>
+        <tr>
+            <td width="29.6%">15. &ensp; Bertato</td>
+            <td width="1%">:</td>
+            <td>{{ $peserta->bertato ? 'Ya (Ditolak)' : 'Tidak' }}</td>
         </tr>
     </table>
 

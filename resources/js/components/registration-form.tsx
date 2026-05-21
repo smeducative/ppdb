@@ -56,8 +56,10 @@ import {
 	ChevronsUpDown,
 	GraduationCap,
 	Home,
+	Info,
 	MessageSquare,
 	PartyPopper,
+	ShieldAlert,
 	Trash2,
 	User,
 	Users,
@@ -155,6 +157,7 @@ export function RegistrationForm({
 	const [currentStep, setCurrentStep] = useState(1);
 	const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
 	const [isSuccess, setIsSuccess] = useState(false);
+	const [isRejected, setIsRejected] = useState(false);
 	const [registrationNumber, setRegistrationNumber] = useState<string>("");
 
 	const [openSchool, setOpenSchool] = useState(false);
@@ -165,22 +168,29 @@ export function RegistrationForm({
 
 	const isAdmin = mode === "admin";
 
-	// Check for flash success message on mount (handles page reload after submission)
 	useEffect(() => {
-		if (
-			!isAdmin &&
-			flash?.success &&
-			flash.success.includes("berhasil mendaftar")
-		) {
-			// Extract registration number from flash message
-			const match = flash.success.match(/([A-Z]{2,}-\d+-\d+-\d+)/);
+		if (isAdmin) {
+			return;
+		}
+
+		const noPendaftaranRegex = /([A-Z]{2,}-\d+-\d+-\d+)/;
+
+		if (flash?.warning) {
+			const match = flash.warning.match(noPendaftaranRegex);
+			if (match) {
+				setRegistrationNumber(match[1]);
+			}
+			setIsRejected(true);
+			return;
+		}
+
+		if (flash?.success && flash.success.includes("berhasil mendaftar")) {
+			const match = flash.success.match(noPendaftaranRegex);
 			if (match) {
 				setRegistrationNumber(match[1]);
 			}
 			setIsSuccess(true);
-			// Trigger confetti after a small delay to ensure DOM is ready
 			setTimeout(() => {
-				// Fire confetti from multiple angles for a more celebratory effect
 				const count = 200;
 				const defaults = { origin: { y: 0.7 }, zIndex: 9999 };
 
@@ -217,7 +227,6 @@ export function RegistrationForm({
 					particleCount: Math.floor(count * 0.1),
 				});
 
-				// Fire from the sides
 				setTimeout(() => {
 					confetti({
 						...defaults,
@@ -487,8 +496,61 @@ export function RegistrationForm({
 
 	return (
 		<div className={cn("mx-auto px-4 w-full", isAdmin ? "max-w-5xl" : "max-w-4xl")}>
-			{/* Success State with Confetti (Only for landing page) */}
-			{isSuccess && !isAdmin ? (
+			{isRejected && !isAdmin ? (
+				<div className="py-16 text-center">
+					<div className="inline-flex justify-center items-center bg-amber-100 dark:bg-amber-900/30 mb-6 rounded-full w-24 h-24">
+						<ShieldAlert className="w-12 h-12 text-amber-600 dark:text-amber-400" />
+					</div>
+					<h1 className="mb-4 font-bold text-foreground text-3xl md:text-4xl">
+						Pendaftaran Tercatat
+					</h1>
+					<p className="mx-auto mb-6 max-w-xl text-muted-foreground text-lg">
+						Mohon maaf, berdasarkan ketentuan sekolah peserta dengan tato tidak
+						dapat diterima. Data Anda tetap kami simpan sebagai catatan.
+					</p>
+
+					{registrationNumber && (
+						<div className="inline-block bg-amber-500/10 mb-8 p-6 border border-amber-500/30 rounded-2xl">
+							<p className="mb-2 text-muted-foreground text-sm">
+								Nomor Pendaftaran
+							</p>
+							<p className="font-bold text-amber-700 dark:text-amber-300 text-3xl tracking-wider">
+								{registrationNumber}
+							</p>
+						</div>
+					)}
+
+					<Card className="shadow-xl mx-auto border-0 rounded-3xl max-w-lg overflow-hidden">
+						<CardContent className="p-8">
+							<div className="space-y-4">
+								<div className="flex items-start gap-3 text-left">
+									<Info className="mt-0.5 w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
+									<p className="text-muted-foreground">
+										Pendaftaran Anda telah tercatat di sistem kami, namun
+										dinyatakan ditolak.
+									</p>
+								</div>
+								<div className="flex items-start gap-3 text-left">
+									<Info className="mt-0.5 w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
+									<p className="text-muted-foreground">
+										Untuk informasi lebih lanjut, silakan hubungi panitia SPMB
+										SMK Diponegoro Karanganyar.
+									</p>
+								</div>
+							</div>
+
+							<Button
+								className="mt-8 rounded-xl w-full h-12 text-base"
+								variant="outline"
+								onClick={() => router.visit("/")}
+							>
+								<Home className="mr-2 w-4 h-4" />
+								Kembali ke Beranda
+							</Button>
+						</CardContent>
+					</Card>
+				</div>
+			) : isSuccess && !isAdmin ? (
 				<div className="py-16 text-center">
 					<div className="inline-flex justify-center items-center bg-green-100 dark:bg-green-900/30 mb-6 rounded-full w-24 h-24 animate-bounce">
 						<PartyPopper className="w-12 h-12 text-green-600 dark:text-green-400" />

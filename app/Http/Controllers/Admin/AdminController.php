@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function dashboard(DocumentFilterRequest $request)
     {
-        $tahun = $request->input('tahun', now()->year);
+        $tahun = (int) ($request->validated('tahun') ?? now()->year);
 
         $peserta = PesertaPPDB::select(DB::raw('jurusan_id, count(*) as c'))->whereYear('created_at', $tahun)->groupBy('jurusan_id')->get();
 
@@ -85,13 +85,13 @@ class AdminController extends Controller
             'l' => collect($compareDu)->pluck('l'),
         ];
 
-        $lastYear = now()->setYear($tahun)->subYear()->format('Y');
+        $lastYear = $tahun - 1;
 
         // Perbandingan pendaftar bulanan per tahun sekarang dengan tahun sebelumnya
         $yearDiff = PesertaPPDB::select(
             DB::raw('YEAR(created_at) as tahun, MONTH(created_at) as bulan, count(*) as jumlah_pendaftar')
         )
-            ->whereRaw("YEAR(created_at) >= $lastYear")
+            ->whereYear('created_at', '>=', $lastYear)
             ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
             ->get();
 
@@ -100,7 +100,7 @@ class AdminController extends Controller
             DB::raw('YEAR(created_at) as tahun, MONTH(created_at) as bulan, count(*) as jumlah_daftar_ulang')
         )
             ->has('kwitansi')
-            ->whereRaw("YEAR(created_at) >= $lastYear")
+            ->whereYear('created_at', '>=', $lastYear)
             ->groupBy(DB::raw('YEAR(created_at), MONTH(created_at)'))
             ->get();
 
@@ -115,8 +115,8 @@ class AdminController extends Controller
         })->groupBy('tahun');
 
         // If current year is not in the yearDiff, add it
-        if (! $yearDiff->has(now()->year)) {
-            $yearDiff->put(now()->year, collect());
+        if (! $yearDiff->has($tahun)) {
+            $yearDiff->put($tahun, collect());
         }
 
         $yearDiffDaftarUlang = $yearDiffDaftarUlang->map(function ($item) use ($months) {
@@ -128,8 +128,8 @@ class AdminController extends Controller
         })->groupBy('tahun');
 
         // If current year is not in the yearDiffDaftarUlang, add it
-        if (! $yearDiffDaftarUlang->has(now()->year)) {
-            $yearDiffDaftarUlang->put(now()->year, collect());
+        if (! $yearDiffDaftarUlang->has($tahun)) {
+            $yearDiffDaftarUlang->put($tahun, collect());
         }
 
         // Daily registration trends for the current year
@@ -200,6 +200,40 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get();
 
+        $pendaftarPerDaerah = PesertaPPDB::select(
+            DB::raw("COALESCE(NULLIF(kecamatan, ''), '(Tidak diisi)') as kecamatan"),
+            DB::raw("COALESCE(NULLIF(kabupaten_kota, ''), '(Tidak diisi)') as kabupaten_kota"),
+            DB::raw('count(*) as as_count')
+        )
+            ->whereYear('created_at', $tahun)
+            ->groupBy('kecamatan', 'kabupaten_kota')
+            ->orderByDesc('as_count')
+            ->get();
+
+        $umurStatsRaw = PesertaPPDB::select(
+            DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at) as umur')
+        )
+            ->whereYear('created_at', $tahun)
+            ->whereNotNull('tanggal_lahir')
+            ->whereBetween(DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at)'), [10, 30])
+            ->pluck('umur');
+
+        $umurStats = [
+            'rata_rata' => $umurStatsRaw->isNotEmpty() ? round($umurStatsRaw->avg(), 1) : 0,
+            'minimum' => $umurStatsRaw->isNotEmpty() ? $umurStatsRaw->min() : 0,
+            'maksimum' => $umurStatsRaw->isNotEmpty() ? $umurStatsRaw->max() : 0,
+            'total' => $umurStatsRaw->count(),
+        ];
+
+        $umurDistribusi = $umurStatsRaw
+            ->countBy()
+            ->sortKeys()
+            ->map(fn ($jumlah, $umur) => [
+                'umur' => (int) $umur,
+                'jumlah' => $jumlah,
+            ])
+            ->values();
+
         // Get oldest year for the year filter dropdown
         $oldestYear = Cache::remember('oldest_year', 60 * 24 * 28, function () {
             $oldest = PesertaPPDB::oldest('created_at')->first();
@@ -207,7 +241,28 @@ class AdminController extends Controller
             return $oldest ? $oldest->created_at->year : date('Y');
         });
 
-        return inertia('Admin/Dashboard', compact('count', 'du', 'compareSx', 'compareDx', 'pendaftarPerSekolah', 'penerimaan', 'yearDiff', 'yearDiffDaftarUlang', 'tahun', 'lastYear', 'dailyTrends', 'acceptanceByMajor', 'genderOverTime', 'pendaftarPerSekolahCount', 'daftarUlangPerSekolah', 'daftarUlangPerSekolahCount', 'oldestYear'));
+        return inertia('Admin/Dashboard', compact(
+            'count',
+            'du',
+            'compareSx',
+            'compareDx',
+            'pendaftarPerSekolah',
+            'penerimaan',
+            'yearDiff',
+            'yearDiffDaftarUlang',
+            'tahun',
+            'lastYear',
+            'dailyTrends',
+            'acceptanceByMajor',
+            'genderOverTime',
+            'pendaftarPerSekolahCount',
+            'daftarUlangPerSekolah',
+            'daftarUlangPerSekolahCount',
+            'pendaftarPerDaerah',
+            'umurStats',
+            'umurDistribusi',
+            'oldestYear'
+        ));
     }
 
     public function pengaturanAkun()

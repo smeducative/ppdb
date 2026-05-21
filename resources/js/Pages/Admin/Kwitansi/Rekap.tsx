@@ -16,7 +16,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { Head, router, usePage } from "@inertiajs/react";
+import { usePrintRoute } from "@/hooks/use-print-route";
+import { Head, router } from "@inertiajs/react";
 import { format } from "date-fns";
 
 interface User {
@@ -71,7 +72,8 @@ export default function Rekap({
 	tahun,
 	years,
 }: Props) {
-	const { csrf_token } = usePage<any>().props;
+	const { printFromRoute, printingDocumentId, isPrinting, PrintFrame } =
+		usePrintRoute();
 	const handleYearChange = (value: string) => {
 		router.get(
 			route("ppdb.kwitansi.rekap"),
@@ -224,22 +226,24 @@ export default function Rekap({
 												</TableCell>
 												<TableCell>
 													{!k.deleted_at ? (
-														<Button asChild size="sm" variant="secondary">
-															<form
-																action={route("ppdb.cetak.kwitansi.single", {
-																	uuid: k.peserta_ppdb.id,
-																	id: k.id,
-																})}
-																method="post"
-																target="_blank"
-															>
-																<input
-																	type="hidden"
-																	name="_token"
-																	value={csrf_token}
-																/>
-																<button type="submit">Cetak</button>
-															</form>
+														<Button
+															type="button"
+															size="sm"
+															variant="secondary"
+															disabled={isPrinting}
+															onClick={() =>
+																printFromRoute(
+																	route("ppdb.cetak.kwitansi.single", {
+																		uuid: k.peserta_ppdb.id,
+																		id: k.id,
+																	}),
+																	`kwitansi-${k.id}`,
+																)
+															}
+														>
+															{printingDocumentId === `kwitansi-${k.id}`
+																? "Memuat..."
+																: "Cetak"}
 														</Button>
 													) : (
 														<span className="text-destructive text-xs">
@@ -265,6 +269,8 @@ export default function Rekap({
 					</Card>
 				</div>
 			</div>
+
+			<PrintFrame />
 		</>
 	);
 }
