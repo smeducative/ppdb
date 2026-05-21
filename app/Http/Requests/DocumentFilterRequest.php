@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DocumentFilterRequest extends FormRequest
@@ -17,12 +18,12 @@ class DocumentFilterRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'tahun' => ['nullable', 'integer'],
+            'tahun' => ['nullable', 'integer', 'min:1900', 'max:'.(now()->year + 1)],
             'search' => ['nullable', 'string'],
             'per_page' => ['nullable', 'integer'],
         ];
