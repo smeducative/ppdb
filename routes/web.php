@@ -10,6 +10,7 @@ use App\Http\Controllers\PendaftaranPPDB;
 use App\Http\Controllers\PpdbSettingController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UkuranSeragamController;
+use App\Models\Jurusan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,7 @@ Route::get('/', function () {
 });
 Route::get('/register', function () {
     return inertia('Pendaftaran', [
-        'jurusan' => \App\Models\Jurusan::all()->map(fn($j) => [
+        'jurusan' => Jurusan::all()->map(fn ($j) => [
             'value' => $j->id,
             'label' => $j->nama,
         ]),
@@ -150,5 +151,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('non-akademik', [BeasiswaController::class, 'beasiswaNonAkademik'])->name('ppdb.beasiswa.non-akademik');
         Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
         Route::get('tahfidz', [BeasiswaController::class, 'beasiswaTahfidz'])->name('ppdb.beasiswa.tahfidz');
+        Route::get('yatim-piatu', [BeasiswaController::class, 'beasiswaYatimPiatu'])->name('ppdb.beasiswa.yatim-piatu');
     });
 });

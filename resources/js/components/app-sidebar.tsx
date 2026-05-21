@@ -34,6 +34,7 @@ import {
 	File,
 	FileText,
 	Gauge,
+	HeartHandshake,
 	IdCard,
 	Medal,
 	MonitorCog,
@@ -479,6 +480,17 @@ export function AppSidebar() {
 									<Link href={route("ppdb.beasiswa.kip")}>
 										<Medal className="size-4" />
 										<span>KIP</span>
+									</Link>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+							<SidebarMenuItem>
+								<SidebarMenuButton
+									asChild
+									isActive={url.includes("/beasiswa/yatim-piatu")}
+								>
+									<Link href={route("ppdb.beasiswa.yatim-piatu")}>
+										<HeartHandshake className="size-4" />
+										<span>Yatim Piatu</span>
 									</Link>
 								</SidebarMenuButton>
 							</SidebarMenuItem>

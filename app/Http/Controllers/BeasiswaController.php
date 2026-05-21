@@ -188,4 +188,34 @@ class BeasiswaController extends Controller
 
         return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
     }
+
+    public function beasiswaYatimPiatu(BeasiswaFilterRequest $request)
+    {
+        $tahun = $request->input('tahun', now()->year);
+        $search = $request->input('search');
+        $title = 'Beasiswa Yatim Piatu';
+
+        $query = PesertaPPDB::with('jurusan')
+            ->whereYatimPiatu(1)
+            ->whereYear('created_at', $tahun)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_lengkap', 'like', "%{$search}%")
+                        ->orWhere('no_pendaftaran', 'like', "%{$search}%")
+                        ->orWhere('asal_sekolah', 'like', "%{$search}%");
+                });
+            })
+            ->latest();
+
+        if ($request->has('export')) {
+            $pesertappdb = $query->get();
+
+            return Excel::download(new BeasiswaExport($pesertappdb), $tahun.'-beasiswa-yatim-piatu.xlsx');
+        }
+
+        $pesertappdb = $query->paginate($request->input('per_page', 10))->withQueryString();
+        $years = range(now()->year, now()->year - 5);
+
+        return inertia('Admin/Beasiswa/Index', compact('pesertappdb', 'title', 'tahun', 'years'));
+    }
 }

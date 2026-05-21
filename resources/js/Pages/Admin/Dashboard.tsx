@@ -49,6 +49,8 @@ interface DashboardProps {
 	pendaftarPerSekolahCount: { asal_sekolah: string; as_count: number }[];
 	daftarUlangPerSekolah: { asal_sekolah: string; as_count: number }[];
 	daftarUlangPerSekolahCount: { asal_sekolah: string; as_count: number }[];
+	pendaftarPerKecamatan: { kecamatan: string; as_count: number }[];
+	pendaftarPerKota: { kabupaten_kota: string; as_count: number }[];
 	genderOverTime: Record<
 		number,
 		{ bulan: string; laki: number; perempuan: number }
@@ -80,6 +82,8 @@ export default function Dashboard({
 	pendaftarPerSekolahCount,
 	daftarUlangPerSekolah,
 	daftarUlangPerSekolahCount,
+	pendaftarPerKecamatan,
+	pendaftarPerKota,
 	genderOverTime,
 	tahun,
 	lastYear,
@@ -203,6 +207,34 @@ export default function Dashboard({
 		0,
 		10,
 	);
+
+	const topKecamatanChart = (pendaftarPerKecamatan || [])
+		.slice(0, 10)
+		.map((item) => ({ name: item.kecamatan, jumlah: item.as_count }));
+
+	const topKotaChart = (pendaftarPerKota || [])
+		.slice(0, 10)
+		.map((item) => ({ name: item.kabupaten_kota, jumlah: item.as_count }));
+
+	const totalPendaftarKecamatan = (pendaftarPerKecamatan || []).reduce(
+		(sum, item) => sum + item.as_count,
+		0,
+	);
+	const totalPendaftarKota = (pendaftarPerKota || []).reduce(
+		(sum, item) => sum + item.as_count,
+		0,
+	);
+
+	const topKecamatanTable = (pendaftarPerKecamatan || []).slice(0, 15);
+	const topKotaTable = (pendaftarPerKota || []).slice(0, 15);
+
+	const formatPercent = (value: number, total: number): string => {
+		if (!total) {
+			return "0%";
+		}
+
+		return `${((value / total) * 100).toFixed(1)}%`;
+	};
 
 	return (
 		<>
@@ -655,6 +687,146 @@ export default function Dashboard({
 									</div>
 								) : (
 									<p className="text-muted-foreground">Belum ada peserta</p>
+								)}
+							</CardContent>
+						</Card>
+					</div>
+				</section>
+
+				{/* Analisis Asal Daerah */}
+				<section>
+					<h3 className="mb-4 font-medium text-lg">Analisis Asal Daerah</h3>
+					<div className="gap-4 grid md:grid-cols-2">
+						<Card>
+							<CardHeader>
+								<CardTitle>Top 10 Pendaftar Per Kecamatan</CardTitle>
+							</CardHeader>
+							<CardContent className="px-1">
+								{topKecamatanChart.length > 0 ? (
+									<ResponsiveContainer width="100%" height={300}>
+										<BarChart data={topKecamatanChart} layout="vertical">
+											<CartesianGrid strokeDasharray="3 3" />
+											<XAxis type="number" />
+											<YAxis
+												dataKey="name"
+												type="category"
+												width={150}
+												tick={{ fontSize: 12 }}
+											/>
+											<Tooltip />
+											<Bar dataKey="jumlah" fill="rgba(99, 102, 241, 0.85)" />
+										</BarChart>
+									</ResponsiveContainer>
+								) : (
+									<p className="text-muted-foreground">Belum ada data</p>
+								)}
+							</CardContent>
+						</Card>
+
+						<Card>
+							<CardHeader>
+								<CardTitle>Top 10 Pendaftar Per Kabupaten/Kota</CardTitle>
+							</CardHeader>
+							<CardContent className="px-1">
+								{topKotaChart.length > 0 ? (
+									<ResponsiveContainer width="100%" height={300}>
+										<BarChart data={topKotaChart} layout="vertical">
+											<CartesianGrid strokeDasharray="3 3" />
+											<XAxis type="number" />
+											<YAxis
+												dataKey="name"
+												type="category"
+												width={150}
+												tick={{ fontSize: 12 }}
+											/>
+											<Tooltip />
+											<Bar dataKey="jumlah" fill="rgba(20, 184, 166, 0.85)" />
+										</BarChart>
+									</ResponsiveContainer>
+								) : (
+									<p className="text-muted-foreground">Belum ada data</p>
+								)}
+							</CardContent>
+						</Card>
+
+						<Card>
+							<CardHeader>
+								<CardTitle>Distribusi Pendaftar Per Kecamatan</CardTitle>
+							</CardHeader>
+							<CardContent className="px-1">
+								{topKecamatanTable.length > 0 ? (
+									<div className="border rounded-md overflow-x-auto">
+										<table className="w-full text-sm text-left">
+											<thead className="bg-muted text-muted-foreground text-xs uppercase">
+												<tr>
+													<th className="px-6 py-3">Kecamatan</th>
+													<th className="px-6 py-3 text-right">Jumlah</th>
+													<th className="px-6 py-3 text-right">Persentase</th>
+												</tr>
+											</thead>
+											<tbody className="divide-y divide-border">
+												{topKecamatanTable.map((row) => (
+													<tr
+														key={row.kecamatan}
+														className="bg-card hover:bg-muted/50 transition-colors"
+													>
+														<td className="px-6 py-4 font-medium text-foreground">
+															{row.kecamatan}
+														</td>
+														<td className="px-6 py-4 font-semibold text-right">
+															{row.as_count}
+														</td>
+														<td className="px-6 py-4 text-muted-foreground text-right">
+															{formatPercent(row.as_count, totalPendaftarKecamatan)}
+														</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+								) : (
+									<p className="text-muted-foreground">Belum ada data</p>
+								)}
+							</CardContent>
+						</Card>
+
+						<Card>
+							<CardHeader>
+								<CardTitle>Distribusi Pendaftar Per Kabupaten/Kota</CardTitle>
+							</CardHeader>
+							<CardContent className="px-1">
+								{topKotaTable.length > 0 ? (
+									<div className="border rounded-md overflow-x-auto">
+										<table className="w-full text-sm text-left">
+											<thead className="bg-muted text-muted-foreground text-xs uppercase">
+												<tr>
+													<th className="px-6 py-3">Kabupaten/Kota</th>
+													<th className="px-6 py-3 text-right">Jumlah</th>
+													<th className="px-6 py-3 text-right">Persentase</th>
+												</tr>
+											</thead>
+											<tbody className="divide-y divide-border">
+												{topKotaTable.map((row) => (
+													<tr
+														key={row.kabupaten_kota}
+														className="bg-card hover:bg-muted/50 transition-colors"
+													>
+														<td className="px-6 py-4 font-medium text-foreground">
+															{row.kabupaten_kota}
+														</td>
+														<td className="px-6 py-4 font-semibold text-right">
+															{row.as_count}
+														</td>
+														<td className="px-6 py-4 text-muted-foreground text-right">
+															{formatPercent(row.as_count, totalPendaftarKota)}
+														</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+								) : (
+									<p className="text-muted-foreground">Belum ada data</p>
 								)}
 							</CardContent>
 						</Card>
