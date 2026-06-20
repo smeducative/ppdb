@@ -200,25 +200,22 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get();
 
-        $pendaftarPerDaerah = PesertaPPDB::select(
-            DB::raw("COALESCE(NULLIF(
-                CONCAT(UPPER(LEFT(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 1)),
-                LOWER(SUBSTRING(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 2))),
-                ''), '(Tidak diisi)') as kecamatan"),
-            DB::raw("COALESCE(NULLIF(
-                CONCAT(UPPER(LEFT(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 1)),
-                LOWER(SUBSTRING(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 2))),
-                ''), '(Tidak diisi)') as kabupaten_kota"),
-            DB::raw('count(*) as as_count')
-        )
+        $pendaftarPerDaerah = PesertaPPDB::select('kecamatan', 'kabupaten_kota')
             ->whereYear('created_at', $tahun)
-            ->groupBy(
-                DB::raw("COALESCE(NULLIF(CONCAT(UPPER(LEFT(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 1)), LOWER(SUBSTRING(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 2))), ''), '(Tidak diisi)')"),
-                DB::raw("COALESCE(NULLIF(CONCAT(UPPER(LEFT(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 1)), LOWER(SUBSTRING(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 2))), ''), '(Tidak diisi)')")
-            )
-            ->orderByDesc('as_count')
-            ->limit(10)
-            ->get();
+            ->get()
+            ->map(fn ($item) => [
+                'kecamatan' => $this->normalizeLocation($item->kecamatan),
+                'kabupaten_kota' => $this->normalizeLocation($item->kabupaten_kota),
+            ])
+            ->groupBy(fn ($item) => $item['kecamatan'].'|'.$item['kabupaten_kota'])
+            ->map(fn ($items, $key) => [
+                'kecamatan' => $items->first()['kecamatan'],
+                'kabupaten_kota' => $items->first()['kabupaten_kota'],
+                'as_count' => $items->count(),
+            ])
+            ->sortByDesc('as_count')
+            ->take(10)
+            ->values();
 
         $umurStatsRaw = PesertaPPDB::select(
             DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at) as umur')
@@ -296,5 +293,18 @@ class AdminController extends Controller
         session()->flash('success', 'Data user dan password berhasil di ganti');
 
         return back();
+    }
+
+    private function normalizeLocation(?string $value): string
+    {
+        $value = trim($value ?? '');
+        $value = preg_replace('/^(kec\.?|kecamatan)\s+/i', '', $value);
+        $value = preg_replace('/^(kab\.?|kabupaten|kota)\s+/i', '', $value);
+
+        if ($value === '') {
+            return '(Tidak diisi)';
+        }
+
+        return ucfirst(strtolower($value));
     }
 }
