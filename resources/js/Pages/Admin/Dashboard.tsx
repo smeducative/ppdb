@@ -233,7 +233,7 @@ export default function Dashboard({
 		0,
 	);
 
-	const topDaerahTable = (pendaftarPerDaerah || []).slice(0, 20);
+	const topDaerahTable = pendaftarPerDaerah || [];
 
 	const umurChartData = (umurDistribusi || []).map((item) => ({
 		name: `${item.umur} th`,

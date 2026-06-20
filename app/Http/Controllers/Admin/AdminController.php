@@ -9,7 +9,6 @@ use App\Models\Jurusan;
 use App\Models\PesertaPPDB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -202,24 +201,24 @@ class AdminController extends Controller
             ->get();
 
         $pendaftarPerDaerah = PesertaPPDB::select(
-            DB::raw("COALESCE(NULLIF(kecamatan, ''), '(Tidak diisi)') as kecamatan"),
-            DB::raw("COALESCE(NULLIF(kabupaten_kota, ''), '(Tidak diisi)') as kabupaten_kota"),
+            DB::raw("COALESCE(NULLIF(
+                CONCAT(UPPER(LEFT(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 1)),
+                LOWER(SUBSTRING(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 2))),
+                ''), '(Tidak diisi)') as kecamatan"),
+            DB::raw("COALESCE(NULLIF(
+                CONCAT(UPPER(LEFT(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 1)),
+                LOWER(SUBSTRING(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 2))),
+                ''), '(Tidak diisi)') as kabupaten_kota"),
             DB::raw('count(*) as as_count')
         )
             ->whereYear('created_at', $tahun)
-            ->groupBy('kecamatan', 'kabupaten_kota')
+            ->groupBy(
+                DB::raw("REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', '')"),
+                DB::raw("REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', '')")
+            )
             ->orderByDesc('as_count')
-            ->get()
-            ->map(function ($item) {
-                $item->kecamatan = Str::title(
-                    preg_replace('/^(kec\.?|kecamatan)\s+/i', '', trim($item->kecamatan))
-                );
-                $item->kabupaten_kota = Str::title(
-                    preg_replace('/^(kab\.?|kabupaten|kota)\s+/i', '', trim($item->kabupaten_kota))
-                );
-
-                return $item;
-            });
+            ->limit(10)
+            ->get();
 
         $umurStatsRaw = PesertaPPDB::select(
             DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at) as umur')
