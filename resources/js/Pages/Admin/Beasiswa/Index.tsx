@@ -2,14 +2,25 @@ import { AlertMessages } from "@/components/alert-messages";
 import { type Column, DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
 import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
+import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { usePrintRoute } from "@/hooks/use-print-route";
 import { formatDate } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
+import { useState } from "react";
 
 interface Jurusan {
 	id: number;
@@ -22,7 +33,7 @@ interface Peserta {
 	no_pendaftaran: string;
 	nama_lengkap: string;
 	tempat_lahir: string;
-	tanggal_lahir: string; // ISO date string
+	tanggal_lahir: string;
 	no_hp: string;
 	asal_sekolah: string;
 	jurusan: Jurusan;
@@ -45,10 +56,56 @@ interface Props {
 	tahun: number;
 	years: number[];
 	title: string;
+	printSingleRoute: string;
+	printAllRoute: string;
+	jenis: string;
+	defaultKeterangan: string;
 }
 
-export default function Index({ pesertappdb, tahun, years, title }: Props) {
+const PRINT_ALL_ID = "all";
+
+export default function Index({
+	pesertappdb,
+	tahun,
+	years,
+	title,
+	printSingleRoute,
+	printAllRoute,
+	jenis,
+	defaultKeterangan,
+}: Props) {
 	const { flash } = usePage<any>().props;
+	const { printFromRoute, printingDocumentId, isPrinting, PrintFrame } =
+		usePrintRoute();
+
+	const [modalOpen, setModalOpen] = useState(false);
+	const [keterangan, setKeterangan] = useState(defaultKeterangan);
+	const [printMode, setPrintMode] = useState<"single" | "all">("single");
+	const [selectedId, setSelectedId] = useState<string | null>(null);
+
+	const handleOpenModal = (mode: "single" | "all", id?: string) => {
+		setPrintMode(mode);
+		setSelectedId(id || null);
+		setKeterangan(defaultKeterangan);
+		setModalOpen(true);
+	};
+
+	const handleConfirmPrint = () => {
+		if (printMode === "single" && selectedId) {
+			printFromRoute(
+				route(printSingleRoute, selectedId) +
+					`?keterangan=${encodeURIComponent(keterangan)}`,
+				selectedId,
+			);
+		} else if (printMode === "all") {
+			printFromRoute(
+				route(printAllRoute, { jenis }) +
+					`?keterangan=${encodeURIComponent(keterangan)}`,
+				PRINT_ALL_ID,
+			);
+		}
+		setModalOpen(false);
+	};
 
 	const columns: Column<Peserta>[] = [
 		{
@@ -117,6 +174,20 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 				</div>
 			),
 		},
+		{
+			id: "actions",
+			header: "Aksi",
+			cell: ({ row }) => (
+				<Button
+					type="button"
+					size="sm"
+					disabled={isPrinting}
+					onClick={() => handleOpenModal("single", row.original.id)}
+				>
+					Cetak
+				</Button>
+			),
+		},
 	];
 
 	const handleYearChange = (value: string) => {
@@ -160,7 +231,16 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					</div>
 
 					<div className="flex items-center gap-2">
-						<Button asChild>
+						<Button
+							type="button"
+							disabled={isPrinting}
+							onClick={() => handleOpenModal("all")}
+						>
+							{printingDocumentId === PRINT_ALL_ID
+								? "Memuat..."
+								: "Cetak Semua"}
+						</Button>
+						<Button asChild variant="outline">
 							<a
 								href={route(route().current() as string, {
 									tahun: tahun,
@@ -181,6 +261,46 @@ export default function Index({ pesertappdb, tahun, years, title }: Props) {
 					searchPlaceholder="Cari nama..."
 				/>
 			</div>
+
+			{/* Modal Verifikasi Keterangan */}
+			<Dialog open={modalOpen} onOpenChange={setModalOpen}>
+				<DialogContent className="sm:max-w-lg">
+					<DialogHeader>
+						<DialogTitle>Verifikasi Keterangan Beasiswa</DialogTitle>
+						<DialogDescription>
+							Periksa dan edit keterangan beasiswa sebelum mencetak dokumen.
+						</DialogDescription>
+					</DialogHeader>
+					<div className="space-y-2">
+						<label
+							htmlFor="keterangan"
+							className="text-sm font-medium leading-none"
+						>
+							Keterangan Beasiswa
+						</label>
+						<Textarea
+							id="keterangan"
+							value={keterangan}
+							onChange={(e) => setKeterangan(e.target.value)}
+							rows={5}
+							className="resize-none"
+						/>
+					</div>
+					<DialogFooter>
+						<Button
+							variant="outline"
+							onClick={() => setModalOpen(false)}
+						>
+							Batal
+						</Button>
+						<Button onClick={handleConfirmPrint}>
+							{isPrinting ? "Memuat..." : "Cetak"}
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+
+			<PrintFrame />
 		</>
 	);
 }

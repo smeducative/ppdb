@@ -373,6 +373,74 @@ export function AppSidebar() {
 								))}
 							</CollapsibleMenuItem>
 
+							{/* Surat Beasiswa */}
+							<CollapsibleMenuItem
+								icon={<Award className="size-4" />}
+								title="Surat Beasiswa"
+								defaultOpen={isActive("/dashboard/beasiswa")}
+							>
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										asChild
+										isActive={url.includes("/beasiswa/mwc")}
+									>
+										<Link href={route("ppdb.beasiswa.mwc")}>
+											Rekomendasi MWC
+										</Link>
+									</SidebarMenuSubButton>
+								</SidebarMenuSubItem>
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										asChild
+										isActive={url.includes("/beasiswa/akademik")}
+									>
+										<Link href={route("ppdb.beasiswa.akademik")}>
+											Akademik
+										</Link>
+									</SidebarMenuSubButton>
+								</SidebarMenuSubItem>
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										asChild
+										isActive={url.includes("/beasiswa/tahfidz")}
+									>
+										<Link href={route("ppdb.beasiswa.tahfidz")}>
+											Tahfidz
+										</Link>
+									</SidebarMenuSubButton>
+								</SidebarMenuSubItem>
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										asChild
+										isActive={url.includes("/beasiswa/non-akademik")}
+									>
+										<Link href={route("ppdb.beasiswa.non-akademik")}>
+											Non Akademik
+										</Link>
+									</SidebarMenuSubButton>
+								</SidebarMenuSubItem>
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										asChild
+										isActive={url.includes("/beasiswa/kip")}
+									>
+										<Link href={route("ppdb.beasiswa.kip")}>
+											KIP
+										</Link>
+									</SidebarMenuSubButton>
+								</SidebarMenuSubItem>
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										asChild
+										isActive={url.includes("/beasiswa/yatim-piatu")}
+									>
+										<Link href={route("ppdb.beasiswa.yatim-piatu")}>
+											Yatim Piatu
+										</Link>
+									</SidebarMenuSubButton>
+								</SidebarMenuSubItem>
+							</CollapsibleMenuItem>
+
 							{/* Kwitansi */}
 							<CollapsibleMenuItem
 								icon={<Receipt className="size-4" />}
