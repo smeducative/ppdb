@@ -127,14 +127,25 @@ Hafalan. Dengan perolehan Beasiswa <b> Bebas Biaya Pendidikan Selama Sekolah </b
             </div>
             <div>
                 <h2 class="mb-5 text-2xl font-bold pl-2 border-l-8 border-l-amber-400">
-                     BEASISWA SUBSIDI DPP 50%
+                     BEASISWA SAUDARA KANDUNG/ALUMNI
 
                 </h2>
                 <p class="text-gray-600">
-                    Beasiswa tersebut diberlakukan untuk calon peserta didik baru yang melakukan Daftar
-Ulang (50 pendaftar ulang pertama) atau memiliki saudara kandung masih aktif atau alumni SMK
-Diponegoro Karanganyar (dibuktikan dengan Kartu Keluarga). Besarnya perolehan beasiswa yaitu
-Subsidi DPP 50%.
+                    Beasiswa tersebut diberlakukan untuk calon peserta didik baru yang memiliki saudara
+kandung masih aktif atau alumni SMK Diponegoro Karanganyar (dibuktikan dengan Kartu Keluarga).
+Besarnya perolehan beasiswa yaitu Subsidi Biaya Kegiatan 50%.
+
+                </p>
+            </div>
+            <div>
+                <h2 class="mb-5 text-2xl font-bold pl-2 border-l-8 border-l-amber-400">
+                     BEASISWA YATIM PIATU
+
+                </h2>
+                <p class="text-gray-600">
+                    Beasiswa tersebut diberlakukan untuk calon peserta didik baru yang merupakan anak
+Yatim/Piatu untuk meringankan biaya pendidikan. Besarnya perolehan beasiswa yaitu
+Potongan Biaya SPP.
 
                 </p>
             </div>

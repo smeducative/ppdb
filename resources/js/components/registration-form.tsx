@@ -340,7 +340,7 @@ export function RegistrationForm({
 		return () => ctx.revert();
 	}, []);
 
-	// GSAP animation for step transitions
+	// GSAP animation for step transitions + scroll to top
 	useEffect(() => {
 		void currentStep;
 		gsap.fromTo(
@@ -348,6 +348,9 @@ export function RegistrationForm({
 			{ opacity: 0, x: 20 },
 			{ opacity: 1, x: 0, duration: 0.4, ease: "power2.out" },
 		);
+		if (cardRef.current) {
+			cardRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+		}
 	}, [currentStep]);
 
 	// Validates form fields for the current step

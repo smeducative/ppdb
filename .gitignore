@@ -17,3 +17,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+.opencode
+/public/build/manifest.json

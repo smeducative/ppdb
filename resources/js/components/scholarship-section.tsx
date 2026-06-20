@@ -68,14 +68,23 @@ const scholarships = [
 	},
 	{
 		icon: Clock,
-		title: "Beasiswa Subsidi DPP 50%",
-		description: "Untuk 50 pendaftar ulang pertama atau saudara alumni",
+		title: "Beasiswa Saudara Kandung/Alumni",
+		description: "Untuk siswa yang memiliki saudara kandung masih aktif atau alumni",
 		benefits: [
-			{ rank: "50 Pendaftar Pertama", reward: "Subsidi DPP 50%" },
-			{ rank: "Saudara Kandung/Alumni", reward: "Subsidi DPP 50%" },
+			{ rank: "Saudara Kandung/Alumni", reward: "Subsidi Biaya Kegiatan 50%" },
 		],
 		color: "from-purple-500 to-pink-600",
 		requirement: "Dibuktikan dengan Kartu Keluarga",
+	},
+	{
+		icon: Users,
+		title: "Beasiswa Yatim Piatu",
+		description: "Untuk siswa yatim/piatu untuk meringankan biaya pendidikan",
+		benefits: [
+			{ rank: "Yatim/Piatu", reward: "Potongan Biaya SPP" },
+		],
+		color: "from-rose-500 to-red-600",
+		requirement: "Dibuktikan dengan Surat Keterangan dari Kelurahan/Pengurus NU",
 	},
 ];
 

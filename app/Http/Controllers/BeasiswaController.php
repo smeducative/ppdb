@@ -17,7 +17,7 @@ class BeasiswaController extends Controller
             'non-akademik' => 'Beasiswa Non Akademik diberikan kepada calon peserta didik baru yang mempunyai prestasi di bidang Non Akademik (Olahraga, Seni). Dibuktikan fotokopi Sertifikat/Piagam penghargaan. Juara I Kabupaten: 1,5 Tahun, Karesidenan: 2 Tahun, Provinsi: 3 Tahun.',
             'kip' => '-',
             'tahfidz' => 'Beasiswa Hafidz dan Hafidzah diberikan kepada calon peserta didik baru yang mampu menghafal Al-Qur\'an minimal 1 Juz. Dibuktikan mampu menghafal di hadapan Petugas Tes Hafalan. Perolehan Beasiswa: Bebas Biaya Pendidikan Selama Sekolah.',
-            'yatim-piatu' => 'Beasiswa Yatim Piatu diberikan kepada calon peserta didik baru yang merupakan anak yatim/piatu. Bebas biaya pendidikan selama menjalani pendidikan di SMK Diponegoro Karanganyar.',
+            'yatim-piatu' => 'Beasiswa Yatim Piatu diberikan kepada calon peserta didik baru yang merupakan anak yatim/piatu. Perolehan beasiswa berupa potongan biaya SPP.',
             default => '-',
         };
     }
