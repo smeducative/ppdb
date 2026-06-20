@@ -1,4 +1,5 @@
 import { type Column, DataTable } from "@/components/data-table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Select,
 	SelectContent,
@@ -6,8 +7,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
+import {
+	Banknote,
+	FileCheck,
+	FileText,
+	ReceiptText,
+} from "lucide-react";
 
 interface Jurusan {
 	id: number;
@@ -40,6 +48,13 @@ interface PaginationLink {
 	active: boolean;
 }
 
+interface JenisPembayaran {
+	[key: string]: {
+		count: number;
+		total: number;
+	};
+}
+
 interface Props {
 	pesertappdb: {
 		data: Peserta[];
@@ -51,9 +66,42 @@ interface Props {
 	tahun: number;
 	years: number[];
 	jurusan: string | null;
+	danaKelola: number;
+	jenisPembayaran: JenisPembayaran;
 }
 
-export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
+const JENIS_PEMBAYARAN_ICONS: Record<
+	string,
+	React.ComponentType<{ className?: string }>
+> = {
+	"Daftar Ulang": ReceiptText,
+	SPP: Banknote,
+	"Seragam": FileCheck,
+};
+
+const JENIS_PEMBAYARAN_COLORS: Record<string, string> = {
+	"Daftar Ulang": "bg-amber-500",
+	SPP: "bg-sky-500",
+	"Seragam": "bg-emerald-500",
+};
+
+const JENIS_PEMBAYARAN_FALLBACK_COLORS = [
+	"bg-violet-500",
+	"bg-rose-500",
+	"bg-cyan-500",
+	"bg-orange-500",
+	"bg-indigo-500",
+	"bg-pink-500",
+];
+
+export default function Index({
+	pesertappdb,
+	tahun,
+	years,
+	jurusan,
+	danaKelola,
+	jenisPembayaran,
+}: Props) {
 	const formatCurrency = (amount: number) => {
 		return new Intl.NumberFormat("id-ID", {
 			style: "currency",
@@ -61,6 +109,11 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			minimumFractionDigits: 0,
 		}).format(amount);
 	};
+
+	const totalKwitansi = Object.values(jenisPembayaran).reduce(
+		(sum, item) => sum + item.count,
+		0,
+	);
 
 	const columns: Column<Peserta>[] = [
 		{
@@ -151,10 +204,13 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 			<Head title="Dashboard Kwitansi" />
 
 			<div className="space-y-6">
-				<div className="flex flex-col sm:flex-row justify-between gap-4">
-					<div className="w-full sm:w-1/4">
+				{/* Header with Year Filter */}
+				<div className="flex flex-wrap justify-between items-center gap-4">
+					<h1 className="font-bold text-2xl">Dashboard Kwitansi</h1>
+					<div className="flex items-center gap-2">
+						<span className="text-sm text-muted-foreground">Data Tahun:</span>
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
-							<SelectTrigger>
+							<SelectTrigger className="w-[120px]">
 								<SelectValue placeholder="Pilih Tahun" />
 							</SelectTrigger>
 							<SelectContent>
@@ -166,11 +222,64 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 							</SelectContent>
 						</Select>
 					</div>
-
-					<div className="flex items-center gap-2">
-						{/* Export buttons can be added here if needed */}
-					</div>
 				</div>
+
+				{/* Ringkasan */}
+				<section>
+					<h3 className="mb-4 font-semibold text-xl">Ringkasan</h3>
+					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-3">
+						<StatsCard
+							title="Dana Masuk"
+							subtitle={formatCurrency(danaKelola)}
+							icon={Banknote}
+							iconClassName="bg-amber-500"
+						/>
+						<StatsCard
+							title="Jumlah Kwitansi"
+							subtitle={`${totalKwitansi} transaksi`}
+							icon={FileText}
+							iconClassName="bg-sky-500"
+						/>
+						<StatsCard
+							title="Jenis Pembayaran"
+							subtitle={`${Object.keys(jenisPembayaran).length} jenis`}
+							icon={ReceiptText}
+							iconClassName="bg-emerald-500"
+						/>
+					</div>
+				</section>
+
+				{/* Stats per Jenis Pembayaran */}
+				{Object.keys(jenisPembayaran).length > 0 && (
+					<section>
+						<h3 className="mb-4 font-semibold text-xl">
+							Statistik per Jenis Pembayaran
+						</h3>
+						<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-3">
+							{Object.entries(jenisPembayaran).map(
+								([jenis, data], index) => {
+									const Icon =
+										JENIS_PEMBAYARAN_ICONS[jenis] || FileText;
+									const colorClass =
+										JENIS_PEMBAYARAN_COLORS[jenis] ||
+										JENIS_PEMBAYARAN_FALLBACK_COLORS[
+											index % JENIS_PEMBAYARAN_FALLBACK_COLORS.length
+										];
+
+									return (
+										<StatsCard
+											key={jenis}
+											title={jenis}
+											subtitle={`${data.count} kwitansi · ${formatCurrency(data.total)}`}
+											icon={Icon}
+											iconClassName={colorClass}
+										/>
+									);
+								},
+							)}
+						</div>
+					</section>
+				)}
 
 				<div className="space-y-4">
 					<div className="bg-blue-500/10 border-l-4 border-blue-500 p-4 rounded text-blue-700 dark:text-blue-400 text-sm">
@@ -197,5 +306,33 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 				/>
 			</div>
 		</>
+	);
+}
+
+function StatsCard({
+	title,
+	subtitle,
+	icon: Icon,
+	iconClassName,
+}: {
+	title: string;
+	subtitle: string;
+	icon: React.ComponentType<{ className?: string }>;
+	iconClassName?: string;
+}) {
+	return (
+		<Card className="py-4">
+			<div className="flex items-center px-4 gap-4">
+				<div className={cn("p-3 rounded-lg shrink-0", iconClassName)}>
+					<Icon className="w-6 h-6 text-white" />
+				</div>
+				<div>
+					<div className="text-2xl font-bold leading-none">{title}</div>
+					<div className="text-sm font-medium text-muted-foreground mt-1">
+						{subtitle}
+					</div>
+				</div>
+			</div>
+		</Card>
 	);
 }

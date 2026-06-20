@@ -59,13 +59,13 @@ interface DashboardProps {
 		rata_rata: number;
 		minimum: number;
 		maksimum: number;
-		total: number;
 	};
 	umurDistribusi: { umur: number; jumlah: number }[];
 	genderOverTime: Record<
 		number,
 		{ bulan: string; laki: number; perempuan: number }
 	>;
+	totalPendaftar: number;
 	tahun: number;
 	lastYear: string;
 	oldestYear: number;
@@ -97,6 +97,7 @@ export default function Dashboard({
 	umurStats,
 	umurDistribusi,
 	genderOverTime,
+	totalPendaftar,
 	tahun,
 	lastYear,
 	oldestYear,
@@ -804,8 +805,8 @@ export default function Dashboard({
 							iconClassName="bg-indigo-500"
 						/>
 						<StatsCard
-							title="Total Data Umur"
-							value={umurStats?.total ?? 0}
+							title="Total Pendaftar"
+							value={totalPendaftar}
 							icon={Users}
 							iconClassName="bg-slate-500"
 						/>
