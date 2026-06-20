@@ -211,6 +211,9 @@ class AdminController extends Controller
             ->orderByDesc('as_count')
             ->get()
             ->map(function ($item) {
+                $item->kecamatan = Str::title(
+                    preg_replace('/^(kec\.?|kecamatan)\s+/i', '', trim($item->kecamatan))
+                );
                 $item->kabupaten_kota = Str::title(
                     preg_replace('/^(kab\.?|kabupaten|kota)\s+/i', '', trim($item->kabupaten_kota))
                 );
