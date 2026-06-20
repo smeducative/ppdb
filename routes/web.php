@@ -152,5 +152,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('kip', [BeasiswaController::class, 'beasiswaKip'])->name('ppdb.beasiswa.kip');
         Route::get('tahfidz', [BeasiswaController::class, 'beasiswaTahfidz'])->name('ppdb.beasiswa.tahfidz');
         Route::get('yatim-piatu', [BeasiswaController::class, 'beasiswaYatimPiatu'])->name('ppdb.beasiswa.yatim-piatu');
+
+        // cetak beasiswa
+        Route::post('/cetak/{uuid}', [BeasiswaController::class, 'cetakBeasiswaSingle'])->name('ppdb.cetak.beasiswa');
+        Route::post('/cetak-semua/{jenis}', [BeasiswaController::class, 'cetakBeasiswaSemua'])->name('ppdb.cetak.beasiswa.semua');
     });
 });

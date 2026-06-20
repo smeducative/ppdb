@@ -25,6 +25,8 @@ class DocumentFilterRequest extends FormRequest
         return [
             'tahun' => ['nullable', 'integer', 'min:1900', 'max:'.(now()->year + 1)],
             'search' => ['nullable', 'string'],
+            'jenis_pembayaran' => ['nullable', 'string'],
+            'status' => ['nullable', 'string', 'in:active,deleted'],
             'per_page' => ['nullable', 'integer'],
         ];
     }

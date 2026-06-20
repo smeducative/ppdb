@@ -9,6 +9,7 @@ use App\Models\Jurusan;
 use App\Models\PesertaPPDB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -208,7 +209,14 @@ class AdminController extends Controller
             ->whereYear('created_at', $tahun)
             ->groupBy('kecamatan', 'kabupaten_kota')
             ->orderByDesc('as_count')
-            ->get();
+            ->get()
+            ->map(function ($item) {
+                $item->kabupaten_kota = Str::title(
+                    preg_replace('/^(kab\.?|kabupaten|kota)\s+/i', '', trim($item->kabupaten_kota))
+                );
+
+                return $item;
+            });
 
         $umurStatsRaw = PesertaPPDB::select(
             DB::raw('TIMESTAMPDIFF(YEAR, tanggal_lahir, created_at) as umur')
@@ -222,8 +230,9 @@ class AdminController extends Controller
             'rata_rata' => $umurStatsRaw->isNotEmpty() ? round($umurStatsRaw->avg(), 1) : 0,
             'minimum' => $umurStatsRaw->isNotEmpty() ? $umurStatsRaw->min() : 0,
             'maksimum' => $umurStatsRaw->isNotEmpty() ? $umurStatsRaw->max() : 0,
-            'total' => $umurStatsRaw->count(),
         ];
+
+        $totalPendaftar = PesertaPPDB::whereYear('created_at', $tahun)->count();
 
         $umurDistribusi = $umurStatsRaw
             ->countBy()
@@ -261,6 +270,7 @@ class AdminController extends Controller
             'pendaftarPerDaerah',
             'umurStats',
             'umurDistribusi',
+            'totalPendaftar',
             'oldestYear'
         ));
     }
