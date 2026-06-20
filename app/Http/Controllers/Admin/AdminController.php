@@ -213,8 +213,8 @@ class AdminController extends Controller
         )
             ->whereYear('created_at', $tahun)
             ->groupBy(
-                DB::raw("REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', '')"),
-                DB::raw("REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', '')")
+                DB::raw("COALESCE(NULLIF(CONCAT(UPPER(LEFT(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 1)), LOWER(SUBSTRING(REGEXP_REPLACE(kecamatan, '^(kec\\.?|kecamatan)\\s+', ''), 2))), ''), '(Tidak diisi)')"),
+                DB::raw("COALESCE(NULLIF(CONCAT(UPPER(LEFT(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 1)), LOWER(SUBSTRING(REGEXP_REPLACE(kabupaten_kota, '^(kab\\.?|kabupaten|kota)\\s+', ''), 2))), ''), '(Tidak diisi)')")
             )
             ->orderByDesc('as_count')
             ->limit(10)
