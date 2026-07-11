@@ -1,4 +1,5 @@
 import { type Column, DataTable } from "@/components/data-table";
+import { ExportStatusDialog } from "@/components/export-status-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -174,16 +175,11 @@ export default function ListBelumDaftarUlang({
 					</div>
 
 					<div className="flex items-center gap-2">
-						<Button asChild>
-							<a
-								href={route("export.belum.daftar.ulang", {
-									tahun: tahun,
-									jurusan: jurusan || "",
-								})}
-							>
-								Export Excel
-							</a>
-						</Button>
+						<ExportStatusDialog
+							routeName="export.belum.daftar.ulang"
+							params={{ tahun, jurusan: jurusan || "" }}
+							defaultStatus="belum_du"
+						/>
 					</div>
 				</div>
 

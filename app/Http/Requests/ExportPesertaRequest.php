@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExportPesertaRequest extends FormRequest
@@ -17,15 +18,14 @@ class ExportPesertaRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'jurusan' => ['nullable', 'exists:jurusan,id'],
-            'diterima' => ['nullable', 'integer'],
+            'status' => ['nullable', 'in:semua,diterima,sudah_du,belum_du'],
             'tahun' => ['nullable', 'integer'],
-            'all' => ['nullable', 'integer'],
         ];
     }
 }

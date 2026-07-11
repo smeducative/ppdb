@@ -1,4 +1,5 @@
 import { AlertMessages } from "@/components/alert-messages";
+import { ExportStatusDialog } from "@/components/export-status-dialog";
 import { type Column, DataTable } from "@/components/data-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -216,16 +217,11 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 					</div>
 
 					<div className="flex items-center gap-2">
-						<Button asChild>
-							<a
-								href={route("export.seragam", {
-									tahun: tahun,
-									jurusan: jurusan || "",
-								})}
-							>
-								Export Excel
-							</a>
-						</Button>
+						<ExportStatusDialog
+							routeName="export.seragam"
+							params={{ tahun, jurusan: jurusan || "" }}
+							defaultStatus="diterima"
+						/>
 					</div>
 				</div>
 

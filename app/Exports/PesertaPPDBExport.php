@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\PesertaPPDB;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,38 +15,34 @@ class PesertaPPDBExport implements FromCollection, ShouldAutoSize, WithHeadings,
 
     public $tahun;
 
-    public $diterima;
+    public $status;
 
-    public $all;
-
-    public function __construct($jurusan, $tahun, $diterima, $all = null)
+    public function __construct($jurusan, $tahun, $status = 'semua')
     {
         $this->jurusan = $jurusan;
         $this->tahun = $tahun;
-        $this->diterima = $diterima;
-        $this->all = $all;
+        $this->status = $status;
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection()
     {
-        if ($this->all) {
-            return PesertaPPDB::when(! empty($this->jurusan), function ($query) {
-                $query->where('jurusan_id', $this->jurusan);
-            })
-                ->whereYear('created_at', $this->tahun)->get();
-        }
-
         return PesertaPPDB::when(! empty($this->jurusan), function ($query) {
             $query->where('jurusan_id', $this->jurusan);
-        })->when($this->diterima, function ($query) {
-            $query->has('kwitansi')->whereDiterima(1);
-        })->when($this->diterima == 0, function ($query) {
-            $query->doesntHave('kwitansi');
         })
-            ->whereYear('created_at', $this->tahun)->get();
+            ->whereYear('created_at', $this->tahun)
+            ->when($this->status === 'diterima', function ($query) {
+                $query->whereDiterima(1);
+            })
+            ->when($this->status === 'sudah_du', function ($query) {
+                $query->whereDiterima(1)->has('kwitansi');
+            })
+            ->when($this->status === 'belum_du', function ($query) {
+                $query->doesntHave('kwitansi');
+            })
+            ->get();
     }
 
     // heading

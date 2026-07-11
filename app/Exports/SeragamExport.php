@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\PesertaPPDB;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -14,14 +15,17 @@ class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, Wit
 
     public $tahun;
 
-    public function __construct($jurusan, $tahun)
+    public $status;
+
+    public function __construct($jurusan, $tahun, $status = 'diterima')
     {
         $this->jurusan = $jurusan;
         $this->tahun = $tahun;
+        $this->status = $status;
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection()
     {
@@ -29,8 +33,13 @@ class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, Wit
             ->when(! empty($this->jurusan), function ($query) {
                 return $query->where('jurusan_id', $this->jurusan);
             })
-            ->whereDiterima(1)
             ->whereYear('created_at', $this->tahun)
+            ->when($this->status === 'sudah_du', function ($query) {
+                return $query->whereDiterima(1)->has('kwitansi');
+            })
+            ->when($this->status === 'diterima', function ($query) {
+                return $query->whereDiterima(1);
+            })
             ->get();
     }
 

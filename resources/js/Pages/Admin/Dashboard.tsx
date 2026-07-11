@@ -1,3 +1,4 @@
+import { ExportStatusDialog } from "@/components/export-status-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -624,11 +625,14 @@ export default function Dashboard({
 						<Card>
 							<CardHeader className="flex flex-row justify-between items-center">
 								<CardTitle>Top 10 Jumlah Pendaftar Per Sekolah</CardTitle>
-								<Button asChild variant="outline" size="sm">
-									<a href={route("export.rekap-sekolah", { tahun })}>
-										Export .xlsx
-									</a>
-								</Button>
+								<ExportStatusDialog
+									routeName="export.rekap-sekolah"
+									params={{ tahun }}
+									defaultStatus="semua"
+									label="Export .xlsx"
+									variant="outline"
+									size="sm"
+								/>
 							</CardHeader>
 							<CardContent className="px-1">
 								{topSchoolsPendaftarCount &&

@@ -1,5 +1,5 @@
 import { type Column, DataTable } from "@/components/data-table";
-import { Button } from "@/components/ui/button";
+import { ExportStatusDialog } from "@/components/export-status-dialog";
 import {
 	Select,
 	SelectContent,
@@ -152,18 +152,11 @@ export default function ListDaftarUlang({
 					</div>
 
 					<div className="flex items-center gap-2">
-						<Button asChild>
-							<a
-								href={route("export.peserta.ppdb", {
-									tahun: tahun,
-									diterima: 1,
-									all: 0,
-									jurusan: jurusan || "",
-								})}
-							>
-								Export Excel
-							</a>
-						</Button>
+						<ExportStatusDialog
+							routeName="export.peserta.ppdb"
+							params={{ tahun, jurusan: jurusan || "" }}
+							defaultStatus="sudah_du"
+						/>
 					</div>
 				</div>
 
