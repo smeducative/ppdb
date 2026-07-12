@@ -22,6 +22,14 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
+import {
+	Hash,
+	Pencil,
+	Settings2,
+	Shirt,
+	User,
+	UserRound,
+} from "lucide-react";
 import { useState } from "react";
 
 interface Jurusan {
@@ -135,22 +143,24 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 		{
 			accessorKey: "no_pendaftaran",
 			header: "No. Pendaftaran",
+			icon: Hash,
 			cell: ({ row }) => (
-				<div>
-					<div className="font-medium text-primary">
-						{row.getValue("no_pendaftaran")}
-					</div>
+				<div className="inline-flex items-center gap-1.5 font-medium text-primary">
+					<Hash className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.getValue("no_pendaftaran")}
 				</div>
 			),
 		},
 		{
 			accessorKey: "nama_lengkap",
 			header: "Nama Lengkap",
+			icon: User,
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.show.peserta", row.original.id)}
-					className="font-medium hover:underline"
+					className="inline-flex items-center gap-1.5 font-medium hover:underline"
 				>
+					<User className="size-3.5 shrink-0 text-muted-foreground" />
 					{row.getValue("nama_lengkap")}
 				</Link>
 			),
@@ -158,8 +168,10 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 		{
 			accessorKey: "jenis_kelamin",
 			header: "L/P",
+			icon: UserRound,
 			cell: ({ row }) => (
-				<Badge variant="outline">
+				<Badge variant="outline" className="gap-1">
+					<UserRound className="size-3" />
 					{row.getValue("jenis_kelamin") === "l" ? "L" : "P"}
 				</Badge>
 			),
@@ -167,18 +179,32 @@ export default function Index({ pesertappdb, tahun, years, jurusan }: Props) {
 		{
 			id: "baju",
 			header: "Baju",
-			cell: ({ row }) => row.original.ukuran_seragam?.baju || "-",
+			icon: Shirt,
+			cell: ({ row }) => (
+				<span className="inline-flex items-center gap-1.5">
+					<Shirt className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.original.ukuran_seragam?.baju || "-"}
+				</span>
+			),
 		},
 		{
 			id: "jas",
 			header: "Jas",
-			cell: ({ row }) => row.original.ukuran_seragam?.jas || "-",
+			icon: Shirt,
+			cell: ({ row }) => (
+				<span className="inline-flex items-center gap-1.5">
+					<Shirt className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.original.ukuran_seragam?.jas || "-"}
+				</span>
+			),
 		},
 		{
 			id: "actions",
 			header: "Aksi",
+			icon: Settings2,
 			cell: ({ row }) => (
 				<Button size="sm" onClick={() => handleEdit(row.original)}>
+					<Pencil className="size-3.5" />
 					Ubah
 				</Button>
 			),

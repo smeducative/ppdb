@@ -2,26 +2,38 @@
 
 namespace App\Exports;
 
+use App\Exports\Concerns\StyledExcelExport;
 use App\Models\PesertaPPDB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithCustomStartCell;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping
+class SeragamExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithEvents, WithHeadings, WithMapping
 {
+    use StyledExcelExport;
+
     public $jurusan;
 
     public $tahun;
 
     public $status;
 
+    protected $index = 0;
+
     public function __construct($jurusan, $tahun, $status = 'diterima')
     {
         $this->jurusan = $jurusan;
         $this->tahun = $tahun;
         $this->status = $status;
+    }
+
+    public function exportTitle(): string
+    {
+        return 'Data Ukuran Seragam Peserta PPDB Tahun '.$this->tahun;
     }
 
     /**
@@ -46,6 +58,7 @@ class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, Wit
     public function headings(): array
     {
         return [
+            'No',
             'No Pendaftaran',
             'Nama Lengkap',
             'Jenis Kelamin',
@@ -67,7 +80,10 @@ class SeragamExport implements FromCollection, ShouldAutoSize, WithHeadings, Wit
 
     public function map($row): array
     {
+        $this->index++;
+
         return [
+            $this->index,
             $row->no_pendaftaran,
             $row->nama_lengkap,
             $row->jenis_kelamin === 'p' ? 'Perempuan' : 'Laki-laki',

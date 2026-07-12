@@ -245,7 +245,7 @@ class BeasiswaController extends Controller
     public function cetakBeasiswaSingle($uuid)
     {
         $peserta = PesertaPPDB::with('jurusan')->findOrFail($uuid);
-        $jenis = $this->resolveJenis($peserta);
+        $jenis = request('jenis', $this->resolveJenis($peserta));
         $defaultKeterangan = $this->getKeteranganBeasiswa($jenis);
         $keterangan = request('keterangan', $defaultKeterangan);
         $user = auth()->user();

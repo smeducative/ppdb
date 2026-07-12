@@ -2,26 +2,38 @@
 
 namespace App\Exports;
 
+use App\Exports\Concerns\StyledExcelExport;
 use App\Models\PesertaPPDB;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithCustomStartCell;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class PesertaPPDBExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping
+class PesertaPPDBExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithEvents, WithHeadings, WithMapping
 {
+    use StyledExcelExport;
+
     public $jurusan;
 
     public $tahun;
 
     public $status;
 
+    protected $index = 0;
+
     public function __construct($jurusan, $tahun, $status = 'semua')
     {
         $this->jurusan = $jurusan;
         $this->tahun = $tahun;
         $this->status = $status;
+    }
+
+    public function exportTitle(): string
+    {
+        return 'Data Peserta PPDB Tahun '.$this->tahun;
     }
 
     /**
@@ -49,6 +61,7 @@ class PesertaPPDBExport implements FromCollection, ShouldAutoSize, WithHeadings,
     public function headings(): array
     {
         return [
+            'No',
             'No. Pendaftaran',
             'Nama Lengkap',
             'Jenis Kelamin',
@@ -92,7 +105,10 @@ class PesertaPPDBExport implements FromCollection, ShouldAutoSize, WithHeadings,
     // map
     public function map($peserta): array
     {
+        $this->index++;
+
         return [
+            $this->index,
             $peserta->no_pendaftaran,
             $peserta->nama_lengkap,
             $peserta->jenis_kelamin == 'l' ? 'Laki-laki' : 'Perempuan',

@@ -2,17 +2,24 @@
 
 namespace App\Exports;
 
+use App\Exports\Concerns\StyledExcelExport;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class RekapSekolahExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithHeadings, WithMapping
+class RekapSekolahExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithEvents, WithHeadings, WithMapping
 {
+    use StyledExcelExport;
+
     public $tahun;
 
     public $pendaftarPerSekolah;
+
+    protected $index = 0;
 
     public function __construct($tahun, $pendaftarPerSekolah)
     {
@@ -20,22 +27,23 @@ class RekapSekolahExport implements FromCollection, ShouldAutoSize, WithCustomSt
         $this->pendaftarPerSekolah = $pendaftarPerSekolah;
     }
 
+    public function exportTitle(): string
+    {
+        return 'Rekap Asal Sekolah Pendaftar PPDB Tahun '.$this->tahun;
+    }
+
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection()
     {
         return $this->pendaftarPerSekolah;
     }
 
-    public function startCell(): string
-    {
-        return 'A3';
-    }
-
     public function headings(): array
     {
         return [
+            'No',
             'Nama Sekolah',
             'Jumlah Pendaftar',
         ];
@@ -43,7 +51,10 @@ class RekapSekolahExport implements FromCollection, ShouldAutoSize, WithCustomSt
 
     public function map($row): array
     {
+        $this->index++;
+
         return [
+            $this->index,
             $row->asal_sekolah,
             $row->as_count,
         ];

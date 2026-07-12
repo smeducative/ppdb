@@ -18,6 +18,16 @@ import {
 import { usePrintRoute } from "@/hooks/use-print-route";
 import { formatDate, formatDateFull } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
+import {
+	CalendarClock,
+	GraduationCap,
+	Hash,
+	Info,
+	Printer,
+	School,
+	Settings2,
+	User,
+} from "lucide-react";
 
 interface Jurusan {
 	id: number;
@@ -85,19 +95,22 @@ export default function Index({
 	const columns: Column<Peserta>[] = [
 		{
 			header: "Identitas Peserta",
+			icon: User,
 			className: "min-w-[200px]",
 			cell: ({ row }) => (
-				<div className="flex flex-col">
-					<span className="text-xs text-muted-foreground font-mono">
+				<div className="flex flex-col gap-0.5">
+					<span className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground">
+						<Hash className="size-3 shrink-0" />
 						{row.original.no_pendaftaran}
 					</span>
 					<Link
 						href={route("ppdb.show.peserta", row.original.id)}
-						className="text-primary hover:underline font-bold"
+						className="font-bold text-primary hover:underline"
 					>
 						{row.original.nama_lengkap}
 					</Link>
-					<span className="text-xs sm:hidden text-muted-foreground mt-1">
+					<span className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground sm:hidden">
+						<GraduationCap className="size-3 shrink-0" />
 						{row.original.jurusan?.nama || "-"}
 					</span>
 				</div>
@@ -105,19 +118,20 @@ export default function Index({
 		},
 		{
 			header: "Info Peserta",
+			icon: Info,
 			className: "hidden md:table-cell",
 			cell: ({ row }) => (
-				<div className="flex flex-col text-sm">
-					<div className="flex items-center gap-1">
-						<span className="text-muted-foreground">TTL:</span>
+				<div className="flex flex-col gap-1 text-sm">
+					<div className="flex items-center gap-1.5">
+						<CalendarClock className="size-3.5 shrink-0 text-muted-foreground" />
 						<span>
 							{row.original.tempat_lahir},{" "}
 							{formatDate(row.original.tanggal_lahir)}
 						</span>
 					</div>
-					<div className="flex items-center gap-1">
-						<span className="text-muted-foreground">Asal:</span>
-						<span className="truncate max-w-[150px]">
+					<div className="flex items-center gap-1.5">
+						<School className="size-3.5 shrink-0 text-muted-foreground" />
+						<span className="max-w-[150px] truncate">
 							{row.original.asal_sekolah}
 						</span>
 					</div>
@@ -126,9 +140,11 @@ export default function Index({
 		},
 		{
 			header: "Jurusan",
+			icon: GraduationCap,
 			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
-				<div className="text-sm font-medium">
+				<div className="inline-flex items-center gap-1.5 text-sm font-medium">
+					<GraduationCap className="size-3.5 shrink-0 text-muted-foreground" />
 					{row.original.jurusan?.abbreviation ||
 						row.original.jurusan?.nama ||
 						"-"}
@@ -138,6 +154,7 @@ export default function Index({
 		{
 			id: "actions",
 			header: "Aksi",
+			icon: Settings2,
 			cell: ({ row }) => (
 				<Button
 					type="button"
@@ -150,7 +167,14 @@ export default function Index({
 						)
 					}
 				>
-					{printingDocumentId === row.original.id ? "Memuat..." : "Cetak"}
+					{printingDocumentId === row.original.id ? (
+						"Memuat..."
+					) : (
+						<>
+							<Printer className="size-3.5" />
+							Cetak
+						</>
+					)}
 				</Button>
 			),
 		},

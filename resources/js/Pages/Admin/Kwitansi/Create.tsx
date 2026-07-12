@@ -23,9 +23,19 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { TableHeaderLabel } from "@/components/data-table";
 import { usePrintRoute } from "@/hooks/use-print-route";
 import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { format } from "date-fns";
+import {
+	CalendarClock,
+	Printer,
+	ReceiptText,
+	Settings2,
+	Trash2,
+	UserCheck,
+	Wallet,
+} from "lucide-react";
 
 interface User {
 	id: number;
@@ -199,11 +209,27 @@ export default function Create({ peserta }: Props) {
 							<Table>
 								<TableHeader>
 									<TableRow>
-										<TableHead>Jenis Pembayaran</TableHead>
-										<TableHead>Jumlah</TableHead>
-										<TableHead>Pada Tanggal</TableHead>
-										<TableHead>Penerima</TableHead>
-										<TableHead>Aksi</TableHead>
+										<TableHead>
+											<TableHeaderLabel icon={ReceiptText}>
+												Jenis Pembayaran
+											</TableHeaderLabel>
+										</TableHead>
+										<TableHead>
+											<TableHeaderLabel icon={Wallet}>Jumlah</TableHeaderLabel>
+										</TableHead>
+										<TableHead>
+											<TableHeaderLabel icon={CalendarClock}>
+												Pada Tanggal
+											</TableHeaderLabel>
+										</TableHead>
+										<TableHead>
+											<TableHeaderLabel icon={UserCheck}>
+												Penerima
+											</TableHeaderLabel>
+										</TableHead>
+										<TableHead>
+											<TableHeaderLabel icon={Settings2}>Aksi</TableHeaderLabel>
+										</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -214,15 +240,31 @@ export default function Create({ peserta }: Props) {
 												k.deleted_at ? "bg-red-500/10 dark:bg-red-900/20" : ""
 											}
 										>
-											<TableCell>{k.jenis_pembayaran}</TableCell>
-											<TableCell>{formatCurrency(k.nominal)}</TableCell>
 											<TableCell>
-												{format(new Date(k.created_at), "dd MMMM yyyy HH:mm")}
+												<span className="inline-flex items-center gap-1.5">
+													<ReceiptText className="size-3.5 shrink-0 text-muted-foreground" />
+													{k.jenis_pembayaran}
+												</span>
+											</TableCell>
+											<TableCell>
+												<span className="inline-flex items-center gap-1.5 font-medium">
+													<Wallet className="size-3.5 shrink-0 text-muted-foreground" />
+													{formatCurrency(k.nominal)}
+												</span>
+											</TableCell>
+											<TableCell>
+												<span className="inline-flex items-center gap-1.5 text-sm">
+													<CalendarClock className="size-3.5 shrink-0 text-muted-foreground" />
+													{format(new Date(k.created_at), "dd MMMM yyyy HH:mm")}
+												</span>
 											</TableCell>
 											<TableCell>
 												{k.deleted_at ? (
 													<div className="text-destructive">
-														<strong>Dihapus</strong>
+														<strong className="inline-flex items-center gap-1">
+															<Trash2 className="size-3.5" />
+															Dihapus
+														</strong>
 														<br />
 														<span className="text-xs">
 															{k.deleted_by?.name}
@@ -230,7 +272,10 @@ export default function Create({ peserta }: Props) {
 													</div>
 												) : (
 													<div className="text-green-600 dark:text-green-400">
-														<strong>Diterima</strong>
+														<strong className="inline-flex items-center gap-1">
+															<UserCheck className="size-3.5" />
+															Diterima
+														</strong>
 														<br />
 														<span className="text-xs">{k.penerima?.name}</span>
 													</div>
@@ -254,14 +299,20 @@ export default function Create({ peserta }: Props) {
 																)
 															}
 														>
-															{printingDocumentId === `kwitansi-${k.id}`
-																? "Memuat..."
-																: "Cetak"}
+															{printingDocumentId === `kwitansi-${k.id}` ? (
+																"Memuat..."
+															) : (
+																<>
+																	<Printer className="size-3.5" />
+																	Cetak
+																</>
+															)}
 														</Button>
 
 														<AlertDialog>
 															<AlertDialogTrigger asChild>
 																<Button size="sm" variant="destructive">
+																	<Trash2 className="size-3.5" />
 																	Hapus
 																</Button>
 															</AlertDialogTrigger>

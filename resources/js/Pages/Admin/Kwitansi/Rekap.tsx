@@ -1,3 +1,4 @@
+import { TableHeaderLabel } from "@/components/data-table";
 import { InertiaPagination as Pagination } from "@/components/inertia-pagination";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,11 +25,18 @@ import { Head, router } from "@inertiajs/react";
 import { format } from "date-fns";
 import {
 	Banknote,
+	CalendarClock,
+	ClipboardList,
 	FileCheck,
 	FileText,
+	Hash,
+	Printer,
 	ReceiptText,
 	Search,
+	Settings2,
 	Trash2,
+	User,
+	Wallet,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -208,20 +216,20 @@ export default function Rekap({
 					<h3 className="mb-4 font-semibold text-xl">Ringkasan</h3>
 					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-3">
 						<StatsCard
-							title="Dana Masuk"
-							subtitle={formatCurrency(danaKelola)}
+							title={formatCurrency(danaKelola)}
+							subtitle="Dana Masuk"
 							icon={Banknote}
 							iconClassName="bg-amber-500"
 						/>
 						<StatsCard
-							title="Jumlah Kwitansi"
-							subtitle={`${totalKwitansi} transaksi`}
+							title={`${totalKwitansi}`}
+							subtitle="Jumlah Kwitansi"
 							icon={FileText}
 							iconClassName="bg-sky-500"
 						/>
 						<StatsCard
-							title="Jenis Pembayaran"
-							subtitle={`${Object.keys(jenisPembayaran).length} jenis`}
+							title={`${Object.keys(jenisPembayaran).length}`}
+							subtitle="Jenis Pembayaran"
 							icon={ReceiptText}
 							iconClassName="bg-emerald-500"
 						/>
@@ -248,8 +256,8 @@ export default function Rekap({
 									return (
 										<StatsCard
 											key={jenis}
-											title={jenis}
-											subtitle={`${data.count} kwitansi · ${formatCurrency(data.total)}`}
+											title={formatCurrency(data.total)}
+											subtitle={`${jenis} · ${data.count} kwitansi`}
 											icon={Icon}
 											iconClassName={colorClass}
 										/>
@@ -324,13 +332,33 @@ export default function Rekap({
 						<Table>
 							<TableHeader>
 								<TableRow>
-									<TableHead>No. Peserta</TableHead>
-									<TableHead>Nama</TableHead>
-									<TableHead>Jenis Pembayaran</TableHead>
-									<TableHead>Jumlah</TableHead>
-									<TableHead>Status</TableHead>
-									<TableHead>Tanggal</TableHead>
-									<TableHead>Aksi</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={Hash}>No. Peserta</TableHeaderLabel>
+									</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={User}>Nama</TableHeaderLabel>
+									</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={ReceiptText}>
+											Jenis Pembayaran
+										</TableHeaderLabel>
+									</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={Wallet}>Jumlah</TableHeaderLabel>
+									</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={ClipboardList}>
+											Status
+										</TableHeaderLabel>
+									</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={CalendarClock}>
+											Tanggal
+										</TableHeaderLabel>
+									</TableHead>
+									<TableHead>
+										<TableHeaderLabel icon={Settings2}>Aksi</TableHeaderLabel>
+									</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>
@@ -345,11 +373,29 @@ export default function Rekap({
 											}
 										>
 											<TableCell>
-												{k.peserta_ppdb?.no_pendaftaran}
+												<span className="inline-flex items-center gap-1.5">
+													<Hash className="size-3.5 shrink-0 text-muted-foreground" />
+													{k.peserta_ppdb?.no_pendaftaran}
+												</span>
 											</TableCell>
-											<TableCell>{k.peserta_ppdb?.nama_lengkap}</TableCell>
-											<TableCell>{k.jenis_pembayaran}</TableCell>
-											<TableCell>{formatCurrency(k.nominal)}</TableCell>
+											<TableCell>
+												<span className="inline-flex items-center gap-1.5">
+													<User className="size-3.5 shrink-0 text-muted-foreground" />
+													{k.peserta_ppdb?.nama_lengkap}
+												</span>
+											</TableCell>
+											<TableCell>
+												<span className="inline-flex items-center gap-1.5">
+													<ReceiptText className="size-3.5 shrink-0 text-muted-foreground" />
+													{k.jenis_pembayaran}
+												</span>
+											</TableCell>
+											<TableCell>
+												<span className="inline-flex items-center gap-1.5 font-medium">
+													<Wallet className="size-3.5 shrink-0 text-muted-foreground" />
+													{formatCurrency(k.nominal)}
+												</span>
+											</TableCell>
 											<TableCell>
 												{k.deleted_at ? (
 													<span className="inline-flex items-center gap-1 text-xs font-medium text-red-600 dark:text-red-400">
@@ -364,7 +410,10 @@ export default function Rekap({
 												)}
 											</TableCell>
 											<TableCell>
-												{format(new Date(k.created_at), "dd/MM/yy HH:mm")}
+												<span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+													<CalendarClock className="size-3.5 shrink-0" />
+													{format(new Date(k.created_at), "dd/MM/yy HH:mm")}
+												</span>
 											</TableCell>
 											<TableCell>
 												{!k.deleted_at ? (
@@ -383,12 +432,17 @@ export default function Rekap({
 															)
 														}
 													>
-														{printingDocumentId === `kwitansi-${k.id}`
-															? "Memuat..."
-															: "Cetak"}
+														{printingDocumentId === `kwitansi-${k.id}` ? (
+															"Memuat..."
+														) : (
+															<>
+																<Printer className="size-3.5" />
+																Cetak
+															</>
+														)}
 													</Button>
 												) : (
-													<span className="text-destructive text-xs">
+													<span className="text-xs text-destructive">
 														dihapus oleh {k.deleted_by?.name}
 													</span>
 												)}

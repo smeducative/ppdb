@@ -2,15 +2,22 @@
 
 namespace App\Exports;
 
+use App\Exports\Concerns\StyledExcelExport;
 use App\Models\PesertaPPDB;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithCustomStartCell;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class BelumDaftarUlangExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
+class BelumDaftarUlangExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithEvents, WithHeadings, WithMapping
 {
+    use StyledExcelExport;
+
     protected $tahun;
+
     protected $jurusan;
 
     public function __construct($tahun = null, $jurusan = null)
@@ -19,14 +26,19 @@ class BelumDaftarUlangExport implements FromCollection, WithHeadings, WithMappin
         $this->jurusan = $jurusan;
     }
 
+    public function exportTitle(): string
+    {
+        return 'Data Peserta Belum Daftar Ulang PPDB Tahun '.$this->tahun;
+    }
+
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection()
     {
         return PesertaPPDB::with('jurusan')
             ->doesntHave('kwitansi')
-            ->when($this->jurusan != null, fn($q) => $q->whereJurusanId($this->jurusan))
+            ->when($this->jurusan != null, fn ($q) => $q->whereJurusanId($this->jurusan))
             ->whereYear('created_at', $this->tahun)
             ->get();
     }

@@ -10,6 +10,18 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Head, Link, router } from "@inertiajs/react";
+import {
+	CheckCircle2,
+	ClipboardList,
+	Eye,
+	GraduationCap,
+	Hash,
+	Phone,
+	School,
+	Settings2,
+	User,
+	XCircle,
+} from "lucide-react";
 
 interface Jurusan {
 	id: number;
@@ -59,11 +71,13 @@ export default function ListBelumDaftarUlang({
 		{
 			accessorKey: "no_pendaftaran",
 			header: "No. Pendaftaran",
+			icon: Hash,
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.show.peserta", row.original.id)}
-					className="font-medium text-primary hover:underline"
+					className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
 				>
+					<Hash className="size-3.5 shrink-0 text-muted-foreground" />
 					{row.getValue("no_pendaftaran")}
 				</Link>
 			),
@@ -71,14 +85,20 @@ export default function ListBelumDaftarUlang({
 		{
 			accessorKey: "nama_lengkap",
 			header: "Nama Lengkap",
+			icon: User,
 			cell: ({ row }) => (
-				<div className="font-medium">{row.getValue("nama_lengkap")}</div>
+				<div className="inline-flex items-center gap-1.5 font-medium">
+					<User className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.getValue("nama_lengkap")}
+				</div>
 			),
 		},
 		{
 			header: "Jurusan",
+			icon: GraduationCap,
 			cell: ({ row }) => (
-				<div className="font-medium text-sm">
+				<div className="inline-flex items-center gap-1.5 text-sm font-medium">
+					<GraduationCap className="size-3.5 shrink-0 text-muted-foreground" />
 					{row.original.jurusan?.abbreviation ||
 						row.original.jurusan?.nama ||
 						"-"}
@@ -88,11 +108,13 @@ export default function ListBelumDaftarUlang({
 		{
 			accessorKey: "asal_sekolah",
 			header: "Asal Sekolah",
+			icon: School,
 			cell: ({ row }) => (
 				<div
-					className="max-w-[200px] text-muted-foreground text-sm truncate"
+					className="inline-flex max-w-[200px] items-center gap-1.5 truncate text-sm text-muted-foreground"
 					title={row.original.asal_sekolah}
 				>
+					<School className="size-3.5 shrink-0" />
 					{row.original.asal_sekolah}
 				</div>
 			),
@@ -100,13 +122,15 @@ export default function ListBelumDaftarUlang({
 		{
 			accessorKey: "no_hp",
 			header: "No. HP",
+			icon: Phone,
 			cell: ({ row }) => (
 				<a
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="font-medium text-green-600 dark:text-green-400 hover:underline"
+					className="inline-flex items-center gap-1.5 font-medium text-green-600 hover:underline dark:text-green-400"
 				>
+					<Phone className="size-3.5 shrink-0" />
 					{row.getValue("no_hp")}
 				</a>
 			),
@@ -114,20 +138,30 @@ export default function ListBelumDaftarUlang({
 		{
 			accessorKey: "diterima",
 			header: "Status",
+			icon: ClipboardList,
 			cell: ({ row }) => {
 				const status = row.getValue("diterima");
 				if (status === 1) {
 					return (
-						<Badge className="bg-green-500 hover:bg-green-600">Diterima</Badge>
+						<Badge className="bg-green-500 hover:bg-green-600">
+							<CheckCircle2 className="size-3.5" />
+							Diterima
+						</Badge>
 					);
 				} else if (status === 2) {
-					return <Badge variant="destructive">Ditolak</Badge>;
+					return (
+						<Badge variant="destructive">
+							<XCircle className="size-3.5" />
+							Ditolak
+						</Badge>
+					);
 				} else {
 					return (
 						<Badge
 							variant="secondary"
-							className="bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/20 text-yellow-600 dark:text-yellow-400"
+							className="border-yellow-500/20 bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/20 dark:text-yellow-400"
 						>
+							<ClipboardList className="size-3.5" />
 							Belum Diverifikasi
 						</Badge>
 					);
@@ -137,9 +171,13 @@ export default function ListBelumDaftarUlang({
 		{
 			id: "actions",
 			header: "Aksi",
+			icon: Settings2,
 			cell: ({ row }) => (
 				<Button asChild size="sm" variant="outline">
-					<Link href={route("ppdb.show.peserta", row.original.id)}>Lihat</Link>
+					<Link href={route("ppdb.show.peserta", row.original.id)}>
+						<Eye className="size-3.5" />
+						Lihat
+					</Link>
 				</Button>
 			),
 		},
@@ -158,7 +196,7 @@ export default function ListBelumDaftarUlang({
 			<Head title="List Peserta Belum Daftar Ulang" />
 
 			<div className="space-y-6">
-				<div className="flex sm:flex-row flex-col justify-between gap-4">
+				<div className="flex flex-col justify-between gap-4 sm:flex-row">
 					<div className="w-full sm:w-1/4">
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
 							<SelectTrigger>
@@ -183,7 +221,7 @@ export default function ListBelumDaftarUlang({
 					</div>
 				</div>
 
-				<div className="bg-blue-500/10 p-4 border-blue-500 border-l-4 rounded text-blue-700 dark:text-blue-400 text-sm">
+				<div className="rounded border-l-4 border-blue-500 bg-blue-500/10 p-4 text-sm text-blue-700 dark:text-blue-400">
 					<p className="font-bold">Info!</p>
 					<p>
 						Peserta yang belum melakukan pembayaran daftar ulang akan tampil

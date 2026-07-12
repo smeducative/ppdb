@@ -9,6 +9,15 @@ import {
 } from "@/components/ui/select";
 import { formatDate } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
+import {
+	CalendarClock,
+	GraduationCap,
+	Hash,
+	Info,
+	Phone,
+	School,
+	User,
+} from "lucide-react";
 
 interface Jurusan {
 	id: number;
@@ -56,10 +65,12 @@ export default function ListDaftarUlang({
 	const columns: Column<Peserta>[] = [
 		{
 			header: "Identitas Peserta",
+			icon: User,
 			className: "min-w-[200px]",
 			cell: ({ row }) => (
-				<div className="flex flex-col">
-					<span className="font-mono text-muted-foreground text-xs">
+				<div className="flex flex-col gap-0.5">
+					<span className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground">
+						<Hash className="size-3 shrink-0" />
 						{row.original.no_pendaftaran}
 					</span>
 					<Link
@@ -68,7 +79,8 @@ export default function ListDaftarUlang({
 					>
 						{row.original.nama_lengkap}
 					</Link>
-					<span className="sm:hidden mt-1 text-blue-600 text-muted-foreground dark:text-blue-400 text-xs">
+					<span className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground sm:hidden">
+						<GraduationCap className="size-3 shrink-0" />
 						{row.original.jurusan?.nama || "-"}
 					</span>
 				</div>
@@ -76,18 +88,19 @@ export default function ListDaftarUlang({
 		},
 		{
 			header: "Info Peserta",
+			icon: Info,
 			className: "hidden md:table-cell",
 			cell: ({ row }) => (
-				<div className="flex flex-col text-sm">
-					<div className="flex items-center gap-1">
-						<span className="text-muted-foreground">TTL:</span>
+				<div className="flex flex-col gap-1 text-sm">
+					<div className="flex items-center gap-1.5">
+						<CalendarClock className="size-3.5 shrink-0 text-muted-foreground" />
 						<span>
 							{row.original.tempat_lahir},{" "}
 							{formatDate(row.original.tanggal_lahir)}
 						</span>
 					</div>
-					<div className="flex items-center gap-1">
-						<span className="text-muted-foreground">Asal:</span>
+					<div className="flex items-center gap-1.5">
+						<School className="size-3.5 shrink-0 text-muted-foreground" />
 						<span className="max-w-[150px] truncate">
 							{row.original.asal_sekolah}
 						</span>
@@ -97,23 +110,27 @@ export default function ListDaftarUlang({
 		},
 		{
 			header: "Kontak",
+			icon: Phone,
 			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
 				<a
 					href={`https://wa.me/${row.original.no_hp}`}
 					target="_blank"
 					rel="noreferrer"
-					className="flex items-center gap-1 font-medium text-green-600 dark:text-green-400 text-sm hover:underline"
+					className="inline-flex items-center gap-1.5 text-sm font-medium text-green-600 hover:underline dark:text-green-400"
 				>
+					<Phone className="size-3.5 shrink-0" />
 					{row.original.no_hp}
 				</a>
 			),
 		},
 		{
 			header: "Jurusan",
+			icon: GraduationCap,
 			className: "hidden sm:table-cell",
 			cell: ({ row }) => (
-				<div className="font-medium text-sm">
+				<div className="inline-flex items-center gap-1.5 text-sm font-medium">
+					<GraduationCap className="size-3.5 shrink-0 text-muted-foreground" />
 					{row.original.jurusan?.abbreviation ||
 						row.original.jurusan?.nama ||
 						"-"}
@@ -135,7 +152,7 @@ export default function ListDaftarUlang({
 			<Head title="List Peserta Daftar Ulang" />
 
 			<div className="space-y-6">
-				<div className="flex sm:flex-row flex-col justify-between gap-4">
+				<div className="flex flex-col justify-between gap-4 sm:flex-row">
 					<div className="w-full sm:w-1/4">
 						<Select value={String(tahun)} onValueChange={handleYearChange}>
 							<SelectTrigger>
@@ -160,7 +177,7 @@ export default function ListDaftarUlang({
 					</div>
 				</div>
 
-				<div className="bg-blue-500/10 p-4 border-blue-500 border-l-4 rounded text-blue-700 dark:text-blue-400 text-sm">
+				<div className="rounded border-l-4 border-blue-500 bg-blue-500/10 p-4 text-sm text-blue-700 dark:text-blue-400">
 					<p className="font-bold">Info!</p>
 					<p>
 						Peserta yang telah melakukan pembayaran daftar ulang akan tampil

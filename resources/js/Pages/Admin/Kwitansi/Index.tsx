@@ -12,9 +12,16 @@ import { formatDate } from "@/lib/date";
 import { Head, Link, router } from "@inertiajs/react";
 import {
 	Banknote,
+	CalendarClock,
 	FileCheck,
 	FileText,
+	GraduationCap,
+	Hash,
+	Phone,
 	ReceiptText,
+	School,
+	User,
+	Wallet,
 } from "lucide-react";
 
 interface Jurusan {
@@ -119,18 +126,24 @@ export default function Index({
 		{
 			accessorKey: "no_pendaftaran",
 			header: "No. Pendaftaran",
+			icon: Hash,
 			cell: ({ row }) => (
-				<div className="font-medium">{row.getValue("no_pendaftaran")}</div>
+				<div className="inline-flex items-center gap-1.5 font-medium">
+					<Hash className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.getValue("no_pendaftaran")}
+				</div>
 			),
 		},
 		{
 			accessorKey: "nama_lengkap",
 			header: "Nama Lengkap",
+			icon: User,
 			cell: ({ row }) => (
 				<Link
 					href={route("ppdb.kwitansi.tambah", { uuid: row.original.id })}
-					className="text-primary hover:underline font-medium"
+					className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
 				>
+					<User className="size-3.5 shrink-0 text-muted-foreground" />
 					{row.getValue("nama_lengkap")}
 				</Link>
 			),
@@ -138,9 +151,11 @@ export default function Index({
 		{
 			accessorKey: "ttl",
 			header: "Tempat, Tanggal Lahir",
+			icon: CalendarClock,
 			cell: ({ row }) => {
 				return (
-					<div>
+					<div className="inline-flex items-center gap-1.5">
+						<CalendarClock className="size-3.5 shrink-0 text-muted-foreground" />
 						{row.original.tempat_lahir},{" "}
 						{formatDate(row.original.tanggal_lahir)}
 					</div>
@@ -150,24 +165,47 @@ export default function Index({
 		{
 			accessorKey: "no_hp",
 			header: "No. HP",
+			icon: Phone,
+			cell: ({ row }) => (
+				<span className="inline-flex items-center gap-1.5">
+					<Phone className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.getValue("no_hp")}
+				</span>
+			),
 		},
 		{
 			accessorKey: "asal_sekolah",
 			header: "Asal Sekolah",
+			icon: School,
+			cell: ({ row }) => (
+				<span className="inline-flex items-center gap-1.5">
+					<School className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.getValue("asal_sekolah")}
+				</span>
+			),
 		},
 		{
 			accessorKey: "jurusan.nama",
 			header: "Jurusan",
+			icon: GraduationCap,
+			cell: ({ row }) => (
+				<span className="inline-flex items-center gap-1.5">
+					<GraduationCap className="size-3.5 shrink-0 text-muted-foreground" />
+					{row.getValue("jurusan.nama")}
+				</span>
+			),
 		},
 		{
 			id: "kwitansi_count",
 			header: "Kwitansi",
+			icon: ReceiptText,
 			cell: ({ row }) => {
 				const kwitansi = row.original.kwitansi;
 				return (
-					<div>
+					<div className="inline-flex items-center gap-1.5">
+						<ReceiptText className="size-3.5 shrink-0 text-muted-foreground" />
 						<span className="font-bold">{kwitansi.length}</span>
-						<span className="text-xs text-muted-foreground ml-1">
+						<span className="ml-1 text-xs text-muted-foreground">
 							({kwitansi.map((k) => k.jenis_pembayaran).join(", ")})
 						</span>
 					</div>
@@ -177,13 +215,15 @@ export default function Index({
 		{
 			id: "total_bayar",
 			header: "Terbayar",
+			icon: Wallet,
 			cell: ({ row }) => {
 				const total = row.original.kwitansi.reduce(
 					(sum, k) => sum + k.nominal,
 					0,
 				);
 				return (
-					<div className="font-bold text-green-600 dark:text-green-400">
+					<div className="inline-flex items-center gap-1.5 font-bold text-green-600 dark:text-green-400">
+						<Wallet className="size-3.5 shrink-0" />
 						{formatCurrency(total)}
 					</div>
 				);
@@ -229,20 +269,20 @@ export default function Index({
 					<h3 className="mb-4 font-semibold text-xl">Ringkasan</h3>
 					<div className="gap-4 grid md:grid-cols-2 lg:grid-cols-3">
 						<StatsCard
-							title="Dana Masuk"
-							subtitle={formatCurrency(danaKelola)}
+							title={formatCurrency(danaKelola)}
+							subtitle="Dana Masuk"
 							icon={Banknote}
 							iconClassName="bg-amber-500"
 						/>
 						<StatsCard
-							title="Jumlah Kwitansi"
-							subtitle={`${totalKwitansi} transaksi`}
+							title={`${totalKwitansi}`}
+							subtitle="Jumlah Kwitansi"
 							icon={FileText}
 							iconClassName="bg-sky-500"
 						/>
 						<StatsCard
-							title="Jenis Pembayaran"
-							subtitle={`${Object.keys(jenisPembayaran).length} jenis`}
+							title={`${Object.keys(jenisPembayaran).length}`}
+							subtitle="Jenis Pembayaran"
 							icon={ReceiptText}
 							iconClassName="bg-emerald-500"
 						/>
@@ -269,8 +309,8 @@ export default function Index({
 									return (
 										<StatsCard
 											key={jenis}
-											title={jenis}
-											subtitle={`${data.count} kwitansi · ${formatCurrency(data.total)}`}
+											title={formatCurrency(data.total)}
+											subtitle={`${jenis} · ${data.count} kwitansi`}
 											icon={Icon}
 											iconClassName={colorClass}
 										/>

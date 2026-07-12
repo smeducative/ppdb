@@ -15,6 +15,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { useDebounce } from "@/hooks/use-debounce";
+import { cn } from "@/lib/utils";
 import { router } from "@inertiajs/react";
 import {
 	type ColumnDef,
@@ -23,13 +24,15 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import get from "lodash/get";
-import { Loader2, Search } from "lucide-react";
+import { Loader2, Search, type LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { InertiaPagination } from "./inertia-pagination";
 
 export interface Column<T> {
 	id?: string;
 	header: string;
+	/** Optional Lucide icon shown next to the column header */
+	icon?: LucideIcon;
 	accessorKey?: string;
 	cell?: (props: {
 		row: { original: T; getValue: (key: string) => any };
@@ -38,6 +41,23 @@ export interface Column<T> {
 	meta?: {
 		className?: string;
 	};
+}
+
+export function TableHeaderLabel({
+	icon: Icon,
+	children,
+	className,
+}: {
+	icon?: LucideIcon;
+	children: React.ReactNode;
+	className?: string;
+}) {
+	return (
+		<span className={cn("inline-flex items-center gap-1.5", className)}>
+			{Icon ? <Icon className="size-3.5 shrink-0 text-muted-foreground" /> : null}
+			{children}
+		</span>
+	);
 }
 
 interface DataTableProps<T> {
@@ -137,7 +157,9 @@ export function DataTable<T extends { id?: number | string }>({
 					(typeof col.header === "string"
 						? col.header.toLowerCase().replace(/\s+/g, "-")
 						: `col-${index}`),
-				header: col.header,
+				header: () => (
+					<TableHeaderLabel icon={col.icon}>{col.header}</TableHeaderLabel>
+				),
 				accessorKey: col.accessorKey,
 				cell: col.cell
 					? ({ row }) =>

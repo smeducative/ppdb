@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Exports\Concerns\StyledExcelExport;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -10,11 +11,12 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class RekapRiwayatKwitansiExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithEvents, WithHeadings, WithMapping
 {
+    use StyledExcelExport;
+
     public $index = 1;
 
     public $kwitansies;
@@ -27,17 +29,17 @@ class RekapRiwayatKwitansiExport implements FromCollection, ShouldAutoSize, With
         $this->tahun = $tahun;
     }
 
+    public function exportTitle(): string
+    {
+        return 'Rekap Riwayat Kwitansi PPDB Tahun '.$this->tahun;
+    }
+
     /**
      * @return Collection
      */
     public function collection()
     {
         return $this->kwitansies;
-    }
-
-    public function startCell(): string
-    {
-        return 'A3';
     }
 
     public function headings(): array
@@ -72,36 +74,19 @@ class RekapRiwayatKwitansiExport implements FromCollection, ShouldAutoSize, With
         ];
     }
 
-    public function registerEvents(): array
+    public function afterStyle(AfterSheet $event): void
     {
-        return [
-            AfterSheet::class => function (AfterSheet $event) {
-                $event->sheet->setCellValue('A1', 'Rekap Riwayat Kwitansi PPDB Tahun '.$this->tahun);
-                $event->sheet->mergeCells('A1:J1');
+        $highestRow = $event->sheet->getHighestRow();
 
-                $event->sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
-                $event->sheet->getStyle('A1')->getFont()->setBold(true);
-                $event->sheet->getStyle('A3:J3')->getFont()->setBold(true);
-                $event->sheet->getStyle('A1')->getFont()->setSize(14);
-
-                // set header background color
-                $event->sheet->getStyle('A3:'.$event->sheet->getHighestColumn().'3')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFCCCCCC');
-
-                // set border to entire table
-                $event->sheet->getStyle('A3:'.$event->sheet->getHighestColumn().$event->sheet->getHighestRow())->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-
-                // highlight deleted rows with red background
-                $highestRow = $event->sheet->getHighestRow();
-                for ($row = 4; $row <= $highestRow; $row++) {
-                    $status = $event->sheet->getCell('F'.$row)->getValue();
-                    if ($status === 'Dihapus') {
-                        $event->sheet->getStyle('A'.$row.':J'.$row)->getFill()
-                            ->setFillType(Fill::FILL_SOLID)
-                            ->getStartColor()
-                            ->setARGB('FFFDE2E2');
-                    }
-                }
-            },
-        ];
+        // Sorot baris yang dihapus dengan latar merah muda
+        for ($row = 4; $row <= $highestRow; $row++) {
+            $status = $event->sheet->getCell('F'.$row)->getValue();
+            if ($status === 'Dihapus') {
+                $event->sheet->getStyle('A'.$row.':J'.$row)->getFill()
+                    ->setFillType(Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('FFFDE2E2');
+            }
+        }
     }
 }
