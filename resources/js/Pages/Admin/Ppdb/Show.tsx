@@ -15,13 +15,36 @@ import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
+	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { formatDate } from "@/lib/date";
 import { Head, Link, router, usePage } from "@inertiajs/react";
+import {
+	Award,
+	BookOpen,
+	CheckCircle2,
+	ClipboardList,
+	GraduationCap,
+	Hash,
+	Home,
+	IdCard,
+	MapPin,
+	Medal,
+	Pencil,
+	Phone,
+	School,
+	ShieldCheck,
+	Trophy,
+	User,
+	UserCircle,
+	Users,
+	XCircle,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 interface Jurusan {
 	id: number;
@@ -49,7 +72,7 @@ interface Peserta {
 	asal_sekolah: string;
 	tahun_lulus: string;
 	nisn: string;
-	penerima_kip: string; // 'y' or 'n' or null
+	penerima_kip: string;
 	no_kip: string;
 	no_hp: string;
 	bertindik: boolean;
@@ -71,13 +94,103 @@ interface Peserta {
 		juara_ke?: string;
 		juara_tingkat?: string;
 	} | null;
-	rekomendasi_mwc: number; // boolean like
+	rekomendasi_mwc: number;
 	saran_dari: string;
 	diterima: number;
 }
 
 interface Props {
 	peserta: Peserta;
+}
+
+function StatusBadge({ status }: { status: number }) {
+	switch (status) {
+		case 1:
+			return (
+				<Badge className="bg-green-500 hover:bg-green-600">
+					<CheckCircle2 className="size-3.5" />
+					Diterima
+				</Badge>
+			);
+		case 2:
+			return (
+				<Badge variant="destructive">
+					<XCircle className="size-3.5" />
+					Ditolak
+				</Badge>
+			);
+		default:
+			return (
+				<Badge
+					variant="secondary"
+					className="border-yellow-500/20 bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/20 dark:text-yellow-400"
+				>
+					<ClipboardList className="size-3.5" />
+					Proses Seleksi
+				</Badge>
+			);
+	}
+}
+
+function InfoItem({
+	icon: Icon,
+	label,
+	value,
+}: {
+	icon?: LucideIcon;
+	label: string;
+	value: ReactNode;
+}) {
+	return (
+		<div className="flex min-w-0 gap-2.5 rounded-md border border-transparent bg-muted/40 px-3 py-2.5">
+			{Icon ? (
+				<div className="mt-0.5 shrink-0 text-muted-foreground">
+					<Icon className="size-4" />
+				</div>
+			) : null}
+			<div className="min-w-0 space-y-0.5">
+				<p className="text-xs font-medium text-muted-foreground">{label}</p>
+				<div className="truncate text-sm font-medium leading-snug break-words whitespace-normal">
+					{value || "-"}
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function SectionCard({
+	icon: Icon,
+	title,
+	description,
+	children,
+	className,
+}: {
+	icon: LucideIcon;
+	title: string;
+	description?: string;
+	children: ReactNode;
+	className?: string;
+}) {
+	return (
+		<Card className={className}>
+			<CardHeader className="border-b pb-4">
+				<div className="flex items-start gap-3">
+					<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+						<Icon className="size-4" />
+					</div>
+					<div className="min-w-0 space-y-1">
+						<CardTitle className="text-base">{title}</CardTitle>
+						{description ? (
+							<CardDescription>{description}</CardDescription>
+						) : null}
+					</div>
+				</div>
+			</CardHeader>
+			<CardContent className="pt-4">
+				<div className="grid grid-cols-1 gap-2 sm:grid-cols-2">{children}</div>
+			</CardContent>
+		</Card>
+	);
 }
 
 export default function Show({ peserta }: Props) {
@@ -87,226 +200,345 @@ export default function Show({ peserta }: Props) {
 		router.post(route("ppdb.terima.peserta", { uuid: peserta.id }), { status });
 	};
 
-	const StatusBadge = ({ status }: { status: number }) => {
-		switch (status) {
-			case 1:
-				return (
-					<Badge className="bg-green-500 hover:bg-green-600">Diterima</Badge>
-				);
-			case 2:
-				return <Badge variant="destructive">Ditolak</Badge>;
-			default:
-				return (
-					<Badge
-						variant="secondary"
-						className="bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/20 text-yellow-600 dark:text-yellow-400"
-					>
-						Proses Seleksi
-					</Badge>
-				);
-		}
-	};
-
-	const InfoRow = ({
-		label,
-		value,
-	}: {
-		label: string;
-		value: React.ReactNode;
-	}) => (
-		<div className="grid grid-cols-1 md:grid-cols-3 py-2 last:border-0 border-b">
-			<div className="font-medium text-muted-foreground">{label}</div>
-			<div className="md:col-span-2">{value || "-"}</div>
-		</div>
-	);
-
 	return (
 		<>
 			<Head title={peserta.nama_lengkap} />
 
-			<div className="space-y-6 mx-auto max-w-7xl">
+			<div className="mx-auto max-w-7xl space-y-6">
 				<AlertMessages flash={flash} />
 
-				<Card className="lg:min-w-3xl">
-					<CardHeader className="flex flex-row justify-between items-center">
-						<CardTitle>Data Diri Peserta</CardTitle>
-						<Button asChild>
-							<Link href={route("ppdb.edit.peserta", peserta.id)}>Edit</Link>
+				{/* Header */}
+				<Card>
+					<CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+						<div className="flex min-w-0 items-start gap-3">
+							<div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+								<UserCircle className="size-6" />
+							</div>
+							<div className="min-w-0 space-y-1.5">
+								<div className="flex flex-wrap items-center gap-2">
+									<CardTitle className="text-xl">
+										{peserta.nama_lengkap}
+									</CardTitle>
+									<StatusBadge status={peserta.diterima} />
+								</div>
+								<div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+									<span className="inline-flex items-center gap-1.5">
+										<Hash className="size-3.5" />
+										{peserta.no_pendaftaran}
+									</span>
+									<span className="inline-flex items-center gap-1.5">
+										<GraduationCap className="size-3.5" />
+										{peserta.jurusan?.nama || "-"}
+									</span>
+									<span className="inline-flex items-center gap-1.5">
+										<School className="size-3.5" />
+										{peserta.asal_sekolah || "-"}
+									</span>
+								</div>
+							</div>
+						</div>
+						<Button asChild className="w-full sm:w-auto">
+							<Link href={route("ppdb.edit.peserta", peserta.id)}>
+								<Pencil className="size-4" />
+								Edit
+							</Link>
 						</Button>
 					</CardHeader>
-					<CardContent className="space-y-6">
-						<div>
-							<h3 className="mb-3 font-semibold text-lg"># Identitas Diri</h3>
-							<InfoRow
-								label="No. Pendaftaran"
-								value={<strong>{peserta.no_pendaftaran}</strong>}
-							/>
-							<InfoRow label="Nama Lengkap" value={peserta.nama_lengkap} />
-							<InfoRow
-								label="Jenis Kelamin"
-								value={
-									peserta.jenis_kelamin === "l" ? "Laki-laki" : "Perempuan"
-								}
-							/>
-							<InfoRow
-								label="Tempat, Tanggal Lahir"
-								value={`${peserta.tempat_lahir}, ${formatDate(peserta.tanggal_lahir)}`}
-							/>
-							<InfoRow label="Asal Sekolah" value={peserta.asal_sekolah} />
-							<InfoRow label="Tahun Lulus" value={peserta.tahun_lulus} />
-							<InfoRow label="Pilihan Jurusan" value={peserta.jurusan?.nama} />
-							<InfoRow label="NIK" value={peserta.nik} />
-							<InfoRow label="NISN" value={peserta.nisn} />
-							<InfoRow label="Alamat Jalan" value={peserta.alamat_lengkap} />
-							<InfoRow label="Dukuh" value={peserta.dukuh} />
-							<InfoRow label="RT" value={peserta.rt} />
-							<InfoRow label="RW" value={peserta.rw} />
-							<InfoRow label="Desa/Kelurahan" value={peserta.desa_kelurahan} />
-							<InfoRow label="Kecamatan" value={peserta.kecamatan} />
-							<InfoRow label="Kabupaten/Kota" value={peserta.kabupaten_kota} />
-							<InfoRow label="Provinsi" value={peserta.provinsi} />
-							<InfoRow label="Kode Pos" value={peserta.kode_pos} />
-							<InfoRow label="No. HP" value={peserta.no_hp} />
-							<InfoRow
-								label="Bertindik"
-								value={peserta.bertindik ? "Ya" : "Tidak"}
-							/>
-							<InfoRow
-								label="Bertato"
-								value={peserta.bertato ? "Ya" : "Tidak"}
-							/>
-							<InfoRow
-								label="Penerima KIP"
-								value={
-									peserta.penerima_kip === "y"
-										? "Penerima KIP"
-										: "Bukan penerima KIP"
-								}
-							/>
-							<InfoRow label="No. KIP" value={peserta.no_kip} />
-						</div>
+				</Card>
 
-						<Separator />
+				{/* Content grid */}
+				<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+					<SectionCard
+						icon={User}
+						title="Identitas Diri"
+						description="Data pribadi peserta"
+					>
+						<InfoItem
+							icon={Hash}
+							label="No. Pendaftaran"
+							value={<strong>{peserta.no_pendaftaran}</strong>}
+						/>
+						<InfoItem
+							icon={User}
+							label="Nama Lengkap"
+							value={peserta.nama_lengkap}
+						/>
+						<InfoItem
+							icon={UserCircle}
+							label="Jenis Kelamin"
+							value={
+								peserta.jenis_kelamin === "l" ? "Laki-laki" : "Perempuan"
+							}
+						/>
+						<InfoItem
+							icon={IdCard}
+							label="Tempat, Tanggal Lahir"
+							value={`${peserta.tempat_lahir}, ${formatDate(peserta.tanggal_lahir)}`}
+						/>
+						<InfoItem icon={IdCard} label="NIK" value={peserta.nik} />
+						<InfoItem icon={IdCard} label="NISN" value={peserta.nisn} />
+						<InfoItem
+							icon={School}
+							label="Asal Sekolah"
+							value={peserta.asal_sekolah}
+						/>
+						<InfoItem
+							icon={GraduationCap}
+							label="Tahun Lulus"
+							value={peserta.tahun_lulus}
+						/>
+						<InfoItem
+							icon={BookOpen}
+							label="Pilihan Jurusan"
+							value={peserta.jurusan?.nama}
+						/>
+						<InfoItem icon={Phone} label="No. HP" value={peserta.no_hp} />
+					</SectionCard>
 
-						<div>
-							<h3 className="mb-3 font-semibold text-lg">
-								# Identitas Orang Tua
-							</h3>
-							<InfoRow label="Nama Ayah" value={peserta.nama_ayah} />
-							<InfoRow label="Pekerjaan Ayah" value={peserta.pekerjaan_ayah} />
-							<InfoRow label="No. HP Ayah" value={peserta.no_hp_ayah} />
-							<InfoRow label="Nama Ibu" value={peserta.nama_ibu} />
-							<InfoRow label="Pekerjaan Ibu" value={peserta.pekerjaan_ibu} />
-							<InfoRow label="No. HP Ibu" value={peserta.no_hp_ibu} />
-						</div>
+					<SectionCard
+						icon={MapPin}
+						title="Alamat"
+						description="Domisili peserta"
+					>
+						<InfoItem
+							icon={Home}
+							label="Alamat Jalan"
+							value={peserta.alamat_lengkap}
+						/>
+						<InfoItem icon={MapPin} label="Dukuh" value={peserta.dukuh} />
+						<InfoItem icon={Hash} label="RT" value={peserta.rt} />
+						<InfoItem icon={Hash} label="RW" value={peserta.rw} />
+						<InfoItem
+							icon={MapPin}
+							label="Desa/Kelurahan"
+							value={peserta.desa_kelurahan}
+						/>
+						<InfoItem
+							icon={MapPin}
+							label="Kecamatan"
+							value={peserta.kecamatan}
+						/>
+						<InfoItem
+							icon={MapPin}
+							label="Kabupaten/Kota"
+							value={peserta.kabupaten_kota}
+						/>
+						<InfoItem
+							icon={MapPin}
+							label="Provinsi"
+							value={peserta.provinsi}
+						/>
+						<InfoItem
+							icon={Hash}
+							label="Kode Pos"
+							value={peserta.kode_pos}
+						/>
+					</SectionCard>
 
-						<Separator />
+					<SectionCard
+						icon={Users}
+						title="Identitas Orang Tua"
+						description="Data ayah dan ibu"
+					>
+						<InfoItem
+							icon={User}
+							label="Nama Ayah"
+							value={peserta.nama_ayah}
+						/>
+						<InfoItem
+							icon={ClipboardList}
+							label="Pekerjaan Ayah"
+							value={peserta.pekerjaan_ayah}
+						/>
+						<InfoItem
+							icon={Phone}
+							label="No. HP Ayah"
+							value={peserta.no_hp_ayah}
+						/>
+						<InfoItem icon={User} label="Nama Ibu" value={peserta.nama_ibu} />
+						<InfoItem
+							icon={ClipboardList}
+							label="Pekerjaan Ibu"
+							value={peserta.pekerjaan_ibu}
+						/>
+						<InfoItem
+							icon={Phone}
+							label="No. HP Ibu"
+							value={peserta.no_hp_ibu}
+						/>
+					</SectionCard>
 
-						<div>
-							<h3 className="mb-3 font-semibold text-lg"># Jenis Beasiswa</h3>
-							<h4 className="mt-2 mb-1 font-medium text-muted-foreground">
-								Akademik
-							</h4>
-							<InfoRow label="Kelas" value={peserta.akademik?.kelas} />
-							<InfoRow label="Semester" value={peserta.akademik?.semester} />
-							<InfoRow label="Peringkat" value={peserta.akademik?.peringkat} />
-							<InfoRow
-								label="Hafidz / Hafidzoh"
-								value={peserta.akademik?.hafidz}
-							/>
+					<SectionCard
+						icon={ShieldCheck}
+						title="KIP & Catatan"
+						description="Bantuan dan catatan khusus"
+					>
+						<InfoItem
+							icon={IdCard}
+							label="Penerima KIP"
+							value={
+								peserta.penerima_kip === "y"
+									? "Penerima KIP"
+									: "Bukan penerima KIP"
+							}
+						/>
+						<InfoItem icon={Hash} label="No. KIP" value={peserta.no_kip} />
+						<InfoItem
+							icon={ClipboardList}
+							label="Bertindik"
+							value={peserta.bertindik ? "Ya" : "Tidak"}
+						/>
+						<InfoItem
+							icon={ClipboardList}
+							label="Bertato"
+							value={peserta.bertato ? "Ya" : "Tidak"}
+						/>
+					</SectionCard>
 
-							<h4 className="mt-4 mb-1 font-medium text-muted-foreground">
-								Non Akademik
-							</h4>
-							<InfoRow
-								label="Jenis Lomba"
-								value={peserta.non_akademik?.jenis_lomba}
-							/>
-							<InfoRow
-								label="Juara Ke"
-								value={peserta.non_akademik?.juara_ke}
-							/>
-							<InfoRow
-								label="Juara Tingkat"
-								value={peserta.non_akademik?.juara_tingkat}
-							/>
+					<SectionCard
+						icon={Award}
+						title="Beasiswa Akademik"
+						description="Prestasi akademik"
+					>
+						<InfoItem
+							icon={BookOpen}
+							label="Kelas"
+							value={peserta.akademik?.kelas}
+						/>
+						<InfoItem
+							icon={ClipboardList}
+							label="Semester"
+							value={peserta.akademik?.semester}
+						/>
+						<InfoItem
+							icon={Medal}
+							label="Peringkat"
+							value={peserta.akademik?.peringkat}
+						/>
+						<InfoItem
+							icon={Award}
+							label="Hafidz / Hafidzoh"
+							value={peserta.akademik?.hafidz}
+						/>
+					</SectionCard>
 
-							<h4 className="mt-4 mb-1 font-medium text-muted-foreground">
-								Rekomendasi
-							</h4>
-							<InfoRow
-								label="Rekomendasi MWC"
-								value={peserta.rekomendasi_mwc ? "Ya" : "Tidak"}
-							/>
-						</div>
+					<SectionCard
+						icon={Trophy}
+						title="Beasiswa Non Akademik"
+						description="Prestasi lomba & rekomendasi"
+					>
+						<InfoItem
+							icon={Trophy}
+							label="Jenis Lomba"
+							value={peserta.non_akademik?.jenis_lomba}
+						/>
+						<InfoItem
+							icon={Medal}
+							label="Juara Ke"
+							value={peserta.non_akademik?.juara_ke}
+						/>
+						<InfoItem
+							icon={Award}
+							label="Juara Tingkat"
+							value={peserta.non_akademik?.juara_tingkat}
+						/>
+						<InfoItem
+							icon={ShieldCheck}
+							label="Rekomendasi MWC"
+							value={peserta.rekomendasi_mwc ? "Ya" : "Tidak"}
+						/>
+					</SectionCard>
 
-						<Separator />
-
-						<div>
-							<h3 className="mb-3 font-semibold text-lg"># Status</h3>
-							<InfoRow
+					{/* Status + actions spans full width on large screens when alone, or sits in grid */}
+					<Card className="lg:col-span-2">
+						<CardHeader className="border-b pb-4">
+							<div className="flex items-start gap-3">
+								<div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+									<ClipboardList className="size-4" />
+								</div>
+								<div className="space-y-1">
+									<CardTitle className="text-base">
+										Status Penerimaan
+									</CardTitle>
+									<CardDescription>
+										Kelola keputusan seleksi peserta
+									</CardDescription>
+								</div>
+							</div>
+						</CardHeader>
+						<CardContent className="grid grid-cols-1 gap-2 pt-4 sm:grid-cols-2 lg:grid-cols-3">
+							<InfoItem
+								icon={CheckCircle2}
 								label="Penerimaan"
 								value={<StatusBadge status={peserta.diterima} />}
 							/>
-							<InfoRow label="Saran Dari" value={peserta.saran_dari} />
-						</div>
-					</CardContent>
-					<CardFooter className="flex flex-col items-start gap-4">
-						<p className="text-muted-foreground text-sm">
-							Peserta yang dinyatakan diterima, melakukan daftar ulang di menu
-							kwitansi.
-						</p>
-						<div className="flex gap-2">
-							<AlertDialog>
-								<AlertDialogTrigger asChild>
-									<Button className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white">
-										Terima
-									</Button>
-								</AlertDialogTrigger>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										<AlertDialogTitle>Terima Peserta?</AlertDialogTitle>
-										<AlertDialogDescription>
-											Apakah Anda yakin ingin menerima peserta ini?
-										</AlertDialogDescription>
-									</AlertDialogHeader>
-									<AlertDialogFooter>
-										<AlertDialogCancel>Batal</AlertDialogCancel>
-										<AlertDialogAction
-											onClick={() => handleStatusChange("y")}
-											className="bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 text-white"
-										>
+							<InfoItem
+								icon={User}
+								label="Saran Dari"
+								value={peserta.saran_dari}
+							/>
+						</CardContent>
+						<CardFooter className="flex flex-col items-stretch gap-4 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
+							<p className="text-sm text-muted-foreground">
+								Peserta yang dinyatakan diterima melakukan daftar ulang di menu
+								kwitansi.
+							</p>
+							<div className="flex shrink-0 gap-2">
+								<AlertDialog>
+									<AlertDialogTrigger asChild>
+										<Button className="bg-green-600 text-white hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800">
+											<CheckCircle2 className="size-4" />
 											Terima
-										</AlertDialogAction>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialog>
+										</Button>
+									</AlertDialogTrigger>
+									<AlertDialogContent>
+										<AlertDialogHeader>
+											<AlertDialogTitle>Terima Peserta?</AlertDialogTitle>
+											<AlertDialogDescription>
+												Apakah Anda yakin ingin menerima peserta ini?
+											</AlertDialogDescription>
+										</AlertDialogHeader>
+										<AlertDialogFooter>
+											<AlertDialogCancel>Batal</AlertDialogCancel>
+											<AlertDialogAction
+												onClick={() => handleStatusChange("y")}
+												className="bg-green-600 text-white hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800"
+											>
+												Terima
+											</AlertDialogAction>
+										</AlertDialogFooter>
+									</AlertDialogContent>
+								</AlertDialog>
 
-							<AlertDialog>
-								<AlertDialogTrigger asChild>
-									<Button variant="destructive">Tolak</Button>
-								</AlertDialogTrigger>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										<AlertDialogTitle>Tolak Peserta?</AlertDialogTitle>
-										<AlertDialogDescription>
-											Apakah Anda yakin ingin menolak peserta ini?
-										</AlertDialogDescription>
-									</AlertDialogHeader>
-									<AlertDialogFooter>
-										<AlertDialogCancel>Batal</AlertDialogCancel>
-										<AlertDialogAction
-											onClick={() => handleStatusChange("n")}
-											className="bg-red-600 hover:bg-red-700"
-										>
+								<AlertDialog>
+									<AlertDialogTrigger asChild>
+										<Button variant="destructive">
+											<XCircle className="size-4" />
 											Tolak
-										</AlertDialogAction>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialog>
-						</div>
-					</CardFooter>
-				</Card>
+										</Button>
+									</AlertDialogTrigger>
+									<AlertDialogContent>
+										<AlertDialogHeader>
+											<AlertDialogTitle>Tolak Peserta?</AlertDialogTitle>
+											<AlertDialogDescription>
+												Apakah Anda yakin ingin menolak peserta ini?
+											</AlertDialogDescription>
+										</AlertDialogHeader>
+										<AlertDialogFooter>
+											<AlertDialogCancel>Batal</AlertDialogCancel>
+											<AlertDialogAction
+												onClick={() => handleStatusChange("n")}
+												className="bg-red-600 hover:bg-red-700"
+											>
+												Tolak
+											</AlertDialogAction>
+										</AlertDialogFooter>
+									</AlertDialogContent>
+								</AlertDialog>
+							</div>
+						</CardFooter>
+					</Card>
+				</div>
 			</div>
 		</>
 	);

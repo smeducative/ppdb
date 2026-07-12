@@ -126,7 +126,7 @@ export default function Edit({ jurusan, peserta }: Props) {
 		<>
 			<Head title="Edit Peserta SPMB" />
 
-			<div className="mx-auto space-y-6 max-w-5xl">
+			<div className="mx-auto max-w-7xl space-y-6">
 				<RegistrationForm
 					mode="admin"
 					method="put"
