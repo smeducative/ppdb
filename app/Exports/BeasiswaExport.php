@@ -41,27 +41,36 @@ class BeasiswaExport implements FromCollection, ShouldAutoSize, WithCustomStartC
     {
         return [
             'No',
-            'no pendaftaran',
-            'nama lengkap',
-            'jenis kelamin',
-            'tempat lahir',
-            'tanggal lahir',
-            'pilihan jurusan',
-            'akademik',
-            'non akademik',
-            'penerima kip',
-            'no kip',
-            'rekomendasi mwc',
-            'yatim piatu',
-            'no hp',
-            'alamat lengkap',
-            'asal sekolah',
+            'No. Pendaftaran',
+            'Nama Lengkap',
+            'Jenis Kelamin',
+            'Tempat Lahir',
+            'Tanggal Lahir',
+            'Pilihan Jurusan',
+            'Kelas',
+            'Semester',
+            'Peringkat',
+            'Hafidz/Hafidzoh',
+            'Jenis Lomba',
+            'Juara Ke',
+            'Tingkat',
+            'Penerima KIP',
+            'No. KIP',
+            'Rekomendasi MWC',
+            'Beasiswa MWC',
+            'Yatim Piatu',
+            'No. HP',
+            'Alamat Lengkap',
+            'Asal Sekolah',
         ];
     }
 
     public function map($row): array
     {
         $this->index++;
+
+        $akademik = $row->akademik ?? [];
+        $nonAkademik = $row->non_akademik ?? [];
 
         return [
             $this->index,
@@ -71,10 +80,16 @@ class BeasiswaExport implements FromCollection, ShouldAutoSize, WithCustomStartC
             $row->tempat_lahir,
             $row->tanggal_lahir,
             $row->jurusan->nama,
-            $row->akademik,
-            $row->non_akademik,
+            $akademik['kelas'] ?? '-',
+            $akademik['semester'] ?? '-',
+            $akademik['peringkat'] ?? '-',
+            $akademik['hafidz'] ?? '-',
+            $nonAkademik['jenis_lomba'] ?? '-',
+            $nonAkademik['juara_ke'] ?? '-',
+            $nonAkademik['juara_tingkat'] ?? '-',
             $row->penerima_kip === 'y' ? 'Ya' : 'Tidak',
             $row->no_kip,
+            $row->rekomendasi_mwc ? 'Ya' : 'Tidak',
             $row->rekomendasi_mwc ? 'Ya' : 'Tidak',
             $row->yatim_piatu ? 'Ya' : 'Tidak',
             $row->no_hp,
