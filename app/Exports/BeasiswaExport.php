@@ -78,7 +78,7 @@ class BeasiswaExport implements FromCollection, ShouldAutoSize, WithCustomStartC
             $row->nama_lengkap,
             $row->jenis_kelamin === 'p' ? 'Perempuan' : 'Laki-laki',
             $row->tempat_lahir,
-            $row->tanggal_lahir,
+            $row->tanggal_lahir?->format('d F Y'),
             $row->jurusan->nama,
             $akademik['kelas'] ?? '-',
             $akademik['semester'] ?? '-',
